@@ -1,0 +1,48 @@
+.social_media ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.social_media {
+  margin-right: 25px;
+}
+
+.social_media ul li {
+  list-style: none;
+  margin-right: 16px;
+}
+
+.social_media ul li:last-child {
+  margin-right: 0;
+}
+
+.social_media ul li a {
+  line-height: 24px;
+  font-weight: 600;
+  font-size: 25px;
+  color: #e74c3c;
+  transition: .3s all ease;
+  -webkit-transition: .3s all ease;
+  -moz-transition: .3s all ease;
+  -ms-transition: .3s all ease;
+  -o-transition: .3s all ease;
+}
+
+.social_media ul li a:hover {
+
+  color: #3498DB;
+}
+
+.social_link {
+  margin-left: 10px;
+}
+
+/* ===================Respnsive================ */
+
+@media only screen and (max-width: 768px) {
+  .social_media {
+    display: none;
+  }
+}

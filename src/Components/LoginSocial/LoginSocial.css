@@ -1,0 +1,45 @@
+.login_ocial ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_ocial {
+  margin-right: 36px;
+}
+
+.login_ocial ul li {
+  list-style: none;
+  margin-right: 16px;
+}
+
+
+
+.login_ocial ul li:last-child {
+  margin-right: 0;
+}
+
+.google a {
+  line-height: 24px;
+  font-weight: 600;
+  font-size: 35px;
+  color: #ff0000;
+}
+
+.facebook a {
+  line-height: 24px;
+  font-weight: 600;
+  font-size: 35px;
+  color: #4267b2;
+}
+
+.linkdin a {
+  line-height: 24px;
+  font-weight: 600;
+  font-size: 35px;
+  color: #0077b5;
+}
+
+/* ===================Respnsive================ */
+
+@media only screen and (max-width: 768px) {}

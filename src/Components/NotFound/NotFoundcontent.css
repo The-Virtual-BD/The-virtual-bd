@@ -1,0 +1,19 @@
+.notfound_back {
+    background-color: #dddd;
+}
+
+.notfound_txt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.notfound_txt h2 {
+    font-size: 60px;
+    line-height: 80px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #322545;
+}
