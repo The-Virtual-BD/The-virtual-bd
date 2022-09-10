@@ -28,4 +28,18 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin'], 'as' => 'admin.'],
     Route::get('/permission/{id}',[\App\Http\Controllers\Auth\PermissionController::class, 'edit'])->name('permission.edit');
     Route::put('/permission/update/{id}', [\App\Http\Controllers\Auth\PermissionController::class, 'updatePermission'])->name('permission.update');
     Route::post('/permission/destroy/{id}', [\App\Http\Controllers\Auth\PermissionController::class, 'destroy'])->name('permission.destroy');
+    
+    // User routes
+    Route::get('/users', [\App\Http\Controllers\Auth\UserController::class, 'allUser'])->name('user.all');
+    Route::post('/user/create', [\App\Http\Controllers\Auth\UserController::class, 'create'])->name('user.create');
+    Route::get('/user/{user}',[\App\Http\Controllers\Auth\UserController::class, 'getUser'])->name('user.get');
+    Route::put('/user/update/{user}', [\App\Http\Controllers\Auth\UserController::class, 'update'])->name('user.update');
+    Route::post('/user/destroy/{user}', [\App\Http\Controllers\Auth\UserController::class, 'destroy'])->name('user.destroy');
+
+    // Service routes
+    Route::get('/services', [\App\Http\Controllers\Admin\ServiceController::class, 'allService'])->name('service.all');
+    Route::post('/service/create', [\App\Http\Controllers\Admin\ServiceController::class, 'create'])->name('service.create');
+    Route::get('/service/{service}',[\App\Http\Controllers\Admin\ServiceController::class, 'getService'])->name('service.get');
+    Route::put('/service/update/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'update'])->name('service.update');
+    Route::post('/service/destroy/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'destroy'])->name('service.destroy');
 });

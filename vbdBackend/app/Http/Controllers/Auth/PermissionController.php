@@ -37,7 +37,7 @@ class PermissionController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Permission created successfully'
-            ]);
+            ], 200);
 
         } catch (\Throwable $e) {
             return response()->json([
@@ -54,7 +54,7 @@ class PermissionController extends Controller
             'status' => true,
             'permission' => $permission,
             'message' => 'Role created successfully'
-        ]);
+        ], 200);
     }
 
     public function updatePermission(Request $request, $id)
@@ -71,7 +71,7 @@ class PermissionController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Permission updated successfully'
-            ]);
+            ], 200);
 
         } catch (\Throwable $e) {
             return response()->json([
@@ -88,6 +88,6 @@ class PermissionController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Permission deleted successfully'
-        ]);
+        ], 200);
     }
 }

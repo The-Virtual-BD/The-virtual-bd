@@ -16,8 +16,10 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::create(['name' => 'user']);
+        $user = Role::create(['name' => 'user']);
+        $blogger = Role::create(['name' => 'blogger']);
         $permissions = Permission::pluck('id','id')->all();
-        $role->syncPermissions($permissions);
+        $user->syncPermissions($permissions);
+        $blogger->syncPermissions($permissions);
     }
 }

@@ -37,7 +37,7 @@ class RoleController extends Controller
             'rolePermissions' => $rolePermissions,
             'permissions' => $permissions,
             'message' => 'Role created successfully'
-        ]);
+        ], 200);
     }
 
     public function createRole(Request $request)
@@ -54,7 +54,7 @@ class RoleController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Role created successfully'
-            ]);
+            ], 200);
 
         } catch (\Throwable $e) {
             return response()->json([
@@ -79,7 +79,7 @@ class RoleController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Role updated successfully'
-            ]);
+            ], 200);
 
         } catch (\Throwable $e) {
             return response()->json([
@@ -97,13 +97,13 @@ class RoleController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Role deleted successfully'
-            ]);
+            ], 200);
 
         } catch (\Throwable $e) {
             return response()->json([
                 'status' => false,
                 'message' => $e->getMessage()
-            ]);
+            ], 500);
         }
     }
 }

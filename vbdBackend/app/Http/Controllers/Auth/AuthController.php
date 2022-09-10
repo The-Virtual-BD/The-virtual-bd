@@ -61,18 +61,19 @@ class AuthController extends Controller
 
             $user = User::where('email', $request->email)->first();
 
-            // if ($user->hasRole('Super Admin')) {
-            //     if ($this->attempLogin($request->only(['email', 'password']))) {
-            //         return response()->json([
-            //             'message' => 'Admin Login successfully',
-            //             'role'=> 'Super Admin',
-            //             'token' => $user->createToken('AUTH TOKEN')->plainTextToken
-            //         ], 200);
-            //     }
-            // }
+            if ($user->hasRole('admin')) {
+                if ($this->attempLogin($request->only(['email', 'password']))) {
+                    return response()->json([
+                        'message' => 'Admin Login successfully',
+                        'role'=> 'admin',
+                        'token' => $user->createToken('AUTH TOKEN')->plainTextToken
+                    ], 200);
+                }
+            }
             if ($this->attempLogin($request->only(['email', 'password']))) {
                 return response()->json([
                     'message' => 'User Login successfully',
+                    'role'=> 'user',
                     'token' => $user->createToken('AUTH TOKEN')->plainTextToken
                 ], 200);
             }
