@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RolePermissionController extends Controller
+class RoleController extends Controller
 {
     public function allRoles()
     {
         try {
+            $roles = Role::orderBy('id','DESC')->get();
             return response()->json([
                 'status' => true,
-                'roles' => Role::all()
+                'roles' => $roles
             ], 200);
             
         } catch (\Throwable $e) {
@@ -24,20 +25,19 @@ class RolePermissionController extends Controller
         }
     }
 
-
-    public function allPermissions()
+    public function edit($id)
     {
-        try {
-            return response()->json([
-                'status' => true,
-                'permissions' => Permission::all()
-            ], 200);
+        $role = Role::findOrFail($id);
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
+        $permissions = Permission::get();
 
-        } catch (\Throwable $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        return response()->json([
+            'status' => true,
+            'role' => $role,
+            'rolePermissions' => $rolePermissions,
+            'permissions' => $permissions,
+            'message' => 'Role created successfully'
+        ]);
     }
 
     public function createRole(Request $request)
@@ -85,6 +85,25 @@ class RolePermissionController extends Controller
             return response()->json([
                 'error' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $role = Role::find($id);
+            $role->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Role deleted successfully'
+            ]);
+
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
         }
     }
 }

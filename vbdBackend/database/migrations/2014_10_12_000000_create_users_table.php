@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('status')->default(0)->comment('0 => client, 1 => blogger, 2 => admin');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
