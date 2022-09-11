@@ -20,4 +20,9 @@ Route::group(['middleware' => ['auth:sanctum', 'role:user'], 'as' => 'user.'], f
     Route::post('/subscription/create', [\App\Http\Controllers\Frontend\User\SubscriptionController::class, 'create'])->name('subscription.create');
     Route::put('/subscription/update/{subscription}', [\App\Http\Controllers\Frontend\User\SubscriptionController::class, 'update'])->name('subscription.update');
     Route::post('/subscription/destroy/{subscription}', [\App\Http\Controllers\Frontend\User\SubscriptionController::class, 'destroy'])->name('subscription.destroy');
+
+    // Blogger routes
+    Route::post('/blogger/create', [\App\Http\Controllers\Frontend\User\BloggerController::class, 'create'])->name('blogger.create');
+    Route::put('/blogger/update/{blogger}', [\App\Http\Controllers\Frontend\User\BloggerController::class, 'update'])->name('blogger.update');
+    Route::post('/blogger/destroy/{blogger}', [\App\Http\Controllers\Frontend\User\BloggerController::class, 'destroy'])->name('blogger.destroy');
 });

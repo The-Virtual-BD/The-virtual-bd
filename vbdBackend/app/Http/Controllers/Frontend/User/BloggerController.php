@@ -3,54 +3,30 @@
 namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Subscription;
-use Carbon\Carbon;
+use App\Models\Blogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SubscriptionController extends Controller
+class BloggerController extends Controller
 {
-    public function allSubs()
-    {
-        try {
-            $subs = Subscription::where('user_id', Auth::user()->id)->get();
-            return response()->json([
-                'status' => true,
-                'subscriptions' => $subs
-            ], 200);
-        } catch (\Throwable $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
-
     public function create(Request $request)
     {
         try {
             // validate data
             $data = $request->validate([
-                'service_id' => 'required',
+                'name' => 'required',
                 'subject' => 'required|string',
-                'description' => 'required',
-                'schedule' => 'required'
+                'expertise' => 'required',
+                'description' => 'required'
             ]);
 
-            $file = '';
-            if ($request->hasFile('attachment')) {
-                $path = public_path('/uploads/attachment');
-                $file = fileUpload($request->file('attachment'), $path);
-            }
-
-            // Create subscription
-            $subscription = Subscription::create([
+            // Create blogger
+            $blogger = Blogger::create([
                 'user_id' => Auth::user()->id,
-                'service_id' => $data['service_id'],
+                'name' => $data['name'],
                 'subject' => $data['subject'],
-                'description' => $data['description'],
-                'schedule' => Carbon::parse($data['schedule']),
-                'attachment' => $file ?: NULL,
-                'status' => 0
+                'expertise' => $data['expertise'],
+                'description' => $data['description']
             ]);
 
             return response()->json([

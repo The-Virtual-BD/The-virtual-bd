@@ -42,4 +42,10 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin'], 'as' => 'admin.'],
     Route::get('/service/{service}',[\App\Http\Controllers\Admin\ServiceController::class, 'getService'])->name('service.get');
     Route::put('/service/update/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'update'])->name('service.update');
     Route::post('/service/destroy/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'destroy'])->name('service.destroy');
+
+    // Subscription routes
+    Route::get('/subscriptions', [\App\Http\Controllers\Admin\User\SubscriptionController::class, 'allSubs'])->name('subscription.all');
+    Route::get('/subscription/{subscription}',[\App\Http\Controllers\Admin\User\SubscriptionController::class, 'show'])->name('subscription.view');
+    Route::put('/subscription/update/{subscription}', [\App\Http\Controllers\Admin\User\SubscriptionController::class, 'update'])->name('subscription.update');
+    Route::post('/subscription/destroy/{subscription}', [\App\Http\Controllers\Admin\User\SubscriptionController::class, 'destroy'])->name('subscription.destroy');
 });
