@@ -6,9 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
+    public function allSubs()
+    {
+        try {
+            $subs = Subscription::where('user_id', Auth::user()->id)->get();
+            return response()->json([
+                'status' => true,
+                'subscriptions' => $subs
+            ], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function create(Request $request)
     {
         try {
@@ -20,20 +36,26 @@ class SubscriptionController extends Controller
                 'schedule' => 'required'
             ]);
 
+            $file = '';
+            if ($request->hasFile('attachment')) {
+                $path = public_path('/uploads/attachment');
+                $file = fileUpload($request->file('attachment'), $path);
+            }
+
             // Create subscription
             $subscription = Subscription::create([
+                'user_id' => Auth::user()->id,
                 'service_id' => $data['service_id'],
                 'subject' => $data['subject'],
                 'description' => $data['description'],
                 'schedule' => Carbon::parse($data['schedule']),
-                'attachment' => 's',
+                'attachment' => $file ?: NULL,
                 'status' => 0
             ]);
 
             return response()->json([
                 'message' => 'Application sent Successfully'
             ], 200);
-
         } catch (\Throwable $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -41,31 +63,38 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function update(Request $request, Service $service)
+    public function update(Request $request, Subscription $subscription)
     {
         try {
-            if ($request->name != $service->name) {
-                // validate data
-                $data = $request->validate([
-                    'name' => 'required|string|unique:services,name'
-                ]);
-            }
             // validate data
             $data = $request->validate([
-                'name' => 'required|string',
+                'service_id' => 'required',
+                'subject' => 'required|string',
                 'description' => 'required',
+                'schedule' => 'required'
             ]);
 
-            // Update service
-            $service->update([
-                'name' => $data['name'],
-                'description' => $data['description']
+            $file = '';
+            if ($request->hasFile('attachment')) {
+                $old_path = public_path('/uploads/attachment/').$subscription->attachment;
+                $path = public_path('/uploads/attachment');
+                $file = fileUpload($request->file('attachment'), $path, $old_path);
+            }
+
+            // Update subscription
+            $subscription->update([
+                'user_id' => Auth::user()->id,
+                'service_id' => $data['service_id'],
+                'subject' => $data['subject'],
+                'description' => $data['description'],
+                'schedule' => Carbon::parse($data['schedule']),
+                'attachment' => $file ?: $subscription->attachment,
+                'status' => 0
             ]);
 
             return response()->json([
-                'message' => 'Service updated Successfully'
+                'message' => 'Subscription updated Successfully'
             ], 200);
-
         } catch (\Throwable $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -73,17 +102,16 @@ class SubscriptionController extends Controller
         }
     }
 
-    
-    public function destroy(Service $service)
+
+    public function destroy(Subscription $subscription)
     {
         try {
-            $service->delete();
+            $subscription->delete();
 
             return response()->json([
                 'status' => true,
-                'message' => 'Service deleted successfully'
+                'message' => 'Subscription deleted successfully'
             ], 200);
-
         } catch (\Throwable $e) {
             return response()->json([
                 'status' => false,
