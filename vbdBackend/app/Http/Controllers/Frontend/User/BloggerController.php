@@ -39,37 +39,27 @@ class BloggerController extends Controller
         }
     }
 
-    public function update(Request $request, Subscription $subscription)
+    public function update(Request $request, Blogger $blogger)
     {
         try {
             // validate data
             $data = $request->validate([
-                'service_id' => 'required',
+                'name' => 'required',
                 'subject' => 'required|string',
-                'description' => 'required',
-                'schedule' => 'required'
+                'expertise' => 'required',
+                'description' => 'required'
             ]);
 
-            $file = '';
-            if ($request->hasFile('attachment')) {
-                $old_path = public_path('/uploads/attachment/').$subscription->attachment;
-                $path = public_path('/uploads/attachment');
-                $file = fileUpload($request->file('attachment'), $path, $old_path);
-            }
-
-            // Update subscription
-            $subscription->update([
+            $blogger->update([
                 'user_id' => Auth::user()->id,
-                'service_id' => $data['service_id'],
+                'name' => $data['name'],
                 'subject' => $data['subject'],
-                'description' => $data['description'],
-                'schedule' => Carbon::parse($data['schedule']),
-                'attachment' => $file ?: $subscription->attachment,
-                'status' => 0
+                'expertise' => $data['expertise'],
+                'description' => $data['description']
             ]);
 
             return response()->json([
-                'message' => 'Subscription updated Successfully'
+                'message' => 'Request updated Successfully'
             ], 200);
         } catch (\Throwable $e) {
             return response()->json([
@@ -79,20 +69,14 @@ class BloggerController extends Controller
     }
 
 
-    public function destroy(Subscription $subscription)
+    public function destroy(Blogger $blogger)
     {
         try {
-            $old_path = public_path('/uploads/attachment/').$subscription->attachment;
-            
-            if (file_exists($old_path)) {
-                unlink($old_path);
-            }
-
-            $subscription->delete();
+            $blogger->delete();
 
             return response()->json([
                 'status' => true,
-                'message' => 'Subscription deleted successfully'
+                'message' => 'Request cancelled'
             ], 200);
         } catch (\Throwable $e) {
             return response()->json([

@@ -48,4 +48,10 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin'], 'as' => 'admin.'],
     Route::get('/subscription/{subscription}',[\App\Http\Controllers\Admin\User\SubscriptionController::class, 'show'])->name('subscription.view');
     Route::put('/subscription/update/{subscription}', [\App\Http\Controllers\Admin\User\SubscriptionController::class, 'update'])->name('subscription.update');
     Route::post('/subscription/destroy/{subscription}', [\App\Http\Controllers\Admin\User\SubscriptionController::class, 'destroy'])->name('subscription.destroy');
+
+    // Blogger routes
+    Route::get('/bloggers', [\App\Http\Controllers\Admin\User\BloggerController::class, 'allblogs'])->name('blogger.all');
+    Route::get('/blogger/{blogger}',[\App\Http\Controllers\Admin\User\BloggerController::class, 'show'])->name('blogger.view');
+    Route::put('/blogger/update/{blogger}', [\App\Http\Controllers\Admin\User\BloggerController::class, 'update'])->name('blogger.update');
+    Route::post('/blogger/destroy/{blogger}', [\App\Http\Controllers\Admin\User\BloggerController::class, 'destroy'])->name('blogger.destroy');
 });
