@@ -145,7 +145,7 @@ const UserDashboard = () => {
            <Container >
           <Tabs>
 
-            <div className="bg-white p-5  mt-5 rounded">
+            <div className="bg-white px-5 py-3   rounded">
                 <div className='d-flex  align-items-center   '>
                   <img src={userImg} alt='user img' />
                     <div className='d-flex flex-column  ms-3'>

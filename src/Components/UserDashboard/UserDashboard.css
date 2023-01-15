@@ -1,6 +1,6 @@
 .user-dashboard-container{
     background: linear-gradient(248.14deg, rgba(255, 255, 255, 0.4) 1.48%, rgba(147, 184, 193, 0.4) 121.81%);
-    padding: 50px;
+    padding: 30px;
 }
 
 .form-container input,.form-container textarea,.form-container select{
