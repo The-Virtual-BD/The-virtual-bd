@@ -17,6 +17,7 @@ import SingnIn from "./Pages/SingnIn";
 import Register from "./Pages/Register";
 import Search from "./Pages/Search";
 import TeamInfo from "./Pages/TeamInfo";
+import UserProfile from "./Pages/UserProfile";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/data-protection" element={<PrivacyPolicy />} />
         <Route path="/*" element={<NotFound />} />
+        <Route path="/user-dashboard" element={<UserProfile />} />
         <Route
           path="/team/:slug"
           exact={true}

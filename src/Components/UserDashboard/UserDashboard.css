@@ -1,0 +1,43 @@
+.user-dashboard-container{
+    background: linear-gradient(248.14deg, rgba(255, 255, 255, 0.4) 1.48%, rgba(147, 184, 193, 0.4) 121.81%);
+    padding: 50px;
+}
+
+.form-container input,.form-container textarea,.form-container select{
+    background:#ECF0F1;
+}
+
+.form-container input:focus,.form-container textarea:focus, .form-container select{
+    background:#ECF0F1;
+}
+
+.filepond--credits{
+    display: none;
+}
+
+.img-input-field{
+    border: 1px dashed black;
+    padding: 100px 0;
+    height: 200px;
+    text-align: center;
+    border-radius: 5px;
+    background:#ECF0F1;
+}
+/* 
+.react-tabs__tab--selected {
+    margin-top: none;
+    margin-bottom: 1px solid red  !important;
+} */
+
+.blog-card{
+    color:#2C3E50 !important ;
+}
+.user-dashboard-font{
+    color: #2C3E50;
+}
+.filepond--drop-label{
+    margin-top:60px !important;
+    font-weight: 700;
+}
+
+
