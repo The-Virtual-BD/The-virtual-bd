@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import Form from 'react-bootstrap/Form';
 
 import Button from '../../utilities/Button';
 import userImg from '../../Images/user.png';
 import './UserDashboard.css';
-import {BsChevronDown } from 'react-icons/bs';
+
+import { CKEditor } from 'ckeditor4-react';
+
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -16,7 +17,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import BlogCard from './BlogCard';
+import BlogCard from './BlogCard'; 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -31,7 +32,7 @@ const UserDashboard = () => {
   const[email,setEmail]=useState('');
   const[profession,setProfession]=useState('');
   const[nationality,setNationality]=useState('');
-  const[date,setDate]=useState('');
+  const[birth_date,setBirth_date]=useState('');
   const[phone,setPhone]=useState('');
   const[bio,setBio]=useState('');
 
@@ -48,7 +49,7 @@ const UserDashboard = () => {
   const[subject,setSubject]=useState('');
   const[desc,setDesc]=useState('');
   const[schedule,setSchedule]=useState('');
-  const [files, setFiles] = useState([]);
+  const [doc, setDoc] = useState([]);
   
 
 
@@ -70,9 +71,9 @@ const UserDashboard = () => {
   const [blogSubTitle, setBlogSubTitle] = useState('');
   const [blogsDesc, setBlogsDesc] = useState('');
 
-  const todayDate= new Date().toLocaleDateString();
-  const [blogDate, setBlogDate] = useState(todayDate);
-  const [blogImg, setBlogImg] = useState(null);
+  const [blogDate, setBlogDate] = useState();
+  
+  const [blogImg, setBlogImg] = useState([]);
 
   
   
@@ -82,8 +83,7 @@ const UserDashboard = () => {
   const handleUserProfileForm=e=>{
     e.preventDefault();
     const profileData={
-      name: firstName+ " " +lastName,
-      date,email,profession,nationality,phone,bio
+      firstName,lastName,birth_date,email,profession,nationality,phone,bio
     };
     console.log(profileData);
   };
@@ -103,7 +103,7 @@ const UserDashboard = () => {
   //handle Subcription
   const handleSubcription=e=>{
     e.preventDefault();
-    const subcriptions={services,subject,desc,files,schedule};
+    const subcriptions={services,subject,desc,doc,schedule};
 
     console.log(subcriptions);
     e.target.reset();
@@ -114,7 +114,6 @@ const UserDashboard = () => {
     e.preventDefault();
     const BloggerData = { bloggerName, blogSub, blogExArea, blogDesc, blogImg };
 
-    console.log(BloggerData);
     setIsbloggerAppSent(true);
 
   };
@@ -122,7 +121,7 @@ const UserDashboard = () => {
   //Handle create blog Form
   const handleCreateBlogForm=e=>{
     e.preventDefault();
-    const addNewBlog = { authorName, blogTitle, blogSubTitle, blogsDesc,blogDate, blogImg };
+    const addNewBlog = {  blogTitle, blogSubTitle, blogsDesc, blogImg };
 
     console.log(addNewBlog);
     e.target.reset();
@@ -209,7 +208,7 @@ const UserDashboard = () => {
 
               <TabPanel>
                 <Row>
-                    <Col md={7} sm={12}>
+                    <Col md={9} sm={12}>
                     <div  className="bg-white p-4  rounded user-dashboard-font">
                     <h3 className='px-3 fw-bold'>Information</h3>
                     <form className="row form-container p-3" onSubmit={handleUserProfileForm} >
@@ -231,7 +230,7 @@ const UserDashboard = () => {
                      
                       <div class="col-12">
                         <label for="date" class="form-label fw-bold">Date Of Birth</label>
-                        <input type="date" class="form-control" id="date" onChange={(e)=>setDate(e.target.value)} value={date}/>
+                        <input type="date" class="form-control" id="date" onChange={(e)=>setBirth_date(e.target.value)} value={birth_date}/>
                       </div>
 
                     
@@ -286,7 +285,7 @@ const UserDashboard = () => {
 
 
 
-                  <Col  md={5} sm={12} >
+                  <Col  md={3} sm={12} >
                       <div class="bg-white p-3 rounded text-center">
                         {
                           uploadImage && imageUrl && (
@@ -312,7 +311,7 @@ const UserDashboard = () => {
 
               <TabPanel>
                 <Row>
-                  <Col md={7} sm={12}>
+                  <Col md={9} sm={12}>
                   <div className="bg-white p-3  rounded ">
                       
                       <form className='form-container p-4' onSubmit={handleSubcription}>
@@ -342,20 +341,14 @@ const UserDashboard = () => {
 
                       <div class="col-12 mb-3">
                         <label for="schedule" class="form-label fw-bold">Metting Schedule</label>
-                        <input type="date" class="form-control" id="schedule" onChange={(e)=>setSchedule(e.target.value)}  />
+                        <input type="datetime-local" class="form-control" id="schedule" onChange={(e)=>setSchedule(e.target.value)}  />
                       </div>
 
-                      <div class="col-12 mb-3">
+                      <div class="col-12 mb-3 ">
                         <label for="doc" class="form-label fw-bold">Documents</label>
+                        <input type="file" class="form-control  " id="doc" onChange={(e)=>setDoc(e.target.value)}  />
                        
-                        <FilePond
-                            allowMultiple={true}
-                            files={files}
-                            maxFiles={5}
-                            allowReorder={true}
-                            server="" 
-                            className={"img-input-field"}
-                          />
+                       
                       </div>
 
                       <div class="col-12 text-center mt-2">
@@ -365,7 +358,7 @@ const UserDashboard = () => {
                       </form>
                     </div>
                   </Col>
-                  <Col  md={5} sm={12} >
+                  <Col  md={3} sm={12} >
                      <BlogCard />
                   </Col>
                 </Row>
@@ -373,7 +366,7 @@ const UserDashboard = () => {
  
               <TabPanel>
                 <Row >
-                  <Col md={7} sm={12}>
+                  <Col md={9} sm={12}>
                     
                     {
                       (!isBlogger) ?
@@ -430,15 +423,33 @@ const UserDashboard = () => {
                                     <input type="text" class="form-control" id="subTitle" onChange={(e) => setBlogSubTitle(e.target.value)} />
                                   </div>
 
-                                  <div class="col-12 mb-3">
+                               {/*    <div class="col-12 mb-3">
                                     <label for="blogsDesc" class="form-label fw-bold">Description</label>
                                     <textarea class="form-control" id='blogsDesc' rows="5" onChange={(e) => setBlogsDesc(e.target.value)}></textarea>
-                                  </div>
+                                  </div> */}
+
 
                                   <div class="col-12 mb-3">
+                                    <label for="blogsDesc" class="form-label fw-bold">Description</label>
+                                    <CKEditor
+                                        initData="<p>Write Your Blog Description here</p>"
+                                       
+                                        onChange={ ( event, editor ) => {
+                                          console.log(editor,event);
+                                          const data = editor?.getData();
+                                          setBlogsDesc( { event, editor, data } );
+                                      } }
+                                    />
+                                  </div>
+
+                                 
+
+                            
+                           
+                                {/*   <div class="col-12 mb-3">
                                     <label for="blogDate" class="form-label fw-bold">Date</label>
                                         <input type="date" class="form-control" id="blogDate" onChange={(e) => setBlogDate(e.target.value)} value={blogDate} />
-                                 </div>
+                                 </div> */}
                                   
                                 <div class="col-12 mb-3 ">
                                   <label for="blogDesc" class="form-label fw-bold">Image</label>
@@ -464,7 +475,7 @@ const UserDashboard = () => {
                   </Col>
 
 
-                  <Col  md={5} sm={12} >
+                  <Col  md={3} sm={12} >
                     <div>
                       <BlogCard />
                     </div>
