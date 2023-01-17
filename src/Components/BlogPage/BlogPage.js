@@ -63,7 +63,7 @@ const BlogPage = () => {
                     </Row>
                 </div>
 
-                <div className='mt-5 '>
+                <div className='mt-5 blog-section'>
                     <h6 className='fw-bold'>PREVIOUS POST </h6>
                     <div>
                         <Row xs={1} md={3} className="g-4">
@@ -96,11 +96,11 @@ const BlogPage = () => {
             </Container>
 
 
-            <div className='blog-you-may-like-section'>
+            <div className='blog-you-may-like-section blog-section'>
 
                 <Container >
                     <h6 className='fw-bold'>YOU MAY ALSO LIKE THIS </h6>
-                    <Row xs={1} md={5} className="g-3 ">
+                    <Row xs={1} md={5} className="g-2 ">
                         {asYouLikeBlog?.map(likeblog => {
                             const { _id, blogCatagory, blogTitle, bloggerName, blogImg } = likeblog;
                             return (
@@ -110,7 +110,7 @@ const BlogPage = () => {
                                         <Card.Body>
                                             {/* <span className='blog-catagory'>{blogCatagory}</span> */}
                                             <Card.Title className='fw-bold my-2'>{blogTitle}</Card.Title>
-                                            <p className='blog-author'>by {bloggerName}</p>
+                                            <p className='blog-author mt-3'>by {bloggerName.slice(0,20)}</p>
                                         </Card.Body>
                                     </Card>
                                 </Col>
