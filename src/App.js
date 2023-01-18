@@ -18,6 +18,7 @@ import Register from "./Pages/Register";
 import Search from "./Pages/Search";
 import TeamInfo from "./Pages/TeamInfo";
 import UserProfile from "./Pages/UserProfile";
+import SingleBlogPage from "./Components/BlogPage/SingleBlogPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<SingleBlogPage/>} />
         <Route path="career" element={<Career />} />
         <Route path="/other" element={<Other />} />
         <Route path="/contact" element={<ContuctUs />} />
