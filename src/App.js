@@ -1,5 +1,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import TeamCardData from "./Components/TeamInfo/TeamCardData";
 import Home from "./Pages/Home";
 import Services from "./Pages/Services";
@@ -19,6 +21,7 @@ import Search from "./Pages/Search";
 import TeamInfo from "./Pages/TeamInfo";
 import UserProfile from "./Pages/UserProfile";
 import SingleBlogPage from "./Components/BlogPage/SingleBlogPage";
+import ProjectDetails from "./Components/UserDashboard/ProjectDetails";
 
 function App() {
   return (
@@ -30,7 +33,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<SingleBlogPage/>} />
+        <Route path="/blog/:id" element={<SingleBlogPage />} />
         <Route path="career" element={<Career />} />
         <Route path="/other" element={<Other />} />
         <Route path="/contact" element={<ContuctUs />} />
@@ -43,12 +46,14 @@ function App() {
         <Route path="/data-protection" element={<PrivacyPolicy />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/user-dashboard" element={<UserProfile />} />
+        {/* <Route path="/user-dashboard/:id" element={<ProjectDetails />} /> */}
         <Route
           path="/team/:slug"
           exact={true}
           element={<TeamInfo data={TeamCardData} />}
         />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
