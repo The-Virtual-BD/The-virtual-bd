@@ -33,7 +33,7 @@ const UserDashboard = () => {
             <Tab>Settings</Tab>
             <Tab>Subscription</Tab>
             <Tab>Projects</Tab>
-            <Tab>Blogger</Tab>
+            <Tab>Blog</Tab>
           </TabList>
 
 

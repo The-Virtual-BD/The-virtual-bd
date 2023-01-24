@@ -114,10 +114,18 @@ const Blogger = () => {
                                     <input type="text" class="form-control" id="blogTitle" onChange={(e) => setBlogTitle(e.target.value)} />
                                 </div>
 
+
                                 <div class="col-12 mb-3">
                                     <label for="subTitle" class="form-label fw-bold">Subject</label>
-                                    <input type="text" class="form-control" id="subTitle" onChange={(e) => setBlogSubTitle(e.target.value)} />
+                                    <select onChange={(e) => setBlogSubTitle(e.target.value)} class="form-control custom-select" id="subTitle" aria-label="form-select-lg example">
+                                        <option selected disabled >Select Subject </option>
+                                        <option value="1">one</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
                                 </div>
+
+
 
                                 <div class="col-12 mb-3">
                                     <label for="blogsSDesc" class="form-label fw-bold">Short Description</label>

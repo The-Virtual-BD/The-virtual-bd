@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import BlogCard from './BlogCard';
 import './UserDashboard.css';
@@ -32,7 +32,7 @@ const Subscription = () => {
 
                         <div class="col-12 mb-3">
                             <label for="services" class="form-label fw-bold">Services</label>
-                            <select onChange={(e) => setServices(e.target.value)} class="form-select" id="services" aria-label="form-select-lg example">
+                            <select onChange={(e) => setServices(e.target.value)} class="form-control custom-select" id="services" aria-label="form-select-lg example">
                                 <option selected disabled >Select Service  </option>
                                 <option value="1">Two</option>
                                 <option value="2">Two</option>
@@ -73,7 +73,7 @@ const Subscription = () => {
                 </div>
             </Col>
 
-            
+
             <Col md={3} sm={12} >
                 <BlogCard />
             </Col>

@@ -17,7 +17,7 @@ const ProjectDetails = () => {
     console.log(getProjectsDeatils);
     return (
         <Container>
-            <div className='bg-white  my-2 rounded'>
+            <div className='bg-white  my-2  rounded'>
                 <div>
                     <h2 className='text-2xl fw-bold text-start my-3 px-4'>View Project</h2>
                     <hr className=' text-bgclr' />

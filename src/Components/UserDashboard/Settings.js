@@ -9,6 +9,7 @@ import './UserDashboard.css';
 const Settings = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState('');
+    const [bloggerName, setBloggerName] = useState('');
     const [email, setEmail] = useState('');
     const [profession, setProfession] = useState('');
     const [nationality, setNationality] = useState('');
@@ -27,7 +28,7 @@ const Settings = () => {
     const handleUserProfileForm = e => {
         e.preventDefault();
         const profileData = {
-            firstName, lastName, birth_date, email, profession, nationality, phone, bio
+            firstName, lastName,bloggerName, birth_date, email, profession, nationality, phone, bio
         };
         console.log(profileData);
         toast.success("Profile Updated Successfully");
@@ -70,6 +71,11 @@ return (
                         <input type="text" class="form-control" id="lastName" onChange={(e) => setLastName(e.target.value)} value={lastName} />
                     </div>
 
+
+                    <div class="col-md-12 my-3">
+                        <label for="bloggerName" class="form-label fw-bold">Blogger Name</label>
+                        <input type="text" class="form-control" id="bloggerName" onChange={(e) => setBloggerName(e.target.value)} value={bloggerName} />
+                    </div>
 
                     <div class="col-md-12 my-3">
                         <label for="email" class="form-label fw-bold">Email</label>

@@ -63,6 +63,12 @@ const Projects = () => {
                 sortType: 'basic',
 
             },
+            {
+                Header: "Status",
+                accessor: "status",
+                sortType: 'basic',
+
+            },
 
             {
                 Header: 'Action',
@@ -114,7 +120,7 @@ const ProductDetails = ({ getId, projects }) => {
     console.log(projects);
     return (
         <>
-            <div className='bg-white px-3 py-2 rounded '>
+            <div className='bg-white p-4 px-5 rounded '>
                 <div>
                     <h2 className=' fw-bold text-start '>View Project</h2>
                     <hr className=' text-bgclr' />
