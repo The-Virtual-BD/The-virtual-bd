@@ -122,27 +122,27 @@ const ProductDetails = ({ getId, projects }) => {
         <>
             <div className='bg-white p-4 px-5 rounded '>
                 <div>
-                    <h2 className=' fw-bold text-start '>View Project</h2>
+                    <h3 className=' fw-bold text-start '>View Project</h3>
                     <hr className=' text-bgclr' />
                 </div>
 
                 <Row >
                     <Col md={7} sm={12} >
                         <div className='d-flex flex-column align-items-start '>
-                            <h4><span className='fw-bold'>Project Title:</span> {getProjectsDeatils?.projectName}</h4>
-                            <h4><span className='fw-bold'>Client Name: </span>{getProjectsDeatils?.name}</h4>
+                            <p><span className='fw-bold'>Project Title:</span> {getProjectsDeatils?.projectName}</p>
+                            <p><span className='fw-bold'>Client Name: </span>{getProjectsDeatils?.name}</p>
 
                             <p><span className='fw-bold'>Starting Date: </span>{getProjectsDeatils?.startDate}</p>
                             <p><span className='fw-bold'>Ending Date:</span> {getProjectsDeatils?.endDate}</p>
                             <p><span className='fw-bold'> Status:</span> {getProjectsDeatils?.status}</p>
                             <p><span className='fw-bold'> Budget:</span> {getProjectsDeatils?.budget}</p>
 
-                            <div className='text-start my-3'>
-                                <h4 className='fw-bold' >Short Description:</h4>
+                            <div className='text-start my-2'>
+                                <p className='fw-bold' >Short Description:</p>
                                 <p className='text-labelclr'>{getProjectsDeatils?.blogShortDesc}</p>
                             </div>
                             <div className='text-start'>
-                                <h4 className='fw-bold'>Description:</h4>
+                                <p className='fw-bold'>Description:</p>
                                 <p className='text-labelclr'>{getProjectsDeatils?.blogDesc}</p>
                             </div>
 

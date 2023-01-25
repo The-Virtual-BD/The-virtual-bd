@@ -21,7 +21,6 @@ import Search from "./Pages/Search";
 import TeamInfo from "./Pages/TeamInfo";
 import UserProfile from "./Pages/UserProfile";
 import SingleBlogPage from "./Components/BlogPage/SingleBlogPage";
-import ProjectDetails from "./Components/UserDashboard/ProjectDetails";
 
 function App() {
   return (
@@ -46,7 +45,6 @@ function App() {
         <Route path="/data-protection" element={<PrivacyPolicy />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/user-dashboard" element={<UserProfile />} />
-        {/* <Route path="/user-dashboard/:id" element={<ProjectDetails />} /> */}
         <Route
           path="/team/:slug"
           exact={true}

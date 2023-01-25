@@ -70,7 +70,7 @@ function Table({ columns, data, headline }) {
 
     return (
         <div className="bg-white py-3 px-3 rounded">
-            <div className="d-flex justify-content-between align-items-center px-3">
+            <div className="d-flex flex-sm-row flex-column justify-content-between align-items-center px-3">
                 <h3 className="fw-bold">{headline}</h3>
                 <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
             </div>
@@ -97,14 +97,14 @@ function Table({ columns, data, headline }) {
                         {page.map((row, i) => {
                             prepareRow(row, i)
                             return (
-                                (i % 2 == 1) ? <tr {...row.getRowProps()} key={i} className=" p-3  text-center  ">
+                                (i % 2 == 1) ? <tr {...row.getRowProps()} key={i} className=" p-2  text-center  ">
                                     {row.cells.map((cell, i) => {
-                                        return <td key={i} {...cell.getCellProps()} className=" p-3  text-center   ">{cell.render('Cell')}</td>
+                                        return <td key={i} {...cell.getCellProps()} className=" p-2  text-center   ">{cell.render('Cell')}</td>
                                     })}
                                 </tr> :
-                                    <tr {...row.getRowProps()} key={i} className=" p-3  text-center ">
+                                    <tr {...row.getRowProps()} key={i} className=" p-2  text-center ">
                                         {row.cells.map((cell, i) => {
-                                            return <td key={i} {...cell.getCellProps()} className=" p-3 ash-bg text-center  ">{cell.render('Cell')}</td>
+                                            return <td key={i} {...cell.getCellProps()} className=" p-2 ash-bg text-center  ">{cell.render('Cell')}</td>
                                         })}
                                     </tr>
                             )
@@ -113,7 +113,7 @@ function Table({ columns, data, headline }) {
                 </table>
             </div>
 
-            <div className="d-flex justify-content-between align-items-center px-3">
+            <div className="d-flex flex-sm-row flex-column justify-content-between align-items-center px-3">
                 <div>
                     <span className="fw-bold">Show
                         <select className="rounded p-1 mx-1"
