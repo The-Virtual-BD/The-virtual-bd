@@ -58,7 +58,7 @@ useEffect(() => {
 return (
     <Row>
         <Col md={9} sm={12}>
-            <div className="bg-white p-4  rounded user-dashboard-font">
+            <div className="bg-white p-sm-4 p-2  rounded user-dashboard-font">
                 <h3 className='px-3 fw-bold'>Information</h3>
                 <form className="row form-container p-3" onSubmit={handleUserProfileForm} >
                     <div class="col-md-6">
@@ -116,10 +116,10 @@ return (
                 </form>
             </div>
 
-            <div className="bg-white p-3  rounded my-5">
+            <div className="bg-white p-sm-4 p-2   rounded my-5">
 
                 <h3 className='px-3 fw-bold'>Security</h3>
-                <form className='form-container p-3' onSubmit={handleCngPassword}>
+                <form className='row form-container p-3' onSubmit={handleCngPassword}>
                     <div class="col-12">
                         <label for="cngPass" class="form-label fw-bold">Change Password</label>
                         <input type="password" class="form-control" id="cngPass" onChange={(e) => setCngPass(e.target.value)} required />

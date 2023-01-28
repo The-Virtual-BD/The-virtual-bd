@@ -1,6 +1,6 @@
 import React from "react";
 import "./SideLog.css";
-import backLog from "./img/socialCover.jpg";
+import backLog from "../../../Images/sign-in_back.jpg";
 import { ExternalLink } from "react-external-link";
 import {
   BsFacebook,

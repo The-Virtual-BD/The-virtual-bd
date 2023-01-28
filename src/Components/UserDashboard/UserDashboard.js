@@ -41,7 +41,7 @@ const UserDashboard = () => {
           <div className="tabPanel_gap mb-5 mt-5">
             <TabPanel>
               <Row >
-                <Col md={7} sm={12} >
+                <Col lg={7} sm={12} >
                   <div className="bg-white p-sm-5 p-3 rounded  mb-3">
                     <h3 className='fw-bold user-dashboard-font mb-3'>About Me</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -49,8 +49,8 @@ const UserDashboard = () => {
 
                 </Col>
 
-                <Col md={5} sm={12}>
-                  <div className="bg-white p-5 rounded user-dashboard-font">
+                <Col lg={5} sm={12}>
+                  <div className="bg-white  p-sm-5 p-3 rounded user-dashboard-font">
                     <h3 className='fw-bold mb-4'>Contact Information</h3>
 
                     <div className='d-flex align-items-center justify-space-between gap-3 '>

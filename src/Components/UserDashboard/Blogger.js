@@ -70,9 +70,9 @@ const Blogger = () => {
                         <>
                             {
                                 (!isbloggerAppSent) ?
-                                    <div className="bg-white p-3  rounded">
-                                        <h3 className='px-3 fw-bold'>Become a blogger</h3>
-                                        <form className='form-container p-3' onSubmit={handleBloggerForm} >
+                                    <div className="bg-white p-sm-4 p-2 rounded">
+                                        <h3 className='px-2 fw-bold'>Become a blogger</h3>
+                                        <form className='row form-container p-2 mb-3' onSubmit={handleBloggerForm} >
                                             <div class="col-12 mb-3">
                                                 <label for="bloggerName" class="form-label fw-bold">Blogger Name</label>
                                                 <input type="text" class="form-control" id="bloggerName" onChange={(e) => setBloggerName(e.target.value)} />
@@ -93,7 +93,7 @@ const Blogger = () => {
                                                 <textarea class="form-control" id='blogDesc' rows="5" onChange={(e) => setBlogDesc(e.target.value)}></textarea>
                                             </div>
 
-                                            <div class="col-12 text-center mt-3">
+                                            <div class="col-12 text-center ">
                                                 <button className='main-btn' type="submit">Apply</button>
                                             </div>
                                         </form>
@@ -105,9 +105,9 @@ const Blogger = () => {
                             }
                         </>
                         :
-                        <div className="bg-white p-3  rounded">
-                            <h3 className='px-3 fw-bold'>Create a blog</h3>
-                            <form className='form-container p-2' onSubmit={handleCreateBlogForm} >
+                        <div className="bg-white p-sm-4 p-2  rounded">
+                            <h3 className='px-2 fw-bold'>Create a blog</h3>
+                            <form className='row form-container p-2 mb-3' onSubmit={handleCreateBlogForm} >
 
                                 <div class="mb-3 col-12">
                                     <label for="blogTitle" class="form-label fw-bold">Title</label>
@@ -168,7 +168,7 @@ const Blogger = () => {
                                 </div>
 
 
-                                <div class="col-12 text-center mt-3">
+                                <div class="col-12 text-center ">
                                     <button className='main-btn' type="submit">Submit</button>
                                 </div>
                             </form>

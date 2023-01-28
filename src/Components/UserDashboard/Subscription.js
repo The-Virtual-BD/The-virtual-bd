@@ -26,9 +26,9 @@ const Subscription = () => {
     return (
         <Row>
             <Col md={9} sm={12}>
-                <div className="bg-white p-3  rounded ">
+                <div className="bg-white  p-sm-4 p-2  rounded ">
 
-                    <form className='form-container p-4' onSubmit={handleSubcription}>
+                    <form className='row form-container p-3 mb-3' onSubmit={handleSubcription}>
 
                         <div class="col-12 mb-3">
                             <label for="services" class="form-label fw-bold">Services</label>
@@ -65,7 +65,7 @@ const Subscription = () => {
 
                         </div>
 
-                        <div class="col-12 text-center mt-2">
+                        <div class="col-12 text-center ">
                             <button className='main-btn' type="submit">Submit</button>
                         </div>
 

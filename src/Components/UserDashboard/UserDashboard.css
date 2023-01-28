@@ -100,11 +100,18 @@
 
 .project-table-container {
     width: 100%;
+    /* overflow: hidden; */
+    overflow-y: hidden;
+    overflow-x: auto;
+
 }
 
 .project-table {
     width: 100%;
     color: #2C3E50;
+    margin: 10px 0;
+
+
 }
 
 .ash-bg {
@@ -114,13 +121,12 @@
 .pagination-btn {
     background: white;
     color: #193441;
-    width: 75px;
-    height: 35px;
-    font-weight: 600;
+    padding: 8px 15px;
     border-radius: 8px;
-    border: 0.5px solid #2C3E50;
+    border: 1px solid #2C3E50;
 }
 
+.active-btn,
 .pagination-btn:hover {
     background: #3498db;
     color: #ffffff;
@@ -148,4 +154,11 @@
 .project-delete-btn {
     background: #FF0000;
 
+}
+
+
+@media screen and (max-width:465px) {
+    .project-search-container {
+        width: 100%;
+    }
 }
