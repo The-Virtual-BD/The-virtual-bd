@@ -115,7 +115,7 @@ function Table({ columns, data, headline }) {
             </div>
 
             <div >
-                
+
                 <Pagination
                     gotoPage={gotoPage}
                     length={data.length}

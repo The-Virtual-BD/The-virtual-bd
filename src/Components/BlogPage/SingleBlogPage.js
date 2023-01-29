@@ -7,6 +7,7 @@ import Menu from '../Header/Menu';
 import Socialmedia from '../Socialmedia/Socialmedia';
 import TopHeader from '../TopHeader/TopHeader';
 import './BlogPage.css';
+import BlogSocialmedia from './BlogSocialMedia';
 
 const SingleBlogPage = () => {
     const { id } = useParams();
@@ -29,14 +30,14 @@ const SingleBlogPage = () => {
             <TopHeader />
             <Menu />
             <Container>
-                <div className='blog-details-container  blog-section'>
+                <div className='blog-details-container  blog-section mt-sm-3 mt-5'>
                     <span className='blog-catagory'>{singleBlog?.blogCatagory}</span>
                     <h2 className='fw-bolder mt-2 '>{singleBlog?.blogTitle}</h2>
                     <p className='fs-4'>{singleBlog?.blogsShortDesc}</p>
 
 
                     <div className='d-flex align-items-center justify-content-start gap-3'>
-                        <img src={singleBlog?.bloggerImg} alt="" srcset="" />
+                        <img src={singleBlog?.bloggerImg} alt="" srcset="" className='blogImg' />
                         <div className='mt-3'>
                             <h6 className='mb-0 fw-bold'>{singleBlog?.bloggerName}</h6>
                             <p><small className='fs-6 fw-light'>{singleBlog?.blogDate}</small></p>
@@ -54,7 +55,8 @@ const SingleBlogPage = () => {
                                 <p >{singleBlog?.blogsDesc}</p>
 
                                 <div className='d-flex align-items-center'>
-                                    <h3 className='fw-bold'>Share:</h3><Socialmedia />
+                                    <h3 className='fw-bold'>Share:</h3>
+                                    <BlogSocialmedia />
                                 </div>
 
                                 <BlogCommentBox />
@@ -63,7 +65,7 @@ const SingleBlogPage = () => {
 
                             <Col sm={12} md={3}>
                                 <div>
-                                    <h6 className='fw-bold blog-section-title'>EDITORS CHOICE</h6>
+                                    <h6 className='fw-bold blog-section-title mt-4'>EDITORS CHOICE</h6>
                                     <div className='d-flex flex-column gap-1'>
                                         {
                                             featureBlogs.map(fBlog => <div onClick={() => handleSingleBlogs(fBlog._id)} class="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
@@ -79,9 +81,10 @@ const SingleBlogPage = () => {
                                                 </div>
                                             </div>).slice(0, 3)
                                         }
-
                                     </div>
-                                    <div className='blog-newslatter-container mt-4 text-white p-3 py-4 pe-5'>
+
+
+                                    <div className='blog-newslatter-container  mt-4 text-white  py-4 px-4'>
                                         <h5 className=' blog-section-title text-uppercase'>Newsletter</h5>
                                         <p className='blog-newslatter-text'>Get all the latest
                                             posts delivered
@@ -91,10 +94,12 @@ const SingleBlogPage = () => {
                                         <div >
                                             <form className='d-flex flex-column justify-content-center align-items-center blog-newslatter-input'>
                                                 <input type="email" name="" id="" placeholder='Your email address' />
-                                                <button type='submit'>Subscribe</button>
+                                                <button type='submit' className='subscribe-submit-btn'>Subscribe</button>
                                             </form>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </Col>
                         </Row>
@@ -132,7 +137,7 @@ const BlogCommentBox = () => {
                         <Form.Control as="textarea" rows={4} placeholder="*Comment" />
                     </Form.Group>
 
-                    <button className='main-btn mb-2'>REGISTER NOW</button>
+                    <button className='main-btn mb-3'>REGISTER NOW</button>
                     <p>Become a member of The Virtual BD to start commenting.</p>
                 </Form>
             </div>

@@ -131,7 +131,7 @@
 
 .blog-details-img-container img {
     width: 100%;
-    height: 500px;
+    height: 600px;
     border-radius: 5px;
 }
 
@@ -141,8 +141,8 @@
 
 
 .blog-newslatter-container {
-    width: 309px;
-    height: 322px;
+    /* width: 300px; */
+    /* height: 250px; */
     background: #3498DB;
     border-radius: 10px;
 }
@@ -150,12 +150,13 @@
 .blog-newslatter-text {
     font-weight: 600;
     font-size: 28px;
-    line-height: 33px;
+    line-height: 30px;
 }
 
 
 .blog-newslatter-input input {
-    width: 240px;
+    /* width: 240px; */
+    width: 100%;
     height: 34px;
     background: #ECF0F1;
     border-radius: 5px;
@@ -165,7 +166,8 @@
 }
 
 .blog-newslatter-input button {
-    width: 240px;
+    /* width: 240px; */
+    width: 100%;
     height: 35px;
     background: #ECF0F1;
     border-radius: 5px;
@@ -174,20 +176,68 @@
     font-weight: 600;
 }
 
+.blog-newslatter-input button:hover {
+    background: #e74c3c;
+    color: white;
+}
+
 
 .blog-comment-box-container {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.4) -35.54%, rgba(147, 184, 193, 0.4) 134.11%);
     border-radius: 10px;
     width: 100%;
-    height: 958px;
+    /* height: 958px; */
     padding: 36px;
     margin-top: 35px;
+    
 }
 
+/* Social Media */
 
 
+.blog_social_media ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .blog_social_media {
+    margin-right: 25px;
+  }
+  
+  .blog_social_media ul li {
+    list-style: none;
+    margin-right: 16px;
+  }
+  
+  .blog_social_media ul li:last-child {
+    margin-right: 0;
+  }
+  
+  .blog_social_media ul li a {
+    line-height: 24px;
+    font-weight: 600;
+    font-size: 25px;
+    color: #e74c3c;
+    transition: .3s all ease;
+    -webkit-transition: .3s all ease;
+    -moz-transition: .3s all ease;
+    -ms-transition: .3s all ease;
+    -o-transition: .3s all ease;
+  }
+  
+  .blog_social_media ul li a:hover {
+    color: #3498DB;
+  }
+  
+  .social_link {
+    margin-left: 10px;
+  }
 
 
+  
+  
 
 /* ===============Responsive================ */
 
@@ -215,5 +265,9 @@
         width: 100%;
         height: 100%;
         text-align: center;
+    }
+
+    .blog-details-img-container img {
+        height: 100%;
     }
 }

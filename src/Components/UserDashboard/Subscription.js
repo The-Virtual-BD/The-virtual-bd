@@ -26,7 +26,7 @@ const Subscription = () => {
     return (
         <Row>
             <Col md={9} sm={12}>
-                <div className="bg-white  p-sm-4 p-2  rounded ">
+                <div className="bg-white  p-sm-4 p-2 mb-sm-3 mb-5  rounded ">
 
                     <form className='row form-container p-3 mb-3' onSubmit={handleSubcription}>
 

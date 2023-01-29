@@ -58,6 +58,9 @@
 .author_social_media ul li a {
   color: black;
 }
+.author_social_media ul li a:hover {
+  color: #3498DB;
+}
 
 .author_info {
   margin-left: 40px;

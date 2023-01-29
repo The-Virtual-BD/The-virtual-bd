@@ -46,6 +46,11 @@
   font-size: 18px;
   color: #00b2e2;
 }
+.social_link{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* ==================Respondive================ */
 

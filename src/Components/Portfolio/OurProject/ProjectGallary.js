@@ -64,7 +64,7 @@ function ProjectGallary() {
                       <div className="project_info">
                         <div className="project_text">
                           <h3>
-                            Project: {projectNmae}/ <small>{category}</small>
+                            Project: {projectNmae}
                           </h3>
                           <p>This web site created by {frameWork}</p>
                           <small>Client: {clint}</small>

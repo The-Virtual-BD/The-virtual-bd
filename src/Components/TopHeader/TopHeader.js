@@ -16,6 +16,7 @@ function TopHeader() {
               <img src={Logo} alt="logo" />
             </Link>
           </div>
+
           <div className="info">
             <div className="location">
               <div className="location_icon">
@@ -51,6 +52,7 @@ function TopHeader() {
               </div>
             </div>
           </div>
+
           <div className="social_link">
             <Socialmedia />
           </div>

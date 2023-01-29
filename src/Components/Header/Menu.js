@@ -66,6 +66,7 @@ function Menu() {
               <Nav.Link>
                 <Link to="/career">Career</Link>
               </Nav.Link>
+
             </Nav>
 
             <Nav.Link className="sing_area">
@@ -73,6 +74,7 @@ function Menu() {
                 <span className="signIn">Sign In</span>
               </Link>
             </Nav.Link>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
