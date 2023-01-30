@@ -22,6 +22,7 @@ function TeamMember() {
           <div className="teamMember_head">
             <h2>Get to know the people behind The Virtual BD</h2>
           </div>
+
           <div className="team_slider">
             <Swiper
               slidesPerView={1}

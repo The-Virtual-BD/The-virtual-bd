@@ -17,7 +17,7 @@ import { toast } from 'react-toastify';
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const Blogger = () => {
+const Blogger = ({ isBlogger }) => {
     //Be a blogger Form
     const [bloggerName, setBloggerName] = useState('');
     const [blogSub, setBlogSub] = useState('');
@@ -27,19 +27,20 @@ const Blogger = () => {
     //show sent msg
     const [isbloggerAppSent, setIsbloggerAppSent] = useState(false);
 
-    //Blogger Auth
-    const [isBlogger, setIsBlogger] = useState(true);
 
     //Create a Blog Form
     const [authorName, setAuthorName] = useState('');
+
     const [blogTitle, setBlogTitle] = useState('');
     const [blogSubTitle, setBlogSubTitle] = useState('');
-    const [blogsDesc, setBlogsDesc] = useState('');
     const [blogsShortDesc, setBlogsShortDesc] = useState('');
-
-    const [blogDate, setBlogDate] = useState();
-
     const [blogImg, setBlogImg] = useState([]);
+    const [blogsDesc, setBlogsDesc] = useState('');
+
+    // const [blogDate, setBlogDate] = useState();
+
+
+
 
 
     //Handle Blogger Form
@@ -54,10 +55,10 @@ const Blogger = () => {
     //Handle create blog Form
     const handleCreateBlogForm = e => {
         e.preventDefault();
-        const addNewBlog = { blogTitle, blogSubTitle, blogsDesc, blogImg };
+        const addNewBlog = { blogTitle, blogSubTitle, blogsShortDesc, blogsDesc, blogImg };
         console.log(addNewBlog);
-        e.target.reset();
-        toast.warn("Your Blog has Submitted for permission");
+        // e.target.reset();
+        // toast.warn("Your Blog has Submitted for permission");
 
     };
     return (
@@ -135,34 +136,37 @@ const Blogger = () => {
 
                                 <div class="col-12 mb-3">
                                     <label for="blogsDesc" class="form-label fw-bold">Description</label>
-                                    <CKEditor
-                                        initData="<p>Write Your Blog Description here</p>"
 
-                                        onChange={(event, editor) => {
-                                            console.log(editor, event);
-                                            const data = editor?.getData();
-                                            setBlogsDesc({ event, editor, data });
-                                        }}
+                                    <CKEditor
+                                        data={blogsDesc}
+                                        onChange={e => setBlogsDesc(e.editor.getData())}
+                                       /*  config={{
+                                            height: '200px',
+                                            toolbar: [
+                                                'bold',
+                                                'italic',
+                                                'bulletedList',
+                                                'numberedList',
+                                                'link',
+                                                'CodeSnippet'
+                                            ],
+                                        }} */
                                     />
                                 </div>
 
 
-
-
-
-                                {/*   <div class="col-12 mb-3">
-                            <label for="blogDate" class="form-label fw-bold">Date</label>
-                                <input type="date" class="form-control" id="blogDate" onChange={(e) => setBlogDate(e.target.value)} value={blogDate} />
-                         </div> */}
 
                                 <div class="col-12 mb-3 ">
                                     <label for="blogDesc" class="form-label fw-bold">Image</label>
                                     <FilePond
                                         allowMultiple={true}
                                         files={blogImg}
-                                        maxFiles={5}
+                                        onupdatefiles={setBlogImg}
+                                        maxFiles={3}
                                         allowReorder={true}
                                         server=""
+                                        name="imgs"
+                                        labelIdle='Drag & Drop your Images or <span class="filepond--label-action">Browse</span>'
                                         className={"img-input-field"}
                                     />
                                 </div>

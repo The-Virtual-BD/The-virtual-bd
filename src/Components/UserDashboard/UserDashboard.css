@@ -1,6 +1,8 @@
 .user-dashboard-container {
     background: linear-gradient(248.14deg, rgba(255, 255, 255, 0.4) 1.48%, rgba(147, 184, 193, 0.4) 121.81%);
-    padding: 30px;
+    /* padding: 20px; */
+    padding-top: 35px;
+    padding-bottom: 15px;
 }
 
 .form-container input,
@@ -22,7 +24,7 @@
 .img-input-field {
     border: 1px dashed black;
     padding: 100px 0;
-    height: 200px;
+    /* height: 200px; */
     text-align: center;
     border-radius: 5px;
     background: #ECF0F1;
@@ -43,8 +45,11 @@
 }
 
 .filepond--drop-label {
-    margin-top: 60px !important;
+    padding-top: 60px !important;
     font-weight: 700;
+    background: #ECF0F1;
+    height: 100px;
+
 }
 
 .cke_wysiwyg_frame {

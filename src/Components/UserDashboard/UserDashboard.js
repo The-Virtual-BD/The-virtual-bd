@@ -12,6 +12,8 @@ import Projects from './Projects';
 
 
 const UserDashboard = () => {
+  //Blogger Auth
+  const [isBlogger, setIsBlogger] = useState(true);
 
   return (
     <div className="user-dashboard-container ">
@@ -33,7 +35,7 @@ const UserDashboard = () => {
             <Tab>Settings</Tab>
             <Tab>Subscription</Tab>
             <Tab>Projects</Tab>
-            <Tab>Blog</Tab>
+            <Tab>{isBlogger ? "Blog" : "Blogger"}  </Tab>
           </TabList>
 
 
@@ -87,7 +89,7 @@ const UserDashboard = () => {
             </TabPanel>
 
             <TabPanel>
-              <Blogger />
+              <Blogger isBlogger={isBlogger} />
             </TabPanel>
 
           </div>
