@@ -10,6 +10,7 @@ function AboutHero() {
           <div className="about_text">
             <h2>About The Virtual BD</h2>
           </div>
+         
         </Container>
       </section>
     </>

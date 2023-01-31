@@ -60,7 +60,7 @@ const Subscription = () => {
 
                         <div class="col-12 mb-3 ">
                             <label for="doc" class="form-label fw-bold">Documents</label>
-                            <input type="file" class="form-control  " id="doc" onChange={(e) => setDoc(e.target.value)} />
+                            <input type="file" class="form-control " id="doc" onChange={(e) => setDoc(e.target.value)} />
 
 
                         </div>

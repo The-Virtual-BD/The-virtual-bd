@@ -59,47 +59,52 @@ function TeamMember() {
                     <div className="team_img">
                       <img src={data.img} alt="" />
                     </div>
+
                     <div className="team_info">
                       <h2>{data.Tname}</h2>
                       <p>{data.TDegination}</p>
+
                       <div className="team_social">
+                        <div className="d-flex align-items-center justify-content-center team_social_icon_container">
                         <div className="team_social_icon">
-                          {data.Tfacebook && (
-                            <ExternalLink href={data.Tfacebook}>
-                              <BsFacebook />
-                            </ExternalLink>
-                          )}
-                        </div>
-                        <div className="team_social_icon">
-                          {data.Ttwiter && (
-                            <ExternalLink href={data.Ttwiter}>
-                              <BsTwitter />
-                            </ExternalLink>
-                          )}
-                        </div>
-                        <div className="team_social_icon">
-                          {data.TInstragram && (
-                            <ExternalLink href={data.TInstragram}>
-                              <BsInstagram />
-                            </ExternalLink>
-                          )}
-                        </div>
-                        <div className="team_social_icon">
-                          {data.Tlinkdin && (
-                            <ExternalLink href={data.Tlinkdin}>
-                              <BsLinkedin />
-                            </ExternalLink>
-                          )}
-                        </div>
-                        <div className="team_social_icon">
-                          {data.Tgmail && (
-                            <ExternalLink href={mail + data.Tgmail}>
-                              <SiGmail />
-                            </ExternalLink>
-                          )}
+                            {data.Tfacebook && (
+                              <ExternalLink href={data.Tfacebook}>
+                                <BsFacebook />
+                              </ExternalLink>
+                            )}
+                          </div>
+                          <div className="team_social_icon">
+                            {data.Ttwiter && (
+                              <ExternalLink href={data.Ttwiter}>
+                                <BsTwitter />
+                              </ExternalLink>
+                            )}
+                          </div>
+                          <div className="team_social_icon">
+                            {data.TInstragram && (
+                              <ExternalLink href={data.TInstragram}>
+                                <BsInstagram />
+                              </ExternalLink>
+                            )}
+                          </div>
+                          <div className="team_social_icon">
+                            {data.Tlinkdin && (
+                              <ExternalLink href={data.Tlinkdin}>
+                                <BsLinkedin />
+                              </ExternalLink>
+                            )}
+                          </div>
+                          <div className="team_social_icon">
+                            {data.Tgmail && (
+                              <ExternalLink href={mail + data.Tgmail}>
+                                <SiGmail />
+                              </ExternalLink>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </SwiperSlide>
               ))}

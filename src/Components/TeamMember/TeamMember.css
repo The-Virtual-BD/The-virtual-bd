@@ -28,6 +28,7 @@
   position: relative;
   transition: 0.5s all ease;
   cursor: pointer;
+  
 }
 
 .team_img img {
@@ -37,15 +38,17 @@
 
 .team_info {
   width: 280px;
+  height: 80px;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background: #fff;
   position: absolute;
   transform: translate(-50%);
-  transition: 0.5s all ease;
+  transition: 0.3s all ease;
   left: 50%;
-  bottom: -10%;
-  padding-top: 20px;
+  bottom: -15%;
+  overflow: hidden;
+  /* padding-top: 20px; */
   padding-bottom: 20px;
 }
 
@@ -70,8 +73,8 @@
   justify-content: center;
   margin-bottom: 10px;
   margin-top: -10px;
+  transform: translateY(200%);
   transition: 0.5s all ease;
-  display: none;
 }
 
 .team_social_icon a {
@@ -79,20 +82,19 @@
   color: #e74c3c;
   margin: 10px;
   margin-top: -20px;
-  transition: 0.5s all ease;
+  /* transition: 0.5s all ease; */
 }
 
 .team_social_icon a:hover {
   color: #00b2e2;
 }
 
-.team_card:hover .team_social {
-  display: flex;
+.team_card:hover .team_info {
+  height: 100px;
+}
 
-  /* -webkit-transition: 0.5s all ease;
-  -moz-transition: 0.5s all ease;
-  -ms-transition: 0.5s all ease;
-  -o-transition: 0.5s all ease; */
+.team_card:hover .team_social {
+  transform: translateY(0);
 }
 
 .teamMember_area .swiper {
