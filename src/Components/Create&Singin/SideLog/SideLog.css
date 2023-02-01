@@ -26,9 +26,34 @@
   margin: 10px;
   font-size: 20px;
 }
-.logSocial ul li a {
-  color: #fff;
+/* .reg-social{
+  background-color: #ECF0F1;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+} */
+
+.logSocial ul li{
+  transition: 0.5s all ease;
 }
+
+.logSocial ul li a svg{
+  color: white;
+  transition: 0.2s all linear;
+  font-size: 20px;
+}
+
+
+.logSocial ul li:hover a svg{
+  /* color:#0077b5 ; */
+  transform: scale(1.5);
+}
+
+
 @media only screen and (max-width: 768px) {
   .logimg img {
     margin-left: 0;

@@ -95,6 +95,10 @@
   line-height: 21px;
   text-align: right;
   color: rgba(44, 62, 80, 0.8);
+  text-decoration: none;
+}
+.control_area a:hover{
+  color: #E74C3C;
 }
 
 .form_submit button {

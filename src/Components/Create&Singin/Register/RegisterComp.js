@@ -44,7 +44,7 @@ function RegisterComp() {
                         </div>
                       </div>
                       <div className="form_submit">
-                        <button>LOGIN</button>
+                        <button>REGISTER</button>
                       </div>
                     </form>
                     <div className="dont_account">

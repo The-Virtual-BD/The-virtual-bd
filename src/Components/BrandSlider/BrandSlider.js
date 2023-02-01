@@ -9,7 +9,7 @@ function BrandSlider() {
     <>
       <section className="brandSlider">
         <div className="brand_text">
-          <h2>OUR PARTNERS</h2>
+          <h2>Our Partners</h2>
         </div>
         <div className="nice">
           <Marquee gradient={false} speed={30}>

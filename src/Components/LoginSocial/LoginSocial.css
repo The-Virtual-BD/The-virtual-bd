@@ -15,6 +15,7 @@
 
 
 
+
 .login_ocial ul li:last-child {
   margin-right: 0;
 }
@@ -24,6 +25,9 @@
   font-weight: 600;
   font-size: 35px;
   color: #ff0000;
+}
+.google a svg,.facebook a svg,.linkdin a svg{
+  transition: 0.3s all ease;
 }
 
 .facebook a {
@@ -38,6 +42,10 @@
   font-weight: 600;
   font-size: 35px;
   color: #0077b5;
+}
+
+.google:hover a svg,.facebook:hover a svg,.linkdin:hover a svg{
+  transform: scale(1.2);
 }
 
 /* ===================Respnsive================ */

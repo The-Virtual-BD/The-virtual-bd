@@ -140,22 +140,25 @@ const BlogPage = () => {
                                 }
                             }}
                             modules={[Pagination, Autoplay, Navigation]}
-                            className="mySwiper"
+                            className="mySwiper "
                         >
                             {asYouLikeBlog?.map(likeblog => {
-                                const { _id, blogTitle, bloggerName, blogImg } = likeblog;
+                                const { _id, blogTitle, bloggerName, blogImg,bloggerImg } = likeblog;
                                 return (
                                     <SwiperSlide key={_id} >
-                                        <Card className='blog-card' onClick={() => handleSingleBlogs(_id)}>
+                                        <Card className='blog-card my-4 mx-1'  onClick={() => handleSingleBlogs(_id)}>
                                             <Card.Img variant="top" src={blogImg} />
                                             <Card.Body>
-                                                {/* <span className='blog-catagory'>{blogCatagory}</span> */}
-                                                <Card.Title className='fw-bold my-2'>{blogTitle}</Card.Title>
-                                                <p className='blog-author mt-3'>by {bloggerName.slice(0, 20)}</p>
+                                                 {/* <span className='blog-catagory'>{blogCatagory}</span> */}
+                                                <Card.Title className='fw-bold mb-2'>{blogTitle}</Card.Title>
+                                                <div className='d-flex align-items-center justify-content-start gap-2'>
+                                                     <img src={bloggerImg} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+
+                                                     <p className='blog-author mt-3'> <span className='fw-bolder'>{bloggerName.slice(0, 12)}</span></p>
+                                                </div>
                                             </Card.Body>
                                         </Card>
                                     </SwiperSlide>
-
                                 )
                             })}
 

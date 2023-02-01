@@ -138,7 +138,7 @@ const Blogger = ({ isBlogger }) => {
                                     <label for="blogsDesc" class="form-label fw-bold">Description</label>
 
                                     <CKEditor
-                                        data={blogsDesc}
+                                     data={blogsDesc}
                                         onChange={e => setBlogsDesc(e.editor.getData())}
                                        /*  config={{
                                             height: '200px',

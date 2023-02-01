@@ -29,6 +29,7 @@ function TopHeader() {
                 </p>
               </div>
             </div>
+            
             <div className="contuct">
               <div className="contuct_icon">
                 <FaAddressBook />
@@ -40,6 +41,7 @@ function TopHeader() {
                 </p>
               </div>
             </div>
+
             <div className="time">
               <div className="time_icon">
                 <BsClock />

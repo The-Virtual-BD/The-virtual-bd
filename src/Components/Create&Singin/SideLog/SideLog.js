@@ -10,6 +10,10 @@ import {
   BsLinkedin,
 } from "react-icons/bs";
 
+import {FiTwitter} from "react-icons/fi";
+import { FaFacebook } from "react-icons/fa";
+import { RiYoutubeLine } from "react-icons/ri";
+
 function SideLog() {
   return (
     <>
@@ -21,13 +25,13 @@ function SideLog() {
           <ul>
             <li>
               <ExternalLink href="https://twitter.com">
-                <BsTwitter />
+                <FiTwitter />
               </ExternalLink>
             </li>
 
             <li>
               <ExternalLink href="https://www.facebook.com/TheVirtualBD">
-                <BsFacebook />
+                <FaFacebook />
               </ExternalLink>
             </li>
             <li>
@@ -37,7 +41,7 @@ function SideLog() {
             </li>
             <li>
               <ExternalLink href="https://youtube.com">
-                <BsYoutube />
+                <RiYoutubeLine className="fs-4" />
               </ExternalLink>
             </li>
             <li>

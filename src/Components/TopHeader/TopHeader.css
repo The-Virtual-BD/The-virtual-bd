@@ -56,11 +56,12 @@
 
 @media only screen and (max-width: 768px) {
   .top_header {
-    display: block;
+    /* display: block; */
+    display: none;
   }
   .info {
-    display: flex;
-    flex-direction: column;
+    display: none;
+    /* flex-direction: column; */
   }
   .time {
     margin-right: 60px;
