@@ -61,6 +61,36 @@ const Blogger = ({ isBlogger }) => {
         // toast.warn("Your Blog has Submitted for permission");
 
     };
+
+
+
+    const editorToolbar = [
+        {
+          name: "basicstyles",
+          groups: ["basicstyles", "cleanup"],
+          items: [
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strike",
+            "Subscript",
+            "Superscript",
+            "-",
+            "RemoveFormat",
+          ],
+        },
+        {
+          name: "paragraph",
+          groups: ["list", "indent", "blocks", "align", "bidi"],
+          items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent"],
+        },
+        { name: "links", items: ["Link", "Unlink"] },
+        {
+          name: "insert",
+          items: [ "SpecialChar"],
+        },
+        
+      ];
     return (
         <Row >
             <Col md={9} sm={12}>
@@ -118,7 +148,7 @@ const Blogger = ({ isBlogger }) => {
 
                                 <div class="col-12 mb-3">
                                     <label for="subTitle" class="form-label fw-bold">Subject</label>
-                                    <select onChange={(e) => setBlogSubTitle(e.target.value)} class="form-control custom-select" id="subTitle" aria-label="form-select-lg example">
+                                    <select onChange={(e) => setBlogSubTitle(e.target.value)} class="form-control form-select" id="subTitle" aria-label="form-select-lg example">
                                         <option selected disabled >Select Subject </option>
                                         <option value="1">one</option>
                                         <option value="2">Two</option>
@@ -140,6 +170,8 @@ const Blogger = ({ isBlogger }) => {
                                     <CKEditor
                                      data={blogsDesc}
                                         onChange={e => setBlogsDesc(e.editor.getData())}
+                                        config={{toolbar: editorToolbar}}
+                                        class="form-control"
                                        /*  config={{
                                             height: '200px',
                                             toolbar: [
