@@ -9,6 +9,7 @@ import Settings from './Settings';
 import Subscription from './Subscription';
 import Blogger from './Blogger';
 import Projects from './Projects';
+import { BsCheckCircleFill } from 'react-icons/bs';
 
 
 const UserDashboard = () => {
@@ -24,8 +25,10 @@ const UserDashboard = () => {
             <div className='d-flex  align-items-center   '>
               <img src={userImg} alt='user img' />
               <div className='d-flex flex-column  ms-3'>
-                <h3 className='fw-bold'>Ishtiuq Ahmed Chowdhury</h3>
+
+                <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>Ishtiuq Ahmed Chowdhury</span> <BsCheckCircleFill className='blue-clr'/></h5>
                 <p>User</p>
+
               </div>
             </div>
           </div>

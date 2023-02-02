@@ -163,6 +163,12 @@
 
 }
 
+.blue-clr{
+    color: #3498db;
+}
+.headline-text{
+    color: #2C3E50;
+}
 /* Get Arrow Icon For select in Botstrap */
 select.form-control{
     -webkit-appearance: menulist!important;
