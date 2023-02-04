@@ -1,6 +1,6 @@
 import React from "react";
 import "./SideLog.css";
-import backLog from "../../../Images/sign-in_back.jpg";
+import backLog from "../../../Images/sign-in-img.jpg";
 import { ExternalLink } from "react-external-link";
 import {
   BsFacebook,
@@ -11,8 +11,8 @@ import {
 } from "react-icons/bs";
 
 import {FiTwitter} from "react-icons/fi";
-import { FaFacebook } from "react-icons/fa";
-import { RiYoutubeLine } from "react-icons/ri";
+import { FaFacebook, FaInstagramSquare, FaTwitterSquare } from "react-icons/fa";
+import {AiFillInstagram } from "react-icons/ai";
 
 function SideLog() {
   return (
@@ -25,7 +25,7 @@ function SideLog() {
           <ul>
             <li>
               <ExternalLink href="https://twitter.com">
-                <FiTwitter />
+                <FaTwitterSquare />
               </ExternalLink>
             </li>
 
@@ -36,12 +36,12 @@ function SideLog() {
             </li>
             <li>
               <ExternalLink href="https://instagram.com">
-                <BsInstagram />
+                <FaInstagramSquare />
               </ExternalLink>
             </li>
             <li>
               <ExternalLink href="https://youtube.com">
-                <RiYoutubeLine className="fs-4" />
+                <BsYoutube className="fs-4" />
               </ExternalLink>
             </li>
             <li>

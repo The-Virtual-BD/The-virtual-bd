@@ -23,6 +23,7 @@ import UserProfile from "./Pages/UserProfile";
 import SingleBlogPage from "./Components/BlogPage/SingleBlogPage";
 
 function App() {
+  
   return (
     <div className="App">
       <Routes>

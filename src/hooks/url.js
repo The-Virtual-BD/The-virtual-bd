@@ -1,0 +1,1 @@
+export const baseUrl=`http://vbd.z4id.com`

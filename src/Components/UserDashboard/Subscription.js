@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
+import ReactDatePicker from 'react-datepicker';
 import { toast } from 'react-toastify';
 import BlogCard from './BlogCard';
 import './UserDashboard.css';
@@ -10,13 +11,24 @@ const Subscription = () => {
     const [services, setServices] = useState('');
     const [subject, setSubject] = useState('');
     const [desc, setDesc] = useState('');
-    const [schedule, setSchedule] = useState('');
+    const [schedule, setSchedule] = useState(new Date());
     const [doc, setDoc] = useState([]);
 
     //handle Subcription
     const handleSubcription = e => {
         e.preventDefault();
-        const subcriptions = { services, subject, desc, doc, schedule };
+        const date=new Date(schedule)
+        const meeting_date=date.toLocaleString("en-US", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+          });
+
+          
+        const subcriptions = { services, subject, desc, doc, meeting_date};
 
         console.log(subcriptions);
         e.target.reset();
@@ -55,8 +67,19 @@ const Subscription = () => {
 
                         <div class="col-12 mb-3">
                             <label for="schedule" class="form-label fw-bold">Metting Schedule</label>
-                            <input type="datetime-local" class="form-control" id="schedule" onChange={(e) => setSchedule(e.target.value)} />
+                            <input 
+                                type="datetime-local" 
+                                class="form-control" 
+                                id="schedule" 
+                                value={schedule}
+                                onChange={(e) => setSchedule(e.target.value)} />
                         </div>
+
+
+                        
+
+
+
 
                         <div class="col-12 mb-3 ">
                             <label for="doc" class="form-label fw-bold">Documents</label>

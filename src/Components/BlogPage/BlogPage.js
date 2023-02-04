@@ -146,7 +146,7 @@ const BlogPage = () => {
                                 const { _id, blogTitle, bloggerName, blogImg,bloggerImg } = likeblog;
                                 return (
                                     <SwiperSlide key={_id} >
-                                        <Card className='blog-card my-4 mx-1'  onClick={() => handleSingleBlogs(_id)}>
+                                        <Card className='blog-card mb-4 mx-1'  onClick={() => handleSingleBlogs(_id)}>
                                             <Card.Img variant="top" src={blogImg} />
                                             <Card.Body>
                                                  {/* <span className='blog-catagory'>{blogCatagory}</span> */}
