@@ -15,21 +15,23 @@ function RegisterComp() {
   const onSubmit = (data ,e)=>{
     e.preventDefault();
 
-    console.log(data);
+    // console.log(data);
 
     //send to backend
+   
     const url = `${baseUrl}/api/register`;
     fetch(url, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
+            // 'content-type': 'multipart/form-data'
         },
         body: JSON.stringify(data)
     })
         .then(res => res.json())
         .then(result => {
             console.log(result);
-            toast.success("Register Successfully!");
+            // toast.success("Register Successfully!");
             reset();
         })
 

@@ -77,7 +77,7 @@ const BlogPage = () => {
                     <div>
                         <Row xs={1} md={3} className="g-4">
                             {blogs?.map(blog => {
-                                const { _id, blogCatagory, blogTitle, blogsShortDesc, bloggerName, blogImg } = blog;
+                                const { _id, blogCatagory, blogTitle, blogsShortDesc, bloggerName, blogImg,bloggerImg } = blog;
                                 return (
                                     <Col key={_id}>
                                         <Card onClick={() => handleSingleBlogs(_id)} className="blog-card">
@@ -88,7 +88,12 @@ const BlogPage = () => {
                                                 <Card.Text>
                                                     {blogsShortDesc}
                                                 </Card.Text>
-                                                <p className='blog-author'>by {bloggerName}</p>
+                                                <div className='d-flex align-items-center justify-content-start gap-2'>
+                                                     <img src={bloggerImg} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+
+                                                     <p className='blog-author mt-3'> <span className='fw-bolder'>{bloggerName}</span></p>
+                                                </div>
+                                                {/* <p className='blog-author'>by {bloggerName}</p> */}
                                             </Card.Body>
                                         </Card>
                                     </Col>
