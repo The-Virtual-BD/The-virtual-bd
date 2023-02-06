@@ -1,10 +1,17 @@
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
 import "./Menu.css";
 import logo from "./logo/logo.png";
+import useToken from "../../hooks/useToken";
+import useUser from "../../hooks/useUser";
+
+
 function Menu() {
+  // const [token]= useToken();
+  const[user]=useUser()
+
+  console.log(user);
   return (
     <>
       <Navbar collapseOnSelect expand="lg" className="navBg" sticky="top">
@@ -69,12 +76,24 @@ function Menu() {
 
             </Nav>
 
-            <Nav.Link className="sing_area">
-              <Link to="/sign-in">
-                <span className="signIn">Sign In</span>
-              </Link>
-            </Nav.Link>
+           
+              {user? 
+               <Nav.Link className="sing_area">
+               <Link to="/user-dashboard">
+               <span className="signIn">{user?.first_name}</span>
+             </Link> 
+             </Nav.Link>
 
+             :
+             <Nav.Link className="sing_area">
+             <Link to="/sign-in">
+             <span className="signIn">Sign In</span>
+           </Link>
+             </Nav.Link>
+
+            }
+              
+          
           </Navbar.Collapse>
         </Container>
       </Navbar>

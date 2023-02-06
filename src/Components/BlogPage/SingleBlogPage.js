@@ -68,14 +68,14 @@ const SingleBlogPage = () => {
                                     <h6 className='fw-bold blog-section-title mt-4'>EDITORS CHOICE</h6>
                                     <div className='d-flex flex-column gap-1'>
                                         {
-                                            featureBlogs.map(fBlog => <div onClick={() => handleSingleBlogs(fBlog._id)} class="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
-                                                <div class="row g-0">
-                                                    <div class="col-md-5">
-                                                        <img src={fBlog.blogImg} class="img-fluid rounded-start" alt={fBlog.bloggerName} style={{ height: "100%" }} />
+                                            featureBlogs.map(fBlog => <div onClick={() => handleSingleBlogs(fBlog._id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
+                                                <div className="row g-0">
+                                                    <div className="col-md-5">
+                                                        <img src={fBlog.blogImg} className="img-fluid rounded-start" alt={fBlog.bloggerName} style={{ height: "100%" }} />
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title fw-bold">{fBlog.blogTitle}</h5>
+                                                    <div className="col-md-7">
+                                                        <div className="card-body">
+                                                            <h5 className="card-title fw-bold">{fBlog.blogTitle}</h5>
                                                         </div>
                                                     </div>
                                                 </div>

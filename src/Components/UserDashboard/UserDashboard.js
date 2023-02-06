@@ -10,11 +10,48 @@ import Subscription from './Subscription';
 import Blogger from './Blogger';
 import Projects from './Projects';
 import { BsCheckCircleFill } from 'react-icons/bs';
+import useToken from '../../hooks/useToken';
+import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../hooks/url';
+import { BiLogOutCircle } from 'react-icons/bi';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
+import useUser from '../../hooks/useUser';
 
 
 const UserDashboard = () => {
+  const navigate=useNavigate()
   //Blogger Auth
   const [isBlogger, setIsBlogger] = useState(true);
+  const [token]=useToken();
+
+  const[user]=useUser();
+  const{id,first_name,last_name, email,birth_date,nationality,phone,profession,bio}=user;
+
+  // console.log(token);
+
+
+  const handleLogout=()=>{
+  
+
+    const url = `${baseUrl}/api/logout`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            "Authorization": `Bearer ${token}`
+        }
+    })
+        .then(res => res.json())
+        .then(result => {
+          console.log(result);
+          window.localStorage.removeItem('token');
+          window.localStorage.removeItem('user');
+          navigate('/');
+        })
+
+
+  };
 
   return (
     <div className="user-dashboard-container ">
@@ -26,20 +63,31 @@ const UserDashboard = () => {
               <img src={userImg} alt='user img' />
               <div className='d-flex flex-column  ms-3'>
 
-                <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>Ishtiuq Ahmed Chowdhury</span> <BsCheckCircleFill className='blue-clr'/></h5>
-                <p>User</p>
+                <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>{`${first_name} ${last_name}`}</span> <BsCheckCircleFill className='blue-clr'/></h5>
+                <p className='mb-0'>{profession}</p>
+                {
+                token && <div className='fw-bold logout-btn'>
+                  <BiLogOutCircle />
+                  <span className=' ms-1' onClick={handleLogout}>Logout</span>
+                  {/* <RiLogoutCircleRLine /> */}
+                </div>
+              }
 
               </div>
             </div>
           </div>
 
-          <TabList className="text-start bg-white pb-2">
-            <Tab>My Profile</Tab>
-            <Tab>Settings</Tab>
-            <Tab>Subscription</Tab>
-            <Tab>Projects</Tab>
-            <Tab>{isBlogger ? "Blog" : "Blogger"}  </Tab>
-          </TabList>
+          <div>
+            <TabList className="text-start bg-white pb-2">
+              <Tab>My Profile</Tab>
+              <Tab>Settings</Tab>
+              <Tab>Subscription</Tab>
+              <Tab>Projects</Tab>
+              <Tab>{isBlogger ? "Blog" : "Blogger"}  </Tab>
+             
+              
+            </TabList>
+          </div>
 
 
 
@@ -49,7 +97,12 @@ const UserDashboard = () => {
                 <Col lg={7} sm={12} >
                   <div className="bg-white p-sm-5 p-3 rounded  mb-3">
                     <h3 className='fw-bold user-dashboard-font mb-3'>About Me</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                    {
+                      bio? {bio}: <p>Please Write Your Bio....</p>
+                    }
+
+                    {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
                   </div>
 
                 </Col>
@@ -67,11 +120,11 @@ const UserDashboard = () => {
                         <p className='mb-1 fw-bold'>Nationality:</p>
                       </div>
                       <div>
-                        <p className='mb-1'>ahmedishtiuq@gmail.com</p>
-                        <p className='mb-1'>Graphic & UI/UX Designer</p>
-                        <p className='mb-1'>+880 1674 668 544</p>
-                        <p className='mb-1'>02.10.1990</p>
-                        <p className='mb-1'>Bangladeshi</p>
+                        <p className='mb-1'>{email}</p>
+                        <p className='mb-1'>{profession}</p>
+                        <p className='mb-1'>{phone}</p>
+                        <p className='mb-1'>{birth_date}</p>
+                        <p className='mb-1'>{nationality}</p>
                       </div>
                     </div>
                   </div>

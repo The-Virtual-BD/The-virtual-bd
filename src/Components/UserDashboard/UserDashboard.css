@@ -185,9 +185,16 @@ select.form-control{
     background: #ECF0F1;
 }
 
+.logout-btn{
+    cursor: pointer;
+   color: #3498db;
+
+}
+
 
 @media screen and (max-width:465px) {
     .project-search-container {
         width: 100%;
     }
 }
+

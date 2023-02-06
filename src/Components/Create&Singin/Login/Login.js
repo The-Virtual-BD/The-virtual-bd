@@ -1,20 +1,55 @@
 import React from "react";
 import "./Login.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SideLog from "../SideLog/SideLog";
 import SocialLogIn from "./../SocialLogIn/SocialLogIn";
 import LoginSocial from "../../LoginSocial/LoginSocial";
 import { useForm } from "react-hook-form";
+import { baseUrl } from "../../../hooks/url";
+import { toast } from "react-toastify";
+import { useContext } from "react";
+import { AppContext } from "../../../context";
 
 function Login() {
   const { register, handleSubmit,reset } = useForm();
+  const navigate=useNavigate();
+  // const{user,setUser}=useContext(AppContext);
 
   const onSubmit = (data ,e)=>{
     e.preventDefault();
-    console.log(data);
+    // console.log(data);
+
+
+    const url = `${baseUrl}/api/login`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .then(result => {
+          if(result.error){
+            console.log(result.error);
+            toast.error("Login Failed");
+          }else{
+            console.log(result);
+            const token=result.token
+            const user=JSON.stringify(result.user)
+            // setUser(result.user)
+
+            // toast.success("login Successfully!");
+            window.localStorage.setItem("token", token);
+            window.localStorage.setItem("user", user);
+
+            navigate('/user-dashboard')
+          }
+           
+        })
   
-  }
+  };
 
 
 

@@ -6,19 +6,19 @@ import "./UserDashboard.css"
 const BlogCard = () => {
     return (
         <>
-         {/*  <div class="card blog-card">
-                <img src={card1} class="card-img-top" alt="..." />
-                <div class="card-body">
+         {/*  <div className="card blog-card">
+                <img src={card1} className="card-img-top" alt="..." />
+                <div className="card-body">
                     <div className='d-flex align-items-center justify-content-between mb-2'>
-                        <h6 class="card-subtitle  text-danger fw-bolder fs-6">Programming Language?</h6>
+                        <h6 className="card-subtitle  text-danger fw-bolder fs-6">Programming Language?</h6>
                         <p ></p>
                     </div>
 
-                    <h5 class="card-title fw-bold"></h5>
-                    <p class="card-text">A programming language is a way for programmers (developers) to communicate with computers. Programming languages consist of a set of rules that allows string values</p>
+                    <h5 className="card-title fw-bold"></h5>
+                    <p className="card-text">A programming language is a way for programmers (developers) to communicate with computers. Programming languages consist of a set of rules that allows string values</p>
                     
 
-                    <h5 class=" fw-bold "><a href="#" className='blog-card'> Read More</a></h5>
+                    <h5 className=" fw-bold "><a href="#" className='blog-card'> Read More</a></h5>
                 </div>
           </div> */}
 

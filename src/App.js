@@ -21,10 +21,21 @@ import Search from "./Pages/Search";
 import TeamInfo from "./Pages/TeamInfo";
 import UserProfile from "./Pages/UserProfile";
 import SingleBlogPage from "./Components/BlogPage/SingleBlogPage";
+import RequireAuth from "./Components/Auth/RequireAuth";
+import { createContext } from "react";
+import { AppContext } from "./context";
+import { useState } from "react";
+
+
+
 
 function App() {
-  
+  // const[user,setUser]=useState([]);
+
+  const value={};
+  // console.log(value)
   return (
+    <AppContext.Provider value={value}>
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
@@ -45,7 +56,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/data-protection" element={<PrivacyPolicy />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/user-dashboard" element={<UserProfile />} />
+        <Route path="/user-dashboard" element={ < RequireAuth><UserProfile /></RequireAuth>} />
         <Route
           path="/team/:slug"
           exact={true}
@@ -54,6 +65,7 @@ function App() {
       </Routes>
       <ToastContainer />
     </div>
+    </AppContext.Provider>
   );
 }
 

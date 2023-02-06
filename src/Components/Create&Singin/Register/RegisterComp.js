@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SideLog from "../SideLog/SideLog";
 import SocialLogIn from "../SocialLogIn/SocialLogIn";
 import "./RegisterComp.css";
@@ -8,9 +8,12 @@ import LoginSocial from "./../../LoginSocial/LoginSocial";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../hooks/url";
+import { useContext } from "react";
+import { AppContext } from "../../../context";
 
 function RegisterComp() {
   const { register, handleSubmit,reset } = useForm();
+  const navigate=useNavigate();
 
   const onSubmit = (data ,e)=>{
     e.preventDefault();
@@ -24,17 +27,27 @@ function RegisterComp() {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
-            // 'content-type': 'multipart/form-data'
         },
         body: JSON.stringify(data)
     })
         .then(res => res.json())
         .then(result => {
+          if(result.error){
+            console.log(result.error);
+            toast.error("Register Failed");
+          }else{
             console.log(result);
-            // toast.success("Register Successfully!");
-            reset();
-        })
+            const token=result.token;
+            const user=JSON.stringify(result.user)
+            
 
+            // toast.success("Register Successfully!");
+            window.localStorage.setItem("token", token);
+            window.localStorage.setItem("user", user);
+            navigate('/user-dashboard')
+          }
+           
+        })
   };
 
 
