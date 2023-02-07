@@ -17,41 +17,24 @@ import { BiLogOutCircle } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import useUser from '../../hooks/useUser';
+import moment from 'moment/moment';
 
 
 const UserDashboard = () => {
   const navigate=useNavigate()
   //Blogger Auth
-  const [isBlogger, setIsBlogger] = useState(true);
-  const [token]=useToken();
+  const [isBlogger, setIsBlogger] = useState(false);
 
+  //Get Token & User from Hooks
+  const [token]=useToken();
   const[user]=useUser();
   const{id,first_name,last_name, email,birth_date,nationality,phone,profession,bio}=user;
 
-  // console.log(token);
+  const birthDate=moment(birth_date).format('DD MMM YYYY')
 
 
-  const handleLogout=()=>{
+
   
-
-    const url = `${baseUrl}/api/logout`;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            "Authorization": `Bearer ${token}`
-        }
-    })
-        .then(res => res.json())
-        .then(result => {
-          console.log(result);
-          window.localStorage.removeItem('token');
-          window.localStorage.removeItem('user');
-          navigate('/');
-        })
-
-
-  };
 
   return (
     <div className="user-dashboard-container ">
@@ -65,14 +48,7 @@ const UserDashboard = () => {
 
                 <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>{`${first_name} ${last_name}`}</span> <BsCheckCircleFill className='blue-clr'/></h5>
                 <p className='mb-0'>{profession}</p>
-                {
-                token && <div className='fw-bold logout-btn'>
-                  <BiLogOutCircle />
-                  <span className=' ms-1' onClick={handleLogout}>Logout</span>
-                  {/* <RiLogoutCircleRLine /> */}
-                </div>
-              }
-
+                
               </div>
             </div>
           </div>
@@ -123,7 +99,7 @@ const UserDashboard = () => {
                         <p className='mb-1'>{email}</p>
                         <p className='mb-1'>{profession}</p>
                         <p className='mb-1'>{phone}</p>
-                        <p className='mb-1'>{birth_date}</p>
+                        <p className='mb-1'>{birthDate}</p>
                         <p className='mb-1'>{nationality}</p>
                       </div>
                     </div>
@@ -133,7 +109,7 @@ const UserDashboard = () => {
             </TabPanel>
 
             <TabPanel>
-              <Settings />
+              <Settings user={user} />
             </TabPanel>
 
             <TabPanel>

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useMemo, useState} from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import SideLog from "../SideLog/SideLog";
@@ -8,17 +8,28 @@ import LoginSocial from "./../../LoginSocial/LoginSocial";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../hooks/url";
-import { useContext } from "react";
-import { AppContext } from "../../../context";
+import countryList from "react-select-country-list";
+import Select from 'react-select';
 
 function RegisterComp() {
   const { register, handleSubmit,reset } = useForm();
   const navigate=useNavigate();
+   const [value, setValue] = useState('')
+  const options = useMemo(() => countryList().getData(), []);
+
+  const changeHandler = value => {
+    setValue(value)
+  };
+  // console.log(value)
+
+  // console.log(nationality.label);
 
   const onSubmit = (data ,e)=>{
     e.preventDefault();
 
-    // console.log(data);
+    data.nationality=value.label;
+
+    console.log(data);
 
     //send to backend
    
@@ -35,7 +46,7 @@ function RegisterComp() {
           if(result.error){
             console.log(result.error);
             toast.error("Register Failed");
-          }else{
+          } else{
             console.log(result);
             const token=result.token;
             const user=JSON.stringify(result.user)
@@ -60,7 +71,7 @@ function RegisterComp() {
               <div className="form">
                 <div className="log_form">
                   <div className="log_text">
-                    <h2>Sign into your account</h2>
+                    <h2>Create your account</h2>
                   </div>
                   <div className="log_link">
                     <Link to="/sign-in">Login</Link>
@@ -73,11 +84,11 @@ function RegisterComp() {
                   <div className="form_login">
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="user">
-                        <input type="text" placeholder="First name" {...register("first_name")} required/>
+                        <input type="text" placeholder="First Name" {...register("first_name")} required/>
                       </div>
 
                       <div className="user">
-                        <input type="text" placeholder="Last name"  {...register("last_name")} />
+                        <input type="text" placeholder="Last Name"  {...register("last_name")} />
                       </div>
 
                       <div className="user">
@@ -85,7 +96,12 @@ function RegisterComp() {
                       </div>
                       
                       <div className="user">
-                        <input type="date" placeholder="Birth date"  {...register("birth_date")} />
+                        <input 
+                          type="text"  
+                          placeholder="Date of Birth " 
+                          {...register("birth_date")}  
+                          onFocus={(e) => (e.target.type = "date")}
+                          onBlur={(e) => (e.target.type = "text")}/>
                       </div>
 
                       <div className="user">
@@ -97,7 +113,8 @@ function RegisterComp() {
                       </div>
 
                       <div className="user">
-                        <input type="text" placeholder="Nationality" {...register("nationality")} />
+                        {/* <input type="text" placeholder="Nationality" {...register("nationality")} /> */}
+                        <Select options={options} value={value} onChange={changeHandler} placeholder="Select Country"/>
                       </div>
 
                       <div className="user">
@@ -105,7 +122,7 @@ function RegisterComp() {
                       </div>
 
                       <div className="user">
-                        <input type="password" placeholder="Password confirmation" {...register("password_confirmation")} />
+                        <input type="password" placeholder="Confirm Password " {...register("password_confirmation")} />
                       </div>
 
                       <div className="control_area">

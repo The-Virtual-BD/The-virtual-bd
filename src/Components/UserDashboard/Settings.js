@@ -1,66 +1,121 @@
+import moment from 'moment';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import useUser from '../../hooks/useUser';
+import { baseUrl } from '../../hooks/url';
+import useToken from '../../hooks/useToken';
 import './UserDashboard.css';
 
 
-const Settings = () => {
-    const { register, handleSubmit } = useForm();
-    const[user]=useUser();
+const Settings = ({user}) => {
+    const [token]=useToken();
+
     const{id,first_name,last_name, email,birth_date,nationality,phone,profession,bio}=user;
 
-    const onSubmit = data => console.log(data);
+    const birthDateIn=moment(birth_date).format('DD/ MMM /YYYY')
 
-    /* const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState('');
+    //Update Profile
+    const [firstName, setFirstName] = useState(first_name);
+    const [lastName, setLastName] = useState(last_name);
     const [bloggerName, setBloggerName] = useState('');
-    const [email, setEmail] = useState('');
-    const [profession, setProfession] = useState('');
-    const [nationality, setNationality] = useState('');
-    const [birth_date, setBirth_date] = useState('');
-    const [phone, setPhone] = useState('');
-    const [bio, setBio] = useState(''); */
+    const [emaiL, setEmaiL] = useState(email);
+    const [professioN, setProfessioN] = useState(profession);
+    const [nationalitY, setNationalitY] = useState(nationality);
+    const [birthDate, setBirthDate] = useState(birthDateIn);
+    const [phonE, setPhonE] = useState(phone);
+    const [biO, setBiO] = useState(bio);
 
     const [uploadImage, setUploadImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
 
-    const [cngPass, setCngPass] = useState('');
-    const [confirmPass, setConfirmPass] = useState('');
+    //Password change
+    const [password, setPassword] = useState('');
+    const [password_confirmation, setPassword_confirmation] = useState('');
 
 
-    //Handle User Profile Form
-/*     const handleUserProfileForm = e => {
+    //Handle Update User Profile
+    const handleUserProfileForm = e => {
         e.preventDefault();
         const profileData = {
-            firstName, lastName,bloggerName, birth_date, email, profession, nationality, phone, bio
+            first_name:firstName,
+            last_name:lastName,
+            blogger_name:bloggerName,
+            birth_date:birthDate,
+            email:emaiL,
+            profession:professioN,
+            nationality:nationalitY,
+            phone:phonE,
+            bio:biO
         };
         console.log(profileData);
-        toast.success("Profile Updated Successfully");
-    }; */
+
+
+        //Send To Backend
+        const url = `${baseUrl}/api/myprofile/update/${id}`;
+        fetch(url, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(profileData)
+    })
+        .then(res => res.json())
+        .then(result => {
+          if(result.error){
+            console.log(result);
+            toast.error("Profile Update Failed");
+          } else{
+            console.log(result);
+            toast.success("Profile Updated Successfully");
+          }
+           
+        })
+    };
+
+
+
 
     //Handle Change Password Form
     const handleCngPassword = e => {
         e.preventDefault();
-        if (cngPass === confirmPass) {
-            console.log(confirmPass + " is your new password");
-            toast.success("Password Changed Successfully");
-            e.target.reset();
-        } else (
-            toast.error("password not matched!")
-        );
+        const updatePass={password,password_confirmation}
 
+        //Send To Backend
+        const url = `${baseUrl}/api/myprofile/pupdate/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(updatePass)
+        })
+            .then(res => res.json())
+            .then(result => {
+
+              if(result.error){
+                console.log(result.error);
+                toast.error(result.error);
+              } else{
+                console.log(result);
+                // e.target.reset();
+                toast.success(result.message);
+              }
+               
+            })
+        
     };
 
-//Preview updated Image
-useEffect(() => {
-    if (uploadImage) {
-        setImageUrl(URL.createObjectURL(uploadImage));
-    }
-}, [uploadImage]);
+    //Preview updated Image
+    useEffect(() => {
+        if (uploadImage) {
+             setImageUrl(URL.createObjectURL(uploadImage));
+        }
+    }, [uploadImage]);
 
 
 return (
@@ -68,15 +123,16 @@ return (
         <Col md={9} sm={12}>
             <div className="bg-white p-sm-4 p-2  rounded user-dashboard-font">
                 <h3 className='px-3 fw-bold'>Information</h3>
-                <form className="row form-container p-3" onSubmit={handleSubmit(onSubmit)} >
+                <form className="row form-container p-3" onSubmit={handleUserProfileForm} >
                     <div className="col-md-6">
                         <label for="firstName" className="form-label fw-bold">First Name</label>
                         <input 
-                        {...register("first_name")}
                         type="text" 
                         className="form-control" 
-                        id="firstName"  
-                        value={first_name} />
+                        id="firstName" 
+                        onChange={e=>setFirstName(e.target.value)}
+                        // {...register("first_name")} 
+                        value={firstName || ""}  />
                     </div>
 
                     <div className="col-md-6">
@@ -85,8 +141,9 @@ return (
                         type="text" 
                         className="form-control" 
                         id="lastName" 
-                        {...register("last_name")} 
-                        value={last_name} />
+                        onChange={e=>setLastName(e.target.value)}
+                        // {...register("last_name")} 
+                        value={lastName || ""} />
                     </div>
 
 
@@ -101,18 +158,20 @@ return (
                         type="email" 
                         className="form-control"
                          id="email" 
-                         {...register("email")} 
-                         value={email} />
+                         onChange={e=>setEmaiL(e.target.value)}
+                         value={emaiL || ""} />
                     </div>
 
                     <div className="col-12">
                         <label for="date" className="form-label fw-bold">Date Of Birth</label>
                         <input 
-                        type="date" 
+                        type="text" 
                         className="form-control" 
                         id="date" 
-                        {...register("birth_date")} 
-                         value={birth_date} />
+                        onChange={e=>setBirthDate(e.target.value)}
+                        onFocus={(e) => (e.target.type = "date")}
+                        onBlur={(e) => (e.target.type = "text")}
+                         value={birthDate || ""} />
                     </div>
 
 
@@ -123,8 +182,8 @@ return (
                         type="text" 
                         className="form-control" 
                         id="profession" 
-                        {...register("profession")}  
-                        value={profession} />
+                        onChange={e=>setProfessioN(e.target.value)}
+                        value={professioN || ""} />
                     </div>
 
                     <div className="col-md-12">
@@ -133,8 +192,8 @@ return (
                         type="tel" 
                         className="form-control" 
                         id="phone" 
-                        {...register("phone")}  
-                        value={phone} />
+                        onChange={e=>setPhonE(e.target.value)}
+                        value={phonE} />
                     </div>
 
                     <div className="col-md-12 my-3">
@@ -143,8 +202,8 @@ return (
                         type="text" 
                         className="form-control" 
                         id="Nationality" 
-                        {...register("nationality")}  
-                        placeholder={nationality} />
+                        onChange={e=>setNationalitY(e.target.value)}
+                        value={nationalitY} />
                     </div>
 
                     <div className="mb-3">
@@ -153,8 +212,8 @@ return (
                         className="form-control" 
                         id="bio" 
                         rows="3" 
-                        {...register("bio")} 
-                         value={bio}></textarea>
+                        onChange={e=>setBiO(e.target.value)}
+                         value={biO}></textarea>
                     </div>
 
                     <div className="col-12 text-center">
@@ -164,6 +223,9 @@ return (
                 </form>
             </div>
 
+
+
+
             {/* Security */}
             <div className="bg-white p-sm-4 p-2   rounded my-5">
 
@@ -171,11 +233,12 @@ return (
                 <form className='row form-container p-3' onSubmit={handleCngPassword}>
                     <div className="col-12">
                         <label for="cngPass" className="form-label fw-bold">Change Password</label>
-                        <input type="password" className="form-control" id="cngPass" onChange={(e) => setCngPass(e.target.value)} required />
+                        <input type="password" className="form-control" id="cngPass" onChange={(e) => setPassword(e.target.value)} placeholder="********" required />
                     </div>
+
                     <div className="col-12 my-2">
                         <label for="conPass" className="form-label fw-bold">Confirm Password</label>
-                        <input type="password" className="form-control" id="conPass" onChange={(e) => setConfirmPass(e.target.value)} required />
+                        <input type="password" className="form-control" id="conPass" onChange={(e) => setPassword_confirmation(e.target.value)} placeholder="********" required />
                     </div>
 
                     <div className="col-12 text-center ">

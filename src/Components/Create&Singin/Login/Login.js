@@ -76,7 +76,7 @@ function Login() {
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                       <div className="user">
-                        <input type="text" placeholder="email" {...register("email")}/>
+                        <input type="text" placeholder="Email" {...register("email")}/>
                       </div>
 
                       <div className="pass">

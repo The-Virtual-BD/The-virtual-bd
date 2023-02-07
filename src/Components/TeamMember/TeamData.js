@@ -55,7 +55,13 @@ const TeamSlider = [
     TDegination: "Sr. Web Developer",
     Tgmail: "sabbir@thevirtualbd.com",
   },
-  
+  {
+    id: 6,
+    img: team5,
+    Tname: "Md Abdul Hamid",
+    TDegination: "Frontend Developer",
+    Tgmail: "hamid.virtualbd@gmail.com",
+  },
   {
     id: 7,
     img: team6,

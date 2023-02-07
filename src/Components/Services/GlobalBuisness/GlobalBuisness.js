@@ -22,6 +22,7 @@ function GlobalBuisness() {
                 <div className="global_buis_btn">
                   <Link to="/services">Get Started</Link>
                 </div>
+                
                 <div className="global_contuct_btn">
                   <Link to="/contact">Contact Us</Link>
                 </div>

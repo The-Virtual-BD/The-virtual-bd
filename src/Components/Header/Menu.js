@@ -1,17 +1,43 @@
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Menu.css";
 import logo from "./logo/logo.png";
 import useToken from "../../hooks/useToken";
 import useUser from "../../hooks/useUser";
+import { FaUserCircle } from "react-icons/fa";
+import { BiLogOutCircle } from "react-icons/bi";
+import { baseUrl } from "../../hooks/url";
 
 
 function Menu() {
-  // const [token]= useToken();
-  const[user]=useUser()
+  const [token]= useToken();
+  const[user]=useUser();
+  const navigate=useNavigate()
 
   console.log(user);
+
+  const handleLogout=()=>{
+  
+
+    const url = `${baseUrl}/api/logout`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            "Authorization": `Bearer ${token}`
+        }
+    })
+        .then(res => res.json())
+        .then(result => {
+          console.log(result);
+          window.localStorage.removeItem('token');
+          window.localStorage.removeItem('user');
+          navigate('/');
+        })
+  };
+
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" className="navBg" sticky="top">
@@ -78,23 +104,48 @@ function Menu() {
 
            
               {user? 
-               <Nav.Link className="sing_area">
-               <Link to="/user-dashboard">
-               <span className="signIn">{user?.first_name}</span>
-             </Link> 
-             </Nav.Link>
+
+           /*  <Nav.Link className="sing_area">
+                 <Link to="/user-dashboard">
+                <div className="signIn">
+                    <div >
+                        <FaUserCircle className="fs-2"/>
+                    </div>
+                
+                  </div>
+              </Link> 
+            </Nav.Link> */
+
+            <NavDropdown
+                title={<><FaUserCircle className="fs-4 mr-2"/>{user.first_name}</> }
+                className="dropMenu sing_area"
+                id="navbarScrollingDropdown"
+              >
+                <NavDropdown.Item href={"/user-dashboard"} >
+                 Profile
+                </NavDropdown.Item>
+
+                <NavDropdown.Item onClick={handleLogout}>
+                Logout
+                </NavDropdown.Item>
+
+              
+              </NavDropdown>
 
              :
              <Nav.Link className="sing_area">
              <Link to="/sign-in">
-             <span className="signIn">Sign In</span>
+             <span className="signIn">
+              Sign In
+              </span>
            </Link>
              </Nav.Link>
 
             }
-              
-          
           </Navbar.Collapse>
+
+
+
         </Container>
       </Navbar>
     </>
@@ -102,3 +153,5 @@ function Menu() {
 }
 
 export default Menu;
+
+

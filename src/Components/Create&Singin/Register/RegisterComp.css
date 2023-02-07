@@ -109,7 +109,7 @@
   width: 100%;
   background: #3498db;
   border-radius: 10px;
-  border: none;
+  border: 1px solid #3498db;
   color: #ecf0f1;
   font-weight: 600;
   font-size: 16px;
@@ -118,7 +118,28 @@
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 20px;
+  transition: 0.1s all linear;
 }
+
+.form_submit button:hover{
+  background-color: #ecf0f1;
+  border: 1px solid #3498db;
+  color: #3498db;
+}
+
+
+.css-13cymwt-control{
+  border: none !important;
+}
+#react-select-2-input:focus{
+  outline: none !important;
+}
+
+
+
+
+
+
 .dont_account a{
   text-decoration: none;
 }

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Table from './Table';
 import './UserDashboard.css';
 import { Col, Container, Row } from 'react-bootstrap';
+import { baseUrl } from '../../hooks/url';
 
 const Projects = () => {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Projects = () => {
     const [getId, setGetId] = useState("")
 
     useEffect(() => {
+        const url = `${baseUrl}/api/user/subscriptions`;
         fetch('/projects.json')
             .then(res => res.json())
             .then(data => setProjects(data))
