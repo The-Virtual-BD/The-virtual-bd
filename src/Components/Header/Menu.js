@@ -135,7 +135,7 @@ function Menu() {
              :
              <Nav.Link className="sing_area">
              <Link to="/sign-in">
-             <span className="signIn">
+             <span className="signIn only-signin">
               Sign In
               </span>
            </Link>

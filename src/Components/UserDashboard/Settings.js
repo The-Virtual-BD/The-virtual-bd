@@ -104,6 +104,7 @@ const Settings = ({user}) => {
                 console.log(result);
                 // e.target.reset();
                 toast.success(result.message);
+                e.target.reset();
               }
                
             })
