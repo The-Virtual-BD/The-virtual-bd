@@ -14,7 +14,9 @@ import Select from 'react-select';
 function RegisterComp() {
   const { register, handleSubmit,reset } = useForm();
   const navigate=useNavigate();
-   const [value, setValue] = useState('')
+   const [value, setValue] = useState('');
+   const [failedMsg,setFailedMsg]=useState('');
+   
   const options = useMemo(() => countryList().getData(), []);
 
   const changeHandler = value => {
@@ -44,7 +46,8 @@ function RegisterComp() {
         .then(res => res.json())
         .then(result => {
           if(result.error){
-            console.log(result.error);
+            console.log(result);
+            setFailedMsg(result.error)
             toast.error("Register Failed");
           } else{
             console.log(result);
@@ -55,7 +58,7 @@ function RegisterComp() {
             // toast.success("Register Successfully!");
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("user", user);
-            navigate('/user-dashboard')
+            navigate('/user-dashboard');
           }
            
         })
@@ -129,7 +132,7 @@ function RegisterComp() {
                         <div className="remember">
                           <input type="checkbox" />
                           <label htmlFor="remember">
-                            I agree to the terms & conditions
+                            I agree to the <Link to={"/terms-conditions"}>terms & conditions</Link>
                           </label>
                         </div>
                       </div>

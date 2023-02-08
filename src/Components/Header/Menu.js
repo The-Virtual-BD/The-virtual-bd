@@ -18,7 +18,6 @@ function Menu() {
   console.log(user);
 
   const handleLogout=()=>{
-  
 
     const url = `${baseUrl}/api/logout`;
     fetch(url, {
@@ -121,12 +120,13 @@ function Menu() {
                 className="dropMenu sing_area"
                 id="navbarScrollingDropdown"
               >
-                <NavDropdown.Item href={"/user-dashboard"} >
-                 Profile
+                <NavDropdown.Item href="/user-dashboard">
+                  {/* <Link to="/user-dashboard"> </Link> */}
+                  Profile
                 </NavDropdown.Item>
 
                 <NavDropdown.Item onClick={handleLogout}>
-                Logout
+                    Logout
                 </NavDropdown.Item>
 
               
