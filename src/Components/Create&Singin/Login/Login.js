@@ -66,7 +66,7 @@ function Login() {
                   </div>
                   <div className="log_link">
                     <Link className="link_active" to="/sign-in">
-                      Login
+                     Sign In
                     </Link>
                     <Link to="/register">Register</Link>
                   </div>
