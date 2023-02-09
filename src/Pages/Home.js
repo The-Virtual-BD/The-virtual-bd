@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Counter from "../Components/Counter/Counter";
 import Footer from "../Components/Footer/Footer";
 import Menu from "../Components/Header/Menu";
@@ -11,6 +11,9 @@ import GlobalBuisness from "./../Components/Services/GlobalBuisness/GlobalBuisne
 import Provide from "./../Components/Provived/Provide";
 
 function Home() {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[]);
   return (
     <div>
       <TopHeader />

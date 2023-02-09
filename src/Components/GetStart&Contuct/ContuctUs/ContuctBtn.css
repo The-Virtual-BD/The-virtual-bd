@@ -21,6 +21,7 @@
   -moz-transition: 0.5s all ease;
   -ms-transition: 0.5s all ease;
   -o-transition: 0.2s all ease;
+  text-decoration: none;
 }
 
 .global_started_btn a:hover {

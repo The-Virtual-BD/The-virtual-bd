@@ -137,9 +137,12 @@ function RegisterComp() {
                         </div>
                       </div>
 
+                     
+
                       <div className="form_submit">
                         <button type="submit">REGISTER</button>
                       </div>
+                      <p>{failedMsg}</p>
                     </form>
 
 

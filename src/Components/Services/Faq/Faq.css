@@ -27,7 +27,7 @@
 
 .accordion-item {
   background: #ecf0f1;
-  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25); */
   border-radius: 10px;
   margin-bottom: 5px;
 }
@@ -46,7 +46,7 @@
 
 .accordion-button:not(.collapsed) {
   background: #3498db;
-  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25); */
   border-radius: 10px;
   color: #fff;
   font-weight: 600;
@@ -86,7 +86,7 @@
   background: #fff;
   border: 2px solid #3498db;
   color: #2c3e50;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
 }
 .provide_top {
   text-align: center;
@@ -130,7 +130,7 @@
   background: #ffffff;
   border: 2px solid #3498db !important;
   box-sizing: border-box;
-  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   background-color: #3498db;
   font-weight: 600;
@@ -172,7 +172,7 @@ ul {
 }
 
 .banner_button button {
-  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   outline: none;
   border: none;

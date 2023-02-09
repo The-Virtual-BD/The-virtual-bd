@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,13 +8,11 @@ import LoginSocial from "../../LoginSocial/LoginSocial";
 import { useForm } from "react-hook-form";
 import { baseUrl } from "../../../hooks/url";
 import { toast } from "react-toastify";
-import { useContext } from "react";
-import { AppContext } from "../../../context";
 
 function Login() {
-  const { register, handleSubmit,reset } = useForm();
+  const { register, handleSubmit} = useForm();
   const navigate=useNavigate();
-  // const{user,setUser}=useContext(AppContext);
+  const [failedMsg,setFailedMsg]=useState('');
 
   const onSubmit = (data ,e)=>{
     e.preventDefault();
@@ -23,29 +21,32 @@ function Login() {
 
     const url = `${baseUrl}/api/login`;
     fetch(url, {
+        mode: "no-cors",
         method: 'POST',
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'Access-Control-Allow-Origin': '*' 
         },
         body: JSON.stringify(data)
     })
         .then(res => res.json())
         .then(result => {
           if(result.error){
-            console.log(result.error);
+            console.log(result);
             toast.error("Login Failed");
+            setFailedMsg(result.error)
           }else{
             console.log(result);
             const token=result.token
             const user=JSON.stringify(result.user)
-            // setUser(result.user)
 
             // toast.success("login Successfully!");
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("user", user);
 
-            navigate('/user-dashboard')
+            navigate('/user-dashboard');
           }
+          
            
         })
   
@@ -96,6 +97,7 @@ function Login() {
                       <div className="form_submit">
                         <button type="submit">LOGIN</button>
                       </div>
+                      <p>{failedMsg}</p>
 
                     </form>
 

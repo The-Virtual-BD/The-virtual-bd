@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import useBlogs from '../../hooks/useBlogs';
@@ -22,7 +23,11 @@ const SingleBlogPage = () => {
 
     const handleSingleBlogs = (id) => {
         navigate(`/blog/${id}`)
-    }
+    };
+
+    useEffect(()=>{
+        window.scrollTo(0,0)
+      },[]);
 
     // console.log(typeof (id), singleBlog)
     return (

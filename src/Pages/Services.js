@@ -10,8 +10,12 @@ import Footer from "../Components/Footer/Footer";
 import GlobalBuisness from "../Components/Services/GlobalBuisness/GlobalBuisness";
 import BrandSlider from "./../Components/BrandSlider/BrandSlider";
 import Provide from "./../Components/Provived/Provide";
+import { useEffect } from "react";
 
 function Services() {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[]);
   return (
     <>
       <TopHeader />

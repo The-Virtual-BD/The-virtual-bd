@@ -26,11 +26,20 @@
   background: #fff;
   padding: 20px;
   transition: 0.2s all ease;
+  
 }
 
 .get_job:hover {
   background: #ecf0f1;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.get_job:hover .job_apply a{
+  border: 2px solid #00b2e2;
+  background: #fff;
+  color: #3498db;
+  text-decoration: none;
 }
 
 .job_expertis small {
@@ -84,7 +93,8 @@
 
 .job_apply a {
   background: #3498db;
-  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2); */
+  transition: .2s all linear;
   border-radius: 10px;
   padding: 12px 40px;
   font-weight: 600;
@@ -92,11 +102,7 @@
   line-height: 24px;
   text-transform: uppercase;
   color: #ffffff;
-}
-.job_apply a:hover {
   border: 2px solid #00b2e2;
-  background: #fff;
-  color: #2c3e50;
 }
 
 .apply_area {

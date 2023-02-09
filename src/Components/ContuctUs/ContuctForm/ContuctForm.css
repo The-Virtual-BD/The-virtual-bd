@@ -54,7 +54,7 @@
 
 .contuct_btn a {
   background: #ecf0f1;
-  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   font-weight: 600;
   font-size: 16px;
@@ -62,6 +62,7 @@
   color: #2c3e50;
   padding: 12px 40px;
   display: inline-block;
+  text-decoration: none;
   margin-top: 30px;
 }
 
