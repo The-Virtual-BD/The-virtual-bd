@@ -102,7 +102,7 @@ function Menu() {
             </Nav>
 
            
-              {user? 
+              {(token && user)? 
 
            /*  <Nav.Link className="sing_area">
                  <Link to="/user-dashboard">
@@ -128,17 +128,15 @@ function Menu() {
                 <NavDropdown.Item onClick={handleLogout}>
                     Logout
                 </NavDropdown.Item>
-
-              
               </NavDropdown>
 
              :
              <Nav.Link className="sing_area">
-             <Link to="/sign-in">
-             <span className="signIn only-signin">
-              Sign In
-              </span>
-           </Link>
+                <Link to="/sign-in">
+                <span className="signIn only-signin">
+                  Sign In
+                  </span>
+              </Link>
              </Nav.Link>
 
             }
