@@ -21,11 +21,9 @@ function Login() {
 
     const url = `${baseUrl}/api/login`;
     fetch(url, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
             'content-type': 'application/json',
-            'Access-Control-Allow-Origin': '*' 
         },
         body: JSON.stringify(data)
     })

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { baseUrl } from '../../hooks/url';
 import useToken from '../../hooks/useToken';
@@ -12,6 +13,7 @@ import './UserDashboard.css';
 
 const Settings = ({user}) => {
     const [token]=useToken();
+    const navigate=useNavigate();
 
     const{id,first_name,last_name, email,birth_date,nationality,phone,profession,bio}=user;
 
@@ -59,18 +61,23 @@ const Settings = ({user}) => {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
-            "Authorization": `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(profileData)
     })
         .then(res => res.json())
         .then(result => {
+            console.log(result)
           if(result.error){
-            console.log(result);
+            console.log(result.error);
             toast.error("Profile Update Failed");
           } else{
             console.log(result);
-            toast.success("Profile Updated Successfully");
+            toast.success(result.message);
+            const user=JSON.stringify(result.user)
+
+            window.localStorage.setItem("user", user);
+            navigate("/user-dashboard")
           }
            
         })
@@ -78,8 +85,7 @@ const Settings = ({user}) => {
 
 
 
-
-    //Handle Change Password Form
+    //Handle Update Password
     const handleCngPassword = e => {
         e.preventDefault();
         const updatePass={password,password_confirmation}
@@ -108,8 +114,9 @@ const Settings = ({user}) => {
               }
                
             })
-        
     };
+
+
 
     //Preview updated Image
     useEffect(() => {
@@ -214,7 +221,7 @@ return (
                         id="bio" 
                         rows="3" 
                         onChange={e=>setBiO(e.target.value)}
-                         value={biO}></textarea>
+                         value={biO} />
                     </div>
 
                     <div className="col-12 text-center">

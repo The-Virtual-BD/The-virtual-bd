@@ -14,14 +14,15 @@ const Subscription = () => {
     const [service_id, setService_id] = useState('');
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
-    const [scheduleT, setSchedule] = useState(new Date());
+    // const [scheduleT, setSchedule] = useState(new Date());
+    const [schedule, setSchedule] = useState();
     const [attachment, setAttachment] = useState([]);
 
     //handle Subcription
     const handleSubcription = e => {
         e.preventDefault();
 
-        //set Time Formate
+       /*  //set Time Formate
         const date=new Date(scheduleT)
         const schedule=date.toLocaleString("en-US", {
             day: "2-digit",
@@ -30,7 +31,7 @@ const Subscription = () => {
             hour: "2-digit",
             minute: "2-digit",
             hour12: true
-          });
+          }); */
           
         const subcriptions = { service_id, subject,description, schedule,attachment};
         console.log(subcriptions);
@@ -39,7 +40,7 @@ const Subscription = () => {
         
 
         //Send To Backend
-        const url = `${baseUrl}/api/subscription/create`;
+        const url = `${baseUrl}/api/subscriptions/store`;
         fetch(url, {
             method: 'POST',
             headers: {

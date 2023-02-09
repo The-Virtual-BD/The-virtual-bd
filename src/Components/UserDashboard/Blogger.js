@@ -13,11 +13,15 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast } from "react-toastify";
+import { baseUrl } from "../../hooks/url";
+import useToken from "../../hooks/useToken";
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const Blogger = ({ isBlogger }) => {
+  const [token]=useToken();
+
   //Be a blogger Form
   const [bloggerName, setBloggerName] = useState("");
   const [blogSub, setBlogSub] = useState("");
@@ -39,27 +43,80 @@ const Blogger = ({ isBlogger }) => {
   // const [blogDate, setBlogDate] = useState();
 
   //Handle Blogger Form
+
   const handleBloggerForm = (e) => {
     e.preventDefault();
-    const BloggerData = { bloggerName, blogSub, blogExArea, blogDesc, blogImg };
+    const BloggerReqSent = { bloggerName, blogSub, blogExArea, blogDesc, blogImg };
     toast.success("Your Applications has been Submitted");
-    setIsbloggerAppSent(true);
+   
+     //Send To Backend
+     const url = `${baseUrl}/api/subscriptions/store`;
+     fetch(url, {
+         method: 'POST',
+         headers: {
+             'content-type': 'application/json',
+             "Authorization": `Bearer ${token}`
+         },
+         body: JSON.stringify(BloggerReqSent)
+     })
+         .then(res => res.json())
+         .then(result => {
+
+           if(result.error){
+             console.log(result.error);
+             toast.error("Blogger Req Failed");
+           } else{
+             console.log(result);
+            //  e.target.reset();
+             toast.success("Blogger Req Successfully");
+             setIsbloggerAppSent(true);
+           }
+            
+         });
+
   };
+
+
+
 
   //Handle create blog Form
   const handleCreateBlogForm = (e) => {
     e.preventDefault();
-    const addNewBlog = {
-      blogTitle,
-      blogSubTitle,
-      blogsShortDesc,
-      blogsDesc,
-      blogImg,
-    };
+
+    const addNewBlog = { blogTitle,blogSubTitle, blogsShortDesc, blogsDesc, blogImg,};
     console.log(addNewBlog);
-    // e.target.reset();
-    // toast.warn("Your Blog has Submitted for permission");
+
+
+
+     //Send To Backend
+     const url = `${baseUrl}/api/subscriptions/store`;
+     fetch(url, {
+         method: 'POST',
+         headers: {
+             'content-type': 'application/json',
+             "Authorization": `Bearer ${token}`
+         },
+         body: JSON.stringify(addNewBlog)
+     })
+         .then(res => res.json())
+         .then(result => {
+
+           if(result.error){
+             console.log(result.error);
+             toast.error("Add Blog  Failed");
+           } else{
+             console.log(result);
+            //  e.target.reset();
+             toast.success("Add Blog Successfully");
+           }
+            
+         });
+
   };
+
+
+
+// Classic Editor Toolbar
 
   const editorToolbar = [
     {
@@ -87,6 +144,8 @@ const Blogger = ({ isBlogger }) => {
       items: ["SpecialChar"],
     },
   ];
+
+
   return (
     <Row>
       <Col md={9} sm={12}>

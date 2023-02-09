@@ -15,7 +15,7 @@ function Menu() {
   const[user]=useUser();
   const navigate=useNavigate()
 
-  console.log(user);
+  // console.log(user);
 
   const handleLogout=()=>{
 
@@ -32,7 +32,7 @@ function Menu() {
           console.log(result);
           window.localStorage.removeItem('token');
           window.localStorage.removeItem('user');
-          navigate('/');
+          navigate('/sign-in');
         })
   };
 

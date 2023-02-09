@@ -30,6 +30,8 @@ const UserDashboard = () => {
   const[user]=useUser();
   const{id,first_name,last_name, email,birth_date,nationality,phone,profession,bio}=user;
 
+//  console.log(user);
+
   const birthDate=moment(birth_date).format('DD MMM YYYY')
 
 
@@ -75,7 +77,7 @@ const UserDashboard = () => {
                     <h3 className='fw-bold user-dashboard-font mb-3'>About Me</h3>
 
                     {
-                      bio? {bio}: <p>Please Write Your Bio....</p>
+                      bio? <p>{bio}</p>: <p>Please Write Your Bio....</p>
                     }
 
                     {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}

@@ -3,12 +3,15 @@ import { useState } from "react";
 
 const useUser = () => {
     const [user, setUser] = useState([]);
-    // console.log(user)
+   //  console.log(user)
     useEffect(() => {
        const getUserStr=localStorage.getItem("user");
-       const getUser= JSON.parse(getUserStr);
-    //    console.log(getUser);
-       setUser(getUser);
+       if(getUserStr){
+         const getUser= JSON.parse(getUserStr);
+         //    console.log(getUser);
+            setUser(getUser);
+       }
+      
 
     }, []);
     return [user, setUser];
