@@ -21,7 +21,7 @@ function Login() {
 
     const url = `${baseUrl}/api/login`;
     fetch(url, {
-        mode: "no-cors",
+        mode: 'no-cors',
         method: 'POST',
         headers: {
             'content-type': 'application/json',
