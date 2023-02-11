@@ -70,8 +70,8 @@ function Table({ columns, data, headline }) {
     )
 
     return (
-        <div className="bg-white py-3 px-3 rounded">
-            <div className="d-flex flex-sm-row flex-column justify-content-between align-items-center px-3 mb-2">
+        <div className="bg-white py-3 px-2 rounded">
+            <div className="d-flex flex-sm-row flex-column justify-content-between align-items-center px-2 mb-2">
                 <h3 className="fw-bold user-dashboard-font mb-2">{headline}</h3>
                 <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
             </div>
@@ -83,7 +83,7 @@ function Table({ columns, data, headline }) {
                         {headerGroups.map((headerGroup, ind) => (
                             <tr {...headerGroup.getHeaderGroupProps()} key={ind} >
                                 {headerGroup.headers.map((column, i) => (
-                                    <th key={i} {...column.getHeaderProps(column.getSortByToggleProps())} className="bg-white  text-center    p-2 ">{column.render('Header')}
+                                    <th key={i} {...column.getHeaderProps(column.getSortByToggleProps())} className="bg-white  text-start    p-2 ">{column.render('Header')}
                                         <span>
                                             {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
                                         </span>
@@ -98,14 +98,14 @@ function Table({ columns, data, headline }) {
                         {page.map((row, i) => {
                             prepareRow(row, i)
                             return (
-                                (i % 2 == 1) ? <tr {...row.getRowProps()} key={i} className=" p-2  text-center  ">
+                                (i % 2 == 1) ? <tr {...row.getRowProps()} key={i} className=" p-2 text-start   ">
                                     {row.cells.map((cell, i) => {
-                                        return <td key={i} {...cell.getCellProps()} className=" p-2  text-center   ">{cell.render('Cell')}</td>
+                                        return <td key={i} {...cell.getCellProps()} className=" p-2  text-start    ">{cell.render('Cell')}</td>
                                     })}
                                 </tr> :
-                                    <tr {...row.getRowProps()} key={i} className=" p-2  text-center ">
+                                    <tr {...row.getRowProps()} key={i} className=" p-2 text-start  ">
                                         {row.cells.map((cell, i) => {
-                                            return <td key={i} {...cell.getCellProps()} className=" p-2 ash-bg text-center  ">{cell.render('Cell')}</td>
+                                            return <td key={i} {...cell.getCellProps()} className=" p-2 ash-bg text-start   ">{cell.render('Cell')}</td>
                                         })}
                                     </tr>
                             )

@@ -77,18 +77,10 @@ const Projects = () => {
                 accessor: 'action',
                 Cell: ({ row }) => {
                     const { _id } = row.original;
-                    return (<div className='d-flex justify-content-center align-items-center  gap-2 '>
+                    return (<div>
 
                         <button className='project-action-btn project-view-btn' onClick={() => handleProjectView(_id)}>
-                            <div> <BsEyeFill className=' ' /></div>
-                        </button>
-
-                        <button className='project-action-btn project-edit-btn'>
-                            <div> <RiEditBoxFill className='' /></div>
-                        </button>
-
-                        <button className='project-action-btn project-delete-btn'>
-                            <div> <AiFillDelete className='' /></div>
+                            <div> <BsEyeFill /></div>
                         </button>
                     </div>);
                 },

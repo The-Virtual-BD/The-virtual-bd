@@ -98,22 +98,14 @@ function Menu() {
               <Nav.Link>
                 <Link to="/career">Career</Link>
               </Nav.Link>
+              <Nav.Link>
+                <Link to="/notices">Notices</Link>
+              </Nav.Link>
 
             </Nav>
 
            
               {(token && user)? 
-
-           /*  <Nav.Link className="sing_area">
-                 <Link to="/user-dashboard">
-                <div className="signIn">
-                    <div >
-                        <FaUserCircle className="fs-2"/>
-                    </div>
-                
-                  </div>
-              </Link> 
-            </Nav.Link> */
 
             <NavDropdown
                 title={<><FaUserCircle className="fs-4 mr-2"/>{user.first_name}</> }

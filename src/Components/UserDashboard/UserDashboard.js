@@ -12,10 +12,6 @@ import Projects from './Projects';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import useToken from '../../hooks/useToken';
 import { useNavigate } from 'react-router-dom';
-import { baseUrl } from '../../hooks/url';
-import { BiLogOutCircle } from 'react-icons/bi';
-import { AiOutlineLogout } from 'react-icons/ai';
-import { RiLogoutCircleRLine } from 'react-icons/ri';
 import useUser from '../../hooks/useUser';
 import moment from 'moment/moment';
 

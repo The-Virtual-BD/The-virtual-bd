@@ -25,6 +25,7 @@ import RequireAuth from "./Components/Auth/RequireAuth";
 import { createContext } from "react";
 import { AppContext } from "./context";
 import { useState } from "react";
+import Notices from "./Components/NoticePage/Notices";
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="career" element={<Career />} />
         <Route path="/other" element={<Other />} />
         <Route path="/contact" element={<ContuctUs />} />
+        <Route path="/notices" element={<Notices />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-conditions" element={<TermsCondition />} />

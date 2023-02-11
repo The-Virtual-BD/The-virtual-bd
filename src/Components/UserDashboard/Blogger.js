@@ -15,24 +15,28 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../hooks/url";
 import useToken from "../../hooks/useToken";
+import useUser from "../../hooks/useUser";
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const Blogger = ({ isBlogger }) => {
   const [token]=useToken();
+  const [user]=useUser();
+    const{id}=user;
+    console.log(id);
 
   //Be a blogger Form
-  const [bloggerName, setBloggerName] = useState("");
-  const [blogSub, setBlogSub] = useState("");
-  const [blogExArea, setBlogExArea] = useState("");
-  const [blogDesc, setBlogDesc] = useState("");
+  const [name, setName] = useState("");
+  const [subject, setBlogSub] = useState("");
+  const [expertise, setBlogExArea] = useState("");
+  const [description, setBlogDesc] = useState("");
 
   //show sent msg
-  const [isbloggerAppSent, setIsbloggerAppSent] = useState(false);
+  const [isbloggerAppSent, setIsbloggerAppSent] = useState("");
 
   //Create a Blog Form
-  const [authorName, setAuthorName] = useState("");
+  // const [authorName, setAuthorName] = useState("");
 
   const [blogTitle, setBlogTitle] = useState("");
   const [blogSubTitle, setBlogSubTitle] = useState("");
@@ -46,11 +50,10 @@ const Blogger = ({ isBlogger }) => {
 
   const handleBloggerForm = (e) => {
     e.preventDefault();
-    const BloggerReqSent = { bloggerName, blogSub, blogExArea, blogDesc, blogImg };
-    toast.success("Your Applications has been Submitted");
+    const BloggerReqSent = { name, subject, expertise, description};
    
      //Send To Backend
-     const url = `${baseUrl}/api/subscriptions/store`;
+     const url = `${baseUrl}/api/blogger/store/${id}`;
      fetch(url, {
          method: 'POST',
          headers: {
@@ -61,15 +64,14 @@ const Blogger = ({ isBlogger }) => {
      })
          .then(res => res.json())
          .then(result => {
-
            if(result.error){
              console.log(result.error);
              toast.error("Blogger Req Failed");
            } else{
              console.log(result);
-            //  e.target.reset();
-             toast.success("Blogger Req Successfully");
-             setIsbloggerAppSent(true);
+             e.target.reset();
+             toast.success("Your Applications has been Submitted");
+             setIsbloggerAppSent(result.message);
            }
             
          });
@@ -166,7 +168,7 @@ const Blogger = ({ isBlogger }) => {
                       type="text"
                       className="form-control"
                       id="bloggerName"
-                      onChange={(e) => setBloggerName(e.target.value)}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
 
@@ -216,7 +218,7 @@ const Blogger = ({ isBlogger }) => {
             ) : (
               <div className="bg-white  min-h-screen p-5 ">
                 <h4 className="px-3 rounded  fw-bolder">
-                  Your Applications has been Submitted
+                {isbloggerAppSent}
                 </h4>
               </div>
             )}

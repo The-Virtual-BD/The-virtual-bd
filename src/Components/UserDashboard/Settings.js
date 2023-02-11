@@ -11,12 +11,14 @@ import useToken from '../../hooks/useToken';
 import './UserDashboard.css';
 
 
+import image1  from '../../Images/blogger.png';
+
+
 const Settings = ({user}) => {
     const [token]=useToken();
     const navigate=useNavigate();
 
     const{id,first_name,last_name, email,birth_date,nationality,phone,profession,bio}=user;
-
     const birthDateIn=moment(birth_date).format('DD/ MMM /YYYY')
 
     //Update Profile
@@ -30,7 +32,7 @@ const Settings = ({user}) => {
     const [phonE, setPhonE] = useState(phone);
     const [biO, setBiO] = useState(bio);
 
-    const [uploadImage, setUploadImage] = useState(null);
+    const [uploadImage, setUploadImage] = useState();
     const [imageUrl, setImageUrl] = useState(null);
 
     //Password change
@@ -38,8 +40,10 @@ const Settings = ({user}) => {
     const [password_confirmation, setPassword_confirmation] = useState('');
 
 
+   console.log(uploadImage)
+
     //Handle Update User Profile
-    const handleUserProfileForm = e => {
+    const handleUserProfileForm = async(e )=> {
         e.preventDefault();
         const profileData = {
             first_name:firstName,
@@ -50,37 +54,38 @@ const Settings = ({user}) => {
             profession:professioN,
             nationality:nationalitY,
             phone:phonE,
-            bio:biO
+            bio:biO,
         };
         console.log(profileData);
 
-
         //Send To Backend
         const url = `${baseUrl}/api/myprofile/update/${id}`;
-        fetch(url, {
-        method: 'PUT',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(profileData)
-    })
-        .then(res => res.json())
-        .then(result => {
-            console.log(result)
-          if(result.error){
-            console.log(result.error);
-            toast.error("Profile Update Failed");
-          } else{
-            console.log(result);
-            toast.success(result.message);
-            const user=JSON.stringify(result.user)
-
-            window.localStorage.setItem("user", user);
-            navigate("/user-dashboard")
-          }
-           
+       fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                // 'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(profileData)
+            // body: profileData
         })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+              if(result.error){
+                console.log(result.error);
+                toast.error("Profile Update Failed");
+              } else{
+                console.log(result);
+                toast.success(result.message);
+                const user=JSON.stringify(result.user)
+    
+                window.localStorage.setItem("user", user);
+                // navigate("/user-dashboard")
+              }
+               
+            });
     };
 
 
@@ -124,6 +129,9 @@ const Settings = ({user}) => {
              setImageUrl(URL.createObjectURL(uploadImage));
         }
     }, [uploadImage]);
+
+
+
 
 
 return (
@@ -261,18 +269,18 @@ return (
 
         <Col md={3} sm={12} >
             <div className="bg-white p-3 rounded text-center">
-                {
-                    uploadImage && imageUrl && (
-                        <img src={imageUrl} alt='user img' style={{ height: "200px", width: "200px", borderRadius: "50%" }} />
-                    )
-                }
+               <form >
+                        <img 
+                          src={imageUrl}
+                          alt=""
+                          srcset="" style={{width:"200px",borderRadius:"100%",marginBottom:"10px"}} />
 
-
-                <div className='my-2'>
-                    <label className="main-btn">Change Image
-                        <input type="file" style={{ display: "none" }} required onChange={(e) => setUploadImage(e.target.files[0])} />
-                    </label>
-                </div>
+                       <label className='main-btn'> Change Image
+                                <input type="file" style={{ display: "none" }}  onChange={(e) => setUploadImage(e.target.files[0])} required/>
+                       </label>
+               </form>
+                    
+                
 
                 <p>
                     *Image size should be under 1MB image ratio 200px.

@@ -1,12 +1,12 @@
 import React from "react";
 import "./CareerHero.css";
 
-function CareerHero() {
+function CareerHero({children}) {
   return (
     <>
       <div className="career_banner">
         <div className="career_text">
-          <h2>Career</h2>
+          <h2>{children}</h2>
         </div>
       </div>
     </>

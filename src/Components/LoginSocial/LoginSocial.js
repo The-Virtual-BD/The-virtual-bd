@@ -5,8 +5,7 @@ import { Icon } from "@iconify/react";
 import googleContainedFill from "@iconify/icons-akar-icons/google-contained-fill";
 import facebookFill from "@iconify/icons-akar-icons/facebook-fill";
 import linkedinWithCircle from "@iconify/icons-entypo-social/linkedin-with-circle";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import FacebookLogin from "@greatsumini/react-facebook-login";
+
 
 
 
@@ -50,7 +49,7 @@ function LoginSocial() {
 
 
 
-      {/* <section className="login_ocial">
+      <section className="login_ocial">
         <ul>
           <li className="google">
             <ExternalLink href="https://www.google.com/">
@@ -68,7 +67,7 @@ function LoginSocial() {
             </ExternalLink>
           </li>
         </ul>
-      </section> */}
+      </section>
 
 
 

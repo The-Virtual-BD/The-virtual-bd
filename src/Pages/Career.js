@@ -14,7 +14,7 @@ function Career() {
     <>
       <TopHeader />
       <Menu />
-      <CareerHero />
+      <CareerHero>Career</CareerHero>
       <Apply />
       <Footer />
     </>
