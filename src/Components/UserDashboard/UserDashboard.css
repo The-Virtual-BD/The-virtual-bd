@@ -145,8 +145,9 @@
     width: 30px;
     border: none;
     border-radius: 5px;
-    display: grid;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
     color: white;
 }
 

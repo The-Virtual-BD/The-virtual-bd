@@ -83,7 +83,7 @@ function Table({ columns, data, headline }) {
                         {headerGroups.map((headerGroup, ind) => (
                             <tr {...headerGroup.getHeaderGroupProps()} key={ind} >
                                 {headerGroup.headers.map((column, i) => (
-                                    <th key={i} {...column.getHeaderProps(column.getSortByToggleProps())} className="bg-white  text-start    p-2 ">{column.render('Header')}
+                                    <th key={i} {...column.getHeaderProps(column.getSortByToggleProps())} className="bg-white  text-start ps-3   p-2 ">{column.render('Header')}
                                         <span>
                                             {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
                                         </span>
@@ -100,12 +100,12 @@ function Table({ columns, data, headline }) {
                             return (
                                 (i % 2 == 1) ? <tr {...row.getRowProps()} key={i} className=" p-2 text-start   ">
                                     {row.cells.map((cell, i) => {
-                                        return <td key={i} {...cell.getCellProps()} className=" p-2  text-start    ">{cell.render('Cell')}</td>
+                                        return <td key={i} {...cell.getCellProps()} className=" p-2  text-start    ps-3">{cell.render('Cell')}</td>
                                     })}
                                 </tr> :
                                     <tr {...row.getRowProps()} key={i} className=" p-2 text-start  ">
                                         {row.cells.map((cell, i) => {
-                                            return <td key={i} {...cell.getCellProps()} className=" p-2 ash-bg text-start   ">{cell.render('Cell')}</td>
+                                            return <td key={i} {...cell.getCellProps()} className=" p-2 ash-bg text-start ps-3  ">{cell.render('Cell')}</td>
                                         })}
                                     </tr>
                             )

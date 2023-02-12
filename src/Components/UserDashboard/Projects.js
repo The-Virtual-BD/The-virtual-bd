@@ -9,27 +9,48 @@ import Table from './Table';
 import './UserDashboard.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import { baseUrl } from '../../hooks/url';
+import useUser from '../../hooks/useUser';
+import useToken from '../../hooks/useToken';
 
 const Projects = () => {
+    const [user] = useUser();
+    const [token] = useToken();
+    // const [isLoading,setIsLoading]=useState(false);
+
+    const {id}=user;
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
-    const [getId, setGetId] = useState("")
+    const[getId,setGetId]=useState('');
 
+
+
+    //Get My All Projects
     useEffect(() => {
-        const url = `${baseUrl}/api/user/subscriptions`;
-        fetch('/projects.json')
+        const url = `${baseUrl}/api/projects/myprojects/${id}`;
+        fetch(url ,{
+            method:"GET",
+            headers: {
+                'content-type': 'application/json',
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(res => res.json())
-            .then(data => setProjects(data))
-    }, []);
+            .then(data => {
+                setProjects(data.data);
+            })
+    }, [id]);
 
+
+    //Handle Project View
     const handleProjectView = (id) => {
         console.log("clicked", id);
         setGetId(id)
-        // navigate(`/user-dashboard/${id}`);
     };
 
     // console.log(projects);
 
+   
+        
 
 
 
@@ -37,70 +58,71 @@ const Projects = () => {
         return [
             {
                 Header: "SL",
-                accessor: "_id",
+                accessor: "id",
                 sortType: 'basic',
 
             },
             {
                 Header: "Project Title",
-                accessor: "projectName",
-                sortType: 'basic',
-
-            },
-            {
-                Header: "Client Name",
                 accessor: "name",
                 sortType: 'basic',
 
             },
             {
                 Header: "Start Date",
-                accessor: "startDate",
+                accessor: "starting_date",
                 sortType: 'basic',
 
             },
             {
                 Header: "End Date",
-                accessor: "endDate",
+                accessor: "ending_date",
                 sortType: 'basic',
 
             },
             {
-                Header: "Status",
-                accessor: "status",
-                sortType: 'basic',
-
-            },
-
-            {
-                Header: 'Action',
-                accessor: 'action',
+                Header: 'Status',
+                accessor: 'status',
                 Cell: ({ row }) => {
-                    const { _id } = row.original;
-                    return (<div>
+                    const {status} = row.original;
+                    return (<div className='d-flex justify-content-start pt-1 align-items-center'>
+                        {status==="1"?<p className='text-warning  fw-bold'>Pendding</p>
+                        :status==="2"?<p className='text-success fw-bold'>Running</p>
+                        :status==="3"?<p className='text-danger fw-bold'>Cancel</p>:""}
 
-                        <button className='project-action-btn project-view-btn' onClick={() => handleProjectView(_id)}>
+                    </div>);
+                },
+            },
+            {
+                Header: "Action",
+                accessor: "action",
+                sortType: 'basic',
+                Cell: ({ row }) => {
+                    const { id
+                    } = row.original;
+                    return (<div>
+                        <button className='project-action-btn project-view-btn' onClick={()=>handleProjectView(id)} >
                             <div> <BsEyeFill /></div>
                         </button>
                     </div>);
                 },
+
             },
-
-
         ];
     };
 
     return (
         <>
-            {!getId &&
+           {!getId &&
                 <div >
                     {projects.length && (
                         <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
                     )}
                 </div>
             }
+           
             <div>
-                {getId && <ProductDetails getId={getId} projects={projects} />}
+                {getId && <ProductDetails getId={getId} token={token}/>}
             </div>
         </>
     );
@@ -109,9 +131,32 @@ const Projects = () => {
 export default Projects;
 
 
-const ProductDetails = ({ getId, projects }) => {
-    const getProjectsDeatils = projects?.find(pro => pro._id === getId);
-    console.log(projects);
+
+
+
+
+const ProductDetails = ({ getId,token }) => {
+
+    const [project,setProject]=useState([]);
+    useEffect(()=>{
+        const url = `${baseUrl}/api/projects/show/${getId }`;
+        fetch(url ,{
+            method:"GET",
+            headers: {
+                'content-type': 'application/json',
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => setProject(data.data))
+    }, [getId]);
+
+    // console.log(project)
+
+
+
+
+
     return (
         <>
             <div className='bg-white p-4 px-5 rounded '>
@@ -123,24 +168,35 @@ const ProductDetails = ({ getId, projects }) => {
                 <Row >
                     <Col md={7} sm={12} >
                         <div className='d-flex flex-column align-items-start '>
-                            <p><span className='fw-bold'>Project Title:</span> {getProjectsDeatils?.projectName}</p>
-                            <p><span className='fw-bold'>Client Name: </span>{getProjectsDeatils?.name}</p>
+                            <p><span className='fw-bold'>Project Title:</span> {project?.name}</p>
+                            <p><span className='fw-bold'>Client Name: </span>{project?.client_name}</p>
 
-                            <p><span className='fw-bold'>Starting Date: </span>{getProjectsDeatils?.startDate}</p>
-                            <p><span className='fw-bold'>Ending Date:</span> {getProjectsDeatils?.endDate}</p>
-                            <p><span className='fw-bold'> Status:</span> {getProjectsDeatils?.status}</p>
-                            <p><span className='fw-bold'> Budget:</span> {getProjectsDeatils?.budget}</p>
+
+                            <p><span className='fw-bold'>Starting Date: </span>{project?.starting_date}</p>
+                            <p><span className='fw-bold'>Ending Date:</span> {project?.ending_date}</p>
+
+                            <p><span className='fw-bold'> Status:</span>
+                            {project?.status==="1"?<span className='text-warning ms-1'>Pendding</span>
+                           :project?.status==="2"?<span className='text-success ms-1'>Running</span>
+                           :project?.status==="3"?<span className='text-danger ms-1'>Cancel</span>:""}
+                             </p>
+
+                            <p><span className='fw-bold'> Budget:</span> {project?.value}</p>
+                            <p><span className='fw-bold'> Paid:</span> {project?.value_paid}</p>
+
+                            <p><span className='fw-bold'> Due:</span> {project?.value_payable}</p>
 
                             <div className='text-start my-2'>
                                 <p className='fw-bold' >Short Description:</p>
-                                <p className='text-labelclr'>{getProjectsDeatils?.blogShortDesc}</p>
+                                <p className='text-labelclr'>{project?.short_description}</p>
                             </div>
                             <div className='text-start'>
                                 <p className='fw-bold'>Description:</p>
-                                <p className='text-labelclr'>{getProjectsDeatils?.blogDesc}</p>
+                                <p className='text-labelclr'>{project?.description}</p>
+
                             </div>
 
-                            <p><span className='fw-bold'>Documents:</span> <a className='text-blue cursor-pointer' href={`${getProjectsDeatils?.doc}`} target="_blank" rel="noopener noreferrer">{getProjectsDeatils?.doc}</a> </p>
+                            {/* <p><span className='fw-bold'>Documents:</span> <a className='text-blue cursor-pointer' href={`${project?.documents}`} target="_blank" rel="noopener noreferrer">{project?.documents}</a> </p> */}
 
 
                         </div>
@@ -149,7 +205,7 @@ const ProductDetails = ({ getId, projects }) => {
 
 
                     <Col md={5} sm={12} >
-                        <img src={getProjectsDeatils?.blogImg} alt="" srcset="" style={{ width: "100%" }} />
+                        <img src={project?.blogImg} alt="" srcset="" style={{ width: "100%" }} />
                     </Col>
                 </Row>
             </div>
