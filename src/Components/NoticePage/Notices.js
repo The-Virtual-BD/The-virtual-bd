@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { FiDownload} from 'react-icons/fi';
+import { FiDownload } from 'react-icons/fi';
 import { FaFileDownload } from 'react-icons/fa';
 import CareerHero from '../Career/CareerHero/CareerHero';
 import Menu from '../Header/Menu';
@@ -56,14 +56,14 @@ const Notices = () => {
 
     return (
         <>
-         <TopHeader />
-         <Menu />
-         <CareerHero>Notice</CareerHero>
-        <Container>
-        {projects.length && (
-                        <Table columns={Notice_COLUMNS()} data={projects} headline={" "} />
-                    )}
-        </Container>
+            <TopHeader />
+            <Menu />
+            <CareerHero>Notice</CareerHero>
+            <Container>
+                {projects.length && (
+                    <Table columns={Notice_COLUMNS()} data={projects} headline={" "} />
+                )}
+            </Container>
         </>
     );
 };

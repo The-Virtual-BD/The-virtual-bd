@@ -21,10 +21,10 @@ import useUser from "../../hooks/useUser";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const Blogger = ({ isBlogger }) => {
-  const [token]=useToken();
-  const [user]=useUser();
-    const{id}=user;
-    console.log(id);
+  const [token] = useToken();
+  const [user] = useUser();
+  const { id } = user;
+  console.log(id);
 
   //Be a blogger Form
   const [name, setName] = useState("");
@@ -50,31 +50,31 @@ const Blogger = ({ isBlogger }) => {
 
   const handleBloggerForm = (e) => {
     e.preventDefault();
-    const BloggerReqSent = { name, subject, expertise, description};
-   
-     //Send To Backend
-     const url = `${baseUrl}/api/blogger/store/${id}`;
-     fetch(url, {
-         method: 'POST',
-         headers: {
-             'content-type': 'application/json',
-             "Authorization": `Bearer ${token}`
-         },
-         body: JSON.stringify(BloggerReqSent)
-     })
-         .then(res => res.json())
-         .then(result => {
-           if(result.error){
-             console.log(result.error);
-             toast.error("Blogger Req Failed");
-           } else{
-             console.log(result);
-             e.target.reset();
-             toast.success("Your Applications has been Submitted");
-             setIsbloggerAppSent(result.message);
-           }
-            
-         });
+    const BloggerReqSent = { name, subject, expertise, description };
+
+    //Send To Backend
+    const url = `${baseUrl}/api/blogger/store/${id}`;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(BloggerReqSent)
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.error) {
+          console.log(result.error);
+          toast.error("Blogger Req Failed");
+        } else {
+          console.log(result);
+          e.target.reset();
+          toast.success("Your Applications has been Submitted");
+          setIsbloggerAppSent(result.message);
+        }
+
+      });
 
   };
 
@@ -85,40 +85,40 @@ const Blogger = ({ isBlogger }) => {
   const handleCreateBlogForm = (e) => {
     e.preventDefault();
 
-    const addNewBlog = { blogTitle,blogSubTitle, blogsShortDesc, blogsDesc, blogImg,};
+    const addNewBlog = { blogTitle, blogSubTitle, blogsShortDesc, blogsDesc, blogImg, };
     console.log(addNewBlog);
 
 
 
-     //Send To Backend
-     const url = `${baseUrl}/api/subscriptions/store`;
-     fetch(url, {
-         method: 'POST',
-         headers: {
-             'content-type': 'application/json',
-             "Authorization": `Bearer ${token}`
-         },
-         body: JSON.stringify(addNewBlog)
-     })
-         .then(res => res.json())
-         .then(result => {
+    //Send To Backend
+    const url = `${baseUrl}/api/subscriptions/store`;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(addNewBlog)
+    })
+      .then(res => res.json())
+      .then(result => {
 
-           if(result.error){
-             console.log(result.error);
-             toast.error("Add Blog  Failed");
-           } else{
-             console.log(result);
-            //  e.target.reset();
-             toast.success("Add Blog Successfully");
-           }
-            
-         });
+        if (result.error) {
+          console.log(result.error);
+          toast.error("Add Blog  Failed");
+        } else {
+          console.log(result);
+          //  e.target.reset();
+          toast.success("Add Blog Successfully");
+        }
+
+      });
 
   };
 
 
 
-// Classic Editor Toolbar
+  // Classic Editor Toolbar
 
   const editorToolbar = [
     {
@@ -218,7 +218,7 @@ const Blogger = ({ isBlogger }) => {
             ) : (
               <div className="bg-white  min-h-screen p-5 ">
                 <h4 className="px-3 rounded  fw-bolder">
-                {isbloggerAppSent}
+                  {isbloggerAppSent}
                 </h4>
               </div>
             )}
@@ -283,17 +283,17 @@ const Blogger = ({ isBlogger }) => {
                   onChange={(e) => setBlogsDesc(e.editor.getData())}
                   config={{ toolbar: editorToolbar }}
                   className="form-control"
-                  /*  config={{
-                                            height: '200px',
-                                            toolbar: [
-                                                'bold',
-                                                'italic',
-                                                'bulletedList',
-                                                'numberedList',
-                                                'link',
-                                                'CodeSnippet'
-                                            ],
-                                        }} */
+                /*  config={{
+                                          height: '200px',
+                                          toolbar: [
+                                              'bold',
+                                              'italic',
+                                              'bulletedList',
+                                              'numberedList',
+                                              'link',
+                                              'CodeSnippet'
+                                          ],
+                                      }} */
                 />
               </div>
 

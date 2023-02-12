@@ -1,8 +1,8 @@
+import FormData from 'form-data';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
-import ReactDatePicker from 'react-datepicker';
 import { toast } from 'react-toastify';
 import { baseUrl } from '../../hooks/url';
 import useToken from '../../hooks/useToken';
@@ -11,34 +11,35 @@ import BlogCard from './BlogCard';
 import './UserDashboard.css';
 
 const Subscription = () => {
-    const [token]=useToken();
-    const [user]=useUser();
-    const{id}=user;
+    const [token] = useToken();
+    const [user] = useUser();
+    const { id } = user;
     // console.log(id);
-    const[services,setServices]=useState([]);
+    const [services, setServices] = useState([]);
 
     //Subscription Form
     const [service_id, setService_id] = useState('');
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
     // const [scheduleT, setSchedule] = useState(new Date());
-    const [schedule, setSchedule] = useState();
+    const [schedule, setSchedule] = useState(new Date());
     const [attachment, setAttachment] = useState(null);
 
-    // console.log(attachment?.file?.name);
+    console.log(schedule);
 
-     //Get Services
-     useEffect(()=>{
+    //Get Services
+    useEffect(() => {
         const sUrl = `${baseUrl}/api/services/activeservices`;
         fetch(sUrl, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Bearer ${token}`
-            }})
-        .then(res=>res.json())
-        .then(data=>setServices(data))
-    },[token]);
+            }
+        })
+            .then(res => res.json())
+            .then(data => setServices(data))
+    }, [token]);
 
 
 
@@ -55,7 +56,7 @@ const Subscription = () => {
         subcriptions.append('service_id', service_id);
         subcriptions.append('subject', subject);
         subcriptions.append('description', description);
-        subcriptions.append('schedule',schedule);
+        subcriptions.append('schedule', schedule);
         subcriptions.append('attachment', attachment);
 
         //Send To Backend
@@ -68,25 +69,25 @@ const Subscription = () => {
                 "Authorization": `Bearer ${token}`
             },
             // body: JSON.stringify(subcriptions)
-            body:subcriptions
+            body: subcriptions
         })
             .then(res => res.json())
             .then(result => {
 
-              if(result.error){
-                console.log(result.error);
-                toast.error("Subcriptions Add Failed");
-              } else{
-                console.log(result);
-                e.target.reset();
-                toast.success("Subcriptions Added Successfully");
-              }
-               
+                if (result.error) {
+                    console.log(result.error);
+                    toast.error("Subcriptions Add Failed");
+                } else {
+                    console.log(result);
+                    e.target.reset();
+                    toast.success("Subcriptions Added Successfully");
+                }
+
             })
     };
 
 
-   
+
 
 
     // console.log(services?.data)
@@ -105,9 +106,8 @@ const Subscription = () => {
                             <select onChange={(e) => setService_id(e.target.value)} className="form-control custom-select" id="services" aria-label="form-select-lg example" required>
                                 <option selected disabled >Select Service </option>
                                 {
-                                    services?.data?.map(service=><option value={service.id}>{service.name}</option>)
+                                    services?.data?.map(service => <option value={service.id}>{service.name}</option>)
                                 }
-                             
                             </select>
                         </div>
 
@@ -124,11 +124,11 @@ const Subscription = () => {
 
                         <div className="col-12 mb-3">
                             <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
-                            <input 
-                                type="datetime-local" 
-                                className="form-control" 
-                                id="schedule" 
-                                onChange={(e) => setSchedule(e.target.value)} required/>
+                            <input
+                                type="datetime-local"
+                                className="form-control"
+                                id="schedule"
+                                onChange={(e) => setSchedule(e.target.value)} required />
                         </div>
 
 

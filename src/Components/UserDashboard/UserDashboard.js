@@ -17,22 +17,22 @@ import moment from 'moment/moment';
 
 
 const UserDashboard = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   //Blogger Auth
   const [isBlogger, setIsBlogger] = useState(false);
 
   //Get Token & User from Hooks
-  const [token]=useToken();
-  const[user]=useUser();
-  const{id,first_name,last_name, email,birth_date,nationality,phone,profession,bio}=user;
+  const [token] = useToken();
+  const [user] = useUser();
+  const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio } = user;
 
-//  console.log(user);
+  //  console.log(user);
 
-  const birthDate=moment(birth_date).format('DD MMM YYYY')
+  const birthDate = moment(birth_date).format('DD MMM YYYY')
 
 
 
-  
+
 
   return (
     <div className="user-dashboard-container ">
@@ -44,9 +44,9 @@ const UserDashboard = () => {
               <img src={userImg} alt='user img' />
               <div className='d-flex flex-column  ms-3'>
 
-                <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>{`${first_name} ${last_name}`}</span> <BsCheckCircleFill className='blue-clr'/></h5>
+                <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>{`${first_name} ${last_name}`}</span> <BsCheckCircleFill className='blue-clr' /></h5>
                 <p className='mb-0'>{profession}</p>
-                
+
               </div>
             </div>
           </div>
@@ -58,8 +58,8 @@ const UserDashboard = () => {
               <Tab>Subscription</Tab>
               <Tab>Projects</Tab>
               <Tab>{isBlogger ? "Blog" : "Blogger"}  </Tab>
-             
-              
+
+
             </TabList>
           </div>
 
@@ -73,10 +73,10 @@ const UserDashboard = () => {
                     <h3 className='fw-bold user-dashboard-font mb-3'>About Me</h3>
 
                     {
-                      bio? <p>{bio}</p>: <p>Please Write Your Bio....</p>
+                      bio ? <p>{bio}</p> : <p>Please Write Your Bio....</p>
                     }
 
-                    
+
                   </div>
 
                 </Col>
