@@ -43,13 +43,8 @@ const Blogger = ({ isBlogger }) => {
   const [title, setBlogTitle] = useState("");
   const [descriptions, setDescriptions] = useState("");
   const [short_description, setBlogsShortDesc] = useState("");
-  const [cover, setBlogImg] = useState([]);
-  const [category_id ,setCatagory_id] = useState([]);
-
-
-  // const [blogsDesc, setBlogsDesc] = useState("");
-
-  // const [blogDate, setBlogDate] = useState();
+  const [cover, setCover] = useState(null);
+  const [category_id ,setCatagory_id] = useState("");
 
 
   //Get Catagory
@@ -112,23 +107,26 @@ console.log(catagory);
 
 
 
-    const formData = new FormData();
-       /*  formData.append('service_id', service_id);
-        formData.append('subject', subject);
-        formData.append('description', description);
-        formData.append('schedule', schedule);
-        formData.append('attachment', attachment, attachment.name); */
+        const newPostData = new FormData();
+        newPostData.append('title', title);
+        newPostData.append('short_description', short_description);
+        newPostData.append('descriptions', descriptions);
+        newPostData.append('category_id', category_id );
+        newPostData.append('cover', cover, cover.name);
+
+        console.log(newPostData);
     
-        const url = `${baseUrl}/api/subscriptions/store/${id}`;
+        const url = `${baseUrl}/api/posts/store`;
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 "Authorization": `Bearer ${token}`
             },
-            body: formData
+            body: newPostData
         });
     
         const result = await response.json();
+        console.log(result);
     
         if (result.error) {
             console.log(result.error);
@@ -320,22 +318,30 @@ console.log(catagory);
                 />
               </div>
 
-              <div className="col-12 mb-3 ">
+             {/*  <div className="col-12 mb-3 ">
                 <label for="blogDesc" className="form-label fw-bold">
                   Image
                 </label>
                 <FilePond
                   allowMultiple={true}
                   files={cover}
-                  onupdatefiles={setBlogImg}
+                  onupdatefiles={setCover}
                   maxFiles={3}
                   allowReorder={true}
-                  server=""
+                  // server=""
                   name="imgs"
                   labelIdle='Drag & Drop your Images or <span className="filepond--label-action">Browse</span>'
                   className={"img-input-field"}
                 />
-              </div>
+              </div> */}
+
+                        <div className="col-12 mb-3 ">
+                            <label for="doc" className="form-label fw-bold">Image</label>
+                            <input type="file" className="form-control " id="doc" onChange={(e) => setCover(e.target.files[0])} />
+                        </div>
+
+
+
 
               <div className="col-12 text-center ">
                 <button className="main-btn" type="submit">

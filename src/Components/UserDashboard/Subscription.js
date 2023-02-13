@@ -21,7 +21,7 @@ const Subscription = () => {
     const [service_id, setService_id] = useState('');
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
-    // const [scheduleT, setSchedule] = useState(new Date());
+
     const [schedule, setSchedule] = useState(new Date());
     const [attachment, setAttachment] = useState(null);
 
@@ -32,7 +32,7 @@ const Subscription = () => {
         const sUrl = `${baseUrl}/api/services/activeservices`;
         fetch(sUrl, {
             method: 'GET',
-            headers: {
+            headers: { 
                 'content-type': 'application/json',
                 "Authorization": `Bearer ${token}`
             }
@@ -43,43 +43,7 @@ const Subscription = () => {
 
 
 
-
-    //handle Subcription Request 
-  /*   const handleSubcription = e => {
-        e.preventDefault();
-
-        const subcriptions = { service_id, subject,description, schedule,attachment};
-        console.log(subcriptions);
-
-
-        //Send To Backend
-        const url = `${baseUrl}/api/subscriptions/store/${id}`;
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                // 'Content-Type': 'multipart/form-data',
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(subcriptions)
-            // body: subcriptions
-        })
-            .then(res => res.json())
-            .then(result => {
-
-                if (result.error) {
-                    console.log(result.error);
-                    toast.error("Subcriptions Add Failed");
-                } else {
-                    console.log(result);
-                    e.target.reset();
-                    toast.success("Subcriptions Added Successfully");
-                }
-            })
-    };
- */
-
-
+    //Handle Subscription Form
     const handleSubscription = async (e) => {
         e.preventDefault();
     

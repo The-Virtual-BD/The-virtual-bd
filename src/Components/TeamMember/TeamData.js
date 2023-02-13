@@ -7,12 +7,13 @@ import team6 from "./img/Nasim.png";
 import team7 from "./img/Biswajit.png";
 import team10 from "./img/hedayet.png";
 import team11 from "./img/Shahajalal.png";
+import hamid from '../../Images/hamid.jpg';
 
 const TeamSlider = [
   {
     id: 1,
     img: team1,
-    Tname: "Mehedi Hassan",
+    Tname: "Md. Mehedi Hassan",
     TDegination: "Founder & CEO",
     Tfacebook: "https://www.facebook.com/MhashiqCEO",
     TInstragram: "https://instagram.com/mh_ashiq_?igshid=YmMyMTA2M2Y=",
@@ -57,7 +58,7 @@ const TeamSlider = [
   },
   {
     id: 6,
-    img: team5,
+    img: hamid,
     Tname: "Md Abdul Hamid",
     TDegination: "Frontend Developer",
     Tgmail: "hamid.virtualbd@gmail.com",

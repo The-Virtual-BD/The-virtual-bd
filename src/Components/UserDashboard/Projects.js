@@ -2,8 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
-import { RiEditBoxFill } from 'react-icons/ri';
-import { AiFillDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import Table from './Table';
 import './UserDashboard.css';
@@ -13,20 +11,23 @@ import useUser from '../../hooks/useUser';
 import useToken from '../../hooks/useToken';
 
 const Projects = () => {
+    const [projects, setProjects] = useState([]);
+    const[getId,setGetId]=useState('');
+
     const [user] = useUser();
     const [token] = useToken();
     // const [isLoading,setIsLoading]=useState(false);
 
     const {id}=user;
+    console.log(id)
     const navigate = useNavigate();
-    const [projects, setProjects] = useState([]);
-    const[getId,setGetId]=useState('');
+  
 
 
 
     //Get My All Projects
     useEffect(() => {
-        const url = `${baseUrl}/api/projects/myprojects/${id}`;
+        const url = `${baseUrl}/api/projects/myprojects`;
         fetch(url ,{
             method:"GET",
             headers: {
@@ -35,10 +36,10 @@ const Projects = () => {
             }
         })
             .then(res => res.json())
-            .then(data => {
-                setProjects(data.data);
-            })
-    }, [id]);
+            .then(data => setProjects(data.data))
+     }, [id,token]);
+
+    console.log(projects)
 
 
     //Handle Project View
@@ -50,8 +51,6 @@ const Projects = () => {
     // console.log(projects);
 
    
-        
-
 
 
     const PROJECT_COLUMNS = () => {
@@ -115,7 +114,7 @@ const Projects = () => {
         <>
            {!getId &&
                 <div >
-                    {projects.length && (
+                    {projects?.length && (
                         <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
                     )}
                 </div>
