@@ -32,15 +32,17 @@ const Settings = ({ user }) => {
     const [phonE, setPhonE] = useState(phone);
     const [biO, setBiO] = useState(bio);
 
-    const [uploadImage, setUploadImage] = useState();
-    const [imageUrl, setImageUrl] = useState(null);
+    const [image, setImage] = useState(image1);
+
+    // const [uploadImage, setUploadImage] = useState();
+    // const [imageUrl, setImageUrl] = useState(image1);
 
     //Password change
     const [password, setPassword] = useState('');
     const [password_confirmation, setPassword_confirmation] = useState('');
 
 
-    console.log(uploadImage)
+    // console.log(uploadImage)
 
     //Handle Update User Profile
     const handleUserProfileForm = async (e) => {
@@ -123,12 +125,71 @@ const Settings = ({ user }) => {
 
 
 
-    //Preview updated Image
+    /* //Preview updated Image
     useEffect(() => {
         if (uploadImage) {
             setImageUrl(URL.createObjectURL(uploadImage));
         }
     }, [uploadImage]);
+ */
+
+
+    //Handle Image Change
+
+    const handleImageChange = (event) => {
+        setImage(URL.createObjectURL(event.target.files[0]));
+    };
+
+    const handleImageClick = () => {
+        const fileInput = document.getElementById("image");
+        fileInput.click();
+    };
+
+    const handleDPSubmit = (event) => {
+        event.preventDefault();
+
+        const file = event.target.image.files[0];
+        console.log(file)
+
+        if (!file) {
+            console.error("No file selected");
+            return;
+        };
+
+        const imgData = new FormData();
+        imgData.append("photo", file);
+
+        console.log(imgData)
+
+
+
+        //Send To Backend
+        const url = `${baseUrl}/api/myprofile/profilePic/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'multipart/form-data',
+                "Authorization": `Bearer ${token}`
+            },
+            body: imgData
+        })
+            .then(res => res.json())
+            .then(result => {
+
+                if (result.error) {
+                    console.log(result.error);
+                    toast.error(result.error);
+                } else {
+                    console.log(result);
+                    // e.target.reset();
+                    toast.success(result.message);
+                    // event.target.reset();
+                }
+
+            })
+
+        // setImage(null);
+    };
 
 
 
@@ -269,15 +330,28 @@ const Settings = ({ user }) => {
 
             <Col md={3} sm={12} >
                 <div className="bg-white p-3 rounded text-center">
-                    <form >
+                    {/*  <form >
                         <img
                             src={imageUrl}
                             alt=""
                             srcset="" style={{ width: "200px", borderRadius: "100%", marginBottom: "10px" }} />
 
-                        <label className='main-btn'> Change Image
+                        <label className='main-btn' type="submit"> Change Image
                             <input type="file" style={{ display: "none" }} onChange={(e) => setUploadImage(e.target.files[0])} required />
                         </label>
+                    </form> */}
+
+
+                    <form onSubmit={handleDPSubmit} >
+                        <div>
+                            <input type="file" id="image" onChange={handleImageChange} style={{ display: "none" }} />
+                            {image ? (
+                                <img src={image} alt="Preview" onClick={handleImageClick} style={{ width: "200px", height: "200px", borderRadius: "100%" }} />
+                            ) : (
+                                <div onClick={handleImageClick}>Click to select an image</div>
+                            )}
+                        </div>
+                        <button type="submit" className='main-btn'>Save Image</button>
                     </form>
 
 
@@ -293,3 +367,36 @@ const Settings = ({ user }) => {
 };
 
 export default Settings;
+
+
+
+/* 
+function App() {
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (event) => {
+    setImage(URL.createObjectURL(event.target.files[0]));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("image", event.target.image.files[0]);
+
+    // Add code here to send the form data to the backend
+    // ...
+
+    setImage(null);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="file" id="image" onChange={handleImageChange} />
+      {image && <img src={image} alt="Preview" />}
+      <button type="submit">Submit</button>
+    </form>
+  );
+} */
+
+
