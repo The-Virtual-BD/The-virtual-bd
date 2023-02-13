@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import BlogCard from "./BlogCard";
@@ -24,7 +24,9 @@ const Blogger = ({ isBlogger }) => {
   const [token] = useToken();
   const [user] = useUser();
   const { id } = user;
-  console.log(id);
+  
+
+  const[catagory,setCatagory]=useState([])
 
   //Be a blogger Form
   const [name, setName] = useState("");
@@ -38,16 +40,36 @@ const Blogger = ({ isBlogger }) => {
   //Create a Blog Form
   // const [authorName, setAuthorName] = useState("");
 
-  const [blogTitle, setBlogTitle] = useState("");
-  const [blogSubTitle, setBlogSubTitle] = useState("");
-  const [blogsShortDesc, setBlogsShortDesc] = useState("");
-  const [blogImg, setBlogImg] = useState([]);
-  const [blogsDesc, setBlogsDesc] = useState("");
+  const [title, setBlogTitle] = useState("");
+  const [descriptions, setDescriptions] = useState("");
+  const [short_description, setBlogsShortDesc] = useState("");
+  const [cover, setBlogImg] = useState([]);
+  const [category_id ,setCatagory_id] = useState([]);
+
+
+  // const [blogsDesc, setBlogsDesc] = useState("");
 
   // const [blogDate, setBlogDate] = useState();
 
-  //Handle Blogger Form
 
+  //Get Catagory
+  useEffect(() => {
+    const cUrl = `${baseUrl}/api/categories/catlist`;
+    fetch(cUrl, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            "Authorization": `Bearer ${token}`
+        }
+    })
+        .then(res => res.json())
+        .then(data => setCatagory(data?.data))
+}, [token]);
+
+
+console.log(catagory);
+
+  //Handle Blogger Form
   const handleBloggerForm = (e) => {
     e.preventDefault();
     const BloggerReqSent = { name, subject, expertise, description };
@@ -82,37 +104,40 @@ const Blogger = ({ isBlogger }) => {
 
 
   //Handle create blog Form
-  const handleCreateBlogForm = (e) => {
+  const handleCreateBlogForm = async(e) => {
     e.preventDefault();
 
-    const addNewBlog = { blogTitle, blogSubTitle, blogsShortDesc, blogsDesc, blogImg, };
+    const addNewBlog = { title,short_description, descriptions, cover,category_id };
     console.log(addNewBlog);
 
 
 
-    //Send To Backend
-    const url = `${baseUrl}/api/subscriptions/store`;
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(addNewBlog)
-    })
-      .then(res => res.json())
-      .then(result => {
-
+    const formData = new FormData();
+       /*  formData.append('service_id', service_id);
+        formData.append('subject', subject);
+        formData.append('description', description);
+        formData.append('schedule', schedule);
+        formData.append('attachment', attachment, attachment.name); */
+    
+        const url = `${baseUrl}/api/subscriptions/store/${id}`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: formData
+        });
+    
+        const result = await response.json();
+    
         if (result.error) {
-          console.log(result.error);
-          toast.error("Add Blog  Failed");
+            console.log(result.error);
+            toast.error("Subscriptions Add Failed");
         } else {
-          console.log(result);
-          //  e.target.reset();
-          toast.success("Add Blog Successfully");
+            console.log(result);
+            e.target.reset();
+            toast.success(result.message);
         }
-
-      });
 
   };
 
@@ -247,7 +272,7 @@ const Blogger = ({ isBlogger }) => {
                   Subject
                 </label>
                 <select
-                  onChange={(e) => setBlogSubTitle(e.target.value)}
+                  onChange={(e) => setCatagory_id(e.target.value)}
                   className="form-control form-select"
                   id="subTitle"
                   aria-label="form-select-lg example"
@@ -255,9 +280,7 @@ const Blogger = ({ isBlogger }) => {
                   <option selected disabled>
                     Select Subject{" "}
                   </option>
-                  <option value="1">one</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  { catagory?.map(service => <option value={service.id}>{service.name}</option>) }
                 </select>
               </div>
 
@@ -279,8 +302,8 @@ const Blogger = ({ isBlogger }) => {
                 </label>
 
                 <CKEditor
-                  data={blogsDesc}
-                  onChange={(e) => setBlogsDesc(e.editor.getData())}
+                  data={descriptions}
+                  onChange={(e) => setDescriptions(e.editor.getData())}
                   config={{ toolbar: editorToolbar }}
                   className="form-control"
                 /*  config={{
@@ -303,7 +326,7 @@ const Blogger = ({ isBlogger }) => {
                 </label>
                 <FilePond
                   allowMultiple={true}
-                  files={blogImg}
+                  files={cover}
                   onupdatefiles={setBlogImg}
                   maxFiles={3}
                   allowReorder={true}

@@ -124,16 +124,6 @@ const Settings = ({ user }) => {
     };
 
 
-
-    /* //Preview updated Image
-    useEffect(() => {
-        if (uploadImage) {
-            setImageUrl(URL.createObjectURL(uploadImage));
-        }
-    }, [uploadImage]);
- */
-
-
     //Handle Image Change
 
     const handleImageChange = (event) => {
@@ -145,7 +135,7 @@ const Settings = ({ user }) => {
         fileInput.click();
     };
 
-    const handleDPSubmit = (event) => {
+    const handleDPSubmit =async (event) => {
         event.preventDefault();
 
         const file = event.target.image.files[0];
@@ -157,39 +147,64 @@ const Settings = ({ user }) => {
         };
 
         const imgData = new FormData();
-        imgData.append("photo", file);
-
-        console.log(imgData)
-
-
-
-        //Send To Backend
+      
+        imgData.append('photo',file, file.name);
+        console.log(imgData);
+    
         const url = `${baseUrl}/api/myprofile/profilePic/${id}`;
-        fetch(url, {
+        const response = await fetch(url, {
             method: 'PUT',
             headers: {
-                'content-type': 'multipart/form-data',
                 "Authorization": `Bearer ${token}`
             },
             body: imgData
-        })
-            .then(res => res.json())
-            .then(result => {
+        });
+    
+        console.log(response);
+        const result = await response.json();
 
-                if (result.error) {
-                    console.log(result.error);
-                    toast.error(result.error);
-                } else {
-                    console.log(result);
-                    // e.target.reset();
-                    toast.success(result.message);
-                    // event.target.reset();
-                }
+        if (result.error) {
+        console.log(result.error);
+        toast.error("Subscriptions Add Failed");
+        } else {
+        console.log(result);
+        event.target.reset();
+        toast.success(result.message);
+        }
 
-            })
+            }
 
-        // setImage(null);
-    };
+        
+    
+
+
+  /*   const handleDPSubmit = async (e) => {
+        e.preventDefault();
+    
+        const imgData = new FormData();
+      
+        imgData.append('photo', image, image.name);
+    
+        const url = `${baseUrl}/api/myprofile/profilePic/${id}`;
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body:  imgData
+        });
+    
+        const result = await response.json();
+    
+        if (result.error) {
+            console.log(result.error);
+            toast.error("Subscriptions Add Failed");
+        } else {
+            console.log(result);
+            e.target.reset();
+            toast.success(result.message);
+        }
+    }; */
 
 
 

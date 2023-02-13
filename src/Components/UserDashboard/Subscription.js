@@ -45,21 +45,12 @@ const Subscription = () => {
 
 
     //handle Subcription Request 
-    const handleSubcription = e => {
+  /*   const handleSubcription = e => {
         e.preventDefault();
 
         const subcriptions = { service_id, subject,description, schedule,attachment};
         console.log(subcriptions);
 
-
-      /*   const subcriptions = new FormData();
-        subcriptions.append('service_id', service_id);
-        subcriptions.append('subject', subject);
-        subcriptions.append('description', description);
-        subcriptions.append('schedule', schedule);
-        subcriptions.append('attachment', attachment);
-
-        console.log(subcriptions); */
 
         //Send To Backend
         const url = `${baseUrl}/api/subscriptions/store/${id}`;
@@ -86,6 +77,41 @@ const Subscription = () => {
                 }
             })
     };
+ */
+
+
+    const handleSubscription = async (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData();
+        formData.append('service_id', service_id);
+        formData.append('subject', subject);
+        formData.append('description', description);
+        formData.append('schedule', schedule);
+        formData.append('attachment', attachment, attachment.name);
+    
+        const url = `${baseUrl}/api/subscriptions/store/${id}`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: formData
+        });
+    
+        const result = await response.json();
+    
+        if (result.error) {
+            console.log(result.error);
+            toast.error("Subscriptions Add Failed");
+        } else {
+            console.log(result);
+            e.target.reset();
+            toast.success(result.message);
+        }
+    };
+    
+
 
 
     return (
@@ -93,7 +119,7 @@ const Subscription = () => {
             <Col md={9} sm={12}>
                 <div className="bg-white  p-sm-4 p-2 mb-sm-3 mb-5  rounded ">
 
-                    <form className='row form-container p-3 mb-3' onSubmit={handleSubcription} >
+                    <form className='row form-container p-3 mb-3' onSubmit={handleSubscription} >
 
                         <div className="col-12 mb-3">
                             <label for="services" className="form-label fw-bold">Services</label>
