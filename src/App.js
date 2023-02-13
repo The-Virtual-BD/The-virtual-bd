@@ -26,12 +26,17 @@ import { createContext } from "react";
 import { AppContext } from "./context";
 import { useState } from "react";
 import Notices from "./Components/NoticePage/Notices";
+import useToken from "./hooks/useToken";
+import useUser from "./hooks/useUser";
 
 
 
 
 function App() {
   // const[user,setUser]=useState([]);
+
+  const [token] = useToken();
+  const [user] = useUser();
 
   const value={};
   // console.log(value)
@@ -53,12 +58,19 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-conditions" element={<TermsCondition />} />
-        <Route path="/sign-in" element={<SingnIn />} />
+      
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<Search />} />
         <Route path="/data-protection" element={<PrivacyPolicy />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/user-dashboard" element={ < RequireAuth><UserProfile /></RequireAuth>} />
+
+         <Route path="/user-dashboard" element={ < RequireAuth> <UserProfile /></RequireAuth>} />
+         
+        <Route path="/sign-in" element={<SingnIn />} />
+       
+       
+
+
         <Route
           path="/team/:slug"
           exact={true}

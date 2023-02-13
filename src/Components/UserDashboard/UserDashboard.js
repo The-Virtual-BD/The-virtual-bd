@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -19,7 +19,7 @@ import moment from 'moment/moment';
 const UserDashboard = () => {
   const navigate = useNavigate()
   //Blogger Auth
-  const [isBlogger, setIsBlogger] = useState(false);
+  const [isBlogger, setIsBlogger] = useState(true);
 
   //Get Token & User from Hooks
   const [token] = useToken();

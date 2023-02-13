@@ -25,7 +25,7 @@ const Subscription = () => {
     const [schedule, setSchedule] = useState(new Date());
     const [attachment, setAttachment] = useState(null);
 
-    console.log(schedule);
+    // console.log(schedule);
 
     //Get Services
     useEffect(() => {
@@ -48,28 +48,30 @@ const Subscription = () => {
     const handleSubcription = e => {
         e.preventDefault();
 
-        /* const subcriptions = { service_id, subject,description, schedule,attachment};
+        const subcriptions = { service_id, subject,description, schedule,attachment};
         console.log(subcriptions);
- */
 
-        const subcriptions = new FormData();
+
+      /*   const subcriptions = new FormData();
         subcriptions.append('service_id', service_id);
         subcriptions.append('subject', subject);
         subcriptions.append('description', description);
         subcriptions.append('schedule', schedule);
         subcriptions.append('attachment', attachment);
 
+        console.log(subcriptions); */
+
         //Send To Backend
         const url = `${baseUrl}/api/subscriptions/store/${id}`;
         fetch(url, {
             method: 'POST',
             headers: {
-                // 'content-type': 'application/json',
-                'Content-Type': 'multipart/form-data',
+                'content-type': 'application/json',
+                // 'Content-Type': 'multipart/form-data',
                 "Authorization": `Bearer ${token}`
             },
-            // body: JSON.stringify(subcriptions)
-            body: subcriptions
+            body: JSON.stringify(subcriptions)
+            // body: subcriptions
         })
             .then(res => res.json())
             .then(result => {
@@ -82,16 +84,8 @@ const Subscription = () => {
                     e.target.reset();
                     toast.success("Subcriptions Added Successfully");
                 }
-
             })
     };
-
-
-
-
-
-    // console.log(services?.data)
-
 
 
     return (
@@ -99,7 +93,7 @@ const Subscription = () => {
             <Col md={9} sm={12}>
                 <div className="bg-white  p-sm-4 p-2 mb-sm-3 mb-5  rounded ">
 
-                    <form className='row form-container p-3 mb-3' onSubmit={handleSubcription} enctype="multipart/form-data">
+                    <form className='row form-container p-3 mb-3' onSubmit={handleSubcription} >
 
                         <div className="col-12 mb-3">
                             <label for="services" className="form-label fw-bold">Services</label>
