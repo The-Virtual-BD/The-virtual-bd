@@ -10,7 +10,7 @@ import useUser from '../../hooks/useUser';
 import BlogCard from './BlogCard';
 import './UserDashboard.css';
 
-const Subscription = () => {
+const Subscription = ({loading,setLoading}) => {
     const [token] = useToken();
     const [user] = useUser();
     const { id } = user;
@@ -25,11 +25,13 @@ const Subscription = () => {
     const [schedule, setSchedule] = useState(new Date());
     const [attachment, setAttachment] = useState(null);
 
-    // console.log(schedule);
+    console.log(attachment);
 
     //Get Services
     useEffect(() => {
         const sUrl = `${baseUrl}/api/services/activeservices`;
+        // setLoading(true);
+
         fetch(sUrl, {
             method: 'GET',
             headers: { 
@@ -38,7 +40,10 @@ const Subscription = () => {
             }
         })
             .then(res => res.json())
-            .then(data => setServices(data))
+            .then(data => {
+                // setLoading(false)
+                setServices(data)
+            })
     }, [token]);
 
 
@@ -53,6 +58,8 @@ const Subscription = () => {
         formData.append('description', description);
         formData.append('schedule', schedule);
         formData.append('attachment', attachment, attachment.name);
+
+        // console.log(formData)
     
         const url = `${baseUrl}/api/subscriptions/store/${id}`;
         const response = await fetch(url, {
@@ -76,7 +83,9 @@ const Subscription = () => {
     };
     
 
-
+/* if(loading){
+    return(<p>Loading......</p>)
+}; */
 
     return (
         <Row>

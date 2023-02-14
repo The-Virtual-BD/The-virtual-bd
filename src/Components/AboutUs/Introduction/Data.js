@@ -10,7 +10,7 @@ const introduction = [
     intro_person:
       "IEEE SPAW 2.0 Ambassador, Global Peace Chain Ambassador, GGF Cultural Ambassador, Global Governance Foundation, International Youth Society Campus Ambassador, Asia World Model United Nations Delegate.",
 
-    name: "Mehedi Hassan",
+    name: "Md. Mehedi Hassan",
     pic: ceo,
     designation: "Founder & CEO",
     twitter: "https://twitter.com/MehediCEO",

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
-import userImg from '../../Images/user.png';
+// import userImg from '../../Images/user.png';
 import './UserDashboard.css';
 import Settings from './Settings';
 import Subscription from './Subscription';
@@ -14,16 +14,19 @@ import useToken from '../../hooks/useToken';
 import { useNavigate } from 'react-router-dom';
 import useUser from '../../hooks/useUser';
 import moment from 'moment/moment';
+import image1 from '../../Images/blank_user.png';
 
 
 const UserDashboard = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const[loading,setLoading]=useState(false);
+
   //Blogger Auth
   const [isBlogger, setIsBlogger] = useState(true);
 
   //Get Token & User from Hooks
   const [token] = useToken();
-  const [user] = useUser();
+  const [user,setUser] = useUser();
   const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio } = user;
 
   //  console.log(user);
@@ -41,7 +44,7 @@ const UserDashboard = () => {
 
           <div className="bg-white px-5 py-3  mt-sm-3 mt-5 rounded ">
             <div className='d-flex  align-items-center   '>
-              <img src={userImg} alt='user img' />
+              <img src={image1} alt='user img' style={{ width: "100px", height: "100px", borderRadius: "100%" }} />
               <div className='d-flex flex-column  ms-3'>
 
                 <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>{`${first_name} ${last_name}`}</span> <BsCheckCircleFill className='blue-clr' /></h5>
@@ -107,15 +110,15 @@ const UserDashboard = () => {
             </TabPanel>
 
             <TabPanel>
-              <Settings user={user} />
+              <Settings user={user} setUser={setUser} />
             </TabPanel>
 
             <TabPanel>
-              <Subscription />
+              <Subscription loading={loading} setLoading={setLoading} />
             </TabPanel>
 
             <TabPanel>
-              <Projects />
+              <Projects loading={loading} setLoading={setLoading} />
             </TabPanel>
 
             <TabPanel>

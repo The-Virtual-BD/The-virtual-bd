@@ -11,10 +11,10 @@ import useToken from '../../hooks/useToken';
 import './UserDashboard.css';
 
 
-import image1 from '../../Images/blogger.png';
+import image1 from '../../Images/blank_user.png';
 
 
-const Settings = ({ user }) => {
+const Settings = ({ user,setUser }) => {
     const [token] = useToken();
     const navigate = useNavigate();
 
@@ -33,9 +33,8 @@ const Settings = ({ user }) => {
     const [biO, setBiO] = useState(bio);
 
     const [image, setImage] = useState(image1);
-
-    // const [uploadImage, setUploadImage] = useState();
-    // const [imageUrl, setImageUrl] = useState(image1);
+    const [photo,setPhoto]=useState(null);
+   
 
     //Password change
     const [password, setPassword] = useState('');
@@ -61,12 +60,11 @@ const Settings = ({ user }) => {
         console.log(profileData);
 
         //Send To Backend
-        const url = `${baseUrl}/api/myprofile/update/${id}`;
+        const url = `${baseUrl}/api/myprofile/update`;
         fetch(url, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
-                // 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(profileData)
@@ -81,10 +79,11 @@ const Settings = ({ user }) => {
                 } else {
                     console.log(result);
                     toast.success(result.message);
-                    const user = JSON.stringify(result.user)
+                    setUser(result.user);
 
+                    const user = JSON.stringify(result.user);
                     window.localStorage.setItem("user", user);
-                    // navigate("/user-dashboard")
+                    // navigate("/user-dashboard");
                 }
 
             });
@@ -98,7 +97,7 @@ const Settings = ({ user }) => {
         const updatePass = { password, password_confirmation }
 
         //Send To Backend
-        const url = `${baseUrl}/api/myprofile/pupdate/${id}`;
+        const url = `${baseUrl}/api/myprofile/pupdate`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -128,28 +127,64 @@ const Settings = ({ user }) => {
 
     const handleImageChange = (event) => {
         setImage(URL.createObjectURL(event.target.files[0]));
+        setPhoto(event.target.files[0]);
     };
 
+    console.log(photo);
+
     const handleImageClick = () => {
-        const fileInput = document.getElementById("image");
+        const fileInput = document.getElementById("photo");
         fileInput.click();
     };
 
     const handleDPSubmit =async (event) => {
         event.preventDefault();
 
-        const file = event.target.image.files[0];
-        console.log(file)
+        // const data={photo}
 
-        if (!file) {
-            console.error("No file selected");
-            return;
-        };
+       
 
-        const imgData = new FormData();
+            const formData  = new FormData();
       
-        imgData.append('photo',file, file.name);
-        console.log(imgData);
+            formData.append('photo',photo, photo.name);
+            // formData.append('photo',"this is test");
+            console.log(formData);
+
+            const dpUrl = `${baseUrl}/api/myprofile/update`;
+            // const dpUrl = `${baseUrl}/api/myprofile/profilePic`;
+            const response = await fetch(dpUrl, {
+                method: 'PUT',
+                headers: {
+                    // "content-type":"application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body:formData
+            });
+        
+            console.log(response);
+            const result = await response.json();
+    
+            if (result.error) {
+            console.log(result.error);
+            toast.error("Profile Pic Added Failed");
+            } else {
+            console.log(result);
+            event.target.reset();
+            toast.success(result.message);
+            }
+       
+
+            };
+
+        
+    
+
+
+/*     const handleDPSubmit = async (e) => {
+        e.preventDefault();
+    
+        const imgData = new FormData();
+        imgData.append('photo', image, image.name);
     
         const url = `${baseUrl}/api/myprofile/profilePic/${id}`;
         const response = await fetch(url, {
@@ -159,41 +194,8 @@ const Settings = ({ user }) => {
             },
             body: imgData
         });
-    
+
         console.log(response);
-        const result = await response.json();
-
-        if (result.error) {
-        console.log(result.error);
-        toast.error("Subscriptions Add Failed");
-        } else {
-        console.log(result);
-        event.target.reset();
-        toast.success(result.message);
-        }
-
-            }
-
-        
-    
-
-
-  /*   const handleDPSubmit = async (e) => {
-        e.preventDefault();
-    
-        const imgData = new FormData();
-      
-        imgData.append('photo', image, image.name);
-    
-        const url = `${baseUrl}/api/myprofile/profilePic/${id}`;
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            body:  imgData
-        });
-    
         const result = await response.json();
     
         if (result.error) {
@@ -359,13 +361,14 @@ const Settings = ({ user }) => {
 
                     <form onSubmit={handleDPSubmit} >
                         <div>
-                            <input type="file" id="image" onChange={handleImageChange} style={{ display: "none" }} />
-                            {image ? (
-                                <img src={image} alt="Preview" onClick={handleImageClick} style={{ width: "200px", height: "200px", borderRadius: "100%" }} />
-                            ) : (
-                                <div onClick={handleImageClick}>Click to select an image</div>
-                            )}
+                            <input name="photo" type="file" id="photo" onChange={handleImageChange} style={{display: "none" }}  />
+
+                            {image && (
+                                <img src={image} alt="Preview" onClick={handleImageClick}  style={{ width: "150px", height: "150px", borderRadius: "100%" }} />
+                            ) }
                         </div>
+                        {/* <input type="text"  onChange={e=>setPhoto(e.target.value)}/> */}
+                      
                         <button type="submit" className='main-btn'>Save Image</button>
                     </form>
 
@@ -382,36 +385,5 @@ const Settings = ({ user }) => {
 };
 
 export default Settings;
-
-
-
-/* 
-function App() {
-  const [image, setImage] = useState(null);
-
-  const handleImageChange = (event) => {
-    setImage(URL.createObjectURL(event.target.files[0]));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append("image", event.target.image.files[0]);
-
-    // Add code here to send the form data to the backend
-    // ...
-
-    setImage(null);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" id="image" onChange={handleImageChange} />
-      {image && <img src={image} alt="Preview" />}
-      <button type="submit">Submit</button>
-    </form>
-  );
-} */
 
 

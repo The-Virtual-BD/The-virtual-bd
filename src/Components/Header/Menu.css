@@ -106,8 +106,9 @@ padding-top: 10px;
   width: 100%;
 }
 
-.dropdown-menu.show{
+.logout-dropdown .show{
   width: 100%;
+  text-align: center;
 }
 
 /* .navbar-light .navbar-nav .nav-link:hover a,

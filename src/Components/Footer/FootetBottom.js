@@ -9,7 +9,7 @@ function FootetBottom() {
       <div className="footerVBottom">
         <p>
           <BiCopyright className="copy" />
-          2022
+          2023
           <span>
             <ExternalLink href="https://thevirtualbd.com/">
               The Virtual BD

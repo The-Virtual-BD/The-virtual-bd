@@ -64,6 +64,7 @@
   display: inline-block;
   text-decoration: none;
   margin-top: 30px;
+  transition: .3s all linear;
 }
 
 .contuct_btn a:hover {

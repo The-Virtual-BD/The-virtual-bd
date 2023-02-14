@@ -109,7 +109,7 @@ function Menu() {
 
             <NavDropdown
                 title={<><FaUserCircle className="fs-4 mr-2"/>{user.first_name}</> }
-                className="dropMenu sing_area"
+                className="dropMenu sing_area logout-dropdown"
                 id="navbarScrollingDropdown"
               >
                 <NavDropdown.Item href="/user-dashboard">

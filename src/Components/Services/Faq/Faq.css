@@ -156,8 +156,8 @@
 
 .banner_content p,
 ul {
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 16px;
   line-height: 27px;
   text-align: justify;
   color: #2c3e50;
@@ -235,9 +235,10 @@ ul {
     font-size: 14px;
   }
 
-  .provide_conten ul li {
-    margin-left: -5px;
-  }
+  /* .provide_content ul li {
+    font-size: 14px;
+    font-weight: 400;
+  } */
   .banner_content {
     margin: 10px;
   }
@@ -245,7 +246,7 @@ ul {
     display: flex;
     justify-content: center;
   }
-  .faq_content p {
+  .faq_content p,li {
     margin-top: 15px;
     margin-left: -10px;
     margin-right: 18px;

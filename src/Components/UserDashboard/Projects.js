@@ -10,7 +10,7 @@ import { baseUrl } from '../../hooks/url';
 import useUser from '../../hooks/useUser';
 import useToken from '../../hooks/useToken';
 
-const Projects = () => {
+const Projects = ({loading,setLoading}) => {
     const [projects, setProjects] = useState([]);
     const[getId,setGetId]=useState('');
 
@@ -28,6 +28,7 @@ const Projects = () => {
     //Get My All Projects
     useEffect(() => {
         const url = `${baseUrl}/api/projects/myprojects`;
+        setLoading(true);
         fetch(url ,{
             method:"GET",
             headers: {
@@ -36,7 +37,10 @@ const Projects = () => {
             }
         })
             .then(res => res.json())
-            .then(data => setProjects(data.data))
+            .then(data =>{
+                setLoading(false);
+                setProjects(data.data);
+            } )
      }, [id,token]);
 
     console.log(projects)
@@ -110,6 +114,11 @@ const Projects = () => {
         ];
     };
 
+
+    if(loading){
+        return(<p>Loading......</p>)
+    };
+
     return (
         <>
            {!getId &&
@@ -121,7 +130,7 @@ const Projects = () => {
             }
            
             <div>
-                {getId && <ProductDetails getId={getId} token={token}/>}
+                {getId && <ProductDetails getId={getId} token={token}  loading={loading} setLoading={setLoading}/>}
             </div>
         </>
     );
@@ -147,14 +156,18 @@ const ProductDetails = ({ getId,token }) => {
             }
         })
             .then(res => res.json())
-            .then(data => setProject(data.data))
+            .then(data => {
+                setProject(data?.data)
+            })
     }, [getId]);
 
     // console.log(project)
 
-
-
-
+/* 
+    if(loading){
+        return(<p>Loading......</p>)
+    };
+ */
 
     return (
         <>
