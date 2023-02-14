@@ -130,7 +130,7 @@ const Settings = ({ user,setUser }) => {
         setPhoto(event.target.files[0]);
     };
 
-    console.log(photo);
+    // console.log(photo);
 
     const handleImageClick = () => {
         const fileInput = document.getElementById("photo");
@@ -148,7 +148,7 @@ const Settings = ({ user,setUser }) => {
       
             formData.append('photo',photo, photo.name);
             // formData.append('photo',"this is test");
-            console.log(formData);
+            // console.log(formData);
 
             const dpUrl = `${baseUrl}/api/myprofile/update`;
             // const dpUrl = `${baseUrl}/api/myprofile/profilePic`;

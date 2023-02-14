@@ -117,16 +117,18 @@ const Projects = ({loading,setLoading}) => {
 
 
     if(loading){
-        return(<Loading />)
+        return(<Loading loading={loading} />)
     };
 
     return (
         <>
            {!getId &&
                 <div >
-                    {projects?.length && (
+                    {projects?.length ? (
                         <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
-                    )}
+                    ):
+                    <p className='py-3 bg-white'>You Don't Have any project</p>
+                    }
                 </div>
             }
            
