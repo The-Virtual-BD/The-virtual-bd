@@ -156,12 +156,14 @@
 
 .banner_content p,
 ul {
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 18px;
   line-height: 27px;
   text-align: justify;
   color: #2c3e50;
 }
+
+
 
 .banner_content ul {
   font-weight: 400;
@@ -246,12 +248,7 @@ ul {
     display: flex;
     justify-content: center;
   }
-  .faq_content p,li {
-    margin-top: 15px;
-    margin-left: -10px;
-    margin-right: 18px;
-    font-weight: 500;
-  }
+
   .accordion_gap {
     margin-top: -30px;
   }

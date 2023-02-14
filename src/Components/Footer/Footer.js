@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import logo from "./logo/logo.jpg";
+import logo from "../../Images/logo 2.png";
 import google from "./logo/google.png";
 import apple from "./logo/apple.png";
 import Socialmedia from "../Socialmedia/Socialmedia";
@@ -17,7 +17,7 @@ function Footer() {
             <Row>
               <Col md={3}>
                 <div className="fImage">
-                  <img src={logo} alt="logo" />
+                  <img src={logo} alt="logo" className="footer-logo"/>
                 </div>
                 <div className="footer_text">
                   <p>

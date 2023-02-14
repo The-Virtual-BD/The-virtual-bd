@@ -9,6 +9,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { baseUrl } from '../../hooks/url';
 import useUser from '../../hooks/useUser';
 import useToken from '../../hooks/useToken';
+import Loading from '../../hooks/Loading';
 
 const Projects = ({loading,setLoading}) => {
     const [projects, setProjects] = useState([]);
@@ -116,7 +117,7 @@ const Projects = ({loading,setLoading}) => {
 
 
     if(loading){
-        return(<p>Loading......</p>)
+        return(<Loading />)
     };
 
     return (
