@@ -20,7 +20,7 @@ const Projects = ({loading,setLoading}) => {
     // const [isLoading,setIsLoading]=useState(false);
 
     const {id}=user;
-    console.log(id)
+    // console.log(id)
     const navigate = useNavigate();
   
 
@@ -44,7 +44,7 @@ const Projects = ({loading,setLoading}) => {
             } )
      }, [id,token]);
 
-    console.log(projects)
+    // console.log(projects)
 
 
     //Handle Project View

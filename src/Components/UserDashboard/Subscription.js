@@ -25,7 +25,7 @@ const Subscription = ({loading,setLoading}) => {
     const [schedule, setSchedule] = useState(new Date());
     const [attachment, setAttachment] = useState(null);
 
-    console.log(attachment);
+    // console.log(attachment);
 
     //Get Services
     useEffect(() => {
