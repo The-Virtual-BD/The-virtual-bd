@@ -124,10 +124,10 @@ const Projects = ({loading,setLoading}) => {
         <>
            {!getId &&
                 <div >
-                    {projects?.length ? (
+                    {projects?.length !==0 ? (
                         <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
                     ):
-                    <p className='py-3 bg-white'>You Don't Have any project</p>
+                    <p className='p-3 bg-white rounded'>You Don't Have any project</p>
                     }
                 </div>
             }
