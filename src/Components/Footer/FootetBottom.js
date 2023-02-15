@@ -4,12 +4,15 @@ import { BiCopyright } from "react-icons/bi";
 import { ExternalLink } from "react-external-link";
 
 function FootetBottom() {
+  const date=new Date();
+  const year=date.getFullYear();
+  // console.log(year)
   return (
     <>
       <div className="footerVBottom">
         <p>
           <BiCopyright className="copy" />
-          2023
+          {year}
           <span>
             <ExternalLink href="https://thevirtualbd.com/">
               The Virtual BD
