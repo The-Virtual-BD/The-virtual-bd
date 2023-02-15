@@ -75,7 +75,8 @@ function Login() {
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                       <div className="user">
-                        <input type="text" placeholder="Email" {...register("email")}/>
+                        <input type="email" placeholder="Email" {...register("email")}/>
+                        
                       </div>
 
                       <div className="pass">
@@ -95,7 +96,7 @@ function Login() {
                       <div className="form_submit">
                         <button type="submit">LOGIN</button>
                       </div>
-                      <p>{failedMsg}</p>
+                      <p className="text-danger fs-1">{failedMsg}</p>
 
                     </form>
 
