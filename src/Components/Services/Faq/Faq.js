@@ -126,19 +126,7 @@ function Faq() {
 
                     </Accordion>
                   </Col>
-                 {/*  <Col md={6}>
-                    <div className="faq_content">
-                      <p>
-                        Bringing your ideas to live, website designs is our
-                        forte. We carve perfect designs to build creative
-                        websites that engage users on both desktop & mobile
-                        devices with its ultra modern responsive UI.
-                      </p>
-                      <div className="faq_button">
-                        <Link to="/">Get Started</Link>
-                      </div>
-                    </div>
-                  </Col> */}
+                
                 </Row>
               </div>
             </Tab>
@@ -213,52 +201,105 @@ function Faq() {
             <Tab eventKey="graphic" title="UI & Graphic Design Service">
               <div className="provide_content">
                 <Row>
-                  <Col md={6}>
+                  <Col md={12}>
                     <Accordion>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        What services does The Virtual BD offer in terms of graphics design?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The Virtual BD offers a range of graphics design services, including logo design, branding, web design, social media graphics, brochure design, packaging design, and more.
                         </Accordion.Body>
                       </Accordion.Item>
+
                       <Accordion.Item eventKey="1">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        How experienced are The Virtual BD's graphic designers?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The Virtual BD's graphic designers have extensive experience in the field of graphics design, and they are trained to use the latest tools and technologies to create high-quality designs. They work closely with clients to ensure their needs are met and their expectations are exceeded.
                         </Accordion.Body>
                       </Accordion.Item>
+
                       <Accordion.Item eventKey="2">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        How much do graphics design services from The Virtual BD cost?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The cost of graphics design services from The Virtual BD can vary depending on the scope of the project and the level of expertise required. It's important to discuss your budget and project goals with the team at The Virtual BD to get a customized quote.
                         </Accordion.Body>
                       </Accordion.Item>
+
                       <Accordion.Item eventKey="3">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        How long does it take to complete a graphics design project with The Virtual BD?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The timeline for completing a graphics design project with The Virtual BD can vary depending on the complexity of the project and the availability of the team. It's important to discuss your timeline expectations with the team at The Virtual BD to ensure they can deliver your project within your desired timeframe.
                         </Accordion.Body>
                       </Accordion.Item>
+
+                      <Accordion.Item eventKey="4">
+                        <Accordion.Header>
+                       How does The Virtual BD ensure that their clients are satisfied with their graphics design services?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        The Virtual BD works closely with clients throughout the design process to ensure their needs are met and their expectations are exceeded. They offer multiple revisions and work with clients to incorporate their feedback and ideas into the final design.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="5">
+                        <Accordion.Header>
+                        What types of businesses does The Virtual BD work with for graphics design services?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        The Virtual BD works with businesses of all sizes and industries, including startups, small businesses, and large corporations. They are experienced in creating designs that are tailored to each client's unique needs and branding.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="6">
+                        <Accordion.Header>
+                        What file formats do graphics design services typically provide to clients?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        Graphics design services typically provide clients with high-resolution files in a variety of formats, including JPEG, PNG, EPS, PDF, and more. These files can be used for print and digital purposes, and they are often delivered in a file-sharing platform such as Dropbox or Google Drive.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="7">
+                        <Accordion.Header>
+                        What should clients provide to graphics design services to ensure a successful project?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        Clients should provide a clear creative brief that outlines their project goals, target audience, and any design specifications or preferences. They should also provide any necessary branding assets, such as logos or color palettes, and any content or copy that will be incorporated into the design.
+
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="8">
+                        <Accordion.Header>
+                        How can clients protect their intellectual property when working with a graphics design service?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        Clients can protect their intellectual property by signing a non-disclosure agreement (NDA) with the graphics design service. This agreement should outline the scope of the project and any confidential information that will be shared. The graphics design service should also be willing to sign over the copyright or provide the client with full ownership of the final design.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="9">
+                        <Accordion.Header>
+                       Can graphics design services also handle printing and production of marketing materials?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        Yes, some graphics design services also offer printing and production services for marketing materials such as business cards, brochures, and banners. These services can save clients time and ensure consistency in the design and production process. It's important to discuss your printing and production needs with the graphics design service in advance to ensure they can accommodate your needs.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+
+
                     </Accordion>
                   </Col>
 
-                  <Col md={6}>
+                  {/* <Col md={6}>
                     <div className="faq_content">
                       <p>
                         Bringing your ideas to live, website designs is our
@@ -270,7 +311,7 @@ function Faq() {
                         <Link to="/">Get Started</Link>
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
               </div>
             </Tab>
@@ -279,52 +320,113 @@ function Faq() {
             <Tab eventKey="marketing" title="Digital Marketing Service">
               <div className="provide_content">
                 <Row>
-                  <Col md={6}>
+                  <Col md={12}>
                     <Accordion>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        What are marketing services?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        Marketing services refer to a range of professional services that help businesses promote their products or services. These services can include advertising, public relations, market research, social media management, content marketing, and more.
                         </Accordion.Body>
                       </Accordion.Item>
+
                       <Accordion.Item eventKey="1">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        Why do businesses need marketing services?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        Marketing services can help businesses increase their brand awareness, attract new customers, build loyalty, and ultimately drive sales. By leveraging the expertise of marketing professionals, businesses can develop and execute effective marketing strategies that align with their business goals.
                         </Accordion.Body>
                       </Accordion.Item>
+
                       <Accordion.Item eventKey="2">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        How do I choose the right marketing services for my business?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The marketing services that are right for your business will depend on your unique goals, target audience, and budget. It's important to work with a marketing agency or consultant that can help you identify the most effective tactics and develop a customized plan that meets your needs.
                         </Accordion.Body>
                       </Accordion.Item>
+
                       <Accordion.Item eventKey="3">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        How much do marketing services cost?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The cost of marketing services can vary widely depending on the scope of work and the level of expertise required. Some marketing agencies may charge a flat rate, while others may charge hourly or project-based fees. It's important to get a clear understanding of pricing before entering into an agreement with a marketing services provider.
                         </Accordion.Body>
                       </Accordion.Item>
+
+                      <Accordion.Item eventKey="4">
+                        <Accordion.Header>
+                        How long does it take to see results from marketing services?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        The timeline for seeing results from marketing services can vary depending on the tactics used and the specific goals of the campaign. Some marketing efforts, such as search engine optimization, may take several months to see results, while others, such as paid advertising, can generate results more quickly.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="5">
+                        <Accordion.Header>
+                        Can I do my own marketing instead of hiring a marketing services provider?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        It's certainly possible for businesses to handle their own marketing, but it's important to have the right skills and expertise to do so effectively. If you don't have experience in marketing or don't have the bandwidth to devote to it, it may be more cost-effective to work with a marketing services provider who can deliver results more efficiently.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="6">
+                        <Accordion.Header>
+                        What types of ads I need to pay for?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        There are many types of ads that you can pay for, including search engine ads, social media ads, display ads, video ads, and more. The type of ad we choose depend on your target audience, goals, and budget.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+
+                      <Accordion.Item eventKey="7">
+                        <Accordion.Header>
+                        How much do I pay for ads?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        The cost of ads can vary widely depending on the platform, target audience, and competition. For example, Google Ads may charge per click, while Facebook Ads may charge per impression or engagement. The cost of ads can range from a few cents per click to several dollars per click or impression.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="8">
+                        <Accordion.Header>
+                         How do I determine ad budget?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        Ad budget based on your overall marketing budget, as well as their goals and target audience. It's important to set realistic expectations and to test and adjust ad campaigns over time to optimize performance.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+
+                      <Accordion.Item eventKey="9">
+                        <Accordion.Header>
+                        How can I ensure I get a good return on investment (ROI) for their ad spend?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        We can optimize your ad campaigns to improve ROI by targeting the right audience, using compelling ad creative, and testing and adjusting campaigns over time. It's also important to track conversions and other key performance indicators to measure the success of ad campaigns and make data-driven decisions.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
+                      <Accordion.Item eventKey="10">
+                        <Accordion.Header>
+                         What are some common mistakes when paying for ads?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        Some common mistakes include targeting the wrong audience, using poor ad creative, not tracking conversions, and not optimizing campaigns over time. It's important for you to have a clear understanding of their goals and to work with a qualified ad specialist of The Virtual BD who can help you avoid these mistakes and maximize your results.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
                     </Accordion>
                   </Col>
 
-                  <Col md={6}>
+                 {/*  <Col md={6}>
                     <div className="faq_content">
                       <p>
                         Bringing your ideas to live, website designs is our
@@ -336,7 +438,7 @@ function Faq() {
                         <Link to="/">Get Started</Link>
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
               </div>
             </Tab>

@@ -9,11 +9,7 @@ const useToken = () => {
        const getToken=window.localStorage.getItem("token");
        setToken(getToken);
 
-      /*  const getUserStr=localStorage.getItem("user");
-       
-       const getUser= JSON.parse(getUserStr);
-    //    console.log(getUser);
-       setUser(getUser); */
+     
 
     }, []);
     return [token, setToken];
