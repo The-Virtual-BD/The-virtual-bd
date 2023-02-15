@@ -20,7 +20,7 @@ function Faq() {
             <Tab eventKey="web" title="Web Design & Development">
               <div className="provide_content">
                 <Row>
-                  <Col md={6}>
+                  <Col md={12}>
                     <Accordion>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header className="accordion_gap">
@@ -126,7 +126,7 @@ function Faq() {
 
                     </Accordion>
                   </Col>
-                  <Col md={6}>
+                 {/*  <Col md={6}>
                     <div className="faq_content">
                       <p>
                         Bringing your ideas to live, website designs is our
@@ -138,7 +138,7 @@ function Faq() {
                         <Link to="/">Get Started</Link>
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
               </div>
             </Tab>

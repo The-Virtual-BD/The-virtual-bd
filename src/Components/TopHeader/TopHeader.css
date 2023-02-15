@@ -54,7 +54,7 @@
 
 /* ==================Respondive================ */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1000px) {
   .top_header {
     /* display: block; */
     display: none;
