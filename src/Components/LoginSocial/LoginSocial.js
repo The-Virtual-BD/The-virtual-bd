@@ -9,59 +9,31 @@ import linkedinWithCircle from "@iconify/icons-entypo-social/linkedin-with-circl
 
 
 
-function LoginSocial() {
 
+function LoginSocial() {
+  
  
   
   return (
     <>
-    <div>
 
-         {/*  <FacebookLogin
-        appId="638896764706960"
-        onSuccess={(response) => {
-          console.log('Login Success!', response);
-        }}
-        onFail={(error) => {
-          console.log('Login Failed!', error);
-        }}
-        onProfileSuccess={(response) => {
-          console.log('Get Profile Success!', response);
-        }}
-      /> */}
-
-   {/*  <GoogleOAuthProvider clientId="790674821353-69uc89j596fo1oocti2jr5j67qiurtcr.apps.googleusercontent.com">
-    <GoogleLogin
-        onSuccess={credentialResponse => {
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      />
-      
-      </GoogleOAuthProvider> */}
-
-
-
-    </div>
-
-
-
+  
 
       <section className="login_ocial">
         <ul>
+
           <li className="google">
             <ExternalLink href="https://www.google.com/">
               <Icon icon={googleContainedFill} />
             </ExternalLink>
           </li>
+          
           <li className="facebook">
             <ExternalLink href="">
               <Icon icon={facebookFill} />
             </ExternalLink>
           </li>
-          <li className="linkdin">
+          <li className="linkdin" >
             <ExternalLink href="">
               <Icon icon={linkedinWithCircle} />
             </ExternalLink>

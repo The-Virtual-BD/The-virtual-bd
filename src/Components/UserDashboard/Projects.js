@@ -124,10 +124,10 @@ const Projects = ({loading,setLoading}) => {
         <>
            {!getId &&
                 <div >
-                    {projects?.length !==0 ? (
-                        <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
+                    {projects?.length ===0 ? (
+                         <p className='p-3 bg-white rounded'>You Don't Have any project</p>
                     ):
-                    <p className='p-3 bg-white rounded'>You Don't Have any project</p>
+                    <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
                     }
                 </div>
             }

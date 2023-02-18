@@ -192,6 +192,7 @@ console.log(catagory);
                       className="form-control"
                       id="bloggerName"
                       onChange={(e) => setName(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -203,6 +204,7 @@ console.log(catagory);
                       type="text"
                       className="form-control"
                       id="blogSubject"
+                      required
                       onChange={(e) => setBlogSub(e.target.value)}
                     />
                   </div>
@@ -215,6 +217,7 @@ console.log(catagory);
                       type="text"
                       className="form-control"
                       id="exArea"
+                      required
                       onChange={(e) => setBlogExArea(e.target.value)}
                     />
                   </div>
@@ -227,6 +230,7 @@ console.log(catagory);
                       className="form-control"
                       id="blogDesc"
                       rows="5"
+                      required
                       onChange={(e) => setBlogDesc(e.target.value)}
                     ></textarea>
                   </div>
@@ -261,6 +265,7 @@ console.log(catagory);
                   type="text"
                   className="form-control"
                   id="blogTitle"
+                  required
                   onChange={(e) => setBlogTitle(e.target.value)}
                 />
               </div>
@@ -273,6 +278,7 @@ console.log(catagory);
                   onChange={(e) => setCatagory_id(e.target.value)}
                   className="form-control form-select"
                   id="subTitle"
+                  required
                   aria-label="form-select-lg example"
                 >
                   <option selected disabled>
@@ -290,6 +296,7 @@ console.log(catagory);
                   className="form-control"
                   id="blogsSDesc"
                   rows="5"
+                  required
                   onChange={(e) => setBlogsShortDesc(e.target.value)}
                 ></textarea>
               </div>
