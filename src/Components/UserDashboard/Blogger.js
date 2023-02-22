@@ -24,6 +24,8 @@ const Blogger = ({ isBlogger }) => {
   const [token] = useToken();
   const [user] = useUser();
   const { id } = user;
+
+  console.log(user)
   
 
   const[catagory,setCatagory]=useState([])

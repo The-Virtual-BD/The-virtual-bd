@@ -22,7 +22,7 @@ const UserDashboard = () => {
   const[loading,setLoading]=useState(false);
 
   //Blogger Auth
-  const [isBlogger, setIsBlogger] = useState(false);
+  const [isBlogger, setIsBlogger] = useState(true);
 
   //Get Token & User from Hooks
   const [token] = useToken();
