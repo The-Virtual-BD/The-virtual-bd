@@ -1,0 +1,16 @@
+.download{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.download-icon{
+    height: 30px;
+    width: 30px;
+    border-radius: 6px;
+    background-color: #0068A3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}

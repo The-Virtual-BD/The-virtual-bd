@@ -8,29 +8,56 @@ import CareerHero from '../Career/CareerHero/CareerHero';
 import Menu from '../Header/Menu';
 import TopHeader from '../TopHeader/TopHeader';
 import Table from '../UserDashboard/Table';
+import useToken from '../../hooks/useToken';
+import { baseUrl } from '../../hooks/url';
+import { saveAs } from "file-saver";
+import './Notice.css';
 
 const Notices = () => {
-    const [projects, setProjects] = useState([]);
-    // const newProject=projects.reverse();
+    const[token]=useToken();
+    const [notices, setNotices] = useState([]);
+    
 
-    useEffect(() => {
-        // const url = `${baseUrl}/api/user/subscriptions`;
-        fetch('/projects.json')
-            .then(res => res.json())
-            .then(data => setProjects(data))
-    }, []);
+     //Get Notices
+     useEffect(() => {
+        const perUrl=`${baseUrl}/api/admin/notices`;
+        fetch(perUrl,{
+          method:"GET",
+          headers: {
+              'content-type': 'application/json',
+              "Authorization": `Bearer ${token}`
+          }
+      })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data.data);
+            setNotices(data.data)
+          })
+      }, [token]);
 
-    const Notice_COLUMNS = () => {
+
+    //Download Documents
+    const downloadFile = (id) => {
+        const getDoc = notices.find(notice => notice.id === id);
+
+        fetch(`${getDoc.document}`)
+          .then((response) => response.blob())
+          .then((blob) => {
+            saveAs(blob, `${getDoc.title}.doc`);
+          });
+      };
+
+
+      const NOTICE_COLUMNS = () => {
         return [
             {
                 Header: "SL",
-                accessor: "_id",
+                accessor: "id",
                 sortType: 'basic',
-
             },
             {
                 Header: "Title",
-                accessor: "blogShortDesc",
+                accessor: "title",
                 sortType: 'basic',
 
             },
@@ -38,17 +65,13 @@ const Notices = () => {
                 Header: 'Action',
                 accessor: 'action',
                 Cell: ({ row }) => {
-                    const { _id } = row.original;
-                    return (<div className='d-flex justify-content-center align-items-center  gap-2 '>
-
-                        <button className='project-action-btn project-view-btn'>
-                            <div> <FiDownload className=' ' /></div>
-                        </button>
+                    const { id } = row.original;
+                    return (<div className='download'><button className='download-icon' onClick={() => downloadFile(id)}>
+                        <FiDownload className=' ' />
+                    </button>
                     </div>);
                 },
             },
-
-
         ];
     };
 
@@ -60,8 +83,8 @@ const Notices = () => {
             <Menu />
             <CareerHero>Notice</CareerHero>
             <Container>
-                {projects.length && (
-                    <Table columns={Notice_COLUMNS()} data={projects} headline={" "} />
+                {notices.length && (
+                    <Table columns={NOTICE_COLUMNS()} data={notices} headline={" "} />
                 )}
             </Container>
         </>
