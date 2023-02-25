@@ -96,7 +96,7 @@ function Login() {
                       <div className="form_submit">
                         <button type="submit">LOGIN</button>
                       </div>
-                      <p className="text-danger fs-1">{failedMsg}</p>
+                      <p className="text-danger fs-6">{failedMsg}</p>
 
                     </form>
 

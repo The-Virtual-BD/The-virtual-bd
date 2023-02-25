@@ -10,6 +10,7 @@ import { baseUrl } from '../../hooks/url';
 import useUser from '../../hooks/useUser';
 import useToken from '../../hooks/useToken';
 import Loading from '../../hooks/Loading';
+import { saveAs } from "file-saver";
 
 const Projects = ({loading,setLoading}) => {
     const [projects, setProjects] = useState([]);
@@ -84,7 +85,7 @@ const Projects = ({loading,setLoading}) => {
                 sortType: 'basic',
 
             },
-            {
+            /* {
                 Header: 'Status',
                 accessor: 'status',
                 Cell: ({ row }) => {
@@ -96,7 +97,7 @@ const Projects = ({loading,setLoading}) => {
 
                     </div>);
                 },
-            },
+            }, */
             {
                 Header: "Action",
                 accessor: "action",
@@ -164,7 +165,19 @@ const ProductDetails = ({ getId,token }) => {
             })
     }, [getId]);
 
-    // console.log(project)
+     //Download Documents
+     const downloadFile = () => {
+        // const getDoc = notices.find(notice => notice.id === id);
+
+        fetch(`${baseUrl}/${project?.documents}`)
+       
+          .then((response) => response.blob())
+          .then((blob) => {
+            saveAs(blob, `${project?.title}.doc`);
+          });
+      };
+
+    console.log(project)
 
 /* 
     if(loading){
@@ -190,16 +203,15 @@ const ProductDetails = ({ getId,token }) => {
                             <p><span className='fw-bold'>Starting Date: </span>{project?.starting_date}</p>
                             <p><span className='fw-bold'>Ending Date:</span> {project?.ending_date}</p>
 
-                            <p><span className='fw-bold'> Status:</span>
-                            {project?.status==="1"?<span className='text-warning ms-1'>Pendding</span>
-                           :project?.status==="2"?<span className='text-success ms-1'>Running</span>
-                           :project?.status==="3"?<span className='text-danger ms-1'>Cancel</span>:""}
-                             </p>
+                            <p><span className='fw-bold me-2'> Status:</span>
+                           <span>{project?.progress}</span></p>
+
+                             
 
                             <p><span className='fw-bold'> Budget:</span> {project?.value}</p>
                             <p><span className='fw-bold'> Paid:</span> {project?.value_paid}</p>
 
-                            <p><span className='fw-bold'> Due:</span> {project?.value_payable}</p>
+                            {/* <p><span className='fw-bold'> Due:</span> {project?.value_payable}</p> */}
 
                             <div className='text-start my-2'>
                                 <p className='fw-bold' >Short Description:</p>
@@ -211,7 +223,7 @@ const ProductDetails = ({ getId,token }) => {
 
                             </div>
 
-                            {/* <p><span className='fw-bold'>Documents:</span> <a className='text-blue cursor-pointer' href={`${project?.documents}`} target="_blank" rel="noopener noreferrer">{project?.documents}</a> </p> */}
+                            <p><span className='fw-bold'>Documents:</span> <p className='file-downloda-btn'  onClick={downloadFile}>{`${baseUrl}/${project?.documents}`}</p> </p>
 
 
                         </div>
@@ -220,7 +232,7 @@ const ProductDetails = ({ getId,token }) => {
 
 
                     <Col md={5} sm={12} >
-                        <img src={project?.blogImg} alt="" srcset="" style={{ width: "100%" }} />
+                        <img src={`${baseUrl}/${project?.cover}`} alt="" srcset="" style={{ width: "100%" }} />
                     </Col>
                 </Row>
             </div>

@@ -192,6 +192,11 @@ select.form-control{
 
 }
 
+.file-downloda-btn{
+    color: #3498db;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width:465px) {
     .project-search-container {
