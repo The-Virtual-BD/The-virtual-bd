@@ -7,7 +7,7 @@ function ContuctBtn() {
     <>
       <div className="golobal_button">
         <div className="global_started_btn">
-          <Link to="/services">Get Started</Link>
+          <Link to="/user-dashboard">Get Started</Link>
         </div>
         <div className="global_contuct_btn">
           <Link to="/contact">Contact Us</Link>

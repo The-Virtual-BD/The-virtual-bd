@@ -20,7 +20,7 @@ function GlobalBuisness() {
             <Col md={4} className="global_btn_gap">
               <div className="golobal_button">
                 <div className="global_buis_btn">
-                  <Link to="/services">Get Started</Link>
+                  <Link to="/user-dashboard">Get Started</Link>
                 </div>
                 
                 <div className="global_contuct_btn">

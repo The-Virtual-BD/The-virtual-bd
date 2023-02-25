@@ -56,11 +56,11 @@ const UserDashboard = () => {
 
           <div>
             <TabList className="text-start bg-white pb-2">
-              <Tab>My Profile</Tab>
-              <Tab>Settings</Tab>
               <Tab>Subscription</Tab>
               <Tab>Projects</Tab>
               <Tab>{isBlogger ? "Blog" : "Blogger"}  </Tab>
+              <Tab>My Profile</Tab>
+              <Tab>Settings</Tab>
 
 
             </TabList>
@@ -69,17 +69,28 @@ const UserDashboard = () => {
 
 
           <div className="tabPanel_gap mb-5 mt-5">
+           
+
+            <TabPanel>
+              <Subscription loading={loading} setLoading={setLoading} />
+            </TabPanel>
+
+            <TabPanel>
+              <Projects loading={loading} setLoading={setLoading} />
+            </TabPanel>
+
+            <TabPanel>
+              <Blogger isBlogger={isBlogger} />
+            </TabPanel>
+
             <TabPanel>
               <Row >
                 <Col lg={7} sm={12} >
                   <div className="bg-white p-sm-5 p-3 rounded  mb-3">
                     <h3 className='fw-bold user-dashboard-font mb-3'>About Me</h3>
-
                     {
                       bio ? <p>{bio}</p> : <p>Please Write Your Bio....</p>
                     }
-
-
                   </div>
 
                 </Col>
@@ -111,18 +122,6 @@ const UserDashboard = () => {
 
             <TabPanel>
               <Settings user={user} setUser={setUser} />
-            </TabPanel>
-
-            <TabPanel>
-              <Subscription loading={loading} setLoading={setLoading} />
-            </TabPanel>
-
-            <TabPanel>
-              <Projects loading={loading} setLoading={setLoading} />
-            </TabPanel>
-
-            <TabPanel>
-              <Blogger isBlogger={isBlogger} />
             </TabPanel>
 
           </div>

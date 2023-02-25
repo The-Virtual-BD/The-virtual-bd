@@ -55,7 +55,7 @@ function Resources() {
                 </p>
               </div>
               <div className="know_more">
-                <Link to="/">Know More</Link>
+                <Link to="/aboutus">Know More</Link>
               </div>
             </Col>
             <Col md={6} sm={12}>

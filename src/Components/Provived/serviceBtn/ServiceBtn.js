@@ -7,7 +7,7 @@ function ServiceBtn() {
     <>
       <div className="service_button">
         <div className="service_started_btn">
-          <Link to="/services">Get Started</Link>
+          <Link to="/user-dashboard">Get Started</Link>
         </div>
         <div className="service_contuct_btn">
           <Link to="/contact">Contact Us</Link>
