@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,22 +14,28 @@ const SingleBlogPage = () => {
     const { id } = useParams();
     const [blogs] = useBlogs();
     const navigate = useNavigate();
+    const[subscribe_email,setSubscribe_email]=useState('')
+
+    //Slide to Top
+     useEffect(()=>{
+        window.scrollTo(0,0)
+      },[]);
 
     const singleBlog = blogs?.find(blogD => blogD._id === +id);
-
-
-
     const featureBlogs = blogs.filter(fetureBlog => fetureBlog.blogCatagory.toLowerCase() === singleBlog?.blogCatagory.toLowerCase());
 
+    //Navigate to Single Blog Page
     const handleSingleBlogs = (id) => {
         navigate(`/blog/${id}`)
     };
 
-    useEffect(()=>{
-        window.scrollTo(0,0)
-      },[]);
+   // Handle Subscribe Us Form
+    const handleSubscribeForm=e=>{
+        e.preventDefault();
+        const email={subscribe_email};
+        console.log(email)
+    };
 
-    // console.log(typeof (id), singleBlog)
     return (
         <>
             <TopHeader />
@@ -97,9 +103,10 @@ const SingleBlogPage = () => {
                                             inbox.</p>
 
                                         <div >
-                                            <form className='d-flex flex-column justify-content-center align-items-center blog-newslatter-input'>
-                                                <input type="email" name="" id="" placeholder='Your email address' />
-                                                <button type='submit' className='subscribe-submit-btn'>Subscribe</button>
+                                            <form className='d-flex flex-column justify-content-center align-items-center blog-newslatter-input' onSubmit={handleSubscribeForm}>
+                                                <input type="email" name="" id="" placeholder='Your email address' onChange={e=>setSubscribe_email(e.target.value)} required/>
+
+                                                <button type='submit' className='subscribe-submit-btn'>Subscribe</button> 
                                             </form>
                                         </div>
                                     </div>
@@ -155,4 +162,4 @@ const BlogCommentBox = () => {
 
         </div>
     )
-}
+};

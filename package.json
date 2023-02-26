@@ -37,6 +37,7 @@
     "react-tabs": "^5.1.0",
     "react-toastify": "^9.1.1",
     "react-visibility-sensor": "^5.1.1",
+    "react-whatsapp-chat-widget": "^1.1.6",
     "swiper": "^8.2.4",
     "web-vitals": "^2.1.4"
   },

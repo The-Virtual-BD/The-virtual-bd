@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../Images/logo 2.png";
@@ -9,6 +9,14 @@ import "./Footer.css";
 import FootetBottom from "./FootetBottom";
 
 function Footer() {
+  const[subscribe_email,setSubscribe_email]=useState('')
+
+   // Handle Subscribe Us Form
+   const handleSubscribeForm=e=>{
+    e.preventDefault();
+    const email={subscribe_email};
+    console.log(email)
+};
   return (
     <>
       <footer className="footer_area">
@@ -74,12 +82,14 @@ function Footer() {
               </Col>
               <Col md={3}>
                 <div className="subsCribe">
-                  <form action="">
+
+                  <form onSubmit={handleSubscribeForm}>
                     <div className="email_form">
-                      <input type="email" placeholder="Enter Your email" />
+                      <input type="email" placeholder="Enter Your email" onChange={e=>setSubscribe_email(e.target.value)} required />
                     </div>
-                    <button>Subscribe</button>
+                    <button type="submit">Subscribe</button>
                   </form>
+
                   <p>
                     Be the first to find out about exclusive deals, the latest
                     Updates, and top trends.

@@ -9,6 +9,7 @@ import useToken from '../../hooks/useToken';
 import useUser from '../../hooks/useUser';
 import BlogCard from './BlogCard';
 import './UserDashboard.css';
+import DatePicker from "react-datepicker";
 
 const Subscription = ({loading,setLoading}) => {
     const [token] = useToken();
@@ -118,11 +119,20 @@ const Subscription = ({loading,setLoading}) => {
 
                         <div className="col-12 mb-3">
                             <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
-                            <input
+                            {/* <input
                                 type="datetime-local"
                                 className="form-control"
                                 id="schedule"
-                                onChange={(e) => setSchedule(e.target.value)} required />
+                                onChange={(e) => setSchedule(e.target.value)} required /> */}
+
+                            <DatePicker
+                                selected={schedule}
+                                onChange={(date) => setSchedule(date)}
+                                className="form-control"
+                                timeInputLabel="Time:"
+                                dateFormat="dd/MM/yyyy h:mm aa"
+                                showTimeInput
+                                />
                         </div>
 
 

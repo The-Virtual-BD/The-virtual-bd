@@ -22,19 +22,23 @@ import TeamInfo from "./Pages/TeamInfo";
 import UserProfile from "./Pages/UserProfile";
 import SingleBlogPage from "./Components/BlogPage/SingleBlogPage";
 import RequireAuth from "./Components/Auth/RequireAuth";
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { AppContext } from "./context";
 import { useState } from "react";
 import Notices from "./Components/NoticePage/Notices";
 import useToken from "./hooks/useToken";
 import useUser from "./hooks/useUser";
+import "react-whatsapp-chat-widget/index.css";
+import "react-datepicker/dist/react-datepicker.css";
+import WhatsApp from "./utilities/WhatsApp";
+
 
 
 
 
 function App() {
   // const[user,setUser]=useState([]);
-
+  
   const [token] = useToken();
   const [user] = useUser();
 
@@ -78,6 +82,8 @@ function App() {
         />
       </Routes>
       <ToastContainer />
+      <WhatsApp />
+      
     </div>
     </AppContext.Provider>
   );

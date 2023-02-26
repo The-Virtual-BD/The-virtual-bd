@@ -12,15 +12,18 @@ import useToken from '../../hooks/useToken';
 import { baseUrl } from '../../hooks/url';
 import { saveAs } from "file-saver";
 import './Notice.css';
+import Loading from '../../hooks/Loading';
 
 const Notices = () => {
     const[token]=useToken();
     const [notices, setNotices] = useState([]);
+    const[loading,setLoading]=useState(false);
     
 
      //Get Notices
      useEffect(() => {
         const perUrl=`${baseUrl}/api/admin/notices`;
+        setLoading(true);
         fetch(perUrl,{
           method:"GET",
           headers: {
@@ -31,7 +34,8 @@ const Notices = () => {
           .then(res => res.json())
           .then(data => {
             console.log(data.data);
-            setNotices(data.data)
+            setNotices(data.data);
+            setLoading(false);
           })
       }, [token]);
 
@@ -75,6 +79,10 @@ const Notices = () => {
         ];
     };
 
+  /*   if(loading){
+        return(<Loading loading={loading} />)
+    }; */
+
 
 
     return (
@@ -83,9 +91,14 @@ const Notices = () => {
             <Menu />
             <CareerHero>Notice</CareerHero>
             <Container>
-                {notices.length && (
+                {
+                    loading? <Loading loading={loading} /> : <Table columns={NOTICE_COLUMNS()} data={notices} headline={" "} />
+                }
+
+
+              {/*   {notices.length && (
                     <Table columns={NOTICE_COLUMNS()} data={notices} headline={" "} />
-                )}
+                )} */}
             </Container>
         </>
     );
