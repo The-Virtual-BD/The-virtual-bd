@@ -135,7 +135,7 @@ function Faq() {
             <Tab eventKey="android " title="Android Application Development">
               <div className="provide_content">
                 <Row>
-                  <Col md={6}>
+                  <Col md={12}>
                     <Accordion>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>
@@ -178,20 +178,6 @@ function Faq() {
                         </Accordion.Body>
                       </Accordion.Item>
                     </Accordion>
-                  </Col>
-
-                  <Col md={6}>
-                    <div className="faq_content">
-                      <p>
-                        Bringing your ideas to live, website designs is our
-                        forte. We carve perfect designs to build creative
-                        websites that engage users on both desktop & mobile
-                        devices with its ultra modern responsive UI.
-                      </p>
-                      <div className="faq_button">
-                        <Link to="/">Get Started</Link>
-                      </div>
-                    </div>
                   </Col>
                 </Row>
               </div>

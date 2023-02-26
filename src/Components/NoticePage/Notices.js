@@ -34,8 +34,9 @@ const Notices = () => {
           .then(res => res.json())
           .then(data => {
             console.log(data.data);
-            setNotices(data.data);
             setLoading(false);
+            setNotices(data.data);
+            
           })
       }, [token]);
 
@@ -66,7 +67,7 @@ const Notices = () => {
 
             },
             {
-                Header: 'Action',
+                Header: 'Download',
                 accessor: 'action',
                 Cell: ({ row }) => {
                     const { id } = row.original;
@@ -79,11 +80,7 @@ const Notices = () => {
         ];
     };
 
-  /*   if(loading){
-        return(<Loading loading={loading} />)
-    }; */
-
-
+  
 
     return (
         <>

@@ -88,18 +88,19 @@ function Menu() {
               </NavDropdown>
 
               <Nav.Link>
-                <Link to="/contact">Contact</Link>
-              </Nav.Link>
-
-              <Nav.Link>
                 <Link to="/blog">Blogs</Link>
               </Nav.Link>
 
               <Nav.Link>
                 <Link to="/career">Career</Link>
               </Nav.Link>
+
               <Nav.Link>
                 <Link to="/notices">Notices</Link>
+              </Nav.Link>
+
+              <Nav.Link>
+                <Link to="/contact">Contact</Link>
               </Nav.Link>
 
             </Nav>

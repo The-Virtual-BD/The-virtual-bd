@@ -79,9 +79,12 @@ function Login() {
                         
                       </div>
 
-                      <div className="pass">
-                        <input type="password" placeholder="Password" {...register("password")}/>
-                      </div>
+                     <div>
+                        <div className="pass">
+                            <input type="password" placeholder="Password" {...register("password")}/>
+                        </div>
+                        <p className="text-danger fs-6 mt-0"><small>{failedMsg}</small></p>
+                     </div>
 
                       <div className="control_area">
                         <div className="remember">
@@ -96,7 +99,7 @@ function Login() {
                       <div className="form_submit">
                         <button type="submit">LOGIN</button>
                       </div>
-                      <p className="text-danger fs-6">{failedMsg}</p>
+                      
 
                     </form>
 

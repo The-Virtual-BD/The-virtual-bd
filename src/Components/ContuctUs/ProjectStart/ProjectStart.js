@@ -13,7 +13,7 @@ function ProjectStart() {
         <Container>
           <div className="lets_started">
             <Row>
-              <Col md={6}>
+              <Col md={12}>
                 <div className="lests_start_text">
                   <h2>Let’s Start a Project together.</h2>
                   <p>
@@ -23,11 +23,7 @@ function ProjectStart() {
                   </p>
                 </div>
               </Col>
-              <Col md={6}>
-                <div className="contuct_now_btn">
-                  <ContuctBtn />
-                </div>
-              </Col>
+              
             </Row>
           </div>
           <div className="quality_assurence">

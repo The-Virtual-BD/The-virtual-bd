@@ -45,7 +45,7 @@ function AuthorSlider() {
                     <img src={data.pic} alt="" />
                   </div>
                 </Col>
-                <Col md={8}>
+                <Col md={7}>
                   <div className="author_text">
                     <p>{data.intro_text}</p>
                     <p>{data.intro_person}</p>

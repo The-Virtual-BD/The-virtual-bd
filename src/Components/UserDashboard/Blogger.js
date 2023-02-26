@@ -4,21 +4,12 @@ import { Col, Row } from "react-bootstrap";
 import BlogCard from "./BlogCard";
 import { CKEditor } from "ckeditor4-react";
 import "./UserDashboard.css";
-
-// Import React FilePond
-import { FilePond, registerPlugin } from "react-filepond";
-// Import FilePond styles
-import "filepond/dist/filepond.min.css";
-import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../hooks/url";
 import useToken from "../../hooks/useToken";
 import useUser from "../../hooks/useUser";
 
-// Register the plugins
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+
 
 const Blogger = ({ isBlogger }) => {
   const [token] = useToken();
@@ -47,6 +38,8 @@ const Blogger = ({ isBlogger }) => {
   const [short_description, setBlogsShortDesc] = useState("");
   const [cover, setCover] = useState(null);
   const [category_id ,setCatagory_id] = useState("");
+
+  
 
 
   //Get Catagory
