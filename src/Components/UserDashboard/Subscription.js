@@ -10,6 +10,7 @@ import useUser from '../../hooks/useUser';
 import BlogCard from './BlogCard';
 import './UserDashboard.css';
 import DatePicker from "react-datepicker";
+import moment from 'moment';
 
 const Subscription = ({loading,setLoading}) => {
     const [token] = useToken();
@@ -22,11 +23,14 @@ const Subscription = ({loading,setLoading}) => {
     const [service_id, setService_id] = useState('');
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
-
-    const [schedule, setSchedule] = useState(new Date());
     const [attachment, setAttachment] = useState(null);
 
-    // console.log(attachment);
+    const [schedule, setSchedule] = useState(new Date());
+    /* let parsedDate = moment(time, 'DD.MM.YYYY H:mm:ss');
+    const schedule=parsedDate.toISOString(); */
+    console.log(schedule);
+
+  
 
     //Get Services
     useEffect(() => {
@@ -52,7 +56,8 @@ const Subscription = ({loading,setLoading}) => {
     //Handle Subscription Form
     const handleSubscription = async (e) => {
         e.preventDefault();
-    
+
+      
         const formData = new FormData();
         formData.append('service_id', service_id);
         formData.append('subject', subject);
@@ -62,7 +67,7 @@ const Subscription = ({loading,setLoading}) => {
 
         // console.log(formData)
     
-        const url = `${baseUrl}/api/subscriptions/store/${id}`;
+        const url = `${baseUrl}/api/subscriptions/store`;
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -84,15 +89,11 @@ const Subscription = ({loading,setLoading}) => {
     };
     
 
-/* if(loading){
-    return(<p>Loading......</p>)
-}; */
-
     return (
         <Row>
             <Col md={9} sm={12}>
                 <div className="bg-white  p-sm-4 p-2 mb-sm-3 mb-5  rounded ">
-                <h4 className='px-3'>Sent us your query !</h4>
+                <h4 className=' px-3 fw-bold'>Sent us your query !</h4>
 
                     <form className='row form-container p-3 mb-3' onSubmit={handleSubscription} >
 
@@ -119,22 +120,16 @@ const Subscription = ({loading,setLoading}) => {
 
                         <div className="col-12 mb-3">
                             <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
-                            {/* <input
-                                type="datetime-local"
-                                className="form-control"
-                                id="schedule"
-                                onChange={(e) => setSchedule(e.target.value)} required /> */}
 
                             <DatePicker
                                 selected={schedule}
                                 onChange={(date) => setSchedule(date)}
                                 className="form-control"
                                 timeInputLabel="Time:"
-                                dateFormat="dd/MM/yyyy h:mm aa"
+                                dateFormat="yyyy/MM/dd h:mm"
                                 showTimeInput
                                 />
                         </div>
-
 
                         <div className="col-12 mb-3 ">
                             <label for="doc" className="form-label fw-bold">Documents</label>

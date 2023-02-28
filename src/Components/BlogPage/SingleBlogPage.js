@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import useBlogs from '../../hooks/useBlogs';
+import useToken from '../../hooks/useToken';
+import useUser from '../../hooks/useUser';
 import Footer from '../Footer/Footer';
 import Menu from '../Header/Menu';
 import Socialmedia from '../Socialmedia/Socialmedia';
 import TopHeader from '../TopHeader/TopHeader';
 import './BlogPage.css';
 import BlogSocialmedia from './BlogSocialMedia';
+import './BlogPage';
+import image1 from '../../Images/blank_user.png';
 
 const SingleBlogPage = () => {
     const { id } = useParams();
@@ -76,7 +80,7 @@ const SingleBlogPage = () => {
 
                             <Col sm={12} md={3}>
                                 <div>
-                                    <h6 className='fw-bold blog-section-title mt-4'>EDITORS CHOICE</h6>
+                                    <h6 className='fw-bold blog-section-title mt-4'>Related Articles</h6>
                                     <div className='d-flex flex-column gap-1'>
                                         {
                                             featureBlogs.map(fBlog => <div onClick={() => handleSingleBlogs(fBlog._id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
@@ -131,32 +135,74 @@ export default SingleBlogPage;
 
 
 const BlogCommentBox = () => {
+    const [token]= useToken();
+    const[user]=useUser();
+
+    const[comment,setComment]=useState('');
+    console.log(user)
+
+
+    //Handle Comment
+    const handleCommentForm=e=>{
+        e.preventDefault();
+        console.log(comment);
+        e.target.reset();
+    };
+
+
     return (
         <div className='blog-comment-box-container'>
             <h3 className='fw-bold '>Leave a Comment</h3>
-            <p>Your email address will not be published. Required fields are marked *</p>
-            <div className=''>
-                <Form>
-                    <Form.Group className="mb-3" >
-                        <Form.Control type="text" placeholder="*Name" />
-                    </Form.Group>
+            {/* <p>Your email address will not be published. Required fields are marked *</p> */}
 
-                    <Form.Group className="mb-3" >
-                        <Form.Control type="email" placeholder="*Email" />
-                    </Form.Group>
-
+            {
+                (token && user)? 
+                <div>
+                <Form onSubmit={handleCommentForm}>
                     <Form.Group >
-                        <Form.Control as="textarea" rows={4} placeholder="*Comment" />
+                        <Form.Control as="textarea" rows={4} placeholder="Write a Comment *" onChange={e=>setComment(e.target.value )}/>
                     </Form.Group>
-
-                    <button className='main-btn mb-3'>REGISTER NOW</button>
-                    <p>Become a member of The Virtual BD to start commenting.</p>
+                    <button type='submit' className='blog-btn mb-3'>Comment</button>
                 </Form>
+            </div>:
+            <div>
+                <p>Become a member of The Virtual BD to start commenting.  
+                    <Link to={"/sign-in"} className="comment-login"> SignIn</Link> /
+                    <Link to={"/register"} className="comment-login"> Register</Link>
+                </p>
             </div>
+            }
+           
             <div>
                 <div className='d-flex text-dark  justify-content-between align-items-center my-4'>
                     <h3 className='fw-bold '>Comments</h3>
                     <h4>3 Comments</h4>
+                </div>
+
+                <div>
+
+                    <div className='d-flex align-items-start justify-content-start gap-2'>
+                            <img src={image1} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                           <div>
+                                <p className='my-0'> <span className='fw-bolder'>Md. Akbor</span></p>
+                                <p className='mt-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non alias, saepe esse molestiae odio consequuntur.</p>
+                           </div>
+                    </div>
+                    <div className='d-flex align-items-start justify-content-start gap-2'>
+                            <img src={image1} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                           <div>
+                                <p className='my-0'> <span className='fw-bolder'>Sorif Ahmed</span></p>
+                                <p className='mt-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non alias, saepe esse molestiae odio consequuntur.</p>
+                           </div>
+                    </div>
+                    <div className='d-flex align-items-start justify-content-start gap-2'>
+                            <img src={image1} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                           <div>
+                                <p className='my-0'> <span className='fw-bolder'>John Cina</span></p>
+                                <p className='mt-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non alias, saepe esse molestiae odio consequuntur.</p>
+                           </div>
+                    </div>
+
                 </div>
             </div>
 

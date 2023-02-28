@@ -126,7 +126,7 @@ const Projects = ({loading,setLoading}) => {
            {!getId &&
                 <div >
                     {projects?.length ===0 ? (
-                         <p className='p-3 bg-white rounded'>You Don't Have any project</p>
+                         <p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
                     ):
                     <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
                     }
@@ -173,7 +173,7 @@ const ProductDetails = ({ getId,token }) => {
        
           .then((response) => response.blob())
           .then((blob) => {
-            saveAs(blob, `${project?.title}.doc`);
+            saveAs(blob, `${project?.name}.doc`);
           });
       };
 
@@ -223,7 +223,7 @@ const ProductDetails = ({ getId,token }) => {
 
                             </div>
 
-                            <p><span className='fw-bold'>Documents:</span> <p className='file-downloda-btn'  onClick={downloadFile}>{`${baseUrl}/${project?.documents}`}</p> </p>
+                            <p><span className='fw-bold'>Documents:</span> <p className='file-downloda-btn'  onClick={downloadFile}>{`${project?.name}`}</p> </p>
 
 
                         </div>

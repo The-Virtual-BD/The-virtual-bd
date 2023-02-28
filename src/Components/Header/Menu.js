@@ -17,6 +17,7 @@ function Menu() {
 
   // console.log(user);
 
+  //HANDLE LOGOUT
   const handleLogout=()=>{
 
     const url = `${baseUrl}/api/logout`;
@@ -48,6 +49,7 @@ function Menu() {
               <img src={logo} alt="logo" />
             </Link>
           </Navbar.Brand>
+
           <Navbar.Collapse id="responsive-navbar-nav nav_background">
             <Nav className="me-auto my-2 my-lg-0" navbarScroll>
               <Nav.Link>
@@ -131,8 +133,9 @@ function Menu() {
                   </span>
               </Link>
              </Nav.Link>
-
             }
+
+
           </Navbar.Collapse>
 
 

@@ -5,6 +5,7 @@ import DigitalAgency from "../Components/AboutUs/DigitalAgency/DigitalAgency";
 import HireUs from "../Components/AboutUs/HireUs/HireUs";
 import IntroSlider from "../Components/AboutUs/Introduction/IntroSlider";
 import Menu from "../Components/Header/Menu";
+import TeamMember from "../Components/TeamMember/TeamMember";
 import TopHeader from "../Components/TopHeader/TopHeader";
 import Footer from "./../Components/Footer/Footer";
 
@@ -20,6 +21,7 @@ function AboutUs() {
       <AboutHero />
       <DigitalAgency />
       <IntroSlider />
+      {/* <TeamMember /> */}
       <HireUs />
       <Footer />
     </>

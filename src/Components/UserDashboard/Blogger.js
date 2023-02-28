@@ -38,7 +38,11 @@ const Blogger = ({ isBlogger }) => {
   const [short_description, setBlogsShortDesc] = useState("");
   const [cover, setCover] = useState(null);
   const [category_id ,setCatagory_id] = useState("");
+  const [charCount,setCharCount]=useState(0);
 
+  // console.log(charCount);
+
+  const extraChar=(charCount - 200);
   
 
 
@@ -57,7 +61,7 @@ const Blogger = ({ isBlogger }) => {
 }, [token]);
 
 
-console.log(catagory);
+// console.log(catagory);
 
   //Handle Blogger Form
   const handleBloggerForm = (e) => {
@@ -96,41 +100,43 @@ console.log(catagory);
   //Handle create blog Form
   const handleCreateBlogForm = async(e) => {
     e.preventDefault();
+    if(charCount <= 200){
+      const newPostData = new FormData();
+      newPostData.append('title', title);
+      newPostData.append('short_description', short_description);
+      newPostData.append('descriptions', descriptions);
+      newPostData.append('category_id', category_id );
+      newPostData.append('cover', cover, cover.name);
 
-    const addNewBlog = { title,short_description, descriptions, cover,category_id };
-    console.log(addNewBlog);
-
-
-
-        const newPostData = new FormData();
-        newPostData.append('title', title);
-        newPostData.append('short_description', short_description);
-        newPostData.append('descriptions', descriptions);
-        newPostData.append('category_id', category_id );
-        newPostData.append('cover', cover, cover.name);
-
-        console.log(newPostData);
-    
-        const url = `${baseUrl}/api/posts/store`;
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            body: newPostData
-        });
-    
-        const result = await response.json();
-        console.log(result);
-    
-        if (result.error) {
-            console.log(result.error);
-            toast.error("Subscriptions Add Failed");
-        } else {
-            console.log(result);
-            e.target.reset();
-            toast.success(result.message);
-        }
+  
+      const url = `${baseUrl}/api/posts/store`;
+      const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+              "Authorization": `Bearer ${token}`
+          },
+          body: newPostData
+      });
+  
+      const result = await response.json();
+      // console.log(result);
+  
+      if (result.error) {
+          console.log(result.error);
+          toast.error("Subscriptions Add Failed");
+      } else {
+          // console.log(result);
+          e.target.reset();
+          setDescriptions('');
+          setCharCount(0)
+          toast.success(result.message);
+      }
+  }
+    else{
+      console.log("LIMIT CROOSED");
+      toast.error("You Have Crossed Charecters Limits");
+      return
+    }
 
   };
 
@@ -267,7 +273,7 @@ console.log(catagory);
 
               <div className="col-12 mb-3">
                 <label for="subTitle" className="form-label fw-bold">
-                  Subject
+                  Category
                 </label>
                 <select
                   onChange={(e) => setCatagory_id(e.target.value)}
@@ -277,7 +283,7 @@ console.log(catagory);
                   aria-label="form-select-lg example"
                 >
                   <option selected disabled>
-                    Select Subject{" "}
+                    Select Category{" "}
                   </option>
                   { catagory?.map(service => <option value={service.id}>{service.name}</option>) }
                 </select>
@@ -285,15 +291,26 @@ console.log(catagory);
 
               <div className="col-12 mb-3">
                 <label for="blogsSDesc" className="form-label fw-bold">
-                  Short Description
+                Title Description
                 </label>
                 <textarea
+                //  maxLength={200}
                   className="form-control"
                   id="blogsSDesc"
                   rows="5"
                   required
-                  onChange={(e) => setBlogsShortDesc(e.target.value)}
+                  
+                  onChange={(e) =>{
+                    setBlogsShortDesc(e.target.value) 
+                    setCharCount(e.target.value.length)
+                  }}
                 ></textarea>
+                {
+                  charCount <= 200?
+                  <p>Maximum 200 Characters & You Have Used {charCount}</p>:
+                  <p className="text-danger">You Have Crossed limit of  {extraChar}</p>
+                }
+                
               </div>
 
               <div className="col-12 mb-3">
@@ -307,35 +324,20 @@ console.log(catagory);
                   config={{ toolbar: editorToolbar }}
                   className="form-control"
                 /*  config={{
-                                          height: '200px',
-                                          toolbar: [
-                                              'bold',
-                                              'italic',
-                                              'bulletedList',
-                                              'numberedList',
-                                              'link',
-                                              'CodeSnippet'
+                               height: '200px',
+                                 toolbar: [
+                                      'bold',
+                                       'italic',
+                                       'bulletedList',
+                                       'numberedList',
+                                       'link',
+                                        'CodeSnippet'
                                           ],
                                       }} */
                 />
               </div>
 
-             {/*  <div className="col-12 mb-3 ">
-                <label for="blogDesc" className="form-label fw-bold">
-                  Image
-                </label>
-                <FilePond
-                  allowMultiple={true}
-                  files={cover}
-                  onupdatefiles={setCover}
-                  maxFiles={3}
-                  allowReorder={true}
-                  // server=""
-                  name="imgs"
-                  labelIdle='Drag & Drop your Images or <span className="filepond--label-action">Browse</span>'
-                  className={"img-input-field"}
-                />
-              </div> */}
+           
 
                         <div className="col-12 mb-3 ">
                             <label for="doc" className="form-label fw-bold">Image</label>

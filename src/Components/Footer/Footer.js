@@ -65,7 +65,7 @@ function Footer() {
                     </li>
 
                     <li>
-                      <Link to="/career">Carreer</Link>
+                      <Link to="/career">Career</Link>
                     </li>
 
                     <li>

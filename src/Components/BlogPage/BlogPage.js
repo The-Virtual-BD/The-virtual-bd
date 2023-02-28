@@ -103,7 +103,7 @@ const BlogPage = () => {
                         </Row>
                     </div>
 
-                    <div className='text-center'>
+                    <div className='text-center mt-3'>
                         <button className='blog-btn' onClick={handleShowMoreBlogs}>Load More</button>
                     </div>
                 </div>

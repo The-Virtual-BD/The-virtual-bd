@@ -105,7 +105,7 @@
     color: #fff;
     padding: 10px 35px;
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-right: 10px;
     transition: 0.5s all ease;
     -webkit-transition: 0.5s all ease;
@@ -234,7 +234,16 @@
   .social_link {
     margin-left: 10px;
   }
-
+.comment-login{
+    text-decoration: none;
+    color: #3498DB;
+    font-weight: 600;
+}
+.comment-login:hover{
+    text-decoration: none;
+    color: #e74c3c;
+    
+}
 
   
   

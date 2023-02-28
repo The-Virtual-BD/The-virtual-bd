@@ -5,7 +5,7 @@ import logo from '../Images/The-virtual-BD.png'
 const WhatsApp = () => {
     return (
         <WhatsAppWidget
-        phoneNo="8801985308586"
+        phoneNo="8801902624501"
         position="right"
         widgetWidth="300px"
         widgetWidthMobile="260px"

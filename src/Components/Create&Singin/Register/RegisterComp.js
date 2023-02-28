@@ -48,7 +48,8 @@ function RegisterComp() {
           if(result.error){
             console.log(result);
             setFailedMsg(result.error)
-            toast.error("Register Failed");
+            // toast.error("Register Failed");
+            toast.error(failedMsg);
           } else{
             console.log(result);
             const token=result.token;
@@ -127,6 +128,7 @@ function RegisterComp() {
                       <div className="user">
                         <input type="password" placeholder="Confirm Password " {...register("password_confirmation")} />
                       </div>
+                      {/* <p className="text-danger fs-6 mt-0">{failedMsg}</p> */}
 
                       <div className="control_area">
                         <div className="remember">
@@ -142,7 +144,7 @@ function RegisterComp() {
                       <div className="form_submit">
                         <button type="submit">REGISTER</button>
                       </div>
-                      <p>{failedMsg}</p>
+                     
                     </form>
 
 
