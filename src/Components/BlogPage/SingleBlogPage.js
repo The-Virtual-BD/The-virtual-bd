@@ -13,12 +13,14 @@ import './BlogPage.css';
 import BlogSocialmedia from './BlogSocialMedia';
 import './BlogPage';
 import image1 from '../../Images/blank_user.png';
+import { baseUrl } from '../../hooks/url';
+import { toast } from 'react-toastify';
 
 const SingleBlogPage = () => {
     const { id } = useParams();
     const [blogs] = useBlogs();
     const navigate = useNavigate();
-    const[subscribe_email,setSubscribe_email]=useState('')
+    const[email,setSubscribe_email]=useState('')
 
     //Slide to Top
      useEffect(()=>{
@@ -36,8 +38,24 @@ const SingleBlogPage = () => {
    // Handle Subscribe Us Form
     const handleSubscribeForm=e=>{
         e.preventDefault();
-        const email={subscribe_email};
-        console.log(email)
+        const emaiL={email};
+
+
+        //send to backend
+        const url=`${baseUrl}/api/newsSubscriber/store`;
+        fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(emaiL)
+        })
+        .then(res=>res.json())
+        .then(result=>{
+        console.log(result);
+        toast.success(result.message);
+        e.target.reset();
+        })
     };
 
     return (

@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { baseUrl } from "../../../hooks/url";
 import "./FormArea.css";
 
 function FormArea() {
@@ -7,8 +9,25 @@ function FormArea() {
 
   //handle ContactForm
   const onSubmit = data =>{
-    console.log(data);
-    reset();
+    // console.log(data);
+
+    //Send to Backend
+    const formUrl=`${baseUrl}/api/queries/store`;
+    fetch(formUrl,{
+      method:"POST",
+      headers:{
+        "content-type":"application/json"
+      },
+      body:JSON.stringify(data)
+    } )
+    .then(res=>res.json())
+    .then(result=>{
+      // console.log(result);
+      toast.success(result.message);
+      reset();
+    });
+
+   
   } ;
 
   
@@ -16,9 +35,10 @@ function FormArea() {
     <>
       <div className="form_area">
         <form  onSubmit={handleSubmit(onSubmit)}>
+
           <div className="visitor_info">
             <div className="namef">
-              <input required type="text" placeholder="Name *" {...register("name")} />
+              <input required type="text" placeholder="Name *" {...register("name")}  />
             </div>
 
             <div className="emailf">
@@ -26,9 +46,17 @@ function FormArea() {
             </div>
           </div>
 
-          <div className="subject">
-            <input type="text" placeholder="Subject *"  {...register("subject")} />
+          <div className="visitor_info">
+            <div className="subject me-3">
+              <input required type="tel" placeholder="Phone *"  {...register("phone")} />
+            </div>
+            
+            <div className="subject">
+              <input required type="text" placeholder="Subject *"  {...register("subject")} />
+            </div>
+
           </div>
+          
 
           <div className="meassage">
             <textarea

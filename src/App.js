@@ -32,13 +32,8 @@ import "react-whatsapp-chat-widget/index.css";
 import "react-datepicker/dist/react-datepicker.css";
 import WhatsApp from "./utilities/WhatsApp";
 
-
-
-
-
 function App() {
   // const[user,setUser]=useState([]);
-  
   const [token] = useToken();
   const [user] = useUser();
 

@@ -13,6 +13,7 @@ import { baseUrl } from '../../hooks/url';
 import { saveAs } from "file-saver";
 import './Notice.css';
 import Loading from '../../hooks/Loading';
+import Footer from '../Footer/Footer';
 
 const Notices = () => {
     const[token]=useToken();
@@ -22,23 +23,17 @@ const Notices = () => {
 
      //Get Notices
      useEffect(() => {
-        const perUrl=`${baseUrl}/api/admin/notices`;
-        setLoading(true);
-        fetch(perUrl,{
-          method:"GET",
-          headers: {
-              'content-type': 'application/json',
-              "Authorization": `Bearer ${token}`
-          }
-      })
+        const perUrl=`https://www.admin.thevirtualbd.com/api/notices/allnotice`;
+        // setLoading(true);
+        fetch(perUrl)
           .then(res => res.json())
           .then(data => {
             console.log(data);
-            setLoading(false);
+            // setLoading(false);
             setNotices(data.data);
             
           })
-      }, [token]);
+      }, []);
 
 
     //Download Documents
@@ -97,6 +92,7 @@ const Notices = () => {
                     <Table columns={NOTICE_COLUMNS()} data={notices} headline={" "} />
                 )} */}
             </Container>
+            <Footer />
         </>
     );
 };

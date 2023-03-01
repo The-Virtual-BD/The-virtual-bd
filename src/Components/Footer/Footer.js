@@ -7,16 +7,34 @@ import apple from "./logo/apple.png";
 import Socialmedia from "../Socialmedia/Socialmedia";
 import "./Footer.css";
 import FootetBottom from "./FootetBottom";
+import { baseUrl } from "../../hooks/url";
+import { toast } from "react-toastify";
 
 function Footer() {
-  const[subscribe_email,setSubscribe_email]=useState('')
+  const[email,setSubscribe_email]=useState('')
 
    // Handle Subscribe Us Form
    const handleSubscribeForm=e=>{
     e.preventDefault();
-    const email={subscribe_email};
-    console.log(email)
+    const emaiL={email};
+
+    //send to backend
+    const url=`${baseUrl}/api/newsSubscriber/store`;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(emaiL)
+    })
+    .then(res=>res.json())
+    .then(result=>{
+      console.log(result);
+      toast.success(result.message);
+      e.target.reset();
+    })
 };
+
   return (
     <>
       <footer className="footer_area">
@@ -38,6 +56,7 @@ function Footer() {
                   </div>
                 </div>
               </Col>
+
               <Col md={3}>
                 <div className="footer_contuct">
                   <h3>Contact Us</h3>
@@ -53,6 +72,7 @@ function Footer() {
                   </p>
                 </div>
               </Col>
+
               <Col md={3}>
                 <div className="quicLink">
                   <h3>Quick Links</h3>
@@ -80,6 +100,7 @@ function Footer() {
                   </ul>
                 </div>
               </Col>
+
               <Col md={3}>
                 <div className="subsCribe">
 
