@@ -24,12 +24,12 @@ const Notices = () => {
      //Get Notices
      useEffect(() => {
         const perUrl=`${baseUrl}/api/notices/allnotice`;
-        // setLoading(true);
+        setLoading(true);
         fetch(perUrl)
           .then(res => res.json())
           .then(data => {
             console.log(data);
-            // setLoading(false);
+            setLoading(false);
             setNotices(data.data);
             
           })
@@ -75,12 +75,7 @@ const Notices = () => {
         ];
     };
 
-    if (!notices) {
-        return <div>Loading...</div>;
-      };
 
-
-  
 
     return (
         <>
