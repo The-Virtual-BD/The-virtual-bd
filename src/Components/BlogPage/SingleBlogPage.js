@@ -15,23 +15,34 @@ import './BlogPage';
 import image1 from '../../Images/blank_user.png';
 import { baseUrl } from '../../hooks/url';
 import { toast } from 'react-toastify';
+import blnakUser from '../../Images/blank_user.png';
 
-const SingleBlogPage = () => {
+const BlogPage = () => {
     const { id } = useParams();
-    const [blogs] = useBlogs();
     const navigate = useNavigate();
-    const[email,setSubscribe_email]=useState('')
+    const[email,setSubscribe_email]=useState('');
+    const [blog, setBlog] = useState([]);
+
+    useEffect(() => {
+        const blogUrl=`${baseUrl}/api/posts/activeposts/${id}`;
+        fetch(blogUrl)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setBlog(data.data)
+            })
+    }, []);
 
     //Slide to Top
      useEffect(()=>{
         window.scrollTo(0,0)
       },[]);
 
-    const singleBlog = blogs?.find(blogD => blogD._id === +id);
-    const featureBlogs = blogs.filter(fetureBlog => fetureBlog.blogCatagory.toLowerCase() === singleBlog?.blogCatagory.toLowerCase());
+    // const blog = blog?.find(blogD => blogD.id === +id);
+    // const featureBlogs = blog?.filter(fetureBlog => fetureBlog.blogCatagory.toLowerCase() === blog?.blogCatagory.toLowerCase());
 
     //Navigate to Single Blog Page
-    const handleSingleBlogs = (id) => {
+    const handleblogs = (id) => {
         navigate(`/blog/${id}`)
     };
 
@@ -58,34 +69,36 @@ const SingleBlogPage = () => {
         })
     };
 
+    //id, category, title, short_description, author, blogImg,cover
+
     return (
         <>
             <TopHeader />
             <Menu />
             <Container>
                 <div className='blog-details-container  blog-section mt-sm-3 mt-5'>
-                    <span className='blog-catagory'>{singleBlog?.blogCatagory}</span>
-                    <h2 className='fw-bolder mt-2 '>{singleBlog?.blogTitle}</h2>
-                    <p className='fs-4'>{singleBlog?.blogsShortDesc}</p>
+                    <span className='blog-catagory'>{blog?.category?.name}</span>
+                    <h2 className='fw-bolder mt-2 '>{blog?.title}</h2>
+                    <p className='fs-4'>{blog?.short_description}</p>
 
 
                     <div className='d-flex align-items-center justify-content-start gap-3'>
-                        <img src={singleBlog?.bloggerImg} alt="" srcset="" className='blogImg' />
+                        <img src={blnakUser} alt="" srcset="" className='blogImg' />
                         <div className='mt-3'>
-                            <h6 className='mb-0 fw-bold'>{singleBlog?.bloggerName}</h6>
-                            <p><small className='fs-6 fw-light'>{singleBlog?.blogDate}</small></p>
+                            <h6 className='mb-0 fw-bold'>{blog?.author?.first_name}</h6>
+                            <p><small className='fs-6 fw-light'>{blog?.updated_at}</small></p>
                         </div>
                     </div>
 
                     <div className='blog-details-img-container'>
-                        <img src={singleBlog?.blogImg} alt="" srcset="" />
+                        <img src={`${baseUrl}/${blog?.cover}`} alt="" srcset="" />
                     </div>
 
                     <div className="mt-5">
                         <Row >
                             <Col md={9} sm={12} >
-                                <h3 className='fw-bold'>{singleBlog?.blogSubTitle}</h3>
-                                <p >{singleBlog?.blogsDesc}</p>
+                                <h3 className='fw-bold'>{blog?.blogSubTitle}</h3>
+                                <p >{blog?.blogsDesc}</p>
 
                                 <div className='d-flex align-items-center'>
                                     <h3 className='fw-bold'>Share:</h3>
@@ -99,9 +112,9 @@ const SingleBlogPage = () => {
                             <Col sm={12} md={3}>
                                 <div>
                                     <h6 className='fw-bold blog-section-title mt-4'>Related Articles</h6>
-                                    <div className='d-flex flex-column gap-1'>
+                                    {/* <div className='d-flex flex-column gap-1'>
                                         {
-                                            featureBlogs.map(fBlog => <div onClick={() => handleSingleBlogs(fBlog._id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
+                                            featureBlogs.map(fBlog => <div onClick={() => handleblogs(fBlog._id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
                                                 <div className="row g-0">
                                                     <div className="col-md-5">
                                                         <img src={fBlog.blogImg} className="img-fluid rounded-start" alt={fBlog.bloggerName} style={{ height: "100%" }} />
@@ -114,7 +127,7 @@ const SingleBlogPage = () => {
                                                 </div>
                                             </div>).slice(0, 3)
                                         }
-                                    </div>
+                                    </div> */}
 
 
                                     <div className='blog-newslatter-container  mt-4 text-white  py-4 px-4'>
@@ -148,7 +161,7 @@ const SingleBlogPage = () => {
     );
 };
 
-export default SingleBlogPage;
+export default BlogPage;
 
 
 

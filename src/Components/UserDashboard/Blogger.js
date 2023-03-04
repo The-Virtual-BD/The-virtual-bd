@@ -46,53 +46,52 @@ const Blogger = ({ isBlogger }) => {
   
 
 
-  //Get Catagory
-  useEffect(() => {
-    const cUrl = `${baseUrl}/api/categories/catlist`;
-    fetch(cUrl, {
-        method: 'GET',
-        headers: {
+      //Get Catagory
+      useEffect(() => {
+        const cUrl = `${baseUrl}/api/categories/catlist`;
+        fetch(cUrl, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => setCatagory(data?.data))
+    }, [token]);
+
+
+
+      //Handle Blogger Form
+      const handleBloggerForm = (e) => {
+        e.preventDefault();
+        const BloggerReqSent = { name, subject, expertise, description };
+
+        //Send To Backend
+        const url = `${baseUrl}/api/blogger/store/${id}`;
+        fetch(url, {
+          method: 'POST',
+          headers: {
             'content-type': 'application/json',
             "Authorization": `Bearer ${token}`
-        }
-    })
-        .then(res => res.json())
-        .then(data => setCatagory(data?.data))
-}, [token]);
+          },
+          body: JSON.stringify(BloggerReqSent)
+        })
+          .then(res => res.json())
+          .then(result => {
+            if (result.error) {
+              console.log(result.error);
+              toast.error("Blogger Req Failed");
+            } else {
+              console.log(result);
+              e.target.reset();
+              toast.success("Your Applications has been Submitted");
+              setIsbloggerAppSent(result.message);
+            }
 
+          });
 
-// console.log(catagory);
-
-  //Handle Blogger Form
-  const handleBloggerForm = (e) => {
-    e.preventDefault();
-    const BloggerReqSent = { name, subject, expertise, description };
-
-    //Send To Backend
-    const url = `${baseUrl}/api/blogger/store/${id}`;
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(BloggerReqSent)
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.error) {
-          console.log(result.error);
-          toast.error("Blogger Req Failed");
-        } else {
-          console.log(result);
-          e.target.reset();
-          toast.success("Your Applications has been Submitted");
-          setIsbloggerAppSent(result.message);
-        }
-
-      });
-
-  };
+      };
 
 
 
@@ -294,8 +293,8 @@ const Blogger = ({ isBlogger }) => {
                 Title Description
                 </label>
                 <textarea
-                //  maxLength={200}
-                  className="form-control"
+                  maxLength={200}
+                  className="form-control mb-1"
                   id="blogsSDesc"
                   rows="5"
                   required
@@ -306,9 +305,9 @@ const Blogger = ({ isBlogger }) => {
                   }}
                 ></textarea>
                 {
-                  charCount <= 200?
-                  <p>Maximum 200 Characters & You Have Used {charCount}</p>:
-                  <p className="text-danger">You Have Crossed limit of  {extraChar}</p>
+                  charCount < 200?
+                  <p ><small>Maximum 200 Characters & You Have Used {charCount}</small></p>:
+                  <p className="text-danger">You have reached maximum limits.</p>
                 }
                 
               </div>

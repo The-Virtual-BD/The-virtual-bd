@@ -9,12 +9,27 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Autoplay, Navigation } from "swiper";
+import { useEffect } from 'react';
+import { baseUrl } from '../../hooks/url';
+import blnakUser from '../../Images/blank_user.png';
 
 
 const BlogPage = () => {
-    const [blogs] = useBlogs();
+    const [blogs, setBlogs] = useState([]);
+    useEffect(() => {
+        const blogUrl=`${baseUrl}/api/posts/activeposts`;
+        fetch(blogUrl)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.data);
+                setBlogs(data.data)
+            })
+    }, []);
+
+
     const [showBlog, setShowBlog] = useState(6);
     const navigate = useNavigate();
+
     const handleShowMoreBlogs = () => {
         setShowBlog(prevState => prevState + 3)
     }
@@ -23,12 +38,12 @@ const BlogPage = () => {
     const recentBlog = blogs[blogs?.length - 1];
 
     //As You Like Blogs
-    const asYouLikeBlog = blogs.filter(blog => blog?.blogCatagory.toLowerCase() === recentBlog?.blogCatagory.toLowerCase());
+    const asYouLikeBlog = blogs?.filter(blog => blog?.category?.name.toLowerCase() === recentBlog?.category?.name.toLowerCase());
 
 
     const handleSingleBlogs = (id) => {
         navigate(`/blog/${id}`)
-    }
+    };
 
 
     return (
@@ -46,23 +61,25 @@ const BlogPage = () => {
                     <Row className=''>
                         <Col md={7} sm={12} gap-3>
                             <div className='blog-recent-img-container'>
-                                <img src={recentBlog?.blogImg} alt="" srcset="" />
+                                <img src={`${baseUrl}/${recentBlog?.cover}`} alt="" srcset="" />
                             </div>
                         </Col>
 
                         <Col md={5} sm={12}>
                             <div className='mt-3'>
-                                <span className='blog-catagory'>{recentBlog?.blogCatagory}</span>
-                                <h3 onClick={() => handleSingleBlogs(recentBlog?._id)} className='fw-bolder mt-2 blog-head'>{recentBlog?.blogTitle}</h3>
-                                <p className='mt-4'>{recentBlog?.blogsShortDesc}</p>
-                                <h4 className='fw-bold mt-4'>{recentBlog?.blogSubTitle}</h4>
-                                <p className='mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore non, sapiente dolor delectus dicta corporis totam ipsum! Culpa mollitia eaque veniam rem at totam repudiandae!</p>
+                                <span className='blog-catagory'>{recentBlog?.category?.name}</span>
+                                <h3 onClick={() => handleSingleBlogs(recentBlog?.id)} className='fw-bolder mt-2 blog-head'>{recentBlog?.title}</h3>
+                                <p className='mt-4'>{recentBlog?.short_description}</p>
+
+                               {/*  <h4 className='fw-bold mt-4'>{recentBlog?.blogSubTitle}</h4>
+                                <p className='mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore non, sapiente dolor delectus dicta corporis totam ipsum! Culpa mollitia eaque veniam rem at totam repudiandae!</p> */}
                             </div>
                             <div className='d-flex align-items-center justify-content-start gap-3'>
-                                <img src={recentBlog?.bloggerImg} alt="" srcset="" />
+                                <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
+
                                 <div className='mt-3'>
-                                    <h6 className='mb-0 fw-bold'>{recentBlog?.bloggerName}</h6>
-                                    <p><small className='fs-6 fw-light'>{recentBlog?.blogDate}</small></p>
+                                    <h6 className='mb-0 fw-bold'>{recentBlog?.author?.first_name}</h6>
+                                    <p><small className='fs-6 fw-light'>{recentBlog?.updated_at}</small></p>
                                 </div>
 
                             </div>
@@ -77,23 +94,22 @@ const BlogPage = () => {
                     <div>
                         <Row xs={1} md={3} className="g-4">
                             {blogs?.map(blog => {
-                                const { _id, blogCatagory, blogTitle, blogsShortDesc, bloggerName, blogImg,bloggerImg } = blog;
+                                const { id, category, title, short_description, author, blogImg,cover } = blog;
                                 return (
-                                    <Col key={_id}>
-                                        <Card onClick={() => handleSingleBlogs(_id)} className="blog-card">
-                                            <Card.Img variant="top" src={blogImg} />
+                                    <Col key={id}>
+                                        <Card onClick={() => handleSingleBlogs(id)} className="blog-card">
+                                            <Card.Img variant="top" src={`${baseUrl}/${cover}`} />
                                             <Card.Body>
-                                                <span className='blog-catagory'>{blogCatagory}</span>
-                                                <Card.Title className='fw-bold my-2'>{blogTitle}</Card.Title>
+                                                <span className='blog-catagory'>{category?.name}</span>
+                                                <Card.Title className='fw-bold my-2'>{title}</Card.Title>
                                                 <Card.Text>
-                                                    {blogsShortDesc}
+                                                    {short_description}
                                                 </Card.Text>
                                                 <div className='d-flex align-items-center justify-content-start gap-2'>
-                                                     <img src={bloggerImg} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                     <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
 
-                                                     <p className='blog-author mt-3'> <span className='fw-bolder'>{bloggerName}</span></p>
+                                                     <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.first_name}</span></p>
                                                 </div>
-                                                {/* <p className='blog-author'>by {bloggerName}</p> */}
                                             </Card.Body>
                                         </Card>
                                     </Col>
@@ -148,18 +164,18 @@ const BlogPage = () => {
                             className="mySwiper "
                         >
                             {asYouLikeBlog?.map(likeblog => {
-                                const { _id, blogTitle, bloggerName, blogImg,bloggerImg } = likeblog;
+                                const { id, title, cover,author} = likeblog;
                                 return (
-                                    <SwiperSlide key={_id} >
-                                        <Card className='blog-card mb-4 mx-1'  onClick={() => handleSingleBlogs(_id)}>
-                                            <Card.Img variant="top" src={blogImg} />
+                                    <SwiperSlide key={id} >
+                                        <Card className='blog-card mb-4 mx-1'  onClick={() => handleSingleBlogs(id)}>
+                                            <Card.Img variant="top" src={`${baseUrl}/${cover}`} />
                                             <Card.Body>
-                                                 {/* <span className='blog-catagory'>{blogCatagory}</span> */}
-                                                <Card.Title className='fw-bold mb-2'>{blogTitle}</Card.Title>
+                                               
+                                                <Card.Title className='fw-bold mb-2'>{title}</Card.Title>
                                                 <div className='d-flex align-items-center justify-content-start gap-2'>
-                                                     <img src={bloggerImg} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                     <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
 
-                                                     <p className='blog-author mt-3'> <span className='fw-bolder'>{bloggerName.slice(0, 12)}</span></p>
+                                                     <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.first_name}</span></p>
                                                 </div>
                                             </Card.Body>
                                         </Card>

@@ -16,7 +16,6 @@ const Subscription = ({loading,setLoading}) => {
     const [token] = useToken();
     const [user] = useUser();
     const { id } = user;
-    // console.log(id);
     const [services, setServices] = useState([]);
 
     //Subscription Form
@@ -24,11 +23,10 @@ const Subscription = ({loading,setLoading}) => {
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
     const [attachment, setAttachment] = useState(null);
-
-    const [schedule, setSchedule] = useState(new Date());
-    /* let parsedDate = moment(time, 'DD.MM.YYYY H:mm:ss');
-    const schedule=parsedDate.toISOString(); */
-    console.log(schedule);
+    const [ schedule, setSchedule] = useState('');
+   
+   
+    // console.log(schedule);
 
   
 
@@ -56,7 +54,6 @@ const Subscription = ({loading,setLoading}) => {
     //Handle Subscription Form
     const handleSubscription = async (e) => {
         e.preventDefault();
-
       
         const formData = new FormData();
         formData.append('service_id', service_id);
@@ -65,8 +62,6 @@ const Subscription = ({loading,setLoading}) => {
         formData.append('schedule', schedule);
         formData.append('attachment', attachment, attachment.name);
 
-        // console.log(formData)
-    
         const url = `${baseUrl}/api/subscriptions/store`;
         const response = await fetch(url, {
             method: 'POST',
@@ -118,7 +113,7 @@ const Subscription = ({loading,setLoading}) => {
                             <textarea className="form-control" id="desc" rows="3" onChange={(e) => setDescription(e.target.value)} required></textarea>
                         </div>
 
-                        <div className="col-12 mb-3">
+                        {/* <div className="col-12 mb-3">
                             <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
 
                             <DatePicker
@@ -128,6 +123,18 @@ const Subscription = ({loading,setLoading}) => {
                                 timeInputLabel="Time:"
                                 dateFormat="yyyy/MM/dd h:mm"
                                 showTimeInput
+                                />
+                        </div> */}
+
+                        <div className="col-12 mb-3">
+                            <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
+
+                            <input
+                                selected={schedule}
+                                className="form-control"
+                                type={'datetime-local'}
+                                onChange={e=>setSchedule(e.target.value)}
+
                                 />
                         </div>
 

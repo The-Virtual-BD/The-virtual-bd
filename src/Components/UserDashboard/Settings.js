@@ -137,31 +137,25 @@ const Settings = ({ user,setUser }) => {
         fileInput.click();
     };
 
-    const handleDPSubmit =async (event) => {
-        event.preventDefault();
-
-        // const data={photo}
-
-       
+    const handleDPSubmit =async (e) => {
+            e.preventDefault();
 
             const formData  = new FormData();
-      
             formData.append('photo',photo, photo.name);
-            // formData.append('photo',"this is test");
-            // console.log(formData);
+           
 
             const dpUrl = `${baseUrl}/api/myprofile/update`;
             // const dpUrl = `${baseUrl}/api/myprofile/profilePic`;
+
             const response = await fetch(dpUrl, {
                 method: 'PUT',
                 headers: {
-                    // "content-type":"application/json",
                     "Authorization": `Bearer ${token}`
                 },
                 body:formData
             });
         
-            console.log(response);
+            // console.log(response);
             const result = await response.json();
     
             if (result.error) {
@@ -169,7 +163,7 @@ const Settings = ({ user,setUser }) => {
             toast.error("Profile Pic Added Failed");
             } else {
             console.log(result);
-            event.target.reset();
+            e.target.reset();
             toast.success(result.message);
             }
        
@@ -360,14 +354,15 @@ const Settings = ({ user,setUser }) => {
 
 
                     <form onSubmit={handleDPSubmit} >
-                        <div>
+                       {/*  <div>
                             <input name="photo" type="file" id="photo" onChange={handleImageChange} style={{display: "none" }}  />
 
                             {image && (
                                 <img src={image} alt="Preview" onClick={handleImageClick}  style={{ width: "150px", height: "150px", borderRadius: "100%" }} />
                             ) }
-                        </div>
-                        {/* <input type="text"  onChange={e=>setPhoto(e.target.value)}/> */}
+                        </div> */}
+
+                        <input type="file"  onChange={e=>setPhoto(e.target.files[0])}/>
                       
                         <button type="submit" className='main-btn'>Save Image</button>
                     </form>
