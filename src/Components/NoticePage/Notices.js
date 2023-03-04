@@ -23,7 +23,7 @@ const Notices = () => {
 
      //Get Notices
      useEffect(() => {
-        const perUrl=`https://www.admin.thevirtualbd.com/api/notices/allnotice`;
+        const perUrl=`${baseUrl}/api/notices/allnotice`;
         // setLoading(true);
         fetch(perUrl)
           .then(res => res.json())
@@ -74,6 +74,11 @@ const Notices = () => {
             },
         ];
     };
+
+    if (!notices) {
+        return <div>Loading...</div>;
+      };
+
 
   
 

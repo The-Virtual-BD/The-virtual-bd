@@ -31,6 +31,7 @@ import useUser from "./hooks/useUser";
 import "react-whatsapp-chat-widget/index.css";
 import "react-datepicker/dist/react-datepicker.css";
 import WhatsApp from "./utilities/WhatsApp";
+import CarieerDetails from "./Components/Career/CarieerDetails/CarieerDetails";
 
 function App() {
   // const[user,setUser]=useState([]);
@@ -50,7 +51,8 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<SingleBlogPage />} />
-        <Route path="career" element={<Career />} />
+        <Route path="/career" element={<Career />} />
+        <Route path="/career/:id" element={<CarieerDetails />} />
         <Route path="/other" element={<Other />} />
         <Route path="/contact" element={<ContuctUs />} />
         <Route path="/notices" element={<Notices />} />
@@ -61,7 +63,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<Search />} />
         <Route path="/data-protection" element={<PrivacyPolicy />} />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
 
          <Route path="/user-dashboard" element={ < RequireAuth> <UserProfile /></RequireAuth>} />
          

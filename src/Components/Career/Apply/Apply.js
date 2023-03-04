@@ -1,10 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import apply from "./ApplyData";
 import "./Apply.css";
 import { ExternalLink } from "react-external-link";
+import { baseUrl } from "../../../hooks/url";
+import { useNavigate } from "react-router-dom";
 
 function Apply() {
+  const [jobs, setJobs] = useState([]);
+  const navigate=useNavigate();
+
+   //Get Carieer
+   useEffect(() => {
+    const perUrl = `${baseUrl}/api/vaccancies/activevaccancies`;
+    fetch(perUrl, {
+        method: "GET",
+        headers: {
+            'content-type': 'application/json',
+        }
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setJobs(data.data);
+        })
+}, []);
+
+//Handle View job
+
+const handleViewJob=id=>{
+  navigate(`/career/${id}`)
+};
+
+if(!jobs){
+  return(<p>Loading....</p>)
+}
+
   return (
     <>
       <section className="apply_area">
@@ -18,32 +49,38 @@ function Apply() {
             </h2>
           </div>
 
-          {apply.map((data) => (
+
+
+
+          {jobs.map((data) => (
             <div className="get_job">
               <Row>
                 <Col md={3} sm={12}>
                   <div className="job_expertis">
-                    <small>{data.job_expertis}</small>
+                    <small>{data?.skills}</small>
                   </div>
+
                   <div className="job_name">
                     <h2>
-                      {data.job_name} <span>/ {data.jobNature}</span>
+                      {data?.designation} <span>/ <small>{data?.type}</small></span>
                     </h2>
                   </div>
+
                   <div className="selary">
-                    <p>Expected Salary - {data.Salary}</p>
+                    <p>Expected Salary - {data?.salary_range}</p>
                   </div>
                 </Col>
                 <Col md={6} sm={12}>
                   <div className="job_text">
-                    <p>{data.jobDes}</p>
+                    <p>{data?.description.slice(0,300)}</p>
+
                   </div>
                 </Col>
                 <Col md={3} sm={12}>
                   <div className="job_apply">
-                    <ExternalLink href="https://www.gmail.com">
+                    <button onClick={()=>handleViewJob(data?.id)}>
                       Apply
-                    </ExternalLink>
+                    </button>
                   </div>
                 </Col>
               </Row>
