@@ -139,44 +139,57 @@ function Faq() {
                     <Accordion>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        What is the app development process?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The app development process typically involves several stages, including ideation and research, wireframing and prototyping, design and development, testing, and deployment. Each stage requires different skills and expertise, and it's important to work with a team that can handle all aspects of the process.
                         </Accordion.Body>
                       </Accordion.Item>
                       <Accordion.Item eventKey="1">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        How long does it take to develop an app?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The time it takes to develop an app can vary depending on several factors, including the complexity of the app, the size of the development team, and the availability of resources. Generally, it takes anywhere from a few months to a year or more to develop a fully functional app.
+
                         </Accordion.Body>
                       </Accordion.Item>
                       <Accordion.Item eventKey="2">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        How much does it cost to develop an app?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        The cost of app development depends on several factors, including the features and functionality of the app, the size of the development team, and the complexity of the project. On average, app development costs can range from a few thousand dollars to hundreds of thousands of dollars or more.
                         </Accordion.Body>
                       </Accordion.Item>
+
                       <Accordion.Item eventKey="3">
                         <Accordion.Header>
-                          How much does a new website cost?
+                        What platforms can an app be developed for?
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                        An app can be developed for several platforms, including iOS, Android, and web-based platforms. It's important to determine which platforms are most relevant to your target audience and prioritize development accordingly.
                         </Accordion.Body>
                       </Accordion.Item>
+
+                      <Accordion.Item eventKey="4">
+                        <Accordion.Header>
+                        How can I ensure my app is successful?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        To ensure your app is successful, it's important to conduct thorough market research and identify your target audience. You should also focus on creating a user-friendly design, providing high-quality content and features, and promoting your app through effective marketing and advertising strategies.
+
+                        </Accordion.Body>
+                      </Accordion.Item>
+                      <Accordion.Item eventKey="5">
+                        <Accordion.Header>
+                        What kind of ongoing maintenance does an app require?
+                        </Accordion.Header>
+                        <Accordion.Body>
+                        An app requires ongoing maintenance and updates to ensure that it remains functional and up-to-date with the latest technology and trends. This may include bug fixes, security updates, and feature enhancements, among other things. It's important to work with a development team that can provide ongoing support and maintenance services for your app.
+                        </Accordion.Body>
+                      </Accordion.Item>
+
                     </Accordion>
                   </Col>
                 </Row>

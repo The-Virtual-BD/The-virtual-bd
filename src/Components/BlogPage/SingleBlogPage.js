@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import useBlogs from '../../hooks/useBlogs';
 import useToken from '../../hooks/useToken';
 import useUser from '../../hooks/useUser';
 import Footer from '../Footer/Footer';
@@ -16,6 +15,7 @@ import image1 from '../../Images/blank_user.png';
 import { baseUrl } from '../../hooks/url';
 import { toast } from 'react-toastify';
 import blnakUser from '../../Images/blank_user.png';
+import moment from 'moment';
 
 const BlogPage = () => {
     const { id } = useParams();
@@ -23,6 +23,7 @@ const BlogPage = () => {
     const[email,setSubscribe_email]=useState('');
     const [blog, setBlog] = useState([]);
 
+   // Get Single Blog
     useEffect(() => {
         const blogUrl=`${baseUrl}/api/posts/activeposts/${id}`;
         fetch(blogUrl)
@@ -31,15 +32,20 @@ const BlogPage = () => {
                 console.log(data);
                 setBlog(data.data)
             })
-    }, []);
+    }, [id]);
+
+    console.log(blog)
 
     //Slide to Top
      useEffect(()=>{
         window.scrollTo(0,0)
       },[]);
 
-    // const blog = blog?.find(blogD => blogD.id === +id);
-    // const featureBlogs = blog?.filter(fetureBlog => fetureBlog.blogCatagory.toLowerCase() === blog?.blogCatagory.toLowerCase());
+      const postDate= moment(blog?.updated_at).format('DD MMM YYYY')
+
+    // const relatedblog = blog?.find(blogD => blogD.id == id);
+
+    // const featureBlogs = blog?.filter(fetureBlog => fetureBlog?.category?.name?.toLowerCase() === blog?.category?.name?.toLowerCase());
 
     //Navigate to Single Blog Page
     const handleblogs = (id) => {
@@ -83,45 +89,58 @@ const BlogPage = () => {
 
 
                     <div className='d-flex align-items-center justify-content-start gap-3'>
-                        <img src={blnakUser} alt="" srcset="" className='blogImg' />
+                       
+
+                        {
+                          blog?.author?.photo ?
+                                <img src={`${baseUrl}/${blog?.author?.photo}`} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />:
+                                              
+                                <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
+                                            }
+
+
                         <div className='mt-3'>
                             <h6 className='mb-0 fw-bold'>{blog?.author?.first_name}</h6>
-                            <p><small className='fs-6 fw-light'>{blog?.updated_at}</small></p>
+                            <p><small className='fs-6 fw-light'>{postDate}</small></p>
                         </div>
                     </div>
 
                     <div className='blog-details-img-container'>
-                        <img src={`${baseUrl}/${blog?.cover}`} alt="" srcset="" />
+                        <img src={`${baseUrl}/${blog?.cover}`} alt="" srcset=""  />
                     </div>
 
                     <div className="mt-5">
                         <Row >
                             <Col md={9} sm={12} >
-                                <h3 className='fw-bold'>{blog?.blogSubTitle}</h3>
-                                <p >{blog?.blogsDesc}</p>
+                                {/* <h3 className='fw-bold'>{blog?.blogSubTitle}</h3> */}
+
+                                <div  className='text-labelclr' dangerouslySetInnerHTML={{ __html: blog?.description}}/>
+                                
 
                                 <div className='d-flex align-items-center'>
                                     <h3 className='fw-bold'>Share:</h3>
                                     <BlogSocialmedia />
                                 </div>
 
-                                <BlogCommentBox />
+                                <BlogCommentBox id={blog?.id} comments={blog?.comments} />
+
+
 
                             </Col>
 
                             <Col sm={12} md={3}>
                                 <div>
                                     <h6 className='fw-bold blog-section-title mt-4'>Related Articles</h6>
-                                    {/* <div className='d-flex flex-column gap-1'>
+                                   {/*  <div className='d-flex flex-column gap-1'>
                                         {
-                                            featureBlogs.map(fBlog => <div onClick={() => handleblogs(fBlog._id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
+                                            featureBlogs?.map(fBlog => <div onClick={() => handleblogs(fBlog.id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
                                                 <div className="row g-0">
                                                     <div className="col-md-5">
-                                                        <img src={fBlog.blogImg} className="img-fluid rounded-start" alt={fBlog.bloggerName} style={{ height: "100%" }} />
+                                                        <img src={`${baseUrl}/${fBlog.cover}`} className="img-fluid rounded-start" alt={"Blog Cover"} style={{ height: "100%" }} />
                                                     </div>
                                                     <div className="col-md-7">
                                                         <div className="card-body">
-                                                            <h5 className="card-title fw-bold">{fBlog.blogTitle}</h5>
+                                                            <h5 className="card-title fw-bold">{fBlog?.title}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -165,26 +184,49 @@ export default BlogPage;
 
 
 
-const BlogCommentBox = () => {
+const BlogCommentBox = ({id,comments}) => {
     const [token]= useToken();
     const[user]=useUser();
+    console.log(comments);
 
-    const[comment,setComment]=useState('');
-    console.log(user)
+     const post_id= id?.toString()
+
+    const[body,setComment]=useState('');
+    // console.log(user)
 
 
-    //Handle Comment
+    //Handle Add Comment
     const handleCommentForm=e=>{
         e.preventDefault();
-        console.log(comment);
-        e.target.reset();
+        const data={body,post_id};
+        // console.log(data);
+
+         //Send to Backend
+        const formUrl=`${baseUrl}/api/comments/store`;
+        fetch(formUrl,{
+        method:"POST",
+        headers:{
+            "content-type":"application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body:JSON.stringify(data)
+        } )
+        .then(res=>res.json())
+        .then(result=>{
+            console.log(result);
+            toast.success(result.message);
+            e.target.reset();
+        
+        });
+        
     };
+
 
 
     return (
         <div className='blog-comment-box-container'>
-            <h3 className='fw-bold '>Leave a Comment</h3>
-            {/* <p>Your email address will not be published. Required fields are marked *</p> */}
+            <h3 className='fw-bold mb-0'>Leave a Comment</h3>
+            {/* <p className='mt-0 mb-4'>Your email address will not be published. Required fields are marked *</p> */}
 
             {
                 (token && user)? 
@@ -207,32 +249,23 @@ const BlogCommentBox = () => {
             <div>
                 <div className='d-flex text-dark  justify-content-between align-items-center my-4'>
                     <h3 className='fw-bold '>Comments</h3>
-                    <h4>3 Comments</h4>
+                    <h4>{comments?.length} Comments</h4>
                 </div>
 
                 <div>
+                    {
+                        comments?.map(comment=> <div className='d-flex align-items-start justify-content-start gap-2'>
+                        <img src={image1} alt="" srcset="" style={{width:"30px",borderRadius:"100%"}} />
+                       <div>
+                            <p className='my-0 '> <span className='fw-bolder'>{comment?.commenter_name}</span></p>
 
-                    <div className='d-flex align-items-start justify-content-start gap-2'>
-                            <img src={image1} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
-                           <div>
-                                <p className='my-0'> <span className='fw-bolder'>Md. Akbor</span></p>
-                                <p className='mt-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non alias, saepe esse molestiae odio consequuntur.</p>
-                           </div>
-                    </div>
-                    <div className='d-flex align-items-start justify-content-start gap-2'>
-                            <img src={image1} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
-                           <div>
-                                <p className='my-0'> <span className='fw-bolder'>Sorif Ahmed</span></p>
-                                <p className='mt-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non alias, saepe esse molestiae odio consequuntur.</p>
-                           </div>
-                    </div>
-                    <div className='d-flex align-items-start justify-content-start gap-2'>
-                            <img src={image1} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
-                           <div>
-                                <p className='my-0'> <span className='fw-bolder'>John Cina</span></p>
-                                <p className='mt-0'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non alias, saepe esse molestiae odio consequuntur.</p>
-                           </div>
-                    </div>
+                            <p className='mt-0 fs-6'>{comment?.body}</p>
+                       </div>
+                </div>)
+                    }
+
+                   
+                   
 
                 </div>
             </div>

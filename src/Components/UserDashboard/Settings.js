@@ -3,7 +3,6 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { baseUrl } from '../../hooks/url';
@@ -18,8 +17,9 @@ const Settings = ({ user,setUser }) => {
     const [token] = useToken();
     const navigate = useNavigate();
 
-    const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio } = user;
-    const birthDateIn = moment(birth_date).format('DD/ MMM /YYYY')
+    const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo } = user;
+    const birthDateIn = moment(birth_date).format('DD/ MMM /YYYY');
+    const photoShow=`${baseUrl}/${photo}`
 
     //Update Profile
     const [firstName, setFirstName] = useState(first_name);
@@ -32,16 +32,16 @@ const Settings = ({ user,setUser }) => {
     const [phonE, setPhonE] = useState(phone);
     const [biO, setBiO] = useState(bio);
 
-    const [image, setImage] = useState(image1);
-    const [photo,setPhoto]=useState(null);
+    const [image, setImage] = useState(photoShow || image1);
+    const [photO,setPhoto]=useState(null);
+
+    console.log(photo);
    
 
     //Password change
     const [password, setPassword] = useState('');
     const [password_confirmation, setPassword_confirmation] = useState('');
 
-
-    // console.log(uploadImage)
 
     //Handle Update User Profile
     const handleUserProfileForm = async (e) => {
@@ -124,85 +124,53 @@ const Settings = ({ user,setUser }) => {
 
 
     //Handle Image Change
-
     const handleImageChange = (event) => {
         setImage(URL.createObjectURL(event.target.files[0]));
         setPhoto(event.target.files[0]);
     };
-
-    // console.log(photo);
 
     const handleImageClick = () => {
         const fileInput = document.getElementById("photo");
         fileInput.click();
     };
 
+    //Handle DP Form
     const handleDPSubmit =async (e) => {
             e.preventDefault();
 
-            const formData  = new FormData();
-            formData.append('photo',photo, photo.name);
-           
+            const dpData  = new FormData();
 
-            const dpUrl = `${baseUrl}/api/myprofile/update`;
-            // const dpUrl = `${baseUrl}/api/myprofile/profilePic`;
+            // formData.append('name', "Hamid");
+            dpData.append('photo',photO, photO.name);
+
+            console.log(dpData);
+           
+            const dpUrl = `${baseUrl}/api/myprofile/profilePic`;
 
             const response = await fetch(dpUrl, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${token}`,
                 },
-                body:formData
+                body:dpData
             });
         
-            // console.log(response);
+            console.log(response);
             const result = await response.json();
     
             if (result.error) {
-            console.log(result.error);
-            toast.error("Profile Pic Added Failed");
+                console.log(result.error);
+                toast.error("Profile Pic Added Failed");
             } else {
-            console.log(result);
-            e.target.reset();
-            toast.success(result.message);
+                console.log(result);
+                setUser(result.user);
+
+                const user = JSON.stringify(result.user);
+                window.localStorage.setItem("user", user);
+                e.target.reset();
+                toast.success(result.message);
             }
-       
-
-            };
-
-        
-    
-
-
-/*     const handleDPSubmit = async (e) => {
-        e.preventDefault();
-    
-        const imgData = new FormData();
-        imgData.append('photo', image, image.name);
-    
-        const url = `${baseUrl}/api/myprofile/profilePic/${id}`;
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            body: imgData
-        });
-
-        console.log(response);
-        const result = await response.json();
-    
-        if (result.error) {
-            console.log(result.error);
-            toast.error("Subscriptions Add Failed");
-        } else {
-            console.log(result);
-            e.target.reset();
-            toast.success(result.message);
-        }
-    }; */
-
-
+        };
 
 
 
@@ -341,28 +309,17 @@ const Settings = ({ user,setUser }) => {
 
             <Col md={3} sm={12} >
                 <div className="bg-white p-3 rounded text-center">
-                    {/*  <form >
-                        <img
-                            src={imageUrl}
-                            alt=""
-                            srcset="" style={{ width: "200px", borderRadius: "100%", marginBottom: "10px" }} />
-
-                        <label className='main-btn' type="submit"> Change Image
-                            <input type="file" style={{ display: "none" }} onChange={(e) => setUploadImage(e.target.files[0])} required />
-                        </label>
-                    </form> */}
-
-
+                  
                     <form onSubmit={handleDPSubmit} >
-                       {/*  <div>
+                        <div>
                             <input name="photo" type="file" id="photo" onChange={handleImageChange} style={{display: "none" }}  />
 
                             {image && (
                                 <img src={image} alt="Preview" onClick={handleImageClick}  style={{ width: "150px", height: "150px", borderRadius: "100%" }} />
                             ) }
-                        </div> */}
+                        </div>
 
-                        <input type="file"  onChange={e=>setPhoto(e.target.files[0])}/>
+                        {/* <input type="file"  onChange={e=>setPhoto(e.target.files[0])}/>  */}
                       
                         <button type="submit" className='main-btn'>Save Image</button>
                     </form>

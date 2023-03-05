@@ -37,15 +37,40 @@ const Notices = () => {
 
 
     //Download Documents
-    const downloadFile = (id) => {
-        const getDoc = notices.find(notice => notice.id === id);
+    /* const downloadFile = (url) => {
 
+        fetch(url)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const blobURL=window.URL.createObjectURL(new Blob([blob]));
+            const fileName=url.split("/").pop();
+            const aTag=document.createElement("a");
+            aTag.href=blobURL;
+            aTag.setAttribute=("download",fileName);
+            document.body.appendChild(aTag);
+            aTag.click();
+            aTag.remove();
+
+          });
+      }; */
+
+      const downloadFile = (id) => {
+        const getDoc = notices.find(notice => notice.id === id);
+      
         fetch(`${getDoc.document}`)
           .then((response) => response.blob())
           .then((blob) => {
-            saveAs(blob, `${getDoc.title}.doc`);
+            if (blob.size > 0) {
+              saveAs(blob, `${getDoc.title}.pdf`);
+            } else {
+              console.error('Invalid or empty PDF file');
+            }
+          })
+          .catch((error) => {
+            console.error(error);
           });
       };
+      
 
 
       const NOTICE_COLUMNS = () => {
@@ -65,7 +90,7 @@ const Notices = () => {
                 Header: 'Download',
                 accessor: 'action',
                 Cell: ({ row }) => {
-                    const { id } = row.original;
+                    const { id,document } = row.original;
                     return (<div className='download'><button className='download-icon' onClick={() => downloadFile(id)}>
                         <FiDownload className=' ' />
                     </button>
@@ -88,9 +113,7 @@ const Notices = () => {
                 }
 
 
-              {/*   {notices.length && (
-                    <Table columns={NOTICE_COLUMNS()} data={notices} headline={" "} />
-                )} */}
+              
             </Container>
             <Footer />
         </>

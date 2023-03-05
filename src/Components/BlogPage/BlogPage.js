@@ -12,10 +12,12 @@ import { Pagination, Autoplay, Navigation } from "swiper";
 import { useEffect } from 'react';
 import { baseUrl } from '../../hooks/url';
 import blnakUser from '../../Images/blank_user.png';
+import moment from 'moment';
 
 
 const BlogPage = () => {
     const [blogs, setBlogs] = useState([]);
+    
     useEffect(() => {
         const blogUrl=`${baseUrl}/api/posts/activeposts`;
         fetch(blogUrl)
@@ -26,16 +28,20 @@ const BlogPage = () => {
             })
     }, []);
 
+   
+
 
     const [showBlog, setShowBlog] = useState(6);
     const navigate = useNavigate();
 
     const handleShowMoreBlogs = () => {
         setShowBlog(prevState => prevState + 3)
-    }
+    };
 
     //Recent Blog
     const recentBlog = blogs[blogs?.length - 1];
+    const postDate= moment(recentBlog?.updated_at).format('DD MMM YYYY')
+    // console.log(recentBlog?.author?.photo )
 
     //As You Like Blogs
     const asYouLikeBlog = blogs?.filter(blog => blog?.category?.name.toLowerCase() === recentBlog?.category?.name.toLowerCase());
@@ -71,15 +77,17 @@ const BlogPage = () => {
                                 <h3 onClick={() => handleSingleBlogs(recentBlog?.id)} className='fw-bolder mt-2 blog-head'>{recentBlog?.title}</h3>
                                 <p className='mt-4'>{recentBlog?.short_description}</p>
 
-                               {/*  <h4 className='fw-bold mt-4'>{recentBlog?.blogSubTitle}</h4>
-                                <p className='mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore non, sapiente dolor delectus dicta corporis totam ipsum! Culpa mollitia eaque veniam rem at totam repudiandae!</p> */}
+                               
                             </div>
                             <div className='d-flex align-items-center justify-content-start gap-3'>
-                                <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
+                               
+                                   
+                                    <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
 
+                                    
                                 <div className='mt-3'>
                                     <h6 className='mb-0 fw-bold'>{recentBlog?.author?.first_name}</h6>
-                                    <p><small className='fs-6 fw-light'>{recentBlog?.updated_at}</small></p>
+                                    <p><small className='fs-6 fw-light'>{postDate}</small></p>
                                 </div>
 
                             </div>
@@ -106,7 +114,13 @@ const BlogPage = () => {
                                                     {short_description}
                                                 </Card.Text>
                                                 <div className='d-flex align-items-center justify-content-start gap-2'>
-                                                     <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                {
+                                                author?.photo ?
+                                                <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                              :
+                                                <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                            }
+                                                                
 
                                                      <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.first_name}</span></p>
                                                 </div>
@@ -173,7 +187,13 @@ const BlogPage = () => {
                                                
                                                 <Card.Title className='fw-bold mb-2'>{title}</Card.Title>
                                                 <div className='d-flex align-items-center justify-content-start gap-2'>
-                                                     <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                {
+                                                author?.photo ?
+                                                <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                              :
+                                                <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                            }
+                                                    
 
                                                      <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.first_name}</span></p>
                                                 </div>

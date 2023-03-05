@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import useUser from '../../hooks/useUser';
 import moment from 'moment/moment';
 import image1 from '../../Images/blank_user.png';
+import { baseUrl } from '../../hooks/url';
 
 
 const UserDashboard = () => {
@@ -29,7 +30,8 @@ const UserDashboard = () => {
   const [user,setUser] = useUser();
   console.log(user);
 
-  const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio } = user;
+  const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo } = user;
+  const photoShow=`${baseUrl}/${photo}`
   
   const birthDate = moment(birth_date).format('DD MMM YYYY')
 
@@ -44,7 +46,7 @@ const UserDashboard = () => {
 
           <div className="bg-white px-5 py-3  mt-sm-3 mt-5 rounded ">
             <div className='d-flex  align-items-center   '>
-              <img src={image1} alt='user img' style={{ width: "100px", height: "100px", borderRadius: "100%" }} />
+              <img src={photoShow} alt='user img' style={{ width: "100px", height: "100px", borderRadius: "100%" }} />
               <div className='d-flex flex-column  ms-3'>
 
                 <h5 className=' d-flex align-items-center justify-space-between gap-2 mb-0'><span className='fw-bolder'>{`${first_name} ${last_name}`}</span> <BsCheckCircleFill className='blue-clr' /></h5>
