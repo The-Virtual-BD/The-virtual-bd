@@ -178,7 +178,7 @@ const Blogger = ({ isBlogger }) => {
           <>
             {!isbloggerAppSent ? (
               <div className="bg-white p-sm-4 p-2 rounded  mb-sm-3 mb-5 headline-text">
-                <h3 className="px-2 fw-bold ">Become a blogger</h3>
+                <h3 className="px-2 fw-bold">Become a blogger</h3>
                 <form
                   className="row form-container p-2 mb-3"
                   onSubmit={handleBloggerForm}
@@ -243,15 +243,15 @@ const Blogger = ({ isBlogger }) => {
                 </form>
               </div>
             ) : (
-              <div className="bg-white  min-h-screen p-5 ">
-                <h4 className="px-3 rounded  fw-bolder">
+              <div className="bg-white min-h-screen p-5 ">
+                <h4 className="px-3 rounded fw-bolder">
                   {isbloggerAppSent}
                 </h4>
               </div>
             )}
           </>
         ) : (
-          <div className="bg-white p-sm-4 p-2   mb-sm-3 mb-5 rounded headline-text">
+          <div className="bg-white p-sm-4 p-2 mb-sm-3 mb-5 rounded headline-text">
             <h3 className="px-2 fw-bold">Create a blog</h3>
             <form
               className="row form-container p-2 mb-3"

@@ -106,7 +106,7 @@ const BlogPage = () => {
                                 return (
                                     <Col key={id}>
                                         <Card onClick={() => handleSingleBlogs(id)} className="blog-card">
-                                            <Card.Img variant="top" src={`${baseUrl}/${cover}`} />
+                                            <Card.Img variant="top" style={{height:"235px"}} src={`${baseUrl}/${cover}`} />
                                             <Card.Body>
                                                 <span className='blog-catagory'>{category?.name}</span>
                                                 <Card.Title className='fw-bold my-2'>{title}</Card.Title>
