@@ -19,6 +19,7 @@ const Notices = () => {
     const[token]=useToken();
     const [notices, setNotices] = useState([]);
     const[loading,setLoading]=useState(false);
+    const allNotices=[...notices].reverse();
     
 
      //Get Notices
@@ -109,7 +110,7 @@ const Notices = () => {
             <CareerHero>Notice</CareerHero>
             <Container>
                 {
-                    loading? <Loading loading={loading} /> : <Table columns={NOTICE_COLUMNS()} data={notices} headline={" "} />
+                    loading? <Loading loading={loading} /> : <Table columns={NOTICE_COLUMNS()} data={allNotices} headline={" "} />
                 }
 
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -21,9 +21,10 @@ import { baseUrl } from '../../hooks/url';
 const UserDashboard = () => {
   const navigate = useNavigate();
   const[loading,setLoading]=useState(false);
+  const [bloggerReqPen, setBloggerReqPen] = useState(false);
 
   //Blogger Auth
-  const [isBlogger, setIsBlogger] = useState(true);
+  const [isBlogger, setIsBlogger] = useState(false);
 
   //Get Token & User from Hooks
   const [token] = useToken();
@@ -33,7 +34,21 @@ const UserDashboard = () => {
   const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo } = user;
   const photoShow=`${baseUrl}/${photo}`
   
-  const birthDate = moment(birth_date).format('DD MMM YYYY')
+  const birthDate = moment(birth_date).format('DD MMM YYYY');
+
+    //Get Pendding Blogger Req
+    useEffect(() => {
+      const cUrl = `${baseUrl}/api/blogger/mypendingapplication`;
+      fetch(cUrl, {
+          method: 'GET',
+          headers: {
+              'content-type': 'application/json',
+              "Authorization": `Bearer ${token}`
+          }
+      })
+          .then(res => res.json())
+          .then(data => setBloggerReqPen(data?.pending))
+  }, [token]);
 
 
 
@@ -82,7 +97,7 @@ const UserDashboard = () => {
             </TabPanel>
 
             <TabPanel>
-              <Blogger isBlogger={isBlogger} />
+              <Blogger isBlogger={isBlogger} bloggerReqPen={bloggerReqPen} />
             </TabPanel>
 
             <TabPanel>

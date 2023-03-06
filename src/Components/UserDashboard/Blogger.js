@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import BlogCard from "./BlogCard";
 import { CKEditor } from "ckeditor4-react";
 import "./UserDashboard.css";
@@ -11,7 +11,7 @@ import useUser from "../../hooks/useUser";
 
 
 
-const Blogger = ({ isBlogger }) => {
+const Blogger = ({ isBlogger,bloggerReqPen }) => {
   const [token] = useToken();
   const [user] = useUser();
   const { id } = user;
@@ -26,6 +26,7 @@ const Blogger = ({ isBlogger }) => {
   const [subject, setBlogSub] = useState("");
   const [expertise, setBlogExArea] = useState("");
   const [description, setBlogDesc] = useState("");
+  
 
   //show sent msg
   const [isbloggerAppSent, setIsbloggerAppSent] = useState("");
@@ -42,7 +43,7 @@ const Blogger = ({ isBlogger }) => {
 
   // console.log(charCount);
 
-  const extraChar=(charCount - 200);
+  // const extraChar=(charCount - 200);
   
 
 
@@ -59,6 +60,9 @@ const Blogger = ({ isBlogger }) => {
             .then(res => res.json())
             .then(data => setCatagory(data?.data))
     }, [token]);
+
+
+    
 
 
 
@@ -176,7 +180,7 @@ const Blogger = ({ isBlogger }) => {
       <Col md={9} sm={12}>
         {!isBlogger ? (
           <>
-            {!isbloggerAppSent ? (
+            {!bloggerReqPen ? (
               <div className="bg-white p-sm-4 p-2 rounded  mb-sm-3 mb-5 headline-text">
                 <h3 className="px-2 fw-bold">Become a blogger</h3>
                 <form
@@ -244,9 +248,65 @@ const Blogger = ({ isBlogger }) => {
               </div>
             ) : (
               <div className="bg-white min-h-screen p-5 ">
-                <h4 className="px-3 rounded fw-bolder">
-                  {isbloggerAppSent}
-                </h4>
+
+
+      <section className="buisness_area">
+          <div className="buisness_content">
+            {/* <p>How We Work</p> */}
+            <h3>Blogger Request Proccessing</h3>
+          </div>
+          <Row>
+            <Col md={4} className="content_gap">
+              <div className="content_sl">
+                <div className="number">
+                  <h1>1</h1>
+                </div>
+              </div>
+              <div className="discussion">
+                <h3>Application Sent</h3>
+                
+              </div>
+            </Col>
+            <Col md={4}>
+              <div className="content_sl">
+                <div className="number">
+                  <h1>2</h1>
+                </div>
+              </div>
+              <div className="discussion">
+                <h3>Application Reviewing</h3>
+               
+              </div>
+            </Col>
+           
+            <Col md={4}>
+              <div className="last_content">
+                <div className="number">
+                  <h1>4</h1>
+                </div>
+              </div>
+              <div className="discussion">
+                <h3>4. Execute & install</h3>
+                
+              </div>
+            </Col>
+          </Row>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </div>
             )}
           </>
@@ -355,6 +415,8 @@ const Blogger = ({ isBlogger }) => {
           </div>
         )}
       </Col>
+
+
 
       <Col md={3} sm={12}>
         <div>
