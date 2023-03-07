@@ -16,109 +16,93 @@ import Loading from '../../hooks/Loading';
 import Footer from '../Footer/Footer';
 
 const Notices = () => {
-    const[token]=useToken();
-    const [notices, setNotices] = useState([]);
-    const[loading,setLoading]=useState(false);
-    const allNotices=[...notices].reverse();
-    
-
-     //Get Notices
-     useEffect(() => {
-        const perUrl=`${baseUrl}/api/notices/allnotice`;
-        setLoading(true);
-        fetch(perUrl)
-          .then(res => res.json())
-          .then(data => {
-            console.log(data);
-            setLoading(false);
-            setNotices(data.data);
-            
-          })
-      }, []);
+  const [token] = useToken();
+  const [notices, setNotices] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const allNotices = [...notices].reverse();
 
 
-    //Download Documents
-    /* const downloadFile = (url) => {
+  //Get Notices
+  useEffect(() => {
+    const perUrl = `${baseUrl}/api/notices/allnotice`;
+    setLoading(true);
+    fetch(perUrl)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setLoading(false);
+        setNotices(data.data);
 
-        fetch(url)
-          .then((response) => response.blob())
-          .then((blob) => {
-            const blobURL=window.URL.createObjectURL(new Blob([blob]));
-            const fileName=url.split("/").pop();
-            const aTag=document.createElement("a");
-            aTag.href=blobURL;
-            aTag.setAttribute=("download",fileName);
-            document.body.appendChild(aTag);
-            aTag.click();
-            aTag.remove();
-
-          });
-      }; */
-
-      const downloadFile = (id) => {
-        const getDoc = notices.find(notice => notice.id === id);
-      
-        fetch(`${getDoc.document}`)
-          .then((response) => response.blob())
-          .then((blob) => {
-            if (blob.size > 0) {
-              saveAs(blob, `${getDoc.title}.pdf`);
-            } else {
-              console.error('Invalid or empty PDF file');
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      };
-      
-
-
-      const NOTICE_COLUMNS = () => {
-        return [
-            {
-                Header: "SL",
-                accessor: "id",
-                sortType: 'basic',
-            },
-            {
-                Header: "Title",
-                accessor: "title",
-                sortType: 'basic',
-
-            },
-            {
-                Header: 'Download',
-                accessor: 'action',
-                Cell: ({ row }) => {
-                    const { id,document } = row.original;
-                    return (<div className='download'><button className='download-icon' onClick={() => downloadFile(id)}>
-                        <FiDownload className=' ' />
-                    </button>
-                    </div>);
-                },
-            },
-        ];
-    };
+      })
+  }, []);
 
 
 
-    return (
-        <>
-            <TopHeader />
-            <Menu />
-            <CareerHero>Notice</CareerHero>
-            <Container>
-                {
-                    loading? <Loading loading={loading} /> : <Table columns={NOTICE_COLUMNS()} data={allNotices} headline={" "} />
-                }
+
+  /* const downloadFile = (id) => {
+    const getDoc = notices.find(notice => notice.id === id);
+
+    fetch(`${getDoc.document}`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        if (blob.size > 0) {
+          saveAs(blob, `${getDoc.title}.pdf`);
+        } else {
+          console.error('Invalid or empty PDF file');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }; */
 
 
-              
-            </Container>
-            <Footer />
-        </>
-    );
+
+  const NOTICE_COLUMNS = () => {
+    return [
+      {
+        Header: "SL",
+        id: 'index',
+        accessor: (_row, i) => i + 1
+      },
+      {
+        Header: "Title",
+        accessor: "title",
+        sortType: 'basic',
+
+      },
+      {
+        Header: 'Download',
+        accessor: 'action',
+        Cell: ({ row }) => {
+          const { id, document } = row.original;
+          return (<div className='download'><a href={`${baseUrl}/${document}`} download  >
+            <FiDownload className=' ' />
+          </a>
+          </div>);
+        },
+      },
+    ];
+  };
+
+
+
+  return (
+    <>
+      <TopHeader />
+      <Menu />
+      <CareerHero>Notice</CareerHero>
+      <Container>
+        {
+          loading ? <Loading loading={loading} /> : <Table columns={NOTICE_COLUMNS()} data={allNotices} headline={" "} />
+        }
+
+
+
+      </Container>
+      <Footer />
+    </>
+  );
 };
 
 export default Notices;

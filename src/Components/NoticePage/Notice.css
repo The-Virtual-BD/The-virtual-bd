@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: start;
 }
-.download-icon{
+.download a{
     height: 30px;
     width: 30px;
     border-radius: 6px;
