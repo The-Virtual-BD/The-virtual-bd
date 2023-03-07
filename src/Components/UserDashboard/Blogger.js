@@ -136,7 +136,7 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
       }
   }
     else{
-      console.log("LIMIT CROOSED");
+      console.log("LIMIT CROSSED");
       toast.error("You Have Crossed Charecters Limits");
       return
     }
@@ -282,11 +282,11 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
             <Col md={4}>
               <div className="last_content">
                 <div className="number">
-                  <h1>4</h1>
+                  <h1>3</h1>
                 </div>
               </div>
               <div className="discussion">
-                <h3>4. Execute & install</h3>
+                <h3>Accept Or Reject</h3>
                 
               </div>
             </Col>
