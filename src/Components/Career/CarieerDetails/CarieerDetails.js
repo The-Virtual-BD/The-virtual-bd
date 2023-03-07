@@ -90,8 +90,9 @@ console.log(job)
 
                     <p className=' my-0'><span className='fw-bold '>Job Type:</span> {job?.type}</p>
                     <p className=' my-0'><span className='fw-bold '>Skills:</span> {job?.skills}</p>
-                    <p className=' my-0'><span className='fw-bold'>Salary Range:</span> {job?.salary_range}</p>
-                    <p className=' my-0'><span className='fw-bold'>Job Description:</span> {job?.description}</p>
+                    <p className=' mt-0'><span className='fw-bold'>Salary Range:</span> {job?.salary_range}</p>
+                    <p className=' my-0'><span className='fw-bold'>Job Description:</span></p>
+                    <div  dangerouslySetInnerHTML={{ __html: job?.description }} />
                 </div>
 
 

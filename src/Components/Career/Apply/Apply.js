@@ -11,6 +11,7 @@ function Apply() {
   const [jobs, setJobs] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const allJobs=[...jobs].reverse();
 
   //Get Carieer
   useEffect(() => {
@@ -58,7 +59,7 @@ function Apply() {
             loading ? <Loading loading={loading} /> :
               <div>
                 {
-                  jobs.map((data) => (
+                  allJobs.map((data) => (
                     <div className="get_job">
                       <Row>
                         <Col md={3} sm={12}>
@@ -78,7 +79,8 @@ function Apply() {
                         </Col>
                         <Col md={6} sm={12}>
                           <div className="job_text">
-                            <p>{data?.description.slice(0, 300)}</p>
+                          {/* <div  dangerouslySetInnerHTML={{ __html: data?.description }} /> */}
+                            <p>{data?.description.slice(3, 300)}</p>
 
                           </div>
                         </Col>
