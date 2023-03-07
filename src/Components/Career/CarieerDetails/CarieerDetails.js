@@ -20,7 +20,9 @@ const CarieerDetails = () => {
     const [cv, setCv] = useState(null);
 
 
-
+    useEffect(()=>{
+        window.scrollTo(0,0)
+      },[]);
     
 
     //Get Carieer

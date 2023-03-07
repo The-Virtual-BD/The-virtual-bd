@@ -11,6 +11,7 @@ import useUser from "../../hooks/useUser";
 
 
 
+
 const Blogger = ({ isBlogger,bloggerReqPen }) => {
   const [token] = useToken();
   const [user] = useUser();
@@ -145,6 +146,8 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
 
 
 
+
+
   // Classic Editor Toolbar
 
   const editorToolbar = [
@@ -250,58 +253,7 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
               <div className="bg-white min-h-screen p-5 ">
 
 
-      <section className="buisness_area">
-          <div className="buisness_content">
-            {/* <p>How We Work</p> */}
-            <h3>Blogger Request Proccessing</h3>
-          </div>
-          <Row>
-            <Col md={4} className="content_gap">
-              <div className="content_sl">
-                <div className="number">
-                  <h1>1</h1>
-                </div>
-              </div>
-              <div className="discussion">
-                <h3>Application Sent</h3>
-                
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className="content_sl">
-                <div className="number">
-                  <h1>2</h1>
-                </div>
-              </div>
-              <div className="discussion">
-                <h3>Application Reviewing</h3>
-               
-              </div>
-            </Col>
-           
-            <Col md={4}>
-              <div className="last_content">
-                <div className="number">
-                  <h1>3</h1>
-                </div>
-              </div>
-              <div className="discussion">
-                <h3>Accept Or Reject</h3>
-                
-              </div>
-            </Col>
-          </Row>
-      </section>
-
-
-
-
-
-
-
-
-
-
+       
 
 
 
