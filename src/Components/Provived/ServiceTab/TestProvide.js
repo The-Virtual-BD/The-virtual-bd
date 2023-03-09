@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import "./Provide.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { Container, Row, Col } from "react-bootstrap";
@@ -246,4 +246,4 @@ const TestProvide = () => {
     );
 };
 
-export default TestProvide;
+export default TestProvide; */
