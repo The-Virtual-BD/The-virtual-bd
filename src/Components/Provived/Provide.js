@@ -54,7 +54,7 @@ function Provide() {
 
                       <Col md={5} sm={12}>
                         <div className="service_content text-start">
-                        <div className='' dangerouslySetInnerHTML={{ __html: servceContent?.description}} />
+                          <div className='service-text' dangerouslySetInnerHTML={{ __html: servceContent?.description}} />
                           
                           <ServiceBtn />
                         </div>

@@ -36,11 +36,19 @@
 
 .blog-recent-img-container {
     width: 100%;
-    height: 100%;
+    height: 450px;
 }
 
 .blog-recent-img-container img {
     width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.recent-blog-content{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-between;
     height: 100%;
 }
 
@@ -82,6 +90,12 @@
     transition: all .1s linear;
     border: none;
     background: transparent;
+}
+.prev-blog-card{
+    height: 550px;
+}
+.slide-blog-card{
+    height: 340px;
 }
 
 .recent-blog-section:hover .blog-head {

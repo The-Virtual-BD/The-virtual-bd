@@ -22,6 +22,7 @@ const BlogPage = () => {
     const navigate = useNavigate();
     const[email,setSubscribe_email]=useState('');
     const [blog, setBlog] = useState([]);
+    const [blogs, setBlogs] = useState([]);
 
    // Get Single Blog
     useEffect(() => {
@@ -30,9 +31,19 @@ const BlogPage = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                setBlog(data.data)
+                setBlog(data?.data)
             })
     }, [id]);
+
+    useEffect(() => {
+        const blogUrl=`${baseUrl}/api/posts/activeposts`;
+        fetch(blogUrl)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.data);
+                setBlogs(data.data)
+            })
+    }, []);
 
     console.log(blog)
 
@@ -45,7 +56,7 @@ const BlogPage = () => {
 
     // const relatedblog = blog?.find(blogD => blogD.id == id);
 
-    // const featureBlogs = blog?.filter(fetureBlog => fetureBlog?.category?.name?.toLowerCase() === blog?.category?.name?.toLowerCase());
+    const featureBlogs = blogs?.filter(fetureBlog => fetureBlog?.category?.name?.toLowerCase() === blog?.category?.name?.toLowerCase());
 
     //Navigate to Single Blog Page
     const handleblogs = (id) => {
@@ -131,12 +142,12 @@ const BlogPage = () => {
                             <Col sm={12} md={3}>
                                 <div>
                                     <h6 className='fw-bold blog-section-title mt-4'>Related Articles</h6>
-                                   {/*  <div className='d-flex flex-column gap-1'>
+                                    <div className='d-flex flex-column gap-1'>
                                         {
-                                            featureBlogs?.map(fBlog => <div onClick={() => handleblogs(fBlog.id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
-                                                <div className="row g-0">
+                                            featureBlogs?.map(fBlog => <div onClick={() => handleblogs(fBlog?.id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
+                                                <div className="row g-0 align-items-center">
                                                     <div className="col-md-5">
-                                                        <img src={`${baseUrl}/${fBlog.cover}`} className="img-fluid rounded-start" alt={"Blog Cover"} style={{ height: "100%" }} />
+                                                        <img src={`${baseUrl}/${fBlog?.cover}`} className="img-fluid rounded-start" alt={"Blog Cover"} style={{ height: "88px" }} />
                                                     </div>
                                                     <div className="col-md-7">
                                                         <div className="card-body">
@@ -146,7 +157,7 @@ const BlogPage = () => {
                                                 </div>
                                             </div>).slice(0, 3)
                                         }
-                                    </div> */}
+                                    </div>
 
 
                                     <div className='blog-newslatter-container  mt-4 text-white  py-4 px-4'>

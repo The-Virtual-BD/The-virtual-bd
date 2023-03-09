@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { baseUrl } from "../../hooks/url";
 import useToken from "../../hooks/useToken";
 import useUser from "../../hooks/useUser";
+import BloggerSteps from "./BloggerSteps";
 
 
 
@@ -252,13 +253,8 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
             ) : (
               <div className="bg-white min-h-screen p-5 ">
 
-
+                <BloggerSteps />
        
-
-
-
-
-                
               </div>
             )}
           </>
