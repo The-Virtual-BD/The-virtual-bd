@@ -134,7 +134,8 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
           e.target.reset();
           setDescriptions('');
           setCharCount(0)
-          toast.success(result.message);
+          toast.success("Blog Added For Approval, It will publish soon");
+          // toast.success(result.message);
       }
   }
     else{

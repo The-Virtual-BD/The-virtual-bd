@@ -63,9 +63,8 @@ const Projects = ({loading,setLoading}) => {
         return [
             {
                 Header: "SL",
-                accessor: "id",
-                sortType: 'basic',
-
+                id: 'index',
+                accessor: (_row, i) => i + 1
             },
             {
                 Header: "Project Title",
@@ -165,7 +164,7 @@ const ProductDetails = ({ getId,token }) => {
             })
     }, [getId]);
 
-     //Download Documents
+   /*   //Download Documents
      const downloadFile = () => {
         // const getDoc = notices.find(notice => notice.id === id);
 
@@ -175,7 +174,7 @@ const ProductDetails = ({ getId,token }) => {
           .then((blob) => {
             saveAs(blob, `${project?.name}.doc`);
           });
-      };
+      }; */
 
     console.log(project)
 
@@ -223,8 +222,15 @@ const ProductDetails = ({ getId,token }) => {
 
                             </div>
 
-                            <p><span className='fw-bold'>Documents:</span> <p className='file-downloda-btn'  onClick={downloadFile}>{`${project?.name}`}</p> </p>
+                            <p>
+                                <span className='fw-bold'>Documents:</span> 
+                                <a href={`${baseUrl}/${project?.documents}`} download >Download</a> 
+                            </p>
 
+                            {/* <p>
+                                <span className='fw-bold'>Documents:</span> 
+                                <a href={`${baseUrl}/${project?.documents}`} className='file-downloda-btn' download >Download</a> 
+                            </p> */}
 
                         </div>
 

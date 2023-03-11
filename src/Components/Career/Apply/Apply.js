@@ -31,15 +31,13 @@ function Apply() {
       })
   }, []);
 
-  //Handle View job
 
+  //Handle View job
   const handleViewJob = id => {
     navigate(`/career/${id}`)
   };
 
-  if (!jobs) {
-    return (<p>Loading....</p>)
-  }
+  
 
   return (
     <>
@@ -55,11 +53,13 @@ function Apply() {
           </div>
 
 
+     
+
           {
             loading ? <Loading loading={loading} /> :
               <div>
                 {
-                  allJobs.map((data) => (
+                 allJobs.length!==0 &&  allJobs.map((data) => (
                     <div className="get_job">
                       <Row>
                         <Col md={3} sm={12}>
@@ -79,8 +79,8 @@ function Apply() {
                         </Col>
                         <Col md={6} sm={12}>
                           <div className="job_text">
-                          {/* <div  dangerouslySetInnerHTML={{ __html: data?.description }} /> */}
-                            <p>{data?.description.slice(3, 300)}</p>
+                          <div dangerouslySetInnerHTML={{ __html: data?.description.slice(0, 300) }} />
+                            {/* <p>{data?.description.slice(3, 300)}</p> */}
 
                           </div>
                         </Col>
@@ -93,10 +93,16 @@ function Apply() {
                         </Col>
                       </Row>
                     </div>
-                  ))
+                  )) 
                 }
               </div>
           }
+
+          {
+            allJobs.length ===0 && <p className="text-center fw-bold">No Job available</p>
+          }
+
+
 
 
         </Container>

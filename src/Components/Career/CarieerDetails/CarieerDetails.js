@@ -70,8 +70,9 @@ const CarieerDetails = () => {
         } else {
             console.log(result);
             e.target.reset();
-            toast.success(result.message);
-        }
+            toast.success("Job Application Successfully Done!");
+            // toast.success(result.message);
+        };
 
   } ;
 
@@ -102,7 +103,7 @@ console.log(job)
                         <div className="bg-white  rounded ">
                         <h3 className=' px-3 fw-bold text-center mb-3'>Application Form</h3>
 
-                            <form className='row form-container  mb-3' onSubmit={handleApplicationForm} >
+                            <form className='row form-container ' onSubmit={handleApplicationForm} >
 
                                 <div className="col-12 col-md-6 mb-3">
                                     <label for="subject" className="form-label fw-bold">Name</label>
@@ -124,7 +125,7 @@ console.log(job)
                                     <input type="number" className="form-control" id="subject" placeholder='Expected Salary' onChange={e=>setExpected_salary(e.target.value)} />
                                 </div>
 
-                                <div className="col-12 mb-3 ">
+                                <div className="col-12 ">
                                     <label for="doc" className="form-label fw-bold">CV</label>
                                     <input type="file" className="form-control " id="doc" required onChange={e=>setCv(e.target.files[0])}  />
                                     <p><small>* Please add Doc Or Pdf file only.</small></p>

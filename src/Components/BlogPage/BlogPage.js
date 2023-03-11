@@ -42,6 +42,10 @@ const BlogPage = () => {
     const recentBlog = blogs[blogs?.length - 1];
     const rpostDate= moment(recentBlog?.updated_at).format('DD MMM YYYY');
 
+    //Prev Blog
+    const PrevBlog=blogs.filter(pBlog=>recentBlog.id!==pBlog.id);
+    console.log(PrevBlog);
+
 
 
     //As You Like Blogs
@@ -52,7 +56,7 @@ const BlogPage = () => {
         navigate(`/blog/${id}`)
     };
 
-    console.log(blogs)
+    // console.log(blogs)
 
 
     return (
@@ -83,13 +87,19 @@ const BlogPage = () => {
                                 </div>
                                 
                                 <div className='d-flex align-items-center justify-content-start gap-3'>
-                                    <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
+                                {
+                                    recentBlog?.author?.photo ?
+                                        <img src={`${baseUrl}/${recentBlog?.author?.photo}`} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
+                                        :
+                                        <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
+                                }
+
 
                                         
-                                    <div className='mt-3'>
-                                        <h6 className='mb-0 fw-bold'>{recentBlog?.author?.first_name}</h6>
-                                        <p><small className='fs-6 fw-light'>{rpostDate}</small></p>
-                                    </div>
+                                <div className='mt-3'>
+                                    <h6 className='mb-0 fw-bold'>{recentBlog?.author?.first_name}</h6>
+                                    <p><small className='fs-6 fw-light'>{rpostDate}</small></p>
+                                </div>
 
                                 </div>
                            </div>
@@ -97,13 +107,17 @@ const BlogPage = () => {
 
                     </Row>
                 </div>
+                
 
-                <div className='mt-5 blog-section mb-3'>
+                {
+                    PrevBlog.length!==0 && 
+                    <div className='mt-5 blog-section mb-3'>
                     <h6 className='fw-bold blog-section-title'>PREVIOUS POST </h6>
                     
                     <div>
                         <Row xs={1} md={3} className="g-4">
-                            {blogs?.map(blog => {
+                           
+                            {PrevBlog?.map(blog => {
                                 const { id, category, title, short_description, author,cover,updated_at } = blog;
                                 return (
                                     <Col key={id}>
@@ -149,6 +163,9 @@ const BlogPage = () => {
                         <button className='blog-btn' onClick={handleShowMoreBlogs}>Load More</button>
                     </div>
                 </div>
+                }
+
+               
                 
             </Container>
 

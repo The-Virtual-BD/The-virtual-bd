@@ -39,23 +39,7 @@ const Notices = () => {
 
 
 
-  /* const downloadFile = (id) => {
-    const getDoc = notices.find(notice => notice.id === id);
-
-    fetch(`${getDoc.document}`)
-      .then((response) => response.blob())
-      .then((blob) => {
-        if (blob.size > 0) {
-          saveAs(blob, `${getDoc.title}.pdf`);
-        } else {
-          console.error('Invalid or empty PDF file');
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }; */
-
+ 
 
 
   const NOTICE_COLUMNS = () => {
@@ -92,14 +76,21 @@ const Notices = () => {
       <TopHeader />
       <Menu />
       <CareerHero>Notice</CareerHero>
-      <Container>
+
+      {
+        notices.length!==0 &&
+        <Container>
         {
           loading ? <Loading loading={loading} /> : <Table columns={NOTICE_COLUMNS()} data={allNotices} headline={" "} />
         }
-
-
-
       </Container>
+      }
+      
+      {
+        notices.length===0 && <p className='text-center fw-bold'>No Notice Available</p>
+      }
+
+      
       <Footer />
     </>
   );

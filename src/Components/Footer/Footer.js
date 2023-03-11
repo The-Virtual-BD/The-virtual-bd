@@ -30,8 +30,12 @@ function Footer() {
     .then(res=>res.json())
     .then(result=>{
       console.log(result);
-      toast.success(result.message);
-      e.target.reset();
+      if(result.message){
+        toast.success(result.message);
+        e.target.reset();
+    }else{
+        toast.error("Email Already Added");
+    };
     })
 };
 
