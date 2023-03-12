@@ -65,7 +65,7 @@ function Footer() {
                 <div className="footer_contuct">
                   <h3>Contact Us</h3>
                   <p>
-                    <span>Phone:</span> +880 1711 666 603
+                    <span>Phone:</span> +880 1902-624501
                   </p>
                   <p>
                     <span>Email:</span> contact@thevirtualbd.com

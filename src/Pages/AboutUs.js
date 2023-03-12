@@ -21,8 +21,8 @@ function AboutUs() {
       <AboutHero />
       <DigitalAgency />
       <IntroSlider />
-      {/* <TeamMember /> */}
-      <HireUs />
+      <TeamMember />
+      {/* <HireUs /> */}
       <Footer />
     </>
   );

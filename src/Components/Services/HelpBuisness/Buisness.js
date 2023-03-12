@@ -21,8 +21,7 @@ function Buisness() {
               <div className="discussion">
                 <h3>1. Discussion</h3>
                 <p>
-                  We meet customers in set place to discuss the details about
-                  needs and demands before proposing a plan.
+                The project team and the client engage in a discussion to understand the client's requirements, business objectives, target audience, and other crucial aspects of the project.
                 </p>
               </div>
             </Col>
@@ -35,8 +34,7 @@ function Buisness() {
               <div className="discussion">
                 <h3>2. Concepts & Initatives</h3>
                 <p>
-                  We meet customers in set place to discuss the details about
-                  needs and demands before proposing a plan.
+                The team creates a detailed plan that includes various concepts, initiatives, and strategies that will be implemented throughout the project.
                 </p>
               </div>
             </Col>
@@ -49,8 +47,7 @@ function Buisness() {
               <div className="discussion">
                 <h3>3. Testing & Trying</h3>
                 <p>
-                  We meet customers in set place to discuss the details about
-                  needs and demands before proposing a plan.
+                The team tests and tries out different concepts, initiatives, and strategies that were identified in the previous phase. This is a critical step to ensure that the project meets the client's requirements.
                 </p>
               </div>
             </Col>
@@ -63,8 +60,7 @@ function Buisness() {
               <div className="discussion">
                 <h3>4. Execute & install</h3>
                 <p>
-                  We meet customers in set place to discuss the details about
-                  needs and demands before proposing a plan.
+                The team executes the plan created in the previous phase and installs the necessary tools and systems required for the project.
                 </p>
               </div>
             </Col>

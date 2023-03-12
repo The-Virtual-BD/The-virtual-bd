@@ -14,7 +14,7 @@ function TeamMember() {
   let mail = "mailto:";
   return (
     <>
-      <section className="teamMember_area">
+      <section className="teamMember_area mb-3">
         <Container>
           <div className="teamMember_top">
             <p>Team Member</p>

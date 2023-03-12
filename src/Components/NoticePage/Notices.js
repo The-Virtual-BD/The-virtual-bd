@@ -77,18 +77,16 @@ const Notices = () => {
       <Menu />
       <CareerHero>Notice</CareerHero>
 
-      {
-        notices.length!==0 &&
+     
         <Container>
         {
           loading ? <Loading loading={loading} /> : <Table columns={NOTICE_COLUMNS()} data={allNotices} headline={" "} />
         }
       </Container>
-      }
       
-      {
+      {/* {
         notices.length===0 && <p className='text-center fw-bold'>No Notice Available</p>
-      }
+      } */}
 
       
       <Footer />

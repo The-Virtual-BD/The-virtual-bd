@@ -14,7 +14,7 @@ const galaryImg = [
   {
     id: 1,
     projectNmae: "Project 01",
-    frameWork: "react",
+    frameWork: "React",
     clint: "Red Chillies Entertainment",
     category: "web",
     img: img1,
@@ -22,7 +22,7 @@ const galaryImg = [
   {
     id: 2,
     projectNmae: "Project 02",
-    frameWork: "laravel",
+    frameWork: "Laravel",
     clint: "Red Chillies Entertainment",
     category: "web",
     img: img2,
@@ -30,7 +30,7 @@ const galaryImg = [
   {
     id: 3,
     projectNmae: "Project 03",
-    frameWork: "react",
+    frameWork: "React",
     clint: "Red Chillies Entertainment",
     category: "GraphicDesign",
     img: img3,
@@ -38,7 +38,7 @@ const galaryImg = [
   {
     id: 4,
     projectNmae: "Project 04",
-    frameWork: "react",
+    frameWork: "React",
     clint: "Red Chillies Entertainment",
     category: "GraphicDesign",
     img: img4,
@@ -46,7 +46,7 @@ const galaryImg = [
   {
     id: 5,
     projectNmae: "Project 05",
-    frameWork: "react",
+    frameWork: "React",
     clint: "Red Chillies Entertainment",
     category: "UI/UXDesign",
     img: img5,
@@ -54,7 +54,7 @@ const galaryImg = [
   {
     id: 6,
     projectNmae: "Project 06",
-    frameWork: "react",
+    frameWork: "React",
     clint: "Red Chillies Entertainment",
     category: "UI/UXDesign",
     img: img6,

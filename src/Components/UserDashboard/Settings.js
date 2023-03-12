@@ -315,7 +315,7 @@ const Settings = ({ user,setUser }) => {
                             <input name="photo" type="file" id="photo" onChange={handleImageChange} style={{display: "none" }}  />
 
                             {image && (
-                                <img src={image} alt="Preview" onClick={handleImageClick}  style={{ width: "150px", height: "150px", borderRadius: "100%" }} />
+                                <img src={image} alt="Add Profile" onClick={handleImageClick}  style={{ width: "150px", height: "150px", borderRadius: "100%" }} />
                             ) }
                         </div>
 

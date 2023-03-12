@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProjectGallary.css";
 import { Col, Container, Row } from "react-bootstrap";
 import galaryImg from "./ProjectGallaryData";
+import { baseUrl } from "../../../hooks/url";
+import { useNavigate } from "react-router-dom";
 
 function ProjectGallary() {
+  const navigate = useNavigate();
+  const [projects,setProjects]=useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const allProjects=[...projects].reverse();
+
   const [items, setItems] = useState(galaryImg);
 
   const filterItem = (catItem) => {
@@ -11,6 +19,31 @@ function ProjectGallary() {
       return cureEle.category === catItem;
     });
     setItems(updatedItem);
+  };
+
+
+   //Get Projects
+   useEffect(() => {
+    const perUrl = `${baseUrl}/api/projects/activeprojects`;
+    // setLoading(true);
+    fetch(perUrl, {
+      method: "GET",
+      headers: {
+        'content-type': 'application/json',
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.data);
+        // setLoading(false);
+        setProjects(data.data);
+      })
+  }, []);
+
+
+  //Handle View job
+  const handleViewJob = id => {
+    navigate(`/career/${id}`)
   };
 
   return (

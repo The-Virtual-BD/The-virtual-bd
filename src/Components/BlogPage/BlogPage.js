@@ -170,7 +170,7 @@ const BlogPage = () => {
             </Container>
 
 
-            <div className='blog-you-may-like-section blog-section'>
+            <div className='blog-you-may-like-section blog-section pb-5'>
 
                 <Container >
                     <h6 className='fw-bold blog-section-title pt-3'>YOU MAY ALSO LIKE THIS </h6>
@@ -209,7 +209,7 @@ const BlogPage = () => {
                             {asYouLikeBlog?.map(likeblog => {
                                 const { id, title, cover,author} = likeblog;
                                 return (
-                                    <SwiperSlide key={id} >
+                                    <SwiperSlide key={id} className="mb-3">
                                         <Card className='blog-card slide-blog-card mb-4 mx-1'  onClick={() => handleSingleBlogs(id)}>
                                             <Card.Img variant="top" src={`${baseUrl}/${cover}`} style={{height:"145px"}} />
                                             <Card.Body>

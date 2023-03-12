@@ -99,7 +99,9 @@ function Apply() {
           }
 
           {
-            allJobs.length ===0 && <p className="text-center fw-bold">No Job available</p>
+            allJobs.length ===0 && <div className="d-flex align-items-center justify-content-center" style={{height:"400px"}}>
+              <p className="text-center fw-bold" >No Job available</p>
+            </div>
           }
 
 

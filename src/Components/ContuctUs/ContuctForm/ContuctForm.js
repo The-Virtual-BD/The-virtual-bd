@@ -19,10 +19,10 @@ function ContuctForm() {
                     <p>REACH OUT NOW!</p>
                   </div>
                   <div className="dial">
-                    <h1>01711 666 603</h1>
+                    <h1>+880 1902-624501</h1>
                   </div>
                   <div className="contuct_btn">
-                    <a href="tel:8801711666603">Call Us</a>
+                    <a href="tel:8801902624501">Call Us</a>
                   </div>
                 </div>
               </div>

@@ -236,6 +236,8 @@ const BlogCommentBox = ({id,comments}) => {
         
     };
 
+    const approvedComment=comments?.filter(cmnt=>cmnt.status==="2");
+
 
 
     return (
@@ -264,12 +266,12 @@ const BlogCommentBox = ({id,comments}) => {
             <div>
                 <div className='d-flex text-dark  justify-content-between align-items-center my-4'>
                     <h3 className='fw-bold '>Comments</h3>
-                    <h4>{comments?.length} Comments</h4>
+                    <h4>{approvedComment?.length} Comments</h4>
                 </div>
 
                 <div>
                     {
-                        comments?.map(comment=> <div className='d-flex align-items-start justify-content-start gap-2'>
+                        approvedComment?.map(comment=> <div className='d-flex align-items-start justify-content-start gap-2'>
                         <img src={image1} alt="" srcset="" style={{width:"30px",borderRadius:"100%"}} />
                        <div>
                             <p className='my-0 '> <span className='fw-bolder'>{comment?.commenter_name}</span></p>
