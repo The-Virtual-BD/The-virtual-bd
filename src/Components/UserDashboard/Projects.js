@@ -11,6 +11,7 @@ import useUser from '../../hooks/useUser';
 import useToken from '../../hooks/useToken';
 import Loading from '../../hooks/Loading';
 import { saveAs } from "file-saver";
+import { toast } from 'react-toastify';
 
 const Projects = ({loading,setLoading}) => {
     const [projects, setProjects] = useState([]);
@@ -147,8 +148,10 @@ export default Projects;
 
 
 const ProductDetails = ({ getId,token }) => {
-
     const [project,setProject]=useState([]);
+    const [message,setMessage]=useState('');
+    const [attachment,setAttachment]=useState(null);
+
     useEffect(()=>{
         const url = `${baseUrl}/api/projects/show/${getId }`;
         fetch(url ,{
@@ -164,76 +167,120 @@ const ProductDetails = ({ getId,token }) => {
             })
     }, [getId]);
 
-   /*   //Download Documents
-     const downloadFile = () => {
-        // const getDoc = notices.find(notice => notice.id === id);
+  
 
-        fetch(`${baseUrl}/${project?.documents}`)
-       
-          .then((response) => response.blob())
-          .then((blob) => {
-            saveAs(blob, `${project?.name}.doc`);
-          });
-      }; */
+    console.log(project);
 
-    console.log(project)
 
-/* 
-    if(loading){
-        return(<p>Loading......</p>)
+    //Handle Message Form
+    const handleSubMessageForm=async(e)=>{
+        e.preventDefault();
+
+        const msgData=new FormData();
+        msgData("message",message);
+        msgData("attachment",attachment,attachment.name);
+
+        const url = `${baseUrl}/api/subchat/store`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: msgData
+        });
+    
+        const result = await response.json();
+    
+        if (result.error) {
+            console.log(result.error);
+            toast.error("Message Sent Failed");
+        } else {
+            console.log(result);
+            e.target.reset();
+            toast.success("Message Sent");
+        }
+
     };
- */
+
+
 
     return (
         <>
             <div className='bg-white p-4 px-5 rounded '>
                 <div>
-                    <h3 className=' fw-bold text-start '>View Project</h3>
+                    <h3 className=' fw-bold text-start '>View Subscription Details</h3>
                     <hr className=' text-bgclr' />
                 </div>
 
                 <Row >
                     <Col md={7} sm={12} >
                         <div className='d-flex flex-column align-items-start '>
-                            <p><span className='fw-bold'>Project Title:</span> {project?.name}</p>
-                            <p><span className='fw-bold'>Client Name: </span>{project?.client_name}</p>
+
+                           <div>
+                                <p><span className='fw-bold'>Project Title:</span> {project?.name}</p>
+                                <p><span className='fw-bold'>Client Name: </span>{project?.client_name}</p>
 
 
-                            <p><span className='fw-bold'>Starting Date: </span>{project?.starting_date}</p>
-                            <p><span className='fw-bold'>Ending Date:</span> {project?.ending_date}</p>
+                                <p><span className='fw-bold'>Starting Date: </span>{project?.starting_date}</p>
+                                <p><span className='fw-bold'>Ending Date:</span> {project?.ending_date}</p>
 
-                            <p><span className='fw-bold me-2'> Status:</span>
-                           <span>{project?.progress}</span></p>
+                                <p><span className='fw-bold me-2'> Status:</span>
+                                <span>{project?.progress}</span></p>
 
-                             
+                                <p><span className='fw-bold'> Budget:</span> {project?.value}</p>
+                                <p><span className='fw-bold'> Paid:</span> {project?.value_paid}</p>
 
-                            <p><span className='fw-bold'> Budget:</span> {project?.value}</p>
-                            <p><span className='fw-bold'> Paid:</span> {project?.value_paid}</p>
+                                {/* <p><span className='fw-bold'> Due:</span> {project?.value_payable}</p> */}
 
-                            {/* <p><span className='fw-bold'> Due:</span> {project?.value_payable}</p> */}
+                                <div className='text-start my-2'>
+                                    <p className='fw-bold' >Short Description:</p>
+                                    <p className='text-labelclr'>{project?.short_description}</p>
+                                </div>
+                                <div className='text-start'>
+                                    <p className='fw-bold'>Description:</p>
+                                    <p className='text-labelclr'>{project?.description}</p>
 
-                            <div className='text-start my-2'>
-                                <p className='fw-bold' >Short Description:</p>
-                                <p className='text-labelclr'>{project?.short_description}</p>
+                                </div>
+
+                                <p>
+                                    <span className='fw-bold me-2'>Documents:</span> 
+                                    <a href={`${baseUrl}/${project?.documents}`} download >Download</a> 
+                                </p>
+                           </div>
+
+
+
+
+                            <div >
+                                <div>
+                                    This is Coversation Space
+
+                                </div>
+
+                                <div className="bg-white   rounded user-dashboard-font">
+                                    <form className="row form-container" onSubmit={handleSubMessageForm}>
+                                        <div className=" col-12">
+                                            <label for="bio" className="form-label fw-bold">Message</label>
+                                            <textarea
+                                                className="form-control mb-2"
+                                                required
+                                                id="bio"
+                                                rows="3"
+                                                placeholder='Write Message'
+                                                onChange={e => setMessage(e.target.value)}
+                                                />
+                                                <input type="file" className="form-control " id="doc" 
+                                            onChange={(e) => setAttachment(e.target.files[0])} 
+                                            />
+                                        </div>
+                                        <div className="col-12 text-center">
+                                            <button className='main-btn' type="submit">Send</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div className='text-start'>
-                                <p className='fw-bold'>Description:</p>
-                                <p className='text-labelclr'>{project?.description}</p>
-
-                            </div>
-
-                            <p>
-                                <span className='fw-bold'>Documents:</span> 
-                                <a href={`${baseUrl}/${project?.documents}`} download >Download</a> 
-                            </p>
-
-                            {/* <p>
-                                <span className='fw-bold'>Documents:</span> 
-                                <a href={`${baseUrl}/${project?.documents}`} className='file-downloda-btn' download >Download</a> 
-                            </p> */}
 
                         </div>
-
                     </Col>
 
 
