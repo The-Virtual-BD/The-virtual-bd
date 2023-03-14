@@ -177,8 +177,8 @@ const ProductDetails = ({ getId,token }) => {
         e.preventDefault();
 
         const msgData=new FormData();
-        msgData("message",message);
-        msgData("attachment",attachment,attachment.name);
+        msgData.append("message",message);
+        // msgData.append("attachment",attachment,attachment?.name);
 
         const url = `${baseUrl}/api/subchat/store`;
         const response = await fetch(url, {

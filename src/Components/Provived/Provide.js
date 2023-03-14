@@ -24,6 +24,8 @@ function Provide() {
                 setServices(data.data)
             })
     }, []);
+
+    
   return (
     <>
       <div className="provide_service">

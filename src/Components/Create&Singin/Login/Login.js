@@ -10,7 +10,7 @@ import { baseUrl } from "../../../hooks/url";
 import { toast } from "react-toastify";
 
 function Login() {
-  const { register, handleSubmit} = useForm();
+  const { register, handleSubmit,reset, formState: { errors }} = useForm();
   const navigate=useNavigate();
   const [failedMsg,setFailedMsg]=useState('');
 
@@ -31,7 +31,8 @@ function Login() {
         .then(result => {
           if(result.error){
             console.log(result);
-            toast.error("Login Failed");
+            toast.error(result.error);
+            // toast.error("Login Failed");
             setFailedMsg(result.error)
           }else{
             console.log(result);
@@ -41,6 +42,7 @@ function Login() {
             // toast.success("login Successfully!");
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("user", user);
+            reset();
 
             navigate('/user-dashboard');
           }
@@ -74,17 +76,21 @@ function Login() {
                   <div className="form_login">
                     <form onSubmit={handleSubmit(onSubmit)}>
 
-                      <div className="user">
-                        <input type="email" placeholder="Email" {...register("email")}/>
-                        
+                      <div className="user mb-0">
+                        <input type="email" placeholder="Email" {...register("email", { required: true })}/>
                       </div>
+                      {errors.email && (
+                            <p className="text-danger mt-0 fs-6">*Email is required</p>
+                          )}
 
-                     <div>
-                        <div className="pass">
-                            <input type="password" placeholder="Password" {...register("password")}/>
+                        <div className="mt-3 mb-3">
+                          <div className="pass mb-0 ">
+                              <input type="password" placeholder="Password" {...register("password", { required: true })}/>
+                          </div>
+                          {errors.password && (
+                                <p className="text-danger mt-0 fs-6">*Password is required</p>
+                              )}
                         </div>
-                        <p className="text-danger fs-6 mt-0"><small>{failedMsg}</small></p>
-                     </div>
 
                       <div className="control_area">
                         <div className="remember">

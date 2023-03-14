@@ -1,1 +1,1 @@
-export const baseUrl = `http://admin.thevirtualbd.com`
+export const baseUrl = `https://admin.thevirtualbd.com`

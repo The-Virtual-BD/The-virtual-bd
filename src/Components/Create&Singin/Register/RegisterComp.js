@@ -12,9 +12,10 @@ import countryList from "react-select-country-list";
 import Select from 'react-select';
 
 function RegisterComp() {
-  const { register, handleSubmit,reset } = useForm();
-  const navigate=useNavigate();
+   const { register, handleSubmit,reset, formState: { errors } } = useForm();
+   const navigate=useNavigate();
    const [value, setValue] = useState('');
+   const [privacyCheck, setPrivacyCheck] = useState(false);
    const [failedMsg,setFailedMsg]=useState('');
    
   const options = useMemo(() => countryList().getData(), []);
@@ -22,7 +23,7 @@ function RegisterComp() {
   const changeHandler = value => {
     setValue(value)
   };
-  // console.log(value)
+  console.log(privacyCheck)
 
   // console.log(nationality.label);
 
@@ -59,8 +60,9 @@ function RegisterComp() {
             // toast.success("Register Successfully!");
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("user", user);
+            reset();
             navigate('/user-dashboard');
-          }
+          };
            
         })
   };
@@ -88,28 +90,28 @@ function RegisterComp() {
                   <div className="form_login">
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="user">
-                        <input type="text" placeholder="First Name" {...register("first_name")} required/>
+                        <input type="text" placeholder="First Name" {...register("first_name", { required: true })} required/>
                       </div>
 
                       <div className="user">
-                        <input type="text" placeholder="Last Name"  {...register("last_name")} />
+                        <input type="text" placeholder="Last Name"  {...register("last_name", { required: true })} />
                       </div>
 
                       <div className="user">
-                        <input type="email" placeholder="Email"  {...register("email")} />
+                        <input type="email" placeholder="Email"  {...register("email", { required: true })} />
                       </div>
                       
                       <div className="user">
                         <input 
                           type="text"  
                           placeholder="Date of Birth " 
-                          {...register("birth_date")}  
+                          {...register("birth_date", { required: true })}  
                           onFocus={(e) => (e.target.type = "date")}
                           onBlur={(e) => (e.target.type = "text")}/>
                       </div>
 
                       <div className="user">
-                        <input type="text" placeholder="Profession" {...register("profession")} />
+                        <input type="text" placeholder="Profession" {...register("profession", { required: true })} />
                       </div>
 
                       <div className="user">
@@ -122,17 +124,17 @@ function RegisterComp() {
                       </div>
 
                       <div className="user">
-                        <input type="password" placeholder="Password" {...register("password")} />
+                        <input type="password" placeholder="Password" {...register("password", { required: true })} />
                       </div>
 
                       <div className="user">
-                        <input type="password" placeholder="Confirm Password " {...register("password_confirmation")} />
+                        <input type="password" placeholder="Confirm Password " {...register("password_confirmation", { required: true })} />
                       </div>
-                      {/* <p className="text-danger fs-6 mt-0">{failedMsg}</p> */}
+                      <p className="text-danger fs-6 mt-0">{failedMsg}</p>
 
                       <div className="control_area">
                         <div className="remember">
-                          <input type="checkbox" />
+                          <input type="checkbox"  onChange={(e)=>setPrivacyCheck(e.target.checked)}/>
                           <label htmlFor="remember">
                             I agree to the <Link to={"/terms-conditions"}>terms & conditions</Link>
                           </label>
@@ -142,7 +144,7 @@ function RegisterComp() {
                      
 
                       <div className="form_submit">
-                        <button type="submit">REGISTER</button>
+                        <button type="submit" disabled={!privacyCheck}>REGISTER</button>
                       </div>
                      
                     </form>

@@ -29,7 +29,7 @@ const UserDashboard = () => {
   //Get Token & User from Hooks
   const [token] = useToken();
   const [user,setUser] = useUser();
-  console.log(user);
+  // console.log(user);
 
   const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo } = user;
 
