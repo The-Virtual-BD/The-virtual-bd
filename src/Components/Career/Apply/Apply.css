@@ -41,7 +41,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
-  color: #00b2e2;
+  color: #3498db;
 }
 
 .job_name h2 {
@@ -96,10 +96,10 @@
   line-height: 24px;
   text-transform: uppercase;
   color: #ffffff;
-  border: 2px solid #00b2e2;
+  border: 2px solid #3498db;
 }
 .job_apply button:hover{
-  border: 2px solid #00b2e2;
+  border: 2px solid #3498db;
   background: #fff;
   color: #3498db;
   text-decoration: none;
