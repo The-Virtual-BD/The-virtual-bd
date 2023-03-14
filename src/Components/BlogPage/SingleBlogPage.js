@@ -236,7 +236,7 @@ const BlogCommentBox = ({id,comments}) => {
         
     };
 
-    const approvedComment=comments?.filter(cmnt=>cmnt.status==="2");
+    const approvedComment=comments?.filter(cmnt=>cmnt.status===2);
 
 
 
