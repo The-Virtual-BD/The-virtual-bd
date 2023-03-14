@@ -159,12 +159,16 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
       items: [
         "Bold",
         "Italic",
+        'blockQuote',
+        'undo',
+        'redo',
         "Underline",
         "Strike",
         "Subscript",
         "Superscript",
         "-",
         "RemoveFormat",
+        'heading',
       ],
     },
     {
@@ -179,6 +183,18 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
     },
   ];
 
+  /* const editorToolbar = [
+    'heading',
+    '|',
+    'bold',
+    'italic',
+    'link',
+    'bulletedList',
+    'numberedList',
+    'blockQuote',
+    'undo',
+    'redo'
+  ]; */
 
   return (
     <Row>
@@ -326,9 +342,21 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
                   Description
                 </label>
 
+               {/*  <CKEditor
+                    data={descriptions}
+                    config={{ toolbar: editorToolbar }}
+                    onChange={(event, editor) => {
+                      const data = editor.getData();
+                      setDescriptions(data);
+                    }}
+                  /> */}
+
                 <CKEditor
-                  data={descriptions}
-                  onChange={(e) => setDescriptions(e.editor.getData())}
+                  // data={descriptions}
+                  onChange={(e) =>{
+                    const data=e.editor.getData();
+                    setDescriptions(data);
+                  }}
                   config={{ toolbar: editorToolbar }}
                   className="form-control"
                 /*  config={{
