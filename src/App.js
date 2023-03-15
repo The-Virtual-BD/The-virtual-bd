@@ -32,6 +32,7 @@ import "react-whatsapp-chat-widget/index.css";
 import "react-datepicker/dist/react-datepicker.css";
 import WhatsApp from "./utilities/WhatsApp";
 import CarieerDetails from "./Components/Career/CarieerDetails/CarieerDetails";
+import ProjectDetails from "./Components/Portfolio/PortfolioDetails.js/ProjectDetails";
 
 
 
@@ -51,12 +52,18 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/services" element={<Services />} />
+
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/portfolio/:id" element={<ProjectDetails />} />
+
               <Route path="/aboutus" element={<AboutUs />} />
+
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<SingleBlogPage />} />
+
               <Route path="/career" element={<Career />} />
               <Route path="/career/:id" element={<CarieerDetails />} />
+
               <Route path="/other" element={<Other />} />
               <Route path="/contact" element={<ContuctUs />} />
               <Route path="/notices" element={<Notices />} />

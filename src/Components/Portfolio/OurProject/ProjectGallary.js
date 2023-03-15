@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import galaryImg from "./ProjectGallaryData";
 import { baseUrl } from "../../../hooks/url";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../../hooks/Loading";
 
 function ProjectGallary() {
   const navigate = useNavigate();
@@ -42,9 +43,14 @@ function ProjectGallary() {
 
 
   //Handle View job
-  const handleViewJob = id => {
-    navigate(`/career/${id}`)
+  const handleViewProject = id => {
+    navigate(`/portfolio/${id}`)
   };
+
+  /* if( loading){
+    return <Loading />
+  }; */
+
 
   return (
     <>
@@ -57,51 +63,54 @@ function ProjectGallary() {
           <div className="overLine">
             <hr />
           </div>
+          
           <div className="galary_btn">
             <button className="btn_gap" onClick={() => filterItem("web")}>
-              Web Design & Development
+            Web Design & Development
             </button>
-            <button
-              className="btn_gap"
-              onClick={() => filterItem("GraphicDesign")}
-            >
-              Graphic Design
+
+            <button className="btn_gap"  onClick={() => filterItem("GraphicDesign")}>
+              Android App Development
             </button>
-            <button
-              className="btn_gap"
-              onClick={() => filterItem("UI/UXDesign")}
-            >
-              UI/UX Design
+
+            <button className="btn_gap"  onClick={() => filterItem("UI/UXDesign")}>
+              Graphic & UI/UX Design
             </button>
-            <button
-              className="btn_gap"
-              onClick={() => filterItem("DigitalMarketing")}
-            >
-              Digital Marketing
+
+            
+            <button  className="btn_gap"  onClick={() => filterItem("DigitalMarketing")}>
+               Digital Marketing
             </button>
+            
             <button className="btn_gap" onClick={() => filterItem("Partners")}>
-              Partners
+             Data Analysis
             </button>
+
+            <button className="btn_gap" onClick={() => filterItem("Partners")}>
+             Cyber Security
+            </button>
+
             <button className="btn_gap" onClick={() => setItems(galaryImg)}>
               All
             </button>
           </div>
+
           <Row>
-            {items.map((data) => {
-              const { id, projectNmae, frameWork, clint, category, img } = data;
+            {allProjects?.map((data) => {
+              const { id, name, client_name, service, cover} = data;
+                
               return (
                 <Col md={4} sm={12} key={id}>
                   <div className="glarry_img">
-                    <img src={img} alt="" />
+                    <img src={`${baseUrl}/${cover}`} alt=""  />
                     <div className="project_details">
-                      <div className="project_info">
+                      <div className="project_info" onClick={()=>handleViewProject(id)}>
                         <div className="project_text">
-                          <h3>
-                            Project: {projectNmae}
-                          </h3>
-                          <p>This web site created by {frameWork}</p>
-                          <small>Client: {clint}</small>
+                          <h3> Project: {name}</h3>
+                          <small>Client: {client_name}</small>
+                          <p>Service: {service?.name}</p>
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -109,6 +118,7 @@ function ProjectGallary() {
               );
             })}
           </Row>
+
           <div className="loadMore">
             <button>Load More</button>
           </div>
