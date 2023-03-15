@@ -69,16 +69,7 @@ const TeamSlider = [
     Tname: "Md. Nasim Uddin",
     TDegination: "Digital Marketer",
     Tgmail: "nasim@thevirtualbd.com",
-  },
-
-  {
-    id: 8,
-    img: team10,
-    Tname: " Md. Hedayet",
-    TDegination: "Cyber Security Expert",
-    Tgmail: "hedayet@thevirtualbd.com",
-  },
- 
+  }
 ];
 
 export default TeamSlider;

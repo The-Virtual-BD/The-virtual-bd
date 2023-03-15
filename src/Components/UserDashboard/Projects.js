@@ -13,40 +13,40 @@ import Loading from '../../hooks/Loading';
 import { saveAs } from "file-saver";
 import { toast } from 'react-toastify';
 
-const Projects = ({loading,setLoading}) => {
+const Projects = ({ loading, setLoading }) => {
     const [projects, setProjects] = useState([]);
-    const[getId,setGetId]=useState('');
+    const [getId, setGetId] = useState('');
 
     const [user] = useUser();
     const [token] = useToken();
     // const [isLoading,setIsLoading]=useState(false);
 
-    const {id}=user;
+    const { id } = user;
     // console.log(id)
     const navigate = useNavigate();
-  
 
 
 
-    //Get My All Projects
+
+    //Get My All subscriptions
     useEffect(() => {
-        const url = `${baseUrl}/api/projects/myprojects`;
+        const url = `${baseUrl}/api/subscriptions/mysubscriptions`;
         setLoading(true);
-        fetch(url ,{
-            method:"GET",
+        fetch(url, {
+            method: "GET",
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Bearer ${token}`
             }
         })
             .then(res => res.json())
-            .then(data =>{
+            .then(data => {
                 setLoading(false);
                 setProjects(data.data);
-            } )
-     }, [id,token]);
+            })
+    }, [id, token]);
 
-    // console.log(projects)
+    console.log(projects)
 
 
     //Handle Project View
@@ -54,11 +54,6 @@ const Projects = ({loading,setLoading}) => {
         console.log("clicked", id);
         setGetId(id)
     };
-
-    // console.log(projects);
-
-   
-
 
     const PROJECT_COLUMNS = () => {
         return [
@@ -69,22 +64,20 @@ const Projects = ({loading,setLoading}) => {
             },
             {
                 Header: "Project Title",
-                accessor: "name",
+                accessor: "subject",
                 sortType: 'basic',
-
             },
             {
-                Header: "Start Date",
-                accessor: "starting_date",
+                Header: "Service",
+                accessor: "service.name",
                 sortType: 'basic',
-
             },
             {
-                Header: "End Date",
-                accessor: "ending_date",
+                Header: "Meeting Time",
+                accessor: "schedule",
                 sortType: 'basic',
-
             },
+
             /* {
                 Header: 'Status',
                 accessor: 'status',
@@ -106,7 +99,7 @@ const Projects = ({loading,setLoading}) => {
                     const { id
                     } = row.original;
                     return (<div>
-                        <button className='project-action-btn project-view-btn' onClick={()=>handleProjectView(id)} >
+                        <button className='project-action-btn project-view-btn' onClick={() => handleProjectView(id)} >
                             <div> <BsEyeFill /></div>
                         </button>
                     </div>);
@@ -117,24 +110,24 @@ const Projects = ({loading,setLoading}) => {
     };
 
 
-    if(loading){
-        return(<Loading loading={loading} />)
+    if (loading) {
+        return (<Loading loading={loading} />)
     };
 
     return (
         <>
-           {!getId &&
+            {!getId &&
                 <div >
-                    {projects?.length ===0 ? (
-                         <p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
-                    ):
-                    <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
+                    {projects?.length === 0 ? (
+                        <p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
+                    ) :
+                        <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
                     }
                 </div>
             }
-           
+
             <div>
-                {getId && <ProductDetails getId={getId} token={token}  loading={loading} setLoading={setLoading}/>}
+                {getId && <ProductDetails getId={getId} token={token} loading={loading} setLoading={setLoading} />}
             </div>
         </>
     );
@@ -147,15 +140,15 @@ export default Projects;
 
 
 
-const ProductDetails = ({ getId,token }) => {
-    const [project,setProject]=useState([]);
-    const [message,setMessage]=useState('');
-    const [attachment,setAttachment]=useState(null);
+const ProductDetails = ({ getId, token }) => {
+    const [project, setProject] = useState([]);
+    const [message, setMessage] = useState('');
+    const [attachment, setAttachment] = useState(null);
 
-    useEffect(()=>{
-        const url = `${baseUrl}/api/projects/show/${getId }`;
-        fetch(url ,{
-            method:"GET",
+    useEffect(() => {
+        const url = `${baseUrl}/api/subscriptions/show/${getId}`;
+        fetch(url, {
+            method: "GET",
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -163,22 +156,24 @@ const ProductDetails = ({ getId,token }) => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setProject(data?.data)
             })
     }, [getId]);
 
-  
+
 
     console.log(project);
 
 
     //Handle Message Form
-    const handleSubMessageForm=async(e)=>{
+    const handleSubMessageForm = async (e) => {
         e.preventDefault();
 
-        const msgData=new FormData();
-        msgData.append("message",message);
-        // msgData.append("attachment",attachment,attachment?.name);
+        const msgData = new FormData();
+        msgData.append("message", message);
+        msgData.append("attachment", attachment);
+        msgData.append("subscription_id", getId);
 
         const url = `${baseUrl}/api/subchat/store`;
         const response = await fetch(url, {
@@ -188,9 +183,9 @@ const ProductDetails = ({ getId,token }) => {
             },
             body: msgData
         });
-    
+
         const result = await response.json();
-    
+
         if (result.error) {
             console.log(result.error);
             toast.error("Message Sent Failed");
@@ -213,48 +208,36 @@ const ProductDetails = ({ getId,token }) => {
                 </div>
 
                 <Row >
-                    <Col md={7} sm={12} >
+                    <Col md={12} sm={12} >
                         <div className='d-flex flex-column align-items-start '>
 
-                           <div>
-                                <p><span className='fw-bold'>Project Title:</span> {project?.name}</p>
-                                <p><span className='fw-bold'>Client Name: </span>{project?.client_name}</p>
+                            <div>
+                                <p><span className='fw-bold'>Project Title:</span> {project?.subject}</p>
+                                <p><span className='fw-bold'>Client Name: </span>{project?.service?.name}</p>
+                                <p><span className='fw-bold'>Meeting Time: </span>{project?.schedule}</p>
 
-
-                                <p><span className='fw-bold'>Starting Date: </span>{project?.starting_date}</p>
-                                <p><span className='fw-bold'>Ending Date:</span> {project?.ending_date}</p>
 
                                 <p><span className='fw-bold me-2'> Status:</span>
-                                <span>{project?.progress}</span></p>
+                                    <span>{project?.status}</span></p>
 
-                                <p><span className='fw-bold'> Budget:</span> {project?.value}</p>
-                                <p><span className='fw-bold'> Paid:</span> {project?.value_paid}</p>
 
-                                {/* <p><span className='fw-bold'> Due:</span> {project?.value_payable}</p> */}
-
-                                <div className='text-start my-2'>
-                                    <p className='fw-bold' >Short Description:</p>
-                                    <p className='text-labelclr'>{project?.short_description}</p>
-                                </div>
                                 <div className='text-start'>
-                                    <p className='fw-bold'>Description:</p>
+                                    <p className='fw-bold mb-0'>Description:</p>
                                     <p className='text-labelclr'>{project?.description}</p>
-
                                 </div>
 
                                 <p>
-                                    <span className='fw-bold me-2'>Documents:</span> 
-                                    <a href={`${baseUrl}/${project?.documents}`} download >Download</a> 
+                                    <span className='fw-bold me-2'>Documents:</span>
+                                    <a href={`${baseUrl}/${project?.attachment}`} download >Download</a>
                                 </p>
-                           </div>
+                            </div>
 
 
 
 
                             <div >
-                                <div>
+                                <div className='conversation-container'>
                                     This is Coversation Space
-
                                 </div>
 
                                 <div className="bg-white   rounded user-dashboard-font">
@@ -268,9 +251,9 @@ const ProductDetails = ({ getId,token }) => {
                                                 rows="3"
                                                 placeholder='Write Message'
                                                 onChange={e => setMessage(e.target.value)}
-                                                />
-                                                <input type="file" className="form-control " id="doc" 
-                                            onChange={(e) => setAttachment(e.target.files[0])} 
+                                            />
+                                            <input type="file" className="form-control " id="doc"
+                                                onChange={(e) => setAttachment(e.target.files[0])}
                                             />
                                         </div>
                                         <div className="col-12 text-center">
@@ -284,9 +267,9 @@ const ProductDetails = ({ getId,token }) => {
                     </Col>
 
 
-                    <Col md={5} sm={12} >
+                    {/*   <Col md={5} sm={12} >
                         <img src={`${baseUrl}/${project?.cover}`} alt="" srcset="" style={{ width: "100%" }} />
-                    </Col>
+                    </Col> */}
                 </Row>
             </div>
         </>

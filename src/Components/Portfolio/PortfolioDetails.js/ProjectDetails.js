@@ -8,12 +8,12 @@ import Menu from '../../Header/Menu';
 import TopHeader from '../../TopHeader/TopHeader';
 
 const ProjectDetails = () => {
-    const{id}=useParams();
-    const[project,setProject]=useState({})
+    const { id } = useParams();
+    const [project, setProject] = useState({})
 
     // Get Single Blog
     useEffect(() => {
-        const projUrl=`${baseUrl}/api/projects/show/${id}`;
+        const projUrl = `${baseUrl}/api/projects/show/${id}`;
         fetch(projUrl)
             .then(res => res.json())
             .then(data => {
@@ -21,57 +21,74 @@ const ProjectDetails = () => {
                 setProject(data?.data)
             })
     }, [id]);
+
+    //Slide to Top
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
+
+
     return (
         <div>
             <TopHeader />
             <Menu />
             <CareerHero>Project Details</CareerHero>
             <div className='my-5'>
-            <Container>
-                <div>
-                    <h3 className='fw-bold mb-0'>Project Title: {project?.name}</h3>
-                    <p className=' mb-3'>Service Name: {project?.service?.name}</p>
+                <Container>
+                    <div>
+                        <h3 className='fw-bold mb-0'>Project Title: {project?.name}</h3>
+                        <p className='  my-0'><span className='fw-bold '>Service Name: </span> {project?.service?.name}</p>
+                        <p className='  my-0'><span className='fw-bold '>Client Name:</span> {project?.client_name}</p>
+                        <p className=' my-0'><span className='fw-bold '>Client Type:</span> {project?.client_type}</p>
+                        <p className=' mb-3'><span className='fw-bold '>Client Origin:</span> {project?.client_origin}</p>
 
-                    <div className='project_img'>
-                       <img src={`${baseUrl}/${project?.cover}`} alt={project?.name} srcset="" />
+                        <div className='project_img'>
+                            <img src={`${baseUrl}/${project?.cover}`} alt={project?.name} srcset="" />
+                        </div>
+
+
+
+                        <p className=' my-3'><span className='fw-bold mb-4'>Project Short Description:</span> {project?.short_description}</p>
+
+                        <p className=' my-3'><span className='fw-bold mb-4'>Project Description:</span> {project?.description}</p>
                     </div>
 
-                    <p className=' mt-2 mb-0'><span className='fw-bold '>Client Name:</span> {project?.client_name}</p>
-                    <p className=' my-0'><span className='fw-bold '>Client Type:</span> {project?.client_type}</p>
-                    <p className=' my-0'><span className='fw-bold '>Client Origin:</span> {project?.client_origin}</p>
+                    <div>
+                        <p className=' my-3'>
+                            <span className='fw-bold mb-4 me-2'>Video:</span>
+                            <a href={`${project?.video}`} target="_blank" rel="noopener noreferrer">Watch Video</a>
+                        </p>
+                        <Row >
+                            {
+                                project?.image_1 && <Col md={3} sm={12} >
+                                    <div className='proj_details_img'>
+                                        <img src={`${baseUrl}/${project?.image_1}`} alt="" srcset="" />
+                                    </div>
+                                </Col>
 
-                    <p className=' my-3'><span className='fw-bold mb-4'>project Short Description:</span> {project?.short_description}</p>
+                            }
+                            {
+                                project?.image_2 && <Col md={3} sm={12} >
+                                    <div className='proj_details_img'>
+                                        <img src={`${baseUrl}/${project?.image_2}`} alt="" srcset="" />
+                                    </div>
+                                </Col>
+                            }
+                            {
+                                project?.image_3 && <Col md={3} sm={12} >
+                                    <div className='proj_details_img'>
+                                        <img src={`${baseUrl}/${project?.image_3}`} alt="" srcset="" />
+                                    </div>
+                                </Col>
+                            }
 
-                    <p className=' my-3'><span className='fw-bold mb-4'>project Description:</span> {project?.description}</p>
-                </div>
+                        </Row>
 
-                <div>
-                    <p className=' my-3'>
-                        <span className='fw-bold mb-4 me-2'>Video:</span> 
-                        <a href={`${project?.video}`} target="_blank" rel="noopener noreferrer">Watch Video</a>
-                    </p>
-                    <Row >
-                        {
-                            project?.image_1 &&  <Col md={4} sm={12} >
-                                <img src={`${baseUrl}/${project?.image_1}`} alt="" srcset="" />
-                            </Col>
-                        }
-                        {
-                            project?.image_2 &&  <Col md={4} sm={12} >
-                                <img src={`${baseUrl}/${project?.image_2}`} alt="" srcset="" />
-                            </Col>
-                        }
-                        {
-                            project?.image_3 &&  <Col md={4} sm={12} >
-                                <img src={`${baseUrl}/${project?.image_3}`} alt="" srcset="" />
-                            </Col>
-                        }
-                    
-                    </Row>
-                </div>
-            </Container>
-        </div>
-        <Footer />
+
+                    </div>
+                </Container>
+            </div>
+            <Footer />
         </div>
     );
 };

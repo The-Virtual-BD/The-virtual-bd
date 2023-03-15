@@ -20,13 +20,13 @@ import moment from 'moment';
 const BlogPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const[email,setSubscribe_email]=useState('');
+    const [email, setSubscribe_email] = useState('');
     const [blog, setBlog] = useState([]);
     const [blogs, setBlogs] = useState([]);
 
-   // Get Single Blog
+    // Get Single Blog
     useEffect(() => {
-        const blogUrl=`${baseUrl}/api/posts/activeposts/${id}`;
+        const blogUrl = `${baseUrl}/api/posts/activeposts/${id}`;
         fetch(blogUrl)
             .then(res => res.json())
             .then(data => {
@@ -36,7 +36,7 @@ const BlogPage = () => {
     }, [id]);
 
     useEffect(() => {
-        const blogUrl=`${baseUrl}/api/posts/activeposts`;
+        const blogUrl = `${baseUrl}/api/posts/activeposts`;
         fetch(blogUrl)
             .then(res => res.json())
             .then(data => {
@@ -48,11 +48,11 @@ const BlogPage = () => {
     console.log(blog)
 
     //Slide to Top
-     useEffect(()=>{
-        window.scrollTo(0,0)
-      },[]);
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
 
-      const postDate= moment(blog?.updated_at).format('DD MMM YYYY')
+    const postDate = moment(blog?.updated_at).format('DD MMM YYYY')
 
     // const relatedblog = blog?.find(blogD => blogD.id == id);
 
@@ -63,31 +63,31 @@ const BlogPage = () => {
         navigate(`/blog/${id}`)
     };
 
-   // Handle Subscribe Us Form
-    const handleSubscribeForm=e=>{
+    // Handle Subscribe Us Form
+    const handleSubscribeForm = e => {
         e.preventDefault();
-        const emaiL={email};
+        const emaiL = { email };
 
 
         //send to backend
-        const url=`${baseUrl}/api/newsSubscriber/store`;
+        const url = `${baseUrl}/api/newsSubscriber/store`;
         fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(emaiL)
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(emaiL)
         })
-        .then(res=>res.json())
-        .then(result=>{
-        console.log(result);
-        if(result.message){
-            toast.success(result.message);
-            e.target.reset();
-        }else{
-            toast.error("Email Already Added");
-        }
-        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                if (result.message) {
+                    toast.success(result.message);
+                    e.target.reset();
+                } else {
+                    toast.error("Email Already Added");
+                }
+            })
     };
 
     //id, category, title, short_description, author, blogImg,cover
@@ -104,14 +104,14 @@ const BlogPage = () => {
 
 
                     <div className='d-flex align-items-center justify-content-start gap-3'>
-                       
+
 
                         {
-                          blog?.author?.photo ?
-                                <img src={`${baseUrl}/${blog?.author?.photo}`} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />:
-                                              
-                                <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
-                                            }
+                            blog?.author?.photo ?
+                                <img src={`${baseUrl}/${blog?.author?.photo}`} alt="" srcset="" style={{ width: "50px", borderRadius: "100%" }} /> :
+
+                                <img src={blnakUser} alt="" srcset="" style={{ width: "50px", borderRadius: "100%" }} />
+                        }
 
 
                         <div className='mt-3'>
@@ -121,7 +121,7 @@ const BlogPage = () => {
                     </div>
 
                     <div className='blog-details-img-container'>
-                        <img src={`${baseUrl}/${blog?.cover}`} alt="" srcset=""  />
+                        <img src={`${baseUrl}/${blog?.cover}`} alt="" srcset="" />
                     </div>
 
                     <div className="mt-5">
@@ -129,8 +129,8 @@ const BlogPage = () => {
                             <Col md={9} sm={12} >
                                 {/* <h3 className='fw-bold'>{blog?.blogSubTitle}</h3> */}
 
-                                <div  className='text-labelclr' dangerouslySetInnerHTML={{ __html: blog?.description}}/>
-                                
+                                <div className='text-labelclr' dangerouslySetInnerHTML={{ __html: blog?.description }} />
+
 
                                 <div className='d-flex align-items-center'>
                                     <h3 className='fw-bold'>Share:</h3>
@@ -173,9 +173,9 @@ const BlogPage = () => {
 
                                         <div >
                                             <form className='d-flex flex-column justify-content-center align-items-center blog-newslatter-input' onSubmit={handleSubscribeForm}>
-                                                <input type="email" name="" id="" placeholder='Your email address' onChange={e=>setSubscribe_email(e.target.value)} required/>
+                                                <input type="email" name="" id="" placeholder='Your email address' onChange={e => setSubscribe_email(e.target.value)} required />
 
-                                                <button type='submit' className='subscribe-submit-btn'>Subscribe</button> 
+                                                <button type='submit' className='subscribe-submit-btn'>Subscribe</button>
                                             </form>
                                         </div>
                                     </div>
@@ -199,44 +199,44 @@ export default BlogPage;
 
 
 
-const BlogCommentBox = ({id,comments}) => {
-    const [token]= useToken();
-    const[user]=useUser();
+const BlogCommentBox = ({ id, comments }) => {
+    const [token] = useToken();
+    const [user] = useUser();
     console.log(comments);
 
-     const post_id= id?.toString()
+    const post_id = id?.toString()
 
-    const[body,setComment]=useState('');
+    const [body, setComment] = useState('');
     // console.log(user)
 
 
     //Handle Add Comment
-    const handleCommentForm=e=>{
+    const handleCommentForm = e => {
         e.preventDefault();
-        const data={body,post_id};
+        const data = { body, post_id };
         // console.log(data);
 
-         //Send to Backend
-        const formUrl=`${baseUrl}/api/comments/store`;
-        fetch(formUrl,{
-        method:"POST",
-        headers:{
-            "content-type":"application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        body:JSON.stringify(data)
-        } )
-        .then(res=>res.json())
-        .then(result=>{
-            console.log(result);
-            toast.success(result.message);
-            e.target.reset();
-        
-        });
-        
+        //Send to Backend
+        const formUrl = `${baseUrl}/api/comments/store`;
+        fetch(formUrl, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                toast.success(result.message);
+                e.target.reset();
+
+            });
+
     };
 
-    const approvedComment=comments?.filter(cmnt=>cmnt.status===2);
+    const approvedComment = comments?.filter(cmnt => cmnt.status === 2);
 
 
 
@@ -246,23 +246,23 @@ const BlogCommentBox = ({id,comments}) => {
             {/* <p className='mt-0 mb-4'>Your email address will not be published. Required fields are marked *</p> */}
 
             {
-                (token && user)? 
-                <div>
-                <Form onSubmit={handleCommentForm}>
-                    <Form.Group >
-                        <Form.Control as="textarea" rows={4} placeholder="Write a Comment *" onChange={e=>setComment(e.target.value )}/>
-                    </Form.Group>
-                    <button type='submit' className='blog-btn mb-3'>Comment</button>
-                </Form>
-            </div>:
-            <div>
-                <p>Become a member of The Virtual BD to start commenting.  
-                    <Link to={"/sign-in"} className="comment-login"> SignIn</Link> /
-                    <Link to={"/register"} className="comment-login"> Register</Link>
-                </p>
-            </div>
+                (token && user) ?
+                    <div>
+                        <Form onSubmit={handleCommentForm}>
+                            <Form.Group >
+                                <Form.Control as="textarea" rows={4} placeholder="Write a Comment *" onChange={e => setComment(e.target.value)} />
+                            </Form.Group>
+                            <button type='submit' className='blog-btn mb-3'>Comment</button>
+                        </Form>
+                    </div> :
+                    <div>
+                        <p>Become a member of The Virtual BD to start commenting.
+                            <Link to={"/sign-in"} className="comment-login"> SignIn</Link> /
+                            <Link to={"/register"} className="comment-login"> Register</Link>
+                        </p>
+                    </div>
             }
-           
+
             <div>
                 <div className='d-flex text-dark  justify-content-between align-items-center my-4'>
                     <h3 className='fw-bold '>Comments</h3>
@@ -271,18 +271,18 @@ const BlogCommentBox = ({id,comments}) => {
 
                 <div>
                     {
-                        approvedComment?.map(comment=> <div className='d-flex align-items-start justify-content-start gap-2'>
-                        <img src={image1} alt="" srcset="" style={{width:"30px",borderRadius:"100%"}} />
-                       <div>
-                            <p className='my-0 '> <span className='fw-bolder'>{comment?.commenter_name}</span></p>
+                        approvedComment?.map(comment => <div className='d-flex align-items-start justify-content-start gap-2'>
+                            <img src={image1} alt="" srcset="" style={{ width: "30px", borderRadius: "100%" }} />
+                            <div>
+                                <p className='my-0 '> <span className='fw-bolder'>{comment?.commenter_name}</span></p>
 
-                            <p className='mt-0 fs-6'>{comment?.body}</p>
-                       </div>
-                </div>)
+                                <p className='mt-0 fs-6'>{comment?.body}</p>
+                            </div>
+                        </div>)
                     }
 
-                   
-                   
+
+
 
                 </div>
             </div>
