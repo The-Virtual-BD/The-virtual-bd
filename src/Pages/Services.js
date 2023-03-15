@@ -11,7 +11,6 @@ import GlobalBuisness from "../Components/Services/GlobalBuisness/GlobalBuisness
 import BrandSlider from "./../Components/BrandSlider/BrandSlider";
 import Provide from "./../Components/Provived/Provide";
 import { useEffect } from "react";
-import TestProvide from "../Components/Provived/ServiceTab/TestProvide";
 
 function Services() {
   useEffect(()=>{
@@ -24,7 +23,6 @@ function Services() {
       <Banner />
       <Resources />
       <Provide />
-      {/* <TestProvide /> */}
       <Buisness />
       <Faq />
       <Counter />

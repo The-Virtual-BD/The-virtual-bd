@@ -1,31 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Provide.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { Container, Row, Col } from "react-bootstrap";
-import web from "./ServiceTab/img/web-min.jpg";
-import graphic from "./ServiceTab/img/Graphic-min.jpg";
-import marketing from "./ServiceTab/img/marketing-min.jpg";
-import dataAnalicis from "./ServiceTab/img/Data-analysis-min.jpg";
-import cyber from "./ServiceTab/img/cyber-min.jpg";
-import app from "./ServiceTab/img/app-min.jpg";
 import "react-tabs/style/react-tabs.css";
 import ServiceBtn from "./serviceBtn/ServiceBtn";
 import { baseUrl } from "../../hooks/url";
+import { useQuery } from "react-query";
+import Loading from "../../hooks/Loading";
 
 function Provide() {
-  const [services, setServices] = useState([]);
-    
-    useEffect(() => {
-        const blogUrl=`${baseUrl}/api/services/activeservices`;
-        fetch(blogUrl)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setServices(data.data)
-            })
-    }, []);
+   //Get services
+   const { data:services, isLoading, refetch } = useQuery('services', () => fetch(`${baseUrl}/api/services/activeservices`).then(res => res.json()));
 
-    
   return (
     <>
       <div className="provide_service">
@@ -34,19 +20,17 @@ function Provide() {
           <h2>Services We Provide</h2>
         </div>
 
-        <Container>
+        {
+         isLoading? <Loading />:
+         <Container>
             <Tabs>
               <TabList>
-                {
-                  services.map(servceTab=><Tab>{servceTab?.name}</Tab>)
-                }
-                
-               
+                 { services?.data?.map(servceTab=><Tab>{servceTab?.name}</Tab>)  }
               </TabList>
               
               <div className="tabPanel_gap">
                 {
-                  services.map(servceContent=> <TabPanel>
+                  services?.data?.map(servceContent=> <TabPanel>
                     <Row>
                       <Col md={7} sm={12}>
                         <div className="service_poster">
@@ -64,13 +48,10 @@ function Provide() {
                     </Row>
                   </TabPanel>)
                 }
-               
-  
-              
-
               </div>
             </Tabs>
-          </Container>
+        </Container>
+        }
       </div>
     </>
   );

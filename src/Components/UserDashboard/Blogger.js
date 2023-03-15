@@ -359,17 +359,7 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
                   }}
                   config={{ toolbar: editorToolbar }}
                   className="form-control"
-                /*  config={{
-                               height: '200px',
-                                 toolbar: [
-                                      'bold',
-                                       'italic',
-                                       'bulletedList',
-                                       'numberedList',
-                                       'link',
-                                        'CodeSnippet'
-                                          ],
-                                      }} */
+                
                 />
               </div>
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FadeLoader} from 'react-spinners';
 
-const Loading = ({loading}) => {
-    // let [loading, setLoading] = useState(true);
+const Loading = () => {
+    let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#3498db");
 
     const override = {
