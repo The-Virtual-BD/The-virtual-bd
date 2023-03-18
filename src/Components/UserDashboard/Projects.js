@@ -46,7 +46,7 @@ const Projects = ({ loading, setLoading }) => {
             })
     }, [id, token]);
 
-    console.log(projects)
+    // console.log(projects)
 
 
     //Handle Project View
@@ -156,14 +156,14 @@ const ProductDetails = ({ getId, token }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setProject(data?.data)
             })
     }, [getId]);
 
 
 
-    console.log(project);
+    // console.log(project);
 
 
     //Handle Message Form
@@ -174,6 +174,7 @@ const ProductDetails = ({ getId, token }) => {
         msgData.append("message", message);
         msgData.append("attachment", attachment);
         msgData.append("subscription_id", getId);
+        msgData.append("type", 1);
 
         const url = `${baseUrl}/api/subchat/store`;
         const response = await fetch(url, {
@@ -191,6 +192,7 @@ const ProductDetails = ({ getId, token }) => {
             toast.error("Message Sent Failed");
         } else {
             console.log(result);
+            setProject(result.data)
             e.target.reset();
             toast.success("Message Sent");
         }
@@ -216,9 +218,19 @@ const ProductDetails = ({ getId, token }) => {
                                 <p><span className='fw-bold'>Client Name: </span>{project?.service?.name}</p>
                                 <p><span className='fw-bold'>Meeting Time: </span>{project?.schedule}</p>
 
+                              
+
 
                                 <p><span className='fw-bold me-2'> Status:</span>
-                                    <span>{project?.status}</span></p>
+                                {
+                                  project?.status == "1" ?
+                                (<span className='text-warnning'>Pendding</span>) : project?.status == "2" ?
+                                    (<span className='text-success'>Approved</span>) : project?.status == "4" ?
+                                        (<span className='text-danger'>Declined</span>) : project?.status == "3" ?
+                                            (<span className='text-success'>Approved</span>) : ""
+                                }
+                                    
+                                </p>
 
 
                                 <div className='text-start'>
@@ -236,8 +248,22 @@ const ProductDetails = ({ getId, token }) => {
 
 
                             <div >
-                                <div className='conversation-container'>
-                                    This is Coversation Space
+                                <div className='conversation-container p-2'>
+                                   {
+                                    project?.chats?.map(chat=>{
+                                        console.log(chat)
+                                        const {message,attachment,type}=chat;
+                                        return(
+                                            <div className={`${type==1 ? "text-start": "text-end "} m-2 p-1 rounded bg-white`}>
+                                                <p>{message}</p>
+                                                {
+                                                    attachment && <a href={`${baseUrl}/${attachment}`} download>attachment</a>
+                                                }
+                                            </div>
+                                        )
+                                    })
+
+                                   }
                                 </div>
 
                                 <div className="bg-white   rounded user-dashboard-font">

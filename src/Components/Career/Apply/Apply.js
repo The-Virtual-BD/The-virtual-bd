@@ -36,50 +36,53 @@ function Apply() {
           {
             isLoading? <Loading />:
             <div>
-            {
-             jobs.length!==0 ? recentJobs?.map((data) => (
-                <div className="get_job">
-                  <Row>
-                    <Col md={3} sm={12}>
-                      <div className="job_expertis">
-                        <small>{data?.skills}</small>
-                      </div>
-
-                      <div className="job_name">
-                        <h2>
-                          {data?.designation} <span>/ <small>{data?.type}</small></span>
-                        </h2>
-                      </div>
-
-                      <div className="selary">
-                        <p>Expected Salary - {data?.salary_range}</p>
-                      </div>
-                    </Col>
-                    <Col md={6} sm={12}>
-                      <div className="job_text">
-                      <div dangerouslySetInnerHTML={{ __html: data?.description.slice(0, 300) }} />
-                        {/* <p>{data?.description.slice(3, 300)}</p> */}
-
-                      </div>
-                    </Col>
-                    <Col md={3} sm={12}>
-                      <div className="job_apply">
-                        <button onClick={() => handleViewJob(data?.id)}>
-                          Apply
-                        </button>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              )): 
-
-              <div className="d-flex align-items-center justify-content-center" style={{height:"400px"}}>
-                  <p className="text-center fw-bold" >No Job available</p>
-             </div>
-            }
+              {
+                recentJobs?.map((data) => (
+                  <div className="get_job">
+                    <Row>
+                      <Col md={3} sm={12}>
+                        <div className="job_expertis">
+                          <small>{data?.skills}</small>
+                        </div>
+  
+                        <div className="job_name">
+                          <h2>
+                            {data?.designation} <span>/ <small>{data?.type}</small></span>
+                          </h2>
+                        </div>
+  
+                        <div className="selary">
+                          <p>Expected Salary - {data?.salary_range}</p>
+                        </div>
+                      </Col>
+                      <Col md={6} sm={12}>
+                        <div className="job_text">
+                        <div dangerouslySetInnerHTML={{ __html: data?.description.slice(0, 300) }} />
+                          {/* <p>{data?.description.slice(3, 300)}</p> */}
+  
+                        </div>
+                      </Col>
+                      <Col md={3} sm={12}>
+                        <div className="job_apply">
+                          <button onClick={() => handleViewJob(data?.id)}>
+                            Apply
+                          </button>
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                )) 
+              }
           </div>
           }
         </Container>
+
+        {
+          recentJobs.length===0 &&  <div className="d-flex align-items-center justify-content-center" style={{height:"200px"}}>
+          <p className="text-center fw-bold" >No Job available</p>
+     </div>
+        }
+       
       </section>
     </>
   );

@@ -49,16 +49,23 @@ const Notices = () => {
       <TopHeader />
       <Menu />
       <CareerHero>Notice</CareerHero>
-      {
-         isLoading? <Loading />:
-            <Container>
+      <div>
           {
-            notices?.length !==0 ?
-                <Table columns={NOTICE_COLUMNS()} data={recentNotices} headline={" "} />:
-                <p className='text-center fw-bold'>No Notice Available</p>
+            isLoading? <Loading />:
+                <Container>
+                  {
+                     recentNotices.length !==0 &&   <Table columns={NOTICE_COLUMNS()} data={recentNotices} headline={" "} />
+                  }
+                    
+                </Container>
           }
-          </Container>
-      }
+      </div>
+
+      {
+          recentNotices.length===0 &&  <div className="d-flex align-items-center justify-content-center" style={{height:"200px"}}>
+          <p className="text-center fw-bold" >No Notice available</p>
+     </div>
+        }
       
       <Footer />
     </>

@@ -44,12 +44,12 @@ const BlogPage = () => {
 
     //Prev Blog
     const PrevBlog=blogs.filter(pBlog=>recentBlog.id!==pBlog.id);
-    console.log(PrevBlog);
+    console.log(recentBlog);
 
 
 
     //As You Like Blogs
-    const asYouLikeBlog = blogs?.filter(blog => blog?.category?.name.toLowerCase() === recentBlog?.category?.name.toLowerCase());
+    const asYouLikeBlog = blogs?.filter(blog => blog?.category?.name.toLowerCase() === recentBlog?.category?.name.toLowerCase() && recentBlog?.id !== blog?.id );
 
 
     const handleSingleBlogs = (id) => {
@@ -68,8 +68,10 @@ const BlogPage = () => {
                     </div>
                 </Container>
             </section>
+
             <Container >
-                <div className='mt-5 recent-blog-section'>
+                {
+                    recentBlog &&  <div className='mt-5 recent-blog-section'>
                     <h6 className='fw-bold blog-section-title'>WHATS NEW</h6>
                     <Row className=''>
                         <Col md={7} sm={12} gap-3>
@@ -107,6 +109,9 @@ const BlogPage = () => {
 
                     </Row>
                 </div>
+                }
+
+               
                 
 
                 {
@@ -171,7 +176,7 @@ const BlogPage = () => {
 
 
             <div className='blog-you-may-like-section blog-section pb-5'>
-
+                
                 <Container >
                     <h6 className='fw-bold blog-section-title pt-3'>YOU MAY ALSO LIKE THIS </h6>
                     <Row>
