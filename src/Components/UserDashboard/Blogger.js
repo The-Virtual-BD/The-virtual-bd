@@ -31,7 +31,7 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
   
 
   //show sent msg
-  const [isbloggerAppSent, setIsbloggerAppSent] = useState("");
+  const [isbloggerAppSent, setIsbloggerAppSent] = useState(false);
 
   //Create a Blog Form
   // const [authorName, setAuthorName] = useState("");
@@ -92,7 +92,7 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
               console.log(result);
               e.target.reset();
               toast.success("Your Applications has been Submitted");
-              setIsbloggerAppSent(result.message);
+              setIsbloggerAppSent(true);
             }
 
           });
@@ -199,7 +199,7 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
   return (
     <Row>
       <Col md={9} sm={12}>
-        {!isBlogger ? (
+        {!isbloggerAppSent ? (
           <>
             {!bloggerReqPen ? (
               <div className="bg-white p-sm-4 p-2 rounded  mb-sm-3 mb-5 headline-text">
