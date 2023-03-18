@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { baseUrl } from '../../hooks/url';
 import blnakUser from '../../Images/blank_user.png';
 import moment from 'moment';
+import { Helmet } from 'react-helmet';
 
 
 const BlogPage = () => {
@@ -60,7 +61,14 @@ const BlogPage = () => {
 
 
     return (
+       <>
+        <Helmet>
+            <meta charSet="utf-8" />
+            <title>The Virtual BD || Blogs</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+       </Helmet>
         <div>
+
             <section className="blog_hero">
                 <Container>
                     <div className="blog_text">
@@ -85,7 +93,8 @@ const BlogPage = () => {
                                 <div className='mt-3'>
                                     <span className='blog-catagory'>{recentBlog?.category?.name}</span>
                                     <h3 onClick={() => handleSingleBlogs(recentBlog?.id)} className='fw-bolder mt-2 blog-head'>{recentBlog?.title}</h3>
-                                    <p className='mt-4'>{recentBlog?.short_description}</p>
+                                    <p className='mt-4 fs-5'>{recentBlog?.short_description}</p>
+                                    <div dangerouslySetInnerHTML={{ __html: recentBlog?.description.slice(0, 300) }} />
                                 </div>
                                 
                                 <div className='d-flex align-items-center justify-content-start gap-3'>
@@ -250,6 +259,7 @@ const BlogPage = () => {
 
             </div>
         </div>
+       </>
     );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +13,11 @@ function Login() {
   const { register, handleSubmit,reset, formState: { errors }} = useForm();
   const navigate=useNavigate();
   const [failedMsg,setFailedMsg]=useState('');
+
+  //Slide to Top
+  useEffect(() => {
+    window.scrollTo(0, 0)
+}, []);
 
   const onSubmit = (data ,e)=>{
     e.preventDefault();

@@ -58,7 +58,6 @@ function Apply() {
                       <Col md={6} sm={12}>
                         <div className="job_text">
                         <div dangerouslySetInnerHTML={{ __html: data?.description.slice(0, 300) }} />
-                          {/* <p>{data?.description.slice(3, 300)}</p> */}
   
                         </div>
                       </Col>

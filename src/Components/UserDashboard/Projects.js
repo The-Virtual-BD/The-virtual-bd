@@ -12,6 +12,7 @@ import useToken from '../../hooks/useToken';
 import Loading from '../../hooks/Loading';
 import { saveAs } from "file-saver";
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 const Projects = ({ loading, setLoading }) => {
     const [projects, setProjects] = useState([]);
@@ -163,7 +164,7 @@ const ProductDetails = ({ getId, token }) => {
 
 
 
-    // console.log(project);
+    console.log(project);
 
 
     //Handle Message Form
@@ -191,7 +192,7 @@ const ProductDetails = ({ getId, token }) => {
             console.log(result.error);
             toast.error("Message Sent Failed");
         } else {
-            console.log(result);
+            // console.log(result);
             setProject(result.data)
             e.target.reset();
             toast.success("Message Sent");
@@ -215,7 +216,7 @@ const ProductDetails = ({ getId, token }) => {
 
                             <div>
                                 <p><span className='fw-bold'>Project Title:</span> {project?.subject}</p>
-                                <p><span className='fw-bold'>Client Name: </span>{project?.service?.name}</p>
+                                <p><span className='fw-bold'>Service Name: </span>{project?.service?.name}</p>
                                 <p><span className='fw-bold'>Meeting Time: </span>{project?.schedule}</p>
 
                               
@@ -247,26 +248,31 @@ const ProductDetails = ({ getId, token }) => {
 
 
 
-                            <div >
-                                <div className='conversation-container p-2'>
-                                   {
-                                    project?.chats?.map(chat=>{
-                                        console.log(chat)
-                                        const {message,attachment,type}=chat;
-                                        return(
-                                            <div className={`${type==1 ? "text-start": "text-end "} m-2 p-1 rounded bg-white`}>
-                                                <p>{message}</p>
-                                                {
-                                                    attachment && <a href={`${baseUrl}/${attachment}`} download>attachment</a>
-                                                }
-                                            </div>
-                                        )
-                                    })
+                            <div className='conversation-container  me-5'>
 
-                                   }
+                                <div className='conversation-container-msg'>
+                                    {
+                                          project?.chats?.map(chat=>{
+                                            const {message,attachment,type,created_at}=chat;
+                                            const cmntDate= moment(created_at).format('hh:mm A DD/MM/YY');
+                                        return(
+                                                <div className={`${type==1 ? "text-start me-5 ps-2": "text-end ms-5 pe-2"} my-0 `} >
+                                                    <p className='mb-0 fw-bold'>{project?.applicant?.first_name}</p>
+
+                                                   <div> 
+                                                         <div className='bg-white p-2 rounded  my-0 '>
+                                                            <p className='my-0'>{message}</p>
+                                                            { attachment && 
+                                                                <a title="Click For Download" href={`${baseUrl}/${attachment}`} download> attachment </a>}
+                                                        </div>
+
+                                                        <p className={`time-msg ${type==1 ? "text-end": "text-start"}`}>{cmntDate}</p>
+                                                   </div>
+                                                </div>
+                                            ) } )}
                                 </div>
 
-                                <div className="bg-white   rounded user-dashboard-font">
+                                <div className="bg-white mt-3 ">
                                     <form className="row form-container" onSubmit={handleSubMessageForm}>
                                         <div className=" col-12">
                                             <label for="bio" className="form-label fw-bold">Message</label>
