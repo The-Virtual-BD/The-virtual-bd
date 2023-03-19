@@ -10,6 +10,7 @@ import './Notice.css';
 import Loading from '../../hooks/Loading';
 import Footer from '../Footer/Footer';
 import { useQuery } from "react-query";
+import Skeleton from 'react-loading-skeleton';
 
 const Notices = () => {
   //Get Notices
@@ -51,21 +52,23 @@ const Notices = () => {
       <CareerHero>Notice</CareerHero>
       <div>
           {
-            isLoading? <Loading />:
+            isLoading? <Skeleton count={10} />:
                 <Container>
                   {
-                     recentNotices.length !==0 &&   <Table columns={NOTICE_COLUMNS()} data={recentNotices} headline={" "} />
+                     recentNotices.length !==0 ?   <Table columns={NOTICE_COLUMNS()} data={recentNotices} headline={" "} />:<div className="d-flex align-items-center justify-content-center" style={{height:"200px"}}>
+                     <p className="text-center fw-bold" >No Notice available</p>
+                    </div>
                   }
                     
                 </Container>
           }
       </div>
-
+{/* 
       {
           recentNotices.length===0 &&  <div className="d-flex align-items-center justify-content-center" style={{height:"200px"}}>
           <p className="text-center fw-bold" >No Notice available</p>
      </div>
-        }
+        } */}
       
       <Footer />
     </>

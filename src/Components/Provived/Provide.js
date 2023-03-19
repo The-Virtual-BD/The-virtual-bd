@@ -7,6 +7,7 @@ import ServiceBtn from "./serviceBtn/ServiceBtn";
 import { baseUrl } from "../../hooks/url";
 import { useQuery } from "react-query";
 import Loading from "../../hooks/Loading";
+import Skeleton from "react-loading-skeleton";
 
 function Provide() {
    //Get services
@@ -21,7 +22,7 @@ function Provide() {
         </div>
 
         {
-         isLoading? <Loading />:
+         isLoading? <Skeleton count={10} />:
          <Container>
             <Tabs>
               <TabList>

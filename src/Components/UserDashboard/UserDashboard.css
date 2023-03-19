@@ -201,6 +201,7 @@ select.form-control{
     width: 100%;
     /* height: 400px; */
     background-color: #ECF0F1;
+    color: #2C3E50;
     
 }
 .conversation-container-msg{
@@ -223,7 +224,12 @@ select.form-control{
     margin-right: 40%;
     padding-left: 20px;
 }
-
+.react-rater-star.is-active{
+    color: #3498db !important; 
+}
+/* .react-rater-star{
+    color: #3498db !important;
+} */
 
 @media screen and (max-width:465px) {
     .project-search-container {

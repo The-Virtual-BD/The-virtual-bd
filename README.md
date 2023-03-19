@@ -1,9 +1,9 @@
 # The Virtual BD
 
 ## Description
-[The Virtual BD](https://thevirtualbd.com/) is IT Solution Website. we provide Every kind of IT services.
+[The Virtual BD](https://thevirtualbd.com/) is an IT Solution Website. we provide Every kind of IT services.
 
-## prerequisite
+## Prerequisite
 
 ### Used Dependencies
 * React Js version: 18.2.0

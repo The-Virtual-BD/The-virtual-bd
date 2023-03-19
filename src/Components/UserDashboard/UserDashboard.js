@@ -2,18 +2,17 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import moment from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
+import { BsCheckCircleFill } from 'react-icons/bs';
 
-// import userImg from '../../Images/user.png';
 import './UserDashboard.css';
 import Settings from './Settings';
 import Subscription from './Subscription';
 import Blogger from './Blogger';
 import Projects from './Projects';
-import { BsCheckCircleFill } from 'react-icons/bs';
 import useToken from '../../hooks/useToken';
-import { useNavigate } from 'react-router-dom';
 import useUser from '../../hooks/useUser';
-import moment from 'moment/moment';
 import image1 from '../../Images/blank_user.png';
 import { baseUrl } from '../../hooks/url';
 
@@ -25,10 +24,10 @@ const UserDashboard = () => {
 
   //Blogger Auth
   const [isBlogger, setIsBlogger] = useState(true);
-
-  //Get Token & User from Hooks
   const [token] = useToken();
   const [user,setUser] = useUser();
+
+ 
   // console.log(user);
 
   const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo } = user;
@@ -37,7 +36,7 @@ const UserDashboard = () => {
   
   const birthDate = moment(birth_date).format('DD MMM YYYY');
 
-    //Get Pendding Blogger Req
+    //Check Pendding Blogger Req
     useEffect(() => {
       const cUrl = `${baseUrl}/api/blogger/mypendingapplication`;
       fetch(cUrl, {
@@ -48,7 +47,10 @@ const UserDashboard = () => {
           }
       })
           .then(res => res.json())
-          .then(data => setBloggerReqPen(data?.pending))
+          .then(data =>{
+            console.log(data)
+            setBloggerReqPen(data?.pending);
+          })
   }, [token]);
 
 

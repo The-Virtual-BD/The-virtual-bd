@@ -33,6 +33,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import WhatsApp from "./utilities/WhatsApp";
 import CarieerDetails from "./Components/Career/CarieerDetails/CarieerDetails";
 import ProjectDetails from "./Components/Portfolio/PortfolioDetails.js/ProjectDetails";
+import 'react-rater/lib/react-rater.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 
 

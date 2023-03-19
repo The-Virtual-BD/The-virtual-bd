@@ -5,14 +5,15 @@ import { BsEyeFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import Table from './Table';
 import './UserDashboard.css';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { baseUrl } from '../../hooks/url';
 import useUser from '../../hooks/useUser';
 import useToken from '../../hooks/useToken';
 import Loading from '../../hooks/Loading';
-import { saveAs } from "file-saver";
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import Rater from 'react-rater';
+import Skeleton from 'react-loading-skeleton';
 
 const Projects = ({ loading, setLoading }) => {
     const [projects, setProjects] = useState([]);
@@ -112,7 +113,7 @@ const Projects = ({ loading, setLoading }) => {
 
 
     if (loading) {
-        return (<Loading loading={loading} />)
+        return (<Skeleton count={10} />)
     };
 
     return (
@@ -249,9 +250,9 @@ const ProductDetails = ({ getId, token }) => {
                             </div>
 
 
+                          {/*   Message Section */}
 
-
-                            <div className='conversation-container  me-5'>
+                            <section className='conversation-container '>
 
                                 <div className='conversation-container-msg'>
                                     {
@@ -300,7 +301,7 @@ const ProductDetails = ({ getId, token }) => {
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </section>
 
                         </div>
                     </Col>
@@ -311,8 +312,93 @@ const ProductDetails = ({ getId, token }) => {
                     </Col> */}
                 </Row>
             </div>
+
+            <div className='mt-5'>
+                <Review token={token} getId={getId} />
+            </div>
         </>
     )
-}
+};
+
+
+
+const Review=({token,getId})=>{
+
+    const [subscription_id]=useState(getId);
+    const [body,setReview]=useState('');
+    const [quantity,setRating]=useState(null);
+
+    function handleRate({ rating }) {
+        setRating(rating);
+      };
+
+    const handleReviewForm=e=>{
+        e.preventDefault();
+        const reviewData={subscription_id,body,quantity};
+        console.log(reviewData)
+
+         //Send To Backend
+         const url = `${baseUrl}/api/reviews/store`;
+         fetch(url, {
+             method: 'POST',
+             headers: {
+                 'Authorization': `Bearer ${token}`
+             },
+             body: JSON.stringify(reviewData)
+         })
+             .then(res => res.json())
+             .then(result => {
+                 console.log(result)
+                 if (result.error) {
+                     console.log(result.error);
+                     toast.error("Review Submit Failed");
+                 } else {
+                     console.log(result);
+                     e.target.reset();
+                     toast.success(result.message);
+                 }
+             });
+    };
+
+    
+
+
+    return(
+    <div className="bg-white mt-3 p-3 rounded user-dashboard-font">
+        <h4 className="px-3 fw-bold mb-3">Give a Review</h4>
+
+       <form className="row form-container px-3" onSubmit={handleReviewForm}>
+            <div className="col-12 mb-2">
+                <label for="bloggerName" className="form-label fw-bold mb-0">
+                   Rating
+                </label>
+                <Rater 
+                    total={5} 
+                    /* ratedColor="#FF0000" 
+                    unratedColor="#ccc" */
+                    className="fs-1 d-flex mt-0"
+                    onRate={handleRate} />
+            </div>
+           
+
+            <div className=" col-12">
+                    <label for="bio" className="form-label fw-bold">Review</label>
+                    <textarea
+                    className="form-control mb-2"
+                    required
+                    id="bio"
+                    rows="3"
+                    placeholder='Write Review'
+                    onChange={e => setReview(e.target.value)}
+                />
+            </div>
+
+           <div className="col-12 text-center">
+              <button className='main-btn' type="submit">Submit</button>
+           </div>
+       </form>
+   </div>
+    )
+};
 
 

@@ -102,49 +102,49 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
 
 
 
-  //Handle create blog Form
-  const handleCreateBlogForm = async(e) => {
-    e.preventDefault();
-    if(charCount <= 200){
-      const newPostData = new FormData();
-      newPostData.append('title', title);
-      newPostData.append('short_description', short_description);
-      newPostData.append('descriptions', descriptions);
-      newPostData.append('category_id', category_id );
-      newPostData.append('cover', cover, cover.name);
+      //Handle create blog Form
+      const handleCreateBlogForm = async(e) => {
+        e.preventDefault();
+        if(charCount <= 200){
+          const newPostData = new FormData();
+          newPostData.append('title', title);
+          newPostData.append('short_description', short_description);
+          newPostData.append('descriptions', descriptions);
+          newPostData.append('category_id', category_id );
+          newPostData.append('cover', cover, cover.name);
 
-  
-      const url = `${baseUrl}/api/posts/store`;
-      const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-              "Authorization": `Bearer ${token}`
-          },
-          body: newPostData
-      });
-  
-      const result = await response.json();
-      // console.log(result);
-  
-      if (result.error) {
-          console.log(result.error);
-          toast.error("Subscriptions Add Failed");
-      } else {
+      
+          const url = `${baseUrl}/api/posts/store`;
+          const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                  "Authorization": `Bearer ${token}`
+              },
+              body: newPostData
+          });
+      
+          const result = await response.json();
           // console.log(result);
-          e.target.reset();
-          setDescriptions('');
-          setCharCount(0)
-          toast.success("Blog Added For Approval, It will publish soon");
-          // toast.success(result.message);
+      
+          if (result.error) {
+              console.log(result.error);
+              toast.error("Subscriptions Add Failed");
+          } else {
+              // console.log(result);
+              e.target.reset();
+              setDescriptions('');
+              setCharCount(0)
+              toast.success("Blog Added For Approval, It will publish soon");
+              // toast.success(result.message);
+          }
       }
-  }
-    else{
-      console.log("LIMIT CROSSED");
-      toast.error("You Have Crossed Charecters Limits");
-      return
-    }
+        else{
+          console.log("LIMIT CROSSED");
+          toast.error("You Have Crossed Charecters Limits");
+          return
+        }
 
-  };
+      };
 
 
 
@@ -268,11 +268,9 @@ const Blogger = ({ isBlogger,bloggerReqPen }) => {
                 </form>
               </div>
             ) : (
-              <div className="bg-white min-h-screen p-5 ">
-
-                <BloggerSteps />
-       
-              </div>
+                <div className="bg-white min-h-screen p-5 ">
+                    <BloggerSteps />
+                </div>
             )}
           </>
         ) : (

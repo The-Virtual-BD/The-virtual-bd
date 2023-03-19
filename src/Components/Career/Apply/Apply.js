@@ -7,6 +7,7 @@ import { baseUrl } from "../../../hooks/url";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../hooks/Loading";
 import { useQuery } from "react-query";
+import Skeleton from "react-loading-skeleton";
 
 function Apply() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Apply() {
           </div>
 
           {
-            isLoading? <Loading />:
+            isLoading? <Skeleton count={10} />:
             <div>
               {
                 recentJobs?.map((data) => (
