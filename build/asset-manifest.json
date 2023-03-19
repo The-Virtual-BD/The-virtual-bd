@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.cae663f7.css",
-    "main.js": "/static/js/main.b57af683.js",
+    "main.css": "/static/css/main.30946448.css",
+    "main.js": "/static/js/main.1734050b.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/BusinessService .mp4": "/static/media/BusinessService .1131f575ac3a6ff0f26e.mp4",
     "static/media/Shahajalal.png": "/static/media/Shahajalal.0da7f57fdbb43e2d642e.png",
@@ -39,12 +39,6 @@
     "static/media/p1.jpg": "/static/media/p1.8472219fbf80877abe23.jpg",
     "static/media/fback.png": "/static/media/fback.1cea4ff1455f4b2bb9e4.png",
     "static/media/c_logo.svg": "/static/media/c_logo.533f1e1d2295d9ab4b0a9384abc29cb8.svg",
-    "static/media/Data-analysis-min.jpg": "/static/media/Data-analysis-min.7a5f0a83a34f8eb5815a.jpg",
-    "static/media/cyber-min.jpg": "/static/media/cyber-min.a751901e95e31784b1e1.jpg",
-    "static/media/marketing-min.jpg": "/static/media/marketing-min.722836a50c6d62aa1ffe.jpg",
-    "static/media/app-min.jpg": "/static/media/app-min.3bd533ef283e585e68ee.jpg",
-    "static/media/web-min.jpg": "/static/media/web-min.cd000802a482fa95392f.jpg",
-    "static/media/Graphic-min.jpg": "/static/media/Graphic-min.d4782969714ac4c14778.jpg",
     "static/media/The-govt-of-bahamas.png": "/static/media/The-govt-of-bahamas.03570c110d2cb666140e.png",
     "static/media/Sabbir.jpg": "/static/media/Sabbir.302c808b45f4a1ee8743.jpg",
     "static/media/newimage.png": "/static/media/newimage.0d966d366837ff345d75.png",
@@ -58,12 +52,12 @@
     "static/media/bahamas.png": "/static/media/bahamas.81995b4b340cb24bc7b0.png",
     "static/media/Boibangla.png": "/static/media/Boibangla.0e6396a93f2da134f7b4.png",
     "index.html": "/index.html",
-    "main.cae663f7.css.map": "/static/css/main.cae663f7.css.map",
-    "main.b57af683.js.map": "/static/js/main.b57af683.js.map",
+    "main.30946448.css.map": "/static/css/main.30946448.css.map",
+    "main.1734050b.js.map": "/static/js/main.1734050b.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cae663f7.css",
-    "static/js/main.b57af683.js"
+    "static/css/main.30946448.css",
+    "static/js/main.1734050b.js"
   ]
 }

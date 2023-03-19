@@ -213,6 +213,17 @@ select.form-control{
     font-size: 12px;
 }
 
+.user-msg{
+    text-align: end;
+    margin-left: 40%;
+    padding-right: 20px;
+}
+.admin-msg{
+    text-align:start ;
+    margin-right: 40%;
+    padding-left: 20px;
+}
+
 
 @media screen and (max-width:465px) {
     .project-search-container {

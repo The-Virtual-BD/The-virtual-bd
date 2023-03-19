@@ -217,15 +217,18 @@ const ProductDetails = ({ getId, token }) => {
                             <div>
                                 <p><span className='fw-bold'>Project Title:</span> {project?.subject}</p>
                                 <p><span className='fw-bold'>Service Name: </span>{project?.service?.name}</p>
-                                <p><span className='fw-bold'>Meeting Time: </span>{project?.schedule}</p>
+                                <p><span className='fw-bold'>Meeting Time: </span>{
+                                    moment(project?.schedule).format(' hh:mm A, DD/MM/YYYY')
+                                }
+                                </p>
 
                               
 
 
                                 <p><span className='fw-bold me-2'> Status:</span>
                                 {
-                                  project?.status == "1" ?
-                                (<span className='text-warnning'>Pendding</span>) : project?.status == "2" ?
+                                  project?.status === 1 ?
+                                (<span className='text-warning'>Pendding</span>) : project?.status === 2 ?
                                     (<span className='text-success'>Approved</span>) : project?.status == "4" ?
                                         (<span className='text-danger'>Declined</span>) : project?.status == "3" ?
                                             (<span className='text-success'>Approved</span>) : ""
@@ -256,8 +259,12 @@ const ProductDetails = ({ getId, token }) => {
                                             const {message,attachment,type,created_at}=chat;
                                             const cmntDate= moment(created_at).format('hh:mm A DD/MM/YY');
                                         return(
-                                                <div className={`${type==1 ? "text-start me-5 ps-2": "text-end ms-5 pe-2"} my-0 `} >
-                                                    <p className='mb-0 fw-bold'>{project?.applicant?.first_name}</p>
+                                                <div className={`${type ===1 ? "user-msg": "admin-msg"} my-0 `} >
+                                                <p className='mb-0 fw-bold'>
+                                                    {
+                                                    type ===1?`${project?.applicant?.first_name}`:"Admin"
+                                                   }
+                                                </p>
 
                                                    <div> 
                                                          <div className='bg-white p-2 rounded  my-0 '>
@@ -266,7 +273,7 @@ const ProductDetails = ({ getId, token }) => {
                                                                 <a title="Click For Download" href={`${baseUrl}/${attachment}`} download> attachment </a>}
                                                         </div>
 
-                                                        <p className={`time-msg ${type==1 ? "text-end": "text-start"}`}>{cmntDate}</p>
+                                                        <p className={`time-msg ${type==1 ? "text-start": "text-end"}`}>{cmntDate}</p>
                                                    </div>
                                                 </div>
                                             ) } )}
