@@ -14,43 +14,25 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import Rater from 'react-rater';
 import Skeleton from 'react-loading-skeleton';
+import { useQuery } from 'react-query';
 
-const Projects = ({ loading, setLoading }) => {
-    const [projects, setProjects] = useState([]);
+const Projects = ({ loading, setLoading ,token}) => {
     const [getId, setGetId] = useState('');
-
     const [user] = useUser();
-    const [token] = useToken();
-    // const [isLoading,setIsLoading]=useState(false);
-
     const { id } = user;
-    // console.log(id)
-    const navigate = useNavigate();
 
-
-
-
-    //Get My All subscriptions
-    useEffect(() => {
-        const url = `${baseUrl}/api/subscriptions/mysubscriptions`;
-        setLoading(true);
-        fetch(url, {
-            method: "GET",
-            headers: {
-                'content-type': 'application/json',
-                "Authorization": `Bearer ${token}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                setLoading(false);
-                setProjects(data.data);
-            })
-    }, [id, token]);
+    //Get projects
+    const { data:projects, isLoading, refetch } = useQuery('project', () => fetch(`${baseUrl}/api/subscriptions/mysubscriptions`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            "Authorization": `Bearer ${token}`
+        }
+    }).then(res => res.json()));
+    const recentProjects = projects?.data ? [...(projects.data)].reverse() : [];
 
     // console.log(projects)
-
-
+  
     //Handle Project View
     const handleProjectView = (id) => {
         console.log("clicked", id);
@@ -112,18 +94,14 @@ const Projects = ({ loading, setLoading }) => {
     };
 
 
-    if (loading) {
-        return (<Skeleton count={10} />)
-    };
+   
 
     return (
         <>
             {!getId &&
                 <div >
-                    {projects?.length === 0 ? (
-                        <p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
-                    ) :
-                        <Table columns={PROJECT_COLUMNS()} data={projects} headline={"All Projects List"} />
+                    {isLoading ? (<Skeleton count={10} /> ) :
+                        <Table columns={PROJECT_COLUMNS()} data={recentProjects} headline={"All Projects List"} />
                     }
                 </div>
             }
@@ -131,6 +109,11 @@ const Projects = ({ loading, setLoading }) => {
             <div>
                 {getId && <ProductDetails getId={getId} token={token} loading={loading} setLoading={setLoading} />}
             </div>
+
+            {
+                recentProjects.length===0 && <p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
+            }
+             
         </>
     );
 };
@@ -223,9 +206,6 @@ const ProductDetails = ({ getId, token }) => {
                                 }
                                 </p>
 
-                              
-
-
                                 <p><span className='fw-bold me-2'> Status:</span>
                                 {
                                   project?.status === 1 ?
@@ -280,26 +260,26 @@ const ProductDetails = ({ getId, token }) => {
                                             ) } )}
                                 </div>
 
-                                <div className="bg-white mt-3 ">
-                                    <form className="row form-container" onSubmit={handleSubMessageForm}>
-                                        <div className=" col-12">
-                                            <label for="bio" className="form-label fw-bold">Message</label>
-                                            <textarea
-                                                className="form-control mb-2"
-                                                required
-                                                id="bio"
-                                                rows="3"
-                                                placeholder='Write Message'
-                                                onChange={e => setMessage(e.target.value)}
-                                            />
-                                            <input type="file" className="form-control " id="doc"
-                                                onChange={(e) => setAttachment(e.target.files[0])}
-                                            />
-                                        </div>
-                                        <div className="col-12 text-center">
-                                            <button className='main-btn' type="submit">Send</button>
-                                        </div>
-                                    </form>
+                                    <div className="bg-white mt-3 ">
+                                        <form className="row form-container" onSubmit={handleSubMessageForm}>
+                                            <div className=" col-12">
+                                                <label for="bio" className="form-label fw-bold">Message</label>
+                                                <textarea
+                                                    className="form-control mb-2"
+                                                    required
+                                                    id="bio"
+                                                    rows="3"
+                                                    placeholder='Write Message'
+                                                    onChange={e => setMessage(e.target.value)}
+                                                />
+                                                <input type="file" className="form-control " id="doc"
+                                                    onChange={(e) => setAttachment(e.target.files[0])}
+                                                />
+                                            </div>
+                                            <div className="col-12 text-center">
+                                                <button className='main-btn' type="submit">Send</button>
+                                            </div>
+                                        </form>
                                 </div>
                             </section>
 
@@ -328,10 +308,12 @@ const Review=({token,getId})=>{
     const [body,setReview]=useState('');
     const [quantity,setRating]=useState(null);
 
+    //Get Ratting
     function handleRate({ rating }) {
         setRating(rating);
       };
-
+       
+    //Handle Review Form
     const handleReviewForm=e=>{
         e.preventDefault();
         const reviewData={subscription_id,body,quantity};
@@ -374,14 +356,12 @@ const Review=({token,getId})=>{
                 </label>
                 <Rater 
                     total={5} 
-                    /* ratedColor="#FF0000" 
-                    unratedColor="#ccc" */
                     className="fs-1 d-flex mt-0"
                     onRate={handleRate} />
             </div>
            
 
-            <div className=" col-12">
+            <div className="col-12">
                     <label for="bio" className="form-label fw-bold">Review</label>
                     <textarea
                     className="form-control mb-2"

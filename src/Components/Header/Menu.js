@@ -115,9 +115,9 @@ function Menu() {
                 className="dropMenu sing_area logout-dropdown"
                 id="navbarScrollingDropdown"
               >
-                <NavDropdown.Item href="/user-dashboard">
-                  {/* <Link to="/user-dashboard"> </Link> */}
-                  Profile
+                <NavDropdown.Item className="profile-dropdown">
+                  <Link to="/user-dashboard">  Profile</Link>
+                 
                 </NavDropdown.Item>
 
                 <NavDropdown.Item onClick={handleLogout}>

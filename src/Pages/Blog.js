@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import BlogPage from "../Components/BlogPage/BlogPage";
 import Menu from "../Components/Header/Menu";
 import TopHeader from "../Components/TopHeader/TopHeader";
@@ -12,6 +13,11 @@ function Blog() {
   },[]);
   return (
     <>
+      <Helmet>
+            <meta charSet="utf-8" />
+            <title>The Virtual BD || Blogs</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
       <TopHeader />
       <Menu />
       <BlogPage />

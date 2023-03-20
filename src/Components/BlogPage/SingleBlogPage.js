@@ -16,6 +16,7 @@ import { baseUrl } from '../../hooks/url';
 import { toast } from 'react-toastify';
 import blnakUser from '../../Images/blank_user.png';
 import moment from 'moment';
+import Skeleton from 'react-loading-skeleton';
 
 const BlogPage = () => {
     const { id } = useParams();
@@ -35,6 +36,7 @@ const BlogPage = () => {
             })
     }, [id]);
 
+    
     useEffect(() => {
         const blogUrl = `${baseUrl}/api/posts/activeposts`;
         fetch(blogUrl)
@@ -96,7 +98,10 @@ const BlogPage = () => {
         <>
             <TopHeader />
             <Menu />
-            <Container>
+
+            {
+                blog.length !==0 ? 
+                <Container>
                 <div className='blog-details-container  blog-section mt-sm-3 mt-5'>
                     <span className='blog-catagory'>{blog?.category?.name}</span>
                     <h2 className='fw-bolder mt-2 '>{blog?.title}</h2>
@@ -188,7 +193,9 @@ const BlogPage = () => {
                     </div>
                 </div>
 
-            </Container>
+                </Container> : <Skeleton count={20.5} />
+            }
+           
 
             <Footer />
         </>

@@ -103,7 +103,7 @@ const UserDashboard = () => {
             </TabPanel>
 
             <TabPanel>
-              <Projects loading={loading} setLoading={setLoading} />
+              <Projects loading={loading} setLoading={setLoading} token={token} />
             </TabPanel>
 
             <TabPanel>

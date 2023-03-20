@@ -7,6 +7,7 @@ import ProtfolioSlider from "./../Components/Portfolio/ProtfolioSlider/Protfolio
 
 import ProjectGallary from "./../Components/Portfolio/OurProject/ProjectGallary";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 function Portfolio() {
   useEffect(()=>{
@@ -14,6 +15,11 @@ function Portfolio() {
   },[]);
   return (
     <>
+    <Helmet>
+            <meta charSet="utf-8" />
+            <title>The Virtual BD || Portfolio</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <TopHeader />
       <Menu />
       <PortfolioHero />

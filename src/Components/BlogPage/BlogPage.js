@@ -14,11 +14,14 @@ import { baseUrl } from '../../hooks/url';
 import blnakUser from '../../Images/blank_user.png';
 import moment from 'moment';
 import { Helmet } from 'react-helmet';
+import Skeleton from 'react-loading-skeleton';
+import { useQuery } from 'react-query';
 
 
 const BlogPage = () => {
     const [blogs, setBlogs] = useState([]);
     const navigate = useNavigate();
+
     
     useEffect(() => {
         const blogUrl=`${baseUrl}/api/posts/activeposts`;
@@ -62,11 +65,6 @@ const BlogPage = () => {
 
     return (
        <>
-        <Helmet>
-            <meta charSet="utf-8" />
-            <title>The Virtual BD || Blogs</title>
-            <link rel="canonical" href="http://mysite.com/example" />
-       </Helmet>
         <div>
 
             <section className="blog_hero">
@@ -124,7 +122,7 @@ const BlogPage = () => {
                 
 
                 {
-                    PrevBlog.length!==0 && 
+                    PrevBlog.length!==0 ? 
                     <div className='mt-5 blog-section mb-3'>
                     <h6 className='fw-bold blog-section-title'>PREVIOUS POST </h6>
                     
@@ -176,7 +174,7 @@ const BlogPage = () => {
                     <div className='text-center mt-3'>
                         <button className='blog-btn' onClick={handleShowMoreBlogs}>Load More</button>
                     </div>
-                </div>
+                    </div>: <Skeleton count={10} />
                 }
 
                
@@ -226,26 +224,22 @@ const BlogPage = () => {
                                     <SwiperSlide key={id} className="mb-3">
                                         <Card className='blog-card slide-blog-card mb-4 mx-1'  onClick={() => handleSingleBlogs(id)}>
                                             <Card.Img variant="top" src={`${baseUrl}/${cover}`} style={{height:"145px"}} />
+
                                             <Card.Body>
-                                               
                                                 <Card.Title className='fw-bold mb-2'>{title}</Card.Title>
-                                                
                                             </Card.Body>
+
                                             <Card.Footer  style={{border:"none",backgroundColor:"transparent"}}>
-                                            <div className='d-flex align-items-center justify-content-start gap-2'>
-                                                {
-                                                author?.photo ?
-                                                <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
-                                              :
-                                                <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
-                                            }
+                                                <div className='d-flex align-items-center justify-content-start gap-2'>
+                                                    {
+                                                    author?.photo ?
+                                                    <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                    :
+                                                    <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                    }
 
-                                            <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.first_name}</span></p>
-                                                    
-
-                                                    
+                                                    <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.first_name}</span></p>
                                                 </div>
-                                                
                                             </Card.Footer>
                                         </Card>
                                     </SwiperSlide>

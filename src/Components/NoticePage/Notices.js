@@ -11,6 +11,7 @@ import Loading from '../../hooks/Loading';
 import Footer from '../Footer/Footer';
 import { useQuery } from "react-query";
 import Skeleton from 'react-loading-skeleton';
+import { Helmet } from 'react-helmet';
 
 const Notices = () => {
   //Get Notices
@@ -47,6 +48,11 @@ const Notices = () => {
 
   return (
     <>
+     <Helmet>
+                <meta charSet="utf-8" />
+                <title>The Virtual BD || Notice</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <TopHeader />
       <Menu />
       <CareerHero>Notice</CareerHero>

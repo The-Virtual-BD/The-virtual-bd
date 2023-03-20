@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import AboutHero from "../Components/AboutUs/AboutHero/AboutHero";
 import DigitalAgency from "../Components/AboutUs/DigitalAgency/DigitalAgency";
 import HireUs from "../Components/AboutUs/HireUs/HireUs";
@@ -16,6 +17,11 @@ function AboutUs() {
   
   return (
     <>
+      <Helmet>
+            <meta charSet="utf-8" />
+            <title>The Virtual BD || About Us</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <TopHeader />
       <Menu />
       <AboutHero />

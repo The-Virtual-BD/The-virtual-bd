@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import Footer from '../Components/Footer/Footer';
 import Menu from '../Components/Header/Menu';
 import TopHeader from '../Components/TopHeader/TopHeader';
@@ -10,6 +11,11 @@ const UserProfile = () => {
       },[]);
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>The Virtual BD || Dashboard</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+           </Helmet>
             <TopHeader />
             <Menu />
             <UserDashboard />

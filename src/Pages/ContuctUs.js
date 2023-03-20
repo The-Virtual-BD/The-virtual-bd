@@ -6,6 +6,7 @@ import ContuctHero from "../Components/ContuctUs/ContuctHero/ContuctHero";
 import ContuctForm from "../Components/ContuctUs/ContuctForm/ContuctForm";
 import ProjectStart from "../Components/ContuctUs/ProjectStart/ProjectStart";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 function ContuctUs() {
   useEffect(()=>{
@@ -13,6 +14,11 @@ function ContuctUs() {
   },[]);
   return (
     <>
+     <Helmet>
+            <meta charSet="utf-8" />
+            <title>The Virtual BD || Contact</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <TopHeader />
       <Menu />
       <ContuctHero />

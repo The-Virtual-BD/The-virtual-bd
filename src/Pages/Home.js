@@ -9,6 +9,7 @@ import TeamMember from "../Components/TeamMember/TeamMember";
 import BrandSlider from "../Components/BrandSlider/BrandSlider";
 import GlobalBuisness from "./../Components/Services/GlobalBuisness/GlobalBuisness";
 import Provide from "./../Components/Provived/Provide";
+import { Helmet } from "react-helmet";
 
 function Home() {
   useEffect(()=>{
@@ -16,6 +17,11 @@ function Home() {
   },[]);
   return (
     <div>
+       <Helmet>
+                <meta charSet="utf-8" />
+                <title>The Virtual BD || Home</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
       <TopHeader />
       <Menu />
       <Hero />

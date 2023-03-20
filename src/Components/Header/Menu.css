@@ -37,6 +37,12 @@
   border-bottom: 2px solid #ffff;
 
 }
+.profile-dropdown a{
+  color: #2c3e50;
+}
+.profile-dropdown:hover a{
+ text-decoration: none;
+}
 
 
 

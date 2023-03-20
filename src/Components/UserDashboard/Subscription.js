@@ -9,7 +9,6 @@ import useToken from '../../hooks/useToken';
 import useUser from '../../hooks/useUser';
 import BlogCard from './BlogCard';
 import './UserDashboard.css';
-import DatePicker from "react-datepicker";
 import moment from 'moment';
 
 const Subscription = ({loading,setLoading}) => {
@@ -97,7 +96,7 @@ const Subscription = ({loading,setLoading}) => {
                             <select onChange={(e) => setService_id(e.target.value)} className="form-control custom-select" id="services" aria-label="form-select-lg example" required>
                                 <option selected disabled >Select Service </option>
                                 {
-                                    services?.data?.map(service => <option value={service.id}>{service.name}</option>)
+                                    services?.data?.map(service => <option value={service.id} key={service.id}>{service.name}</option>)
                                 }
                             </select>
                         </div>
@@ -113,19 +112,7 @@ const Subscription = ({loading,setLoading}) => {
                             <textarea className="form-control" id="desc" rows="3" onChange={(e) => setDescription(e.target.value)} required></textarea>
                         </div>
 
-                        {/* <div className="col-12 mb-3">
-                            <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
-
-                            <DatePicker
-                                selected={schedule}
-                                onChange={(date) => setSchedule(date)}
-                                className="form-control"
-                                timeInputLabel="Time:"
-                                dateFormat="yyyy/MM/dd h:mm"
-                                showTimeInput
-                                />
-                        </div> */}
-
+                        
                         <div className="col-12 mb-3">
                             <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
 

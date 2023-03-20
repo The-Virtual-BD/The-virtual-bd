@@ -11,6 +11,7 @@ import GlobalBuisness from "../Components/Services/GlobalBuisness/GlobalBuisness
 import BrandSlider from "./../Components/BrandSlider/BrandSlider";
 import Provide from "./../Components/Provived/Provide";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 function Services() {
   useEffect(()=>{
@@ -18,6 +19,11 @@ function Services() {
   },[]);
   return (
     <>
+     <Helmet>
+            <meta charSet="utf-8" />
+            <title>The Virtual BD || Services</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <TopHeader />
       <Menu />
       <Banner />

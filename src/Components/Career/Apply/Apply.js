@@ -13,7 +13,7 @@ function Apply() {
   const navigate = useNavigate();
 
   //Get Jobs
-  const { data:jobs, isLoading, refetch } = useQuery('users', () => fetch(`${baseUrl}/api/vaccancies/activevaccancies`).then(res => res.json()));
+  const { data:jobs, isLoading, refetch } = useQuery('jobs', () => fetch(`${baseUrl}/api/vaccancies/activevaccancies`).then(res => res.json()));
   const recentJobs = jobs?.data ? [...(jobs.data)].reverse() : [];
 
   //Handle View job
