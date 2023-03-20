@@ -7,8 +7,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper";
+import { useQuery } from "react-query";
+import { baseUrl } from "../../hooks/url";
+import Skeleton from "react-loading-skeleton";
 
 function Testimonial() {
+
+    //Get Jobs
+    const { data:reviews, isLoading, refetch } = useQuery('review', () => fetch(`${baseUrl}/api/reviews/actreview`).then(res => res.json()));
+
+    const recentReviews = reviews?.data ? [...(reviews.data)].reverse() : [];
+    
+    console.log(recentReviews);
+
+    if(isLoading){
+      return <Skeleton count={5.5} />   
+    };
+
+
   return (
     <>
       <section className="tetiomial">
@@ -46,33 +62,41 @@ function Testimonial() {
             modules={[Pagination, Autoplay]}
             className="mySwiper"
           >
-            {TesimonialData.map((data) => (
+            {recentReviews?.map((data) => (
               <SwiperSlide key={data.id}>
                 <div className="review_card">
                   <div className="review_author">
+
                     <div className="review_img">
-                      <img src={data.Timg} alt="" />
+                      <img src={`${baseUrl}/${data?.author?.photo}`} alt="" />
                     </div>
+
                     <div className="review_info">
                       <div className="reviw_star">
                         <Rating
-                          initialRating={data.Trating}
+                          initialRating={data?.quantity}
                           readonly
                           emptySymbol="fa-regular fa-star"
                           fullSymbol="fa-solid fa-star"
                         ></Rating>
                       </div>
+
                       <div className="rivew_name">
-                        <p>{data.name}</p>
+                        <p>{`${data?.author?.first_name} ${data?.author?.last_name}`}</p>
                       </div>
+
                       <div className="rivew_degination">
-                        <p>{data.Tdegicnation}</p>
+                        <p>{data?.author?.profession}</p>
                       </div>
+
                     </div>
                   </div>
+
                   <div className="review_text">
-                    <p>{data.TReviweText}</p>
+                    <p>{data?.body}</p>
+
                   </div>
+
                 </div>
               </SwiperSlide>
             ))}

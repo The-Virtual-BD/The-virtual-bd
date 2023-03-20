@@ -100,8 +100,8 @@ const Projects = ({ loading, setLoading ,token}) => {
         <>
             {!getId &&
                 <div >
-                    {isLoading ? (<Skeleton count={10} /> ) :
-                        <Table columns={PROJECT_COLUMNS()} data={recentProjects} headline={"All Projects List"} />
+                    {isLoading ? (<Skeleton count={10} /> ) :recentProjects.length !==0?
+                        <Table columns={PROJECT_COLUMNS()} data={recentProjects} headline={"All Projects List"} />:<p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
                     }
                 </div>
             }
@@ -110,9 +110,7 @@ const Projects = ({ loading, setLoading ,token}) => {
                 {getId && <ProductDetails getId={getId} token={token} loading={loading} setLoading={setLoading} />}
             </div>
 
-            {
-                recentProjects.length===0 && <p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
-            }
+           
              
         </>
     );

@@ -12,14 +12,14 @@ import Skeleton from "react-loading-skeleton";
 function Apply() {
   const navigate = useNavigate();
 
-  //Get Jobs
-  const { data:jobs, isLoading, refetch } = useQuery('jobs', () => fetch(`${baseUrl}/api/vaccancies/activevaccancies`).then(res => res.json()));
-  const recentJobs = jobs?.data ? [...(jobs.data)].reverse() : [];
+    //Get Jobs
+    const { data:jobs, isLoading, refetch } = useQuery('jobs', () => fetch(`${baseUrl}/api/vaccancies/activevaccancies`).then(res => res.json()));
+    const recentJobs = jobs?.data ? [...(jobs.data)].reverse() : [];
 
-  //Handle View job
-  const handleViewJob = id => {
-    navigate(`/career/${id}`)
-  };
+    //Handle View job
+    const handleViewJob = id => {
+      navigate(`/career/${id}`)
+    };
 
   return (
     <>
