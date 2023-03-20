@@ -13,18 +13,20 @@ import './UserDashboard.css';
 import image1 from '../../Images/blank_user.png';
 
 
-const Settings = ({ user,setUser }) => {
+const Settings = ({ user,setUser,isBloggerRole }) => {
     const [token] = useToken();
     const navigate = useNavigate();
 
-    const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo } = user;
+    const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo,blogger_name
+    } = user;
     const birthDateIn = moment(birth_date).format('DD/ MMM /YYYY');
     const photoShow=`${baseUrl}/${photo}`
 
     //Update Profile
     const [firstName, setFirstName] = useState(first_name);
     const [lastName, setLastName] = useState(last_name);
-    const [bloggerName, setBloggerName] = useState('');
+    const [bloggerName, setBloggerName] = useState(blogger_name);
+        
     const [emaiL, setEmaiL] = useState(email);
     const [professioN, setProfessioN] = useState(profession);
     const [nationalitY, setNationalitY] = useState(nationality);
@@ -187,7 +189,6 @@ const Settings = ({ user,setUser }) => {
                                 className="form-control"
                                 id="firstName"
                                 onChange={e => setFirstName(e.target.value)}
-                                // {...register("first_name")} 
                                 value={firstName || ""} />
                         </div>
 
@@ -198,15 +199,23 @@ const Settings = ({ user,setUser }) => {
                                 className="form-control"
                                 id="lastName"
                                 onChange={e => setLastName(e.target.value)}
-                                // {...register("last_name")} 
                                 value={lastName || ""} />
                         </div>
 
+                        {
+                            isBloggerRole==="blogger" &&  <div className="col-md-12 my-3">
+                            <label for="bloggerName" className="form-label fw-bold">Blogger Name</label>
+                            <input 
+                            type="text" 
+                            onChange={e => setBloggerName(e.target.value)}
+                            value={bloggerName || ""}
+                            className="form-control" 
+                            id="bloggerName"   />
+                         </div>
+                        }
 
-                        {/*  <div className="col-md-12 my-3">
-                        <label for="bloggerName" className="form-label fw-bold">Blogger Name</label>
-                        <input type="text" className="form-control" id="bloggerName"   />
-                    </div> */}
+
+                        
 
                         <div className="col-md-12 my-3">
                             <label for="email" className="form-label fw-bold">Email</label>

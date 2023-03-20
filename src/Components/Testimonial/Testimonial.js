@@ -10,6 +10,7 @@ import { Pagination, Autoplay } from "swiper";
 import { useQuery } from "react-query";
 import { baseUrl } from "../../hooks/url";
 import Skeleton from "react-loading-skeleton";
+import image1 from '../../Images/blank_user.png';
 
 function Testimonial() {
 
@@ -68,7 +69,12 @@ function Testimonial() {
                   <div className="review_author">
 
                     <div className="review_img">
-                      <img src={`${baseUrl}/${data?.author?.photo}`} alt="" />
+                      {
+                        data?.author?.photo ?  <img src={`${baseUrl}/${data?.author?.photo}`} alt="" />:
+                        <img src={image1} alt="" />
+                      }
+                     
+                     
                     </div>
 
                     <div className="review_info">

@@ -106,7 +106,7 @@ const BlogPage = () => {
 
                                         
                                 <div className='mt-3'>
-                                    <h6 className='mb-0 fw-bold'>{recentBlog?.author?.first_name}</h6>
+                                    <h6 className='mb-0 fw-bold'>{recentBlog?.author?.blogger_name}</h6>
                                     <p><small className='fs-6 fw-light'>{rpostDate}</small></p>
                                 </div>
 
@@ -155,7 +155,7 @@ const BlogPage = () => {
                                             }
 
                                             <div className='mt-3'>
-                                                <h6 className='blog-author fw-bold mb-0'>{author?.first_name}</h6>
+                                                <h6 className='blog-author fw-bold mb-0'>{author?.blogger_name}</h6>
                                                 <p><small className='fs-6 fw-light mt-1'>{moment(updated_at).format('DD MMM YYYY')}</small></p>
                                             </div>             
 
@@ -238,7 +238,7 @@ const BlogPage = () => {
                                                     <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
                                                     }
 
-                                                    <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.first_name}</span></p>
+                                                    <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.blogger_name}</span></p>
                                                 </div>
                                             </Card.Footer>
                                         </Card>
