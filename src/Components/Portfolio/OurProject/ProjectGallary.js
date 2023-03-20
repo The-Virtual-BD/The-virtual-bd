@@ -5,6 +5,7 @@ import galaryImg from "./ProjectGallaryData";
 import { baseUrl } from "../../../hooks/url";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../hooks/Loading";
+import Skeleton from "react-loading-skeleton";
 
 function ProjectGallary() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function ProjectGallary() {
   //Get Projects
   useEffect(() => {
     const perUrl = `${baseUrl}/api/projects/activeprojects`;
-    // setLoading(true);
+    setLoading(true);
     fetch(perUrl, {
       method: "GET",
       headers: {
@@ -41,7 +42,7 @@ function ProjectGallary() {
       .then(res => res.json())
       .then(data => {
         console.log(data.data);
-        // setLoading(false);
+        setLoading(false);
         setProjects(data.data);
       })
   }, []);
@@ -52,9 +53,9 @@ function ProjectGallary() {
     navigate(`/portfolio/${id}`)
   };
 
-  /* if( loading){
-    return <Loading />
-  }; */
+  if( loading){
+    return <Skeleton count={10} />
+  };
 
 
   return (

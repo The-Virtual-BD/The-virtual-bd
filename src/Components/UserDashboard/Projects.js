@@ -304,7 +304,7 @@ const ProductDetails = ({ getId, token }) => {
 
 const Review=({token,getId})=>{
 
-    const [subscription_id]=useState(getId);
+    // const [subscription_id]=useState(getId);
     const [body,setReview]=useState('');
     const [quantity,setRating]=useState(null);
 
@@ -312,37 +312,37 @@ const Review=({token,getId})=>{
     function handleRate({ rating }) {
         setRating(rating);
       };
+
        
     //Handle Review Form
-    const handleReviewForm=e=>{
+    const handleReviewForm=async(e)=>{
         e.preventDefault();
-        const reviewData={subscription_id,body,quantity};
-        console.log(reviewData)
+       
+        const reviewData = new FormData();
+        reviewData.append('subscription_id', getId);
+        reviewData.append('body', body);
+        reviewData.append('quantity', quantity);
 
-         //Send To Backend
-         const url = `${baseUrl}/api/reviews/store`;
-         fetch(url, {
-             method: 'POST',
-             headers: {
-                 'Authorization': `Bearer ${token}`
-             },
-             body: JSON.stringify(reviewData)
-         })
-             .then(res => res.json())
-             .then(result => {
-                 console.log(result)
-                 if (result.error) {
-                     console.log(result.error);
-                     toast.error("Review Submit Failed");
-                 } else {
-                     console.log(result);
-                     e.target.reset();
-                     toast.success(result.message);
-                 }
-             });
-    };
-
+        const url = `${baseUrl}/api/reviews/store`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body:reviewData
+        });
     
+        const result = await response.json();
+    
+        if (result.error) {
+            console.log(result.error);
+            toast.error("Review Submit Failed");
+        } else {
+            console.log(result);
+            e.target.reset();
+            toast.success(result.message);
+        }
+    };
 
 
     return(
