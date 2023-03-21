@@ -6,56 +6,41 @@ import { baseUrl } from "../../../hooks/url";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../hooks/Loading";
 import Skeleton from "react-loading-skeleton";
+import { useQuery } from "react-query";
 
 function ProjectGallary() {
-  const navigate = useNavigate();
-  const [projects, setProjects] = useState([]);
+      const navigate = useNavigate();
+      const [showProjects, setShowProjects] = useState(6);
+      const [items, setItems] = useState(galaryImg);
+      
+      //Slide to Top
+      useEffect(() => {
+        window.scrollTo(0, 0)
+      }, []);
 
-  const [loading, setLoading] = useState(false);
-  const allProjects = [...projects].reverse();
-
-  const [items, setItems] = useState(galaryImg);
-
-  const filterItem = (catItem) => {
-    const updatedItem = galaryImg.filter((cureEle) => {
-      return cureEle.category === catItem;
-    });
-    setItems(updatedItem);
-  };
-
-  //Slide to Top
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, []);
+      //Get Jobs
+      const { data:projects, isLoading, refetch } = useQuery('jobs', () => fetch(`${baseUrl}/api/projects/activeprojects`).then(res => res.json()));
+      const recentprojects = projects?.data ? [...(projects.data)].reverse() : [];
 
 
-  //Get Projects
-  useEffect(() => {
-    const perUrl = `${baseUrl}/api/projects/activeprojects`;
-    setLoading(true);
-    fetch(perUrl, {
-      method: "GET",
-      headers: {
-        'content-type': 'application/json',
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data.data);
-        setLoading(false);
-        setProjects(data.data);
-      })
-  }, []);
+      //Handle View job
+      const handleViewProject = id => {
+        navigate(`/portfolio/${id}`)
+      };
+
+      if(isLoading){
+        return <Skeleton count={10} />
+      };
 
 
-  //Handle View job
-  const handleViewProject = id => {
-    navigate(`/portfolio/${id}`)
-  };
+      //Filter Category Projects
+      const filterItem = (catItem) => {
+        const updatedItem = galaryImg.filter((cureEle) => {
+          return cureEle.category === catItem;
+        });
+        setItems(updatedItem);
+      };
 
-  if( loading){
-    return <Skeleton count={10} />
-  };
 
 
   return (
@@ -65,6 +50,7 @@ function ProjectGallary() {
           <p>our ALl Project</p>
           <h2>Have a look at our work!</h2>
         </div>
+
         <Container>
           <div className="overLine">
             <hr />
@@ -102,7 +88,7 @@ function ProjectGallary() {
           </div>
 
           <Row>
-            {allProjects?.map((data) => {
+            {recentprojects?.map((data) => {
               const { id, name, client_name, service, cover } = data;
 
               return (
@@ -126,9 +112,10 @@ function ProjectGallary() {
             })}
           </Row>
 
-          <div className="loadMore">
-            <button>Load More</button>
-          </div>
+          {
+            recentprojects?.length >6 && <div className="loadMore">
+              <button className='blog-btn' onClick={()=>setShowProjects(showProjects+5)}>Load More</button></div>
+          }
         </Container>
       </section>
     </>

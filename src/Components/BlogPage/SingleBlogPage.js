@@ -120,7 +120,7 @@ const BlogPage = () => {
 
 
                         <div className='mt-3'>
-                            <h6 className='mb-0 fw-bold'>{blog?.author?.first_name}</h6>
+                            <h6 className='mb-0 fw-bold'>{blog?.author?.blogger_name}</h6>
                             <p><small className='fs-6 fw-light'>{postDate}</small></p>
                         </div>
                     </div>
@@ -212,9 +212,9 @@ const BlogCommentBox = ({ id, comments }) => {
     console.log(comments);
 
     const post_id = id?.toString()
-
     const [body, setComment] = useState('');
-    // console.log(user)
+    const [showComment, setShowComment] = useState(10);
+    
 
 
     //Handle Add Comment
@@ -285,13 +285,15 @@ const BlogCommentBox = ({ id, comments }) => {
 
                                 <p className='mt-0 fs-6'>{comment?.body}</p>
                             </div>
-                        </div>)
+                        </div>).slice(0,showComment)
                     }
-
-
-
-
                 </div>
+                {
+                   approvedComment?.length >= 10 &&   <div className='text-center mt-3'>
+                   <button className='blog-btn' onClick={()=>setShowComment(showComment+5)}>Load More</button>
+               </div>
+                }
+               
             </div>
 
         </div>

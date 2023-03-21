@@ -170,10 +170,14 @@ const BlogPage = () => {
                             }).slice(0, showBlog)}
                         </Row>
                     </div>
-
-                    <div className='text-center mt-3'>
+                    {
+                        PrevBlog?.length >6 && <div className='text-center mt-3'>
                         <button className='blog-btn' onClick={handleShowMoreBlogs}>Load More</button>
                     </div>
+                    }
+
+                    
+
                     </div>: <Skeleton count={10} />
                 }
 
