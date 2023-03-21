@@ -7,7 +7,6 @@ import TopHeader from '../TopHeader/TopHeader';
 import Table from '../UserDashboard/Table';
 import { baseUrl } from '../../hooks/url';
 import './Notice.css';
-import Loading from '../../hooks/Loading';
 import Footer from '../Footer/Footer';
 import { useQuery } from "react-query";
 import Skeleton from 'react-loading-skeleton';
@@ -69,13 +68,6 @@ const Notices = () => {
                 </Container>
           }
       </div>
-{/* 
-      {
-          recentNotices.length===0 &&  <div className="d-flex align-items-center justify-content-center" style={{height:"200px"}}>
-          <p className="text-center fw-bold" >No Notice available</p>
-     </div>
-        } */}
-      
       <Footer />
     </>
   );

@@ -1,0 +1,28 @@
+.word-counter-textarea{
+    background: #ECF0F1;
+}
+.word-counter-textarea:focus{
+    background: #ECF0F1;
+}
+.word-Counter-result{
+    background: #ECF0F1;
+    height: 70px;
+    margin-top: 20px;
+    color: #2C3E50;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 5px;
+}
+.count-details-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border-bottom: 1px solid #2C3E50; */
+
+}
+.details-container{
+    background: #ECF0F1;
+    padding: 5px 15px;
+    border-radius: 5px;
+}

@@ -97,12 +97,16 @@ function Menu() {
                 <Link to="/career">Career</Link>
               </Nav.Link>
 
-              <Nav.Link>
+              {/* <Nav.Link>
                 <Link to="/notices">Notices</Link>
-              </Nav.Link>
+              </Nav.Link> */}
 
               <Nav.Link>
                 <Link to="/contact">Contact</Link>
+              </Nav.Link>
+
+              <Nav.Link>
+                <Link to="/Word-Counter">WordCounter</Link>
               </Nav.Link>
 
             </Nav>

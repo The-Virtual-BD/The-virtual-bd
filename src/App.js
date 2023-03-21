@@ -35,6 +35,7 @@ import CarieerDetails from "./Components/Career/CarieerDetails/CarieerDetails";
 import ProjectDetails from "./Components/Portfolio/PortfolioDetails.js/ProjectDetails";
 import 'react-rater/lib/react-rater.css';
 import 'react-loading-skeleton/dist/skeleton.css';
+import WordCounter from "./Components/WordCounter/WordCounter";
 
 
 
@@ -72,6 +73,7 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-conditions" element={<TermsCondition />} />
+              <Route path="/Word-Counter" element={<WordCounter />} />
             
               <Route path="/register" element={<Register />} />
               <Route path="/search" element={<Search />} />
