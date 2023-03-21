@@ -60,21 +60,30 @@ const Projects = ({ loading, setLoading ,token}) => {
                 Header: "Meeting Time",
                 accessor: "schedule",
                 sortType: 'basic',
+                Cell: ({ row }) => {
+                    const { schedule } = row.original;
+                    return (
+                       <div>
+                         { moment(schedule).format('DD MMM YYYY hh:mm A')}
+                       </div>
+                    );
+                },
             },
 
-            /* {
+            {
                 Header: 'Status',
                 accessor: 'status',
                 Cell: ({ row }) => {
                     const {status} = row.original;
                     return (<div className='d-flex justify-content-start pt-1 align-items-center'>
-                        {status==="1"?<p className='text-warning  fw-bold'>Pendding</p>
-                        :status==="2"?<p className='text-success fw-bold'>Running</p>
-                        :status==="3"?<p className='text-danger fw-bold'>Cancel</p>:""}
+                        {status===1?<p className='text-warning  fw-bold '>Pendding</p>
+                        :status===2?<p className='text-success fw-bold'>Approved</p>
+                        :status===3?<p className='text-success fw-bold'>Approved</p>
+                        :status===4?<p className='text-danger fw-bold'>Declined</p>:""}
 
                     </div>);
                 },
-            }, */
+            },
             {
                 Header: "Action",
                 accessor: "action",
