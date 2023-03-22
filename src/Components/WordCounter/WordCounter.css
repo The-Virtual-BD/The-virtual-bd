@@ -1,8 +1,29 @@
+button ._4qzafi0{
+    background: red !important;
+}
+
 .word-counter-textarea{
     background: #ECF0F1;
 }
 .word-counter-textarea:focus{
     background: #ECF0F1;
+}
+.settings-container-wordcounter{
+    background: #3498db;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.bg-item{
+    background: #3498db; 
+}
+.gramarly-container{
+    min-height: 30px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-top: 10px;
 }
 .word-Counter-result{
     background: #ECF0F1;
