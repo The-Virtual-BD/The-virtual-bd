@@ -15,6 +15,7 @@ import useToken from '../../hooks/useToken';
 import useUser from '../../hooks/useUser';
 import image1 from '../../Images/blank_user.png';
 import { baseUrl } from '../../hooks/url';
+import BlogList from './BlogList';
 
 
 const UserDashboard = () => {
@@ -88,6 +89,7 @@ const UserDashboard = () => {
               <Tab>Subscription</Tab>
               <Tab>Projects</Tab>
               <Tab>{isBloggerRole==="blogger" ? "Blog" : "Blogger"}  </Tab>
+              { isBloggerRole === "blogger" &&   <Tab>Blog List</Tab>}
               <Tab>My Profile</Tab>
               <Tab>Settings</Tab>
 
@@ -110,6 +112,10 @@ const UserDashboard = () => {
 
             <TabPanel>
               <Blogger isBloggerRole={isBloggerRole} bloggerReqPen={bloggerReqPen} setBloggerReqPen={setBloggerReqPen} />
+            </TabPanel>
+
+            <TabPanel>
+              <BlogList token={token}/>
             </TabPanel>
 
             <TabPanel>

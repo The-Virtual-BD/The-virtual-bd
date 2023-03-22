@@ -10,21 +10,30 @@ import { Pagination, Autoplay } from "swiper";
 import { useQuery } from "react-query";
 import { baseUrl } from "../../hooks/url";
 import Skeleton from "react-loading-skeleton";
-import image1 from '../../Images/blank_user.png';
+import img1 from "./image/user.jpg";
 
 function Testimonial() {
-
     //Get Jobs
     const { data:reviews, isLoading, refetch } = useQuery('review', () => fetch(`${baseUrl}/api/reviews/actreview`).then(res => res.json()));
-
     const recentReviews = reviews?.data ? [...(reviews.data)].reverse() : [];
-    
-    console.log(recentReviews);
+    // console.log(recentReviews);
+
+  //Combined Both data Table with same key,value
+    const testimonialWithNewKeys = recentReviews.map((data) => ({
+      id: data.id,
+      img: data?.author?.photo ? `${baseUrl}/${data?.author?.photo}` : img1,
+      rating: data.quantity,
+      name: `${data.author.first_name} ${data.author.last_name}`,
+      designation: data.author.profession,
+      reviewText: data.body,
+    }));
+
+    const reviewsData = [...testimonialWithNewKeys, ...TesimonialData];
+
 
     if(isLoading){
       return <Skeleton count={5.5} />   
     };
-
 
   return (
     <>
@@ -63,24 +72,19 @@ function Testimonial() {
             modules={[Pagination, Autoplay]}
             className="mySwiper"
           >
-            {recentReviews?.map((data) => (
-              <SwiperSlide key={data.id}>
+            {reviewsData?.map((data) => (
+              <SwiperSlide key={data?.id}>
                 <div className="review_card">
                   <div className="review_author">
 
                     <div className="review_img">
-                      {
-                        data?.author?.photo ?  <img src={`${baseUrl}/${data?.author?.photo}`} alt="" />:
-                        <img src={image1} alt="" />
-                      }
-                     
-                     
+                       { <img src={data?.img} alt={data?.name} /> }
                     </div>
 
                     <div className="review_info">
                       <div className="reviw_star">
                         <Rating
-                          initialRating={data?.quantity}
+                          initialRating={data?.rating}
                           readonly
                           emptySymbol="fa-regular fa-star"
                           fullSymbol="fa-solid fa-star"
@@ -88,18 +92,18 @@ function Testimonial() {
                       </div>
 
                       <div className="rivew_name">
-                        <p>{`${data?.author?.first_name} ${data?.author?.last_name}`}</p>
+                        <p>{data?.name}</p>
                       </div>
 
                       <div className="rivew_degination">
-                        <p>{data?.author?.profession}</p>
+                        <p>{data?.designation}</p>
                       </div>
 
                     </div>
                   </div>
 
                   <div className="review_text">
-                    <p>{data?.body}</p>
+                    <p>{data?.reviewText}</p>
 
                   </div>
 

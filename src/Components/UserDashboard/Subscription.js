@@ -78,7 +78,7 @@ const Subscription = ({loading,setLoading}) => {
         } else {
             console.log(result);
             e.target.reset();
-            toast.success(result.message);
+            toast.success("Your application for subscription is under review. We will communicate with you soon.");
         }
     };
     
@@ -115,14 +115,11 @@ const Subscription = ({loading,setLoading}) => {
                         
                         <div className="col-12 mb-3">
                             <label for="schedule" className="form-label fw-bold">Metting Schedule</label>
-
                             <input
                                 selected={schedule}
                                 className="form-control"
                                 type={'datetime-local'}
-                                onChange={e=>setSchedule(e.target.value)}
-
-                                />
+                                onChange={e=>setSchedule(e.target.value)}/>
                         </div>
 
                         <div className="col-12 mb-3 ">
@@ -133,7 +130,6 @@ const Subscription = ({loading,setLoading}) => {
                         <div className="col-12 text-center ">
                             <button className='main-btn' type="submit">Submit</button>
                         </div>
-
                     </form>
                 </div>
             </Col>

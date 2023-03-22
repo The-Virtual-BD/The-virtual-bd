@@ -110,7 +110,7 @@ const Projects = ({ loading, setLoading ,token}) => {
             {!getId &&
                 <div >
                     {isLoading ? (<Skeleton count={10} /> ) :recentProjects.length !==0?
-                        <Table columns={PROJECT_COLUMNS()} data={recentProjects} headline={"All Projects List"} />:<p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
+                        <Table columns={PROJECT_COLUMNS()} data={recentProjects} headline={"All Projects"} />:<p className='p-3 bg-white rounded fw-bold'>You Don't Have any project</p>
                     }
                 </div>
             }

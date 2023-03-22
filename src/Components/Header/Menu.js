@@ -97,17 +97,24 @@ function Menu() {
                 <Link to="/career">Career</Link>
               </Nav.Link>
 
-              {/* <Nav.Link>
-                <Link to="/notices">Notices</Link>
-              </Nav.Link> */}
-
               <Nav.Link>
-                <Link to="/contact">Contact</Link>
+                  <Link to="/contact">Contact</Link>
               </Nav.Link>
 
-              <Nav.Link>
-                <Link to="/Word-Counter">WordCounter</Link>
-              </Nav.Link>
+              <NavDropdown
+                title="More"
+                className="dropMenu "
+                id="navbarScrollingDropdown"
+              >
+                  <NavDropdown.Item className="profile-dropdown">
+                  <Link to="/notices">Notices</Link>
+                     
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item className="profile-dropdown">
+                      <Link to="/Word-Counter">WordCounter</Link>
+                  </NavDropdown.Item> 
+              </NavDropdown>
 
             </Nav>
 
@@ -121,7 +128,6 @@ function Menu() {
               >
                 <NavDropdown.Item className="profile-dropdown">
                   <Link to="/user-dashboard">  Profile</Link>
-                 
                 </NavDropdown.Item>
 
                 <NavDropdown.Item onClick={handleLogout}>

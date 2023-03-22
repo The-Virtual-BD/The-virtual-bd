@@ -30,8 +30,6 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
   const [description, setBlogDesc] = useState("");
   
 
-  
-
   const [title, setBlogTitle] = useState("");
   const [descriptions, setDescriptions] = useState("");
   const [short_description, setBlogsShortDesc] = useState("");
@@ -248,14 +246,7 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
                  Description
                </label>
 
-              {/*  <CKEditor
-                   data={descriptions}
-                   config={{ toolbar: editorToolbar }}
-                   onChange={(event, editor) => {
-                     const data = editor.getData();
-                     setDescriptions(data);
-                   }}
-                 /> */}
+              
 
                <CKEditor
                  // data={descriptions}
