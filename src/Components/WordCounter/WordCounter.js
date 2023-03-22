@@ -105,7 +105,7 @@ const WordCounter = () => {
                         </div>
 
                         <div className="mb-3 word-Counter-result ps-3">
-                           <h4 className='fw-bold'> Total Usages of Our Sites: 100</h4>
+                           <h4 className='fw-bold text-center'> Total Usages of Our Sites: 100</h4>
                         </div>
 
                     </div>

@@ -54,6 +54,7 @@ const BlogPage = () => {
 
     //As You Like Blogs
     const asYouLikeBlog = blogs?.filter(blog => blog?.category?.name.toLowerCase() === recentBlog?.category?.name.toLowerCase() && recentBlog?.id !== blog?.id );
+   
 
 
     const handleSingleBlogs = (id) => {
@@ -128,7 +129,6 @@ const BlogPage = () => {
                     
                     <div>
                         <Row xs={1} md={3} className="g-4">
-                           
                             {PrevBlog?.map(blog => {
                                 const { id, category, title, short_description, author,cover,updated_at } = blog;
                                 return (
@@ -178,84 +178,83 @@ const BlogPage = () => {
 
                     
 
-                    </div>: <Skeleton count={10} />
+                    </div>:PrevBlog.length ===0 ? " ":  <Skeleton count={10} />
                 }
 
                
                 
             </Container>
 
-
-            <div className='blog-you-may-like-section blog-section pb-5'>
-                
-                <Container >
-                    <h6 className='fw-bold blog-section-title pt-3'>YOU MAY ALSO LIKE THIS </h6>
-                    <Row>
-                        <Swiper
-                            slidesPerView={1}
-                            spaceBetween={20}
-                            navigation={true}
-                            loop={true}
-                            autoplay={{
-                                delay: 1500,
-                                disableOnInteraction: true,
-                                pauseOnMouseEnter: true,
-                            }}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            
-                            breakpoints={{
-                                350: {
-                                    slidesPerView: 1,
-                                },
-                                640: {
-                                    slidesPerView: 2,
-                                },
-                                768: {
-                                    slidesPerView: 3,
-                                },
-                                1024: {
-                                    slidesPerView: 5,
-                                }
-                            }}
-                            modules={[Pagination, Autoplay, Navigation]}
-                            className="mySwiper "
-                        >
-                            {asYouLikeBlog?.map(likeblog => {
-                                const { id, title, cover,author} = likeblog;
-                                return (
-                                    <SwiperSlide key={id} className="mb-3">
-                                        <Card className='blog-card slide-blog-card mb-4 mx-1'  onClick={() => handleSingleBlogs(id)}>
-                                            <Card.Img variant="top" src={`${baseUrl}/${cover}`} style={{height:"145px"}} />
-
-                                            <Card.Body>
-                                                <Card.Title className='fw-bold mb-2'>{title}</Card.Title>
-                                            </Card.Body>
-
-                                            <Card.Footer  style={{border:"none",backgroundColor:"transparent"}}>
-                                                <div className='d-flex align-items-center justify-content-start gap-2'>
-                                                    {
-                                                    author?.photo ?
-                                                    <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
-                                                    :
-                                                    <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
-                                                    }
-
-                                                    <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.blogger_name}</span></p>
-                                                </div>
-                                            </Card.Footer>
-                                        </Card>
-                                    </SwiperSlide>
-                                )
-                            })}
-
-                        </Swiper>
-                    </Row>
-                </Container>
-
-
-            </div>
+                {
+                    asYouLikeBlog.length !== 0 ?<div className='blog-you-may-like-section blog-section pb-5'>
+                    <Container >
+                        <h6 className='fw-bold blog-section-title pt-3'>YOU MAY ALSO LIKE THIS </h6>
+                        <Row>
+                            <Swiper
+                                slidesPerView={1}
+                                spaceBetween={20}
+                                navigation={true}
+                                loop={true}
+                                autoplay={{
+                                    delay: 1500,
+                                    disableOnInteraction: true,
+                                    pauseOnMouseEnter: true,
+                                }}
+                                pagination={{
+                                    clickable: true,
+                                }}
+                                
+                                breakpoints={{
+                                    350: {
+                                        slidesPerView: 1,
+                                    },
+                                    640: {
+                                        slidesPerView: 2,
+                                    },
+                                    768: {
+                                        slidesPerView: 3,
+                                    },
+                                    1024: {
+                                        slidesPerView: 5,
+                                    }
+                                }}
+                                modules={[Pagination, Autoplay, Navigation]}
+                                className="mySwiper "
+                            >
+                                {asYouLikeBlog?.map(likeblog => {
+                                    const { id, title, cover,author} = likeblog;
+                                    return (
+                                        <SwiperSlide key={id} className="mb-3">
+                                            <Card className='blog-card slide-blog-card mb-4 mx-1'  onClick={() => handleSingleBlogs(id)}>
+                                                <Card.Img variant="top" src={`${baseUrl}/${cover}`} style={{height:"145px"}} />
+    
+                                                <Card.Body>
+                                                    <Card.Title className='fw-bold mb-2'>{title}</Card.Title>
+                                                </Card.Body>
+    
+                                                <Card.Footer  style={{border:"none",backgroundColor:"transparent"}}>
+                                                    <div className='d-flex align-items-center justify-content-start gap-2'>
+                                                        {
+                                                        author?.photo ?
+                                                        <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                        :
+                                                        <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                        }
+    
+                                                        <p className='blog-author mt-3'> <span className='fw-bolder'>{author?.blogger_name}</span></p>
+                                                    </div>
+                                                </Card.Footer>
+                                            </Card>
+                                        </SwiperSlide>
+                                    )
+                                })}
+    
+                            </Swiper>
+                        </Row>
+                    </Container>
+                </div>: asYouLikeBlog.length === 0 ? " ":  <Skeleton count={10} />
+                }
+            
         </div>
        </>
     );
