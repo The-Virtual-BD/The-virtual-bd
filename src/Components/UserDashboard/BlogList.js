@@ -17,7 +17,7 @@ const BlogList = ({token}) => {
 
 
         //Get projects
-        const { data:blogs, isLoading, refetch } = useQuery('project', () => fetch(`${baseUrl}/api/posts/myposts`, {
+        const { data:blogs, isLoading, refetch } = useQuery('bloglist', () => fetch(`${baseUrl}/api/posts/myposts`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -34,7 +34,7 @@ const BlogList = ({token}) => {
         setGetId(id)
     };
 
-    const PROJECT_COLUMNS = () => {
+    const BLOGLIST_COLUMNS = () => {
         return [
             {
                 Header: "SL",
@@ -48,7 +48,7 @@ const BlogList = ({token}) => {
                 Cell: ({ row }) => {
                     const { title } = row.original;
                     return (<>
-                        {title.slice(0, 40)}
+                        {title?.slice(0, 30)}
                     </>);
                 },
             },
@@ -107,7 +107,7 @@ const BlogList = ({token}) => {
         {!getId &&
             <div >
                 {isLoading ? (<Skeleton count={10} /> ) : recentBlogs?.length !==0?
-                    <Table columns={PROJECT_COLUMNS()} data={recentBlogs} headline={"Blog List"} />:<p className='p-3 bg-white rounded fw-bold'>You Don't Have any Blogs</p>
+                    <Table columns={BLOGLIST_COLUMNS()} data={recentBlogs} headline={"Blog List"} />: recentBlogs?.length === 0?<p className='p-3 bg-white rounded fw-bold'>You Don't Have any Blogs</p>: ""
                 }
             </div>
         }

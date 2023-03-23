@@ -37,7 +37,7 @@ const Settings = ({ user,setUser,isBloggerRole }) => {
     const [image, setImage] = useState(photoShow || image1);
     const [photO,setPhoto]=useState(null);
 
-    console.log(photo);
+    // console.log(photo);
    
 
     //Password change
@@ -324,7 +324,7 @@ const Settings = ({ user,setUser,isBloggerRole }) => {
                             <input name="photo" type="file" id="photo" onChange={handleImageChange} style={{display: "none" }}  />
 
                             {image && (
-                                <img src={image} alt="Add Profile" onClick={handleImageClick}  style={{ width: "150px", height: "150px", borderRadius: "100%" }} />
+                                <img src={image || image1} alt="Add Profile" onClick={handleImageClick}  style={{ width: "150px", height: "150px", borderRadius: "100%" }} />
                             ) }
                         </div>
 

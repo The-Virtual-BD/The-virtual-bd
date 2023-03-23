@@ -16,45 +16,48 @@ import useUser from '../../hooks/useUser';
 import image1 from '../../Images/blank_user.png';
 import { baseUrl } from '../../hooks/url';
 import BlogList from './BlogList';
+import { useQuery } from 'react-query';
 
 
 const UserDashboard = () => {
+  const [token] = useToken();
+  const [user,setUser] = useUser();
   const navigate = useNavigate();
   const[loading,setLoading]=useState(false);
   const [bloggerReqPen, setBloggerReqPen] = useState(false);
   const [isBloggerRole, setIsBloggerRole] = useState("");
- 
-  const [token] = useToken();
-  const [user,setUser] = useUser();
-
- 
-  console.log(user);
 
   const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo,blogger_name
   } = user;
-
-  // const photoShow=`${baseUrl}/${photo}`
-  
-  const birthDate = moment(birth_date).format('DD MMM YYYY');
+  const birthDate = moment(birth_date).format('DD MMMM, YYYY');
 
     //Check Pendding Blogger Req
       useEffect(() => {
-        const cUrl = `${baseUrl}/api/blogger/mypendingapplication`;
-        fetch(cUrl, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                "Authorization": `Bearer ${token}`
-            }
-        })
-            .then(res => res.json())
-            .then(data =>{
-              console.log(data)
-              setIsBloggerRole(data?.role)
-              setBloggerReqPen(data?.pending);
 
-            })
+        if(token){
+          const cUrl = `${baseUrl}/api/blogger/mypendingapplication`;
+          fetch(cUrl, {
+              method: 'GET',
+              headers: {
+                  'content-type': 'application/json',
+                  "Authorization": `Bearer ${token}`
+              }
+          })
+              .then(res => res.json())
+              .then(data =>{
+                // console.log(data)
+                setIsBloggerRole(data?.role)
+                setBloggerReqPen(data?.pending);
+              })
+
+        }
+       
     }, [token]);
+
+
+    
+     
+     
 
 
 
@@ -87,7 +90,8 @@ const UserDashboard = () => {
           <div>
             <TabList className="text-start bg-white pb-2">
               <Tab>Subscription</Tab>
-              <Tab>Projects</Tab>
+              <Tab>Projects and Communications</Tab>
+              {/* <Tab>Projects</Tab> */}
               <Tab>{isBloggerRole==="blogger" ? "Blog" : "Blogger"}  </Tab>
               { isBloggerRole === "blogger" &&   <Tab>Blog List</Tab>}
               <Tab>My Profile</Tab>
@@ -114,9 +118,11 @@ const UserDashboard = () => {
               <Blogger isBloggerRole={isBloggerRole} bloggerReqPen={bloggerReqPen} setBloggerReqPen={setBloggerReqPen} />
             </TabPanel>
 
-            <TabPanel>
+            { isBloggerRole === "blogger" &&  <TabPanel>
               <BlogList token={token}/>
-            </TabPanel>
+            </TabPanel>}
+
+          
 
             <TabPanel>
               <Row >

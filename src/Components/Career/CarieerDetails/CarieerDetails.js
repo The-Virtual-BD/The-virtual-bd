@@ -70,7 +70,7 @@ const CarieerDetails = () => {
         } else {
             console.log(result);
             e.target.reset();
-            toast.success("Job Application Successfully Done!");
+            toast.success("Job Application Successfully Submitted We'll inform you of your application status.");
             // toast.success(result.message);
         };
 

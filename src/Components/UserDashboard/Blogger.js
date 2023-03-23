@@ -18,7 +18,7 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
   const [user] = useUser();
   const { id } = user;
 
-  console.log(user)
+  // console.log(user)
   
 
   const[catagory,setCatagory]=useState([])
@@ -88,7 +88,7 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
       //Handle create blog Form
       const handleCreateBlogForm = async(e) => {
         e.preventDefault();
-        if(charCount <= 200){
+        if(charCount <= 250){
           const newPostData = new FormData();
           newPostData.append('title', title);
           newPostData.append('short_description', short_description);
@@ -222,7 +222,7 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
                Title Description
                </label>
                <textarea
-                 maxLength={200}
+                 maxLength={250}
                  className="form-control mb-1"
                  id="blogsSDesc"
                  rows="5"
@@ -234,8 +234,8 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
                  }}
                ></textarea>
                {
-                 charCount < 200?
-                 <p ><small>Maximum 200 Characters & You Have Used {charCount}</small></p>:
+                 charCount < 250?
+                 <p ><small>Maximum 250 Characters & You Have Used {charCount}</small></p>:
                  <p className="text-danger">You have reached maximum limits.</p>
                }
                

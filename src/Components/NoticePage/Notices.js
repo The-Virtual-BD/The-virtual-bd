@@ -11,6 +11,7 @@ import Footer from '../Footer/Footer';
 import { useQuery } from "react-query";
 import Skeleton from 'react-loading-skeleton';
 import { Helmet } from 'react-helmet';
+import moment from 'moment';
 
 const Notices = () => {
   //Get Notices
@@ -25,11 +26,24 @@ const Notices = () => {
         id: 'index',
         accessor: (_row, i) => i + 1
       },
+      
       {
-        Header: "Title",
+        Header: "Name",
         accessor: "title",
         sortType: 'basic',
-
+      },
+      {
+        Header: "Published Date",
+        accessor: "created_at",
+        sortType: 'basic',
+        Cell: ({ row }) => {
+          const { created_at } = row.original;
+          return (
+             <div>
+               { moment(created_at).format('DD MMMM, YYYY')}
+             </div>
+          );
+      },
       },
       {
         Header: 'Download',

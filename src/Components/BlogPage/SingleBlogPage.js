@@ -18,12 +18,15 @@ import blnakUser from '../../Images/blank_user.png';
 import moment from 'moment';
 import Skeleton from 'react-loading-skeleton';
 
-const BlogPage = () => {
+const SingleBlogPage = () => {
+    const data = useParams();
     const { id } = useParams();
     const navigate = useNavigate();
     const [email, setSubscribe_email] = useState('');
     const [blog, setBlog] = useState([]);
     const [blogs, setBlogs] = useState([]);
+
+    console.log(data )
 
     // Get Single Blog
     useEffect(() => {
@@ -47,18 +50,16 @@ const BlogPage = () => {
             })
     }, []);
 
-    console.log(blog)
+    // console.log(blog)
 
     //Slide to Top
     useEffect(() => {
         window.scrollTo(0, 0)
     }, []);
 
-    const postDate = moment(blog?.updated_at).format('DD MMM YYYY')
+    const postDate = moment(blog?.updated_at).format('DD MMMM, YYYY')
 
-    // const relatedblog = blog?.find(blogD => blogD.id == id);
-
-    const featureBlogs = blogs?.filter(fetureBlog => fetureBlog?.category?.name?.toLowerCase() === blog?.category?.name?.toLowerCase());
+    const featureBlogs = blogs?.filter(fetureBlog => fetureBlog?.category?.name?.toLowerCase() === blog?.category?.name?.toLowerCase()  && fetureBlog?.id !== blog?.id   );
 
     //Navigate to Single Blog Page
     const handleblogs = (id) => {
@@ -92,8 +93,6 @@ const BlogPage = () => {
             })
     };
 
-    //id, category, title, short_description, author, blogImg,cover
-
     return (
         <>
             <TopHeader />
@@ -113,7 +112,7 @@ const BlogPage = () => {
 
                         {
                             blog?.author?.photo ?
-                                <img src={`${baseUrl}/${blog?.author?.photo}`} alt="" srcset="" style={{ width: "50px", borderRadius: "100%" }} /> :
+                                <img src={`${baseUrl}/${blog?.author?.photo}`} alt="" srcset="" style={{ width: "50px", height:"50px", borderRadius: "100%" }} /> :
 
                                 <img src={blnakUser} alt="" srcset="" style={{ width: "50px", borderRadius: "100%" }} />
                         }
@@ -149,24 +148,33 @@ const BlogPage = () => {
                             </Col>
 
                             <Col sm={12} md={3}>
+                                
                                 <div>
-                                    <h6 className='fw-bold blog-section-title mt-4'>Related Articles</h6>
-                                    <div className='d-flex flex-column gap-1'>
                                         {
-                                            featureBlogs?.map(fBlog => <div onClick={() => handleblogs(fBlog?.id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
-                                                <div className="row g-0 align-items-center">
-                                                    <div className="col-md-5">
-                                                        <img src={`${baseUrl}/${fBlog?.cover}`} className="img-fluid rounded-start" alt={"Blog Cover"} style={{ height: "88px" }} />
-                                                    </div>
-                                                    <div className="col-md-7">
-                                                        <div className="card-body">
-                                                            <h5 className="card-title fw-bold">{fBlog?.title}</h5>
+                                            featureBlogs !==0 ?  <div>
+                                            <h6 className='fw-bold blog-section-title mt-4'>Related Articles</h6>
+                                            <div className='d-flex flex-column gap-1'>
+                                                {
+                                                    featureBlogs?.map(fBlog => <div onClick={() => handleblogs(fBlog?.id)} className="card mb-3 blog-card" style={{ maxWidth: "540px" }}>
+                                                        <div className="row g-0 align-items-center">
+                                                            <div className="col-md-5">
+                                                                <img src={`${baseUrl}/${fBlog?.cover}`} className="img-fluid rounded-start" alt={"Blog Cover"} style={{ height: "88px" }} />
+                                                            </div>
+                                                            <div className="col-md-7">
+                                                                <div className="card-body">
+                                                                    <h5 className="card-title fw-bold">{fBlog?.title}</h5>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>).slice(0, 3)
+                                                    </div>).slice(0, 3)
+                                                }
+                                            </div>
+                                               
+                                            </div>: ""
                                         }
-                                    </div>
+
+                                   
+                                    
 
 
                                     <div className='blog-newslatter-container  mt-4 text-white  py-4 px-4'>
@@ -202,7 +210,7 @@ const BlogPage = () => {
     );
 };
 
-export default BlogPage;
+export default SingleBlogPage;
 
 
 
@@ -238,9 +246,7 @@ const BlogCommentBox = ({ id, comments }) => {
                 console.log(result);
                 toast.success(result.message);
                 e.target.reset();
-
             });
-
     };
 
     const approvedComment = comments?.filter(cmnt => cmnt.status === 2);
@@ -279,11 +285,21 @@ const BlogCommentBox = ({ id, comments }) => {
                 <div>
                     {
                         approvedComment?.map(comment => <div className='d-flex align-items-start justify-content-start gap-2'>
-                            <img src={image1} alt="" srcset="" style={{ width: "30px", borderRadius: "100%" }} />
-                            <div>
-                                <p className='my-0 '> <span className='fw-bolder'>{comment?.commenter_name}</span></p>
+                            {
+                               comment?.author?.photo ? <img src={`${baseUrl}/${comment?.author?.photo}`} alt="" srcset="" style={{ width: "30px",height: "30px", borderRadius: "100%" }} /> :
+                               <img src={image1} alt="" srcset="" style={{ width: "30px",height: "30px", borderRadius: "100%" }} />
 
-                                <p className='mt-0 fs-6'>{comment?.body}</p>
+                            }
+                            
+                            <div>
+                                <p className='my-0 '> 
+                                     <span className='fw-bolder'>{comment?.commenter_name}</span>
+                                </p>
+
+                                <p className='my-0 fs-6'>{comment?.body}</p>
+                                <p className='comnt-time fw-light'>
+                                 {moment(comment?.updated_at).format('DD MMMM, YYYY, hh:mm')}
+                                </p>
                             </div>
                         </div>).slice(0,showComment)
                     }

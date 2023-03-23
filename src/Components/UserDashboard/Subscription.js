@@ -10,12 +10,14 @@ import useUser from '../../hooks/useUser';
 import BlogCard from './BlogCard';
 import './UserDashboard.css';
 import moment from 'moment';
+import Skeleton from 'react-loading-skeleton';
 
-const Subscription = ({loading,setLoading}) => {
+const Subscription = ({loading,setLoading,blog,isLoading}) => {
     const [token] = useToken();
     const [user] = useUser();
     const { id } = user;
     const [services, setServices] = useState([]);
+    const [cardPost, setCardPost] = useState([]);
 
     //Subscription Form
     const [service_id, setService_id] = useState('');
@@ -25,7 +27,8 @@ const Subscription = ({loading,setLoading}) => {
     const [ schedule, setSchedule] = useState('');
    
    
-    // console.log(schedule);
+   
+   
 
   
 
@@ -81,6 +84,8 @@ const Subscription = ({loading,setLoading}) => {
             toast.success("Your application for subscription is under review. We will communicate with you soon.");
         }
     };
+
+    
     
 
     return (
@@ -136,7 +141,7 @@ const Subscription = ({loading,setLoading}) => {
 
 
             <Col md={3} sm={12} >
-                <BlogCard />
+                <BlogCard blog={blog} isLoading={isLoading}/>
             </Col>
         </Row>
     );

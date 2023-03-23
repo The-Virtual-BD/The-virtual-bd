@@ -71,6 +71,10 @@
 }
 
 .blog-author {
+    font-size: 16px;
+    font-weight: 700;
+}
+.blog-date{
     font-size: 14px;
 }
 
@@ -145,7 +149,6 @@
 
 .blog-details-img-container img {
     width: 100%;
-    height: 600px;
     border-radius: 5px;
 }
 
@@ -261,7 +264,9 @@
     color: #e74c3c;
     
 }
-
+.comnt-time{
+    font-size: 13px !important;
+}
   
   
 

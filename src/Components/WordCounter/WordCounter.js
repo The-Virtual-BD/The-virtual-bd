@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer';
 import Menu from '../Header/Menu';
 import TopHeader from '../TopHeader/TopHeader';
 import './WordCounter.css';
-import img1 from "../../Images/cardImg-1.png";
+import img1 from "../../Images/data_analysis.jpg";
 import { Link } from 'react-router-dom';
 import {HiArrowNarrowRight} from 'react-icons/hi';
 import { GrammarlyEditorPlugin } from "@grammarly/editor-sdk-react";
@@ -13,9 +13,14 @@ const client_ID="client_2moMXzVCLAKipUbS1CaY7o"
 
 const WordCounter = () => {
     const [wordCount, setWordCount] = useState(0);
-    const [charsCount,setCharsCount]=useState(0)
-    const [paraCount,setParaCount]=useState(0)
-    const [sentenceCount,setSentenceCount]=useState(0)
+    const [charsCount,setCharsCount]=useState(0);
+    const [paraCount,setParaCount]=useState(0);
+    const [sentenceCount,setSentenceCount]=useState(0);
+
+     //Slide to Top
+     useEffect(() => {
+        window.scrollTo(0, 0)
+      }, []);
 
     //Get Count Number
     const countWords = (text) => {
@@ -104,7 +109,7 @@ const WordCounter = () => {
                            
                         </div>
 
-                        <div className="mb-3 word-Counter-result ps-3">
+                        <div className="word-Counter-user ">
                            <h4 className='fw-bold text-center'> Total Usages of Our Sites: 100</h4>
                         </div>
 
@@ -114,7 +119,9 @@ const WordCounter = () => {
                 <Col md={3} sm={12}>
                     <div>
                         <div>
-                            <img src={img1} alt="" srcset="" style={{height:"275px",width:"260px",marginTop:"20px"}} />
+                           <Link to={"/contact"}>
+                                <img src={img1} alt="" srcset="" style={{height:"275px",width:"260px",marginTop:"20px"}} />
+                           </Link>
                         </div>
 
                         <div className='mt-3 details-container'>

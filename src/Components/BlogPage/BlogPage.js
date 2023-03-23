@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import useBlogs from '../../hooks/useBlogs';
 import './BlogPage.css';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -13,16 +12,14 @@ import { useEffect } from 'react';
 import { baseUrl } from '../../hooks/url';
 import blnakUser from '../../Images/blank_user.png';
 import moment from 'moment';
-import { Helmet } from 'react-helmet';
 import Skeleton from 'react-loading-skeleton';
-import { useQuery } from 'react-query';
 
 
 const BlogPage = () => {
     const [blogs, setBlogs] = useState([]);
     const navigate = useNavigate();
 
-    
+    //Get Active Posts
     useEffect(() => {
         const blogUrl=`${baseUrl}/api/posts/activeposts`;
         fetch(blogUrl)
@@ -44,16 +41,16 @@ const BlogPage = () => {
 
     //Recent Blog
     const recentBlog = blogs[blogs?.length - 1];
-    const rpostDate= moment(recentBlog?.updated_at).format('DD MMM YYYY');
+    const rpostDate= moment(recentBlog?.updated_at).format('DD MMMM, YYYY');
 
     //Prev Blog
-    const PrevBlog=blogs.filter(pBlog=>recentBlog.id!==pBlog.id);
-    console.log(recentBlog);
+    const PrevBlog=blogs?.filter(pBlog=>recentBlog.id!==pBlog.id);
+    // console.log(recentBlog);
 
 
 
     //As You Like Blogs
-    const asYouLikeBlog = blogs?.filter(blog => blog?.category?.name.toLowerCase() === recentBlog?.category?.name.toLowerCase() && recentBlog?.id !== blog?.id );
+    const asYouLikeBlog = blogs?.filter(blog => blog?.category?.name.toLowerCase() === recentBlog?.category?.name.toLowerCase() && recentBlog?.id !== blog?.id  );
    
 
 
@@ -61,7 +58,7 @@ const BlogPage = () => {
         navigate(`/blog/${id}`)
     };
 
-    // console.log(blogs)
+    // console.log(asYouLikeBlog)
 
 
     return (
@@ -93,13 +90,13 @@ const BlogPage = () => {
                                     <span className='blog-catagory'>{recentBlog?.category?.name}</span>
                                     <h3 onClick={() => handleSingleBlogs(recentBlog?.id)} className='fw-bolder mt-2 blog-head'>{recentBlog?.title}</h3>
                                     <p className='mt-4 fs-5'>{recentBlog?.short_description}</p>
-                                    <div dangerouslySetInnerHTML={{ __html: recentBlog?.description.slice(0, 300) }} />
+                                    {/* <div dangerouslySetInnerHTML={{ __html: recentBlog?.description.slice(0, 100) }} /> */}
                                 </div>
                                 
                                 <div className='d-flex align-items-center justify-content-start gap-3'>
                                 {
                                     recentBlog?.author?.photo ?
-                                        <img src={`${baseUrl}/${recentBlog?.author?.photo}`} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
+                                        <img src={`${baseUrl}/${recentBlog?.author?.photo}`} alt="" srcset="" style={{width:"50px", height:"50px",borderRadius:"100%"}} />
                                         :
                                         <img src={blnakUser} alt="" srcset="" style={{width:"50px",borderRadius:"100%"}} />
                                 }
@@ -140,7 +137,7 @@ const BlogPage = () => {
                                                 <span className='blog-catagory'>{category?.name}</span>
                                                 <Card.Title className='fw-bold my-2'>{title}</Card.Title>
                                                 <Card.Text>
-                                                    {short_description}
+                                                    {short_description.slice(0,200)}
                                                 </Card.Text>
                                                 
                                             </Card.Body>
@@ -149,14 +146,14 @@ const BlogPage = () => {
                                             <div className='d-flex align-items-center justify-content-start gap-2'>
                                                 {
                                                 author?.photo ?
-                                                <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
+                                                <img src={`${baseUrl}/${author?.photo}`} alt="" srcset="" style={{width:"32px",height:"32px",borderRadius:"100%"}} />
                                               :
                                                 <img src={blnakUser} alt="" srcset="" style={{width:"32px",borderRadius:"100%"}} />
                                             }
 
                                             <div className='mt-3'>
-                                                <h6 className='blog-author fw-bold mb-0'>{author?.blogger_name}</h6>
-                                                <p><small className='fs-6 fw-light mt-1'>{moment(updated_at).format('DD MMM YYYY')}</small></p>
+                                                <h5 className='blog-author mb-0'>{author?.blogger_name}</h5>
+                                                <p><small className='fw-light  blog-date'>{moment(updated_at).format('DD MMMM, YYYY')}</small></p>
                                             </div>             
 
                                                     

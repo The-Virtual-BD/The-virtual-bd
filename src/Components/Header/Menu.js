@@ -112,7 +112,7 @@ function Menu() {
                   </NavDropdown.Item>
 
                   <NavDropdown.Item className="profile-dropdown">
-                      <Link to="/Word-Counter">WordCounter</Link>
+                      <Link to="/Word-Counter">Word Counter</Link>
                   </NavDropdown.Item> 
               </NavDropdown>
 

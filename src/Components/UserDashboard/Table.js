@@ -100,7 +100,7 @@ function Table({ columns, data, headline }) {
                             return (
                                 (i % 2 == 1) ? <tr {...row.getRowProps()} key={i} className=" p-2 text-start   ">
                                     {row.cells.map((cell, i) => {
-                                        return <td key={i} {...cell.getCellProps()} className=" p-2  text-start    ps-3">{cell.render('Cell')}</td>
+                                        return <td key={i} {...cell.getCellProps()} className=" p-2 text-start ps-3">{cell.render('Cell')}</td>
                                     })}
                                 </tr> :
                                     <tr {...row.getRowProps()} key={i} className=" p-2 text-start  ">
