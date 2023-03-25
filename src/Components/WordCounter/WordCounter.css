@@ -35,6 +35,16 @@ button ._4qzafi0{
     align-items: center;
     border-radius: 5px;
 }
+
+.word-Counter-user{
+    background: #ECF0F1;
+    height: 70px;
+    color: #2C3E50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
 .count-details-item{
     display: flex;
     justify-content: space-between;

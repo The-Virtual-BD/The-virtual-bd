@@ -19,6 +19,7 @@ const Settings = ({ user,setUser,isBloggerRole }) => {
 
     const { id, first_name, last_name, email, birth_date, nationality, phone, profession, bio,photo,blogger_name
     } = user;
+    
     const birthDateIn = moment(birth_date).format('DD/ MMM /YYYY');
     const photoShow=`${baseUrl}/${photo}`
 
@@ -203,7 +204,7 @@ const Settings = ({ user,setUser,isBloggerRole }) => {
                         </div>
 
                         {
-                            isBloggerRole==="blogger" &&  <div className="col-md-12 my-3">
+                            isBloggerRole==="blogger" &&  <div className="col-md-12 mt-3">
                             <label for="bloggerName" className="form-label fw-bold">Blogger Name</label>
                             <input 
                             type="text" 
@@ -217,7 +218,7 @@ const Settings = ({ user,setUser,isBloggerRole }) => {
 
                         
 
-                        <div className="col-md-12 my-3">
+                        <div className="col-md-12 my-3 ">
                             <label for="email" className="form-label fw-bold">Email</label>
                             <input
                                 type="email"

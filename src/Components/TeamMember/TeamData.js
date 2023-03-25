@@ -1,4 +1,4 @@
-import team1 from "./img/Mehedi.png";
+import team1 from "../../Images/mehedi_hasan_CEO.jpg";
 import team2 from "./img/Jarif-Huda-Angon.png";
 import team3 from "./img/asaf-kakon.jpg";
 import team4 from "./img/ishtiuq.png";

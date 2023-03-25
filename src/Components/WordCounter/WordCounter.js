@@ -6,9 +6,10 @@ import Menu from '../Header/Menu';
 import TopHeader from '../TopHeader/TopHeader';
 import './WordCounter.css';
 import img1 from "../../Images/data_analysis.jpg";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {HiArrowNarrowRight} from 'react-icons/hi';
 import { GrammarlyEditorPlugin } from "@grammarly/editor-sdk-react";
+import Cookies from 'js-cookie';
 const client_ID="client_2moMXzVCLAKipUbS1CaY7o"
 
 const WordCounter = () => {
@@ -16,6 +17,17 @@ const WordCounter = () => {
     const [charsCount,setCharsCount]=useState(0);
     const [paraCount,setParaCount]=useState(0);
     const [sentenceCount,setSentenceCount]=useState(0);
+
+    const [count, setCount] = useState(parseInt(Cookies.get('count') || '0'));
+    const location = useLocation();
+
+    useEffect(() => {
+        const newCount = count + 1;
+        setCount(newCount);
+        Cookies.set('count', newCount);
+      }, [location]);
+
+    console.log(location)
 
      //Slide to Top
      useEffect(() => {
@@ -83,7 +95,7 @@ const WordCounter = () => {
                                 <span> {charsCount} {charsCount=== 1?"character":"characters"}</span> </h3>
                         </div>
                             <div className='settings-container-wordcounter col-12'>
-                                <Link to={"/sign-in"} className="btn btn-sm text-light">
+                                <Link to={"/user-dashboard"} className="btn btn-sm text-light">
                                     Proof Reading
                                     <HiArrowNarrowRight className='ms-1 fs-6'/>
                                 </Link>
@@ -110,7 +122,7 @@ const WordCounter = () => {
                         </div>
 
                         <div className="word-Counter-user ">
-                           <h4 className='fw-bold text-center'> Total Usages of Our Sites: 100</h4>
+                           <h4 className='fw-bold '> Total Usages {count} times</h4>
                         </div>
 
                     </div>
@@ -119,7 +131,7 @@ const WordCounter = () => {
                 <Col md={3} sm={12}>
                     <div>
                         <div>
-                           <Link to={"/contact"}>
+                           <Link to={"/user-dashboard"}>
                                 <img src={img1} alt="" srcset="" style={{height:"275px",width:"260px",marginTop:"20px"}} />
                            </Link>
                         </div>

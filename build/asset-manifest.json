@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.8afd02f2.css",
-    "main.js": "/static/js/main.828a214e.js",
+    "main.css": "/static/css/main.987f1115.css",
+    "main.js": "/static/js/main.47c69224.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/BusinessService .mp4": "/static/media/BusinessService .1131f575ac3a6ff0f26e.mp4",
     "static/media/Shahajalal.png": "/static/media/Shahajalal.0da7f57fdbb43e2d642e.png",
@@ -12,6 +12,7 @@
     "static/media/searchHero.jpg": "/static/media/searchHero.6d81fbac003b05c4bd85.jpg",
     "static/media/sign-in-img.jpg": "/static/media/sign-in-img.d5e983f3c98a8992b822.jpg",
     "static/media/pg2.jpg": "/static/media/pg2.158387c563c85855d300.jpg",
+    "static/media/data_analysis.jpg": "/static/media/data_analysis.3e0604a34c12649d2276.jpg",
     "static/media/herobac.jpg": "/static/media/herobac.3399e87332ca7b013aa8.jpg",
     "static/media/pg1.jpg": "/static/media/pg1.cf3d2d4321f9e3c83276.jpg",
     "static/media/pg6.jpg": "/static/media/pg6.1850798bc4f34b479da9.jpg",
@@ -52,12 +53,12 @@
     "static/media/bahamas.png": "/static/media/bahamas.81995b4b340cb24bc7b0.png",
     "static/media/Boibangla.png": "/static/media/Boibangla.0e6396a93f2da134f7b4.png",
     "index.html": "/index.html",
-    "main.8afd02f2.css.map": "/static/css/main.8afd02f2.css.map",
-    "main.828a214e.js.map": "/static/js/main.828a214e.js.map",
+    "main.987f1115.css.map": "/static/css/main.987f1115.css.map",
+    "main.47c69224.js.map": "/static/js/main.47c69224.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8afd02f2.css",
-    "static/js/main.828a214e.js"
+    "static/css/main.987f1115.css",
+    "static/js/main.47c69224.js"
   ]
 }
