@@ -35,7 +35,8 @@ import CarieerDetails from "./Components/Career/CarieerDetails/CarieerDetails";
 import ProjectDetails from "./Components/Portfolio/PortfolioDetails.js/ProjectDetails";
 import 'react-rater/lib/react-rater.css';
 import 'react-loading-skeleton/dist/skeleton.css';
-import WordCounter from "./Components/WordCounter/WordCounter";
+import PdftoDoc from "./Components/Extra Features/PdfToDoc_Covert/Pdf_to_Doc";
+import WordCounter from "./Components/Extra Features/WordCounter/WordCounter";
 
 
 
@@ -74,6 +75,7 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-conditions" element={<TermsCondition />} />
               <Route path="/Word-Counter" element={<WordCounter />} />
+              <Route path="/pdf-to-doc-converter" element={<PdftoDoc />} />
             
               <Route path="/register" element={<Register />} />
               <Route path="/search" element={<Search />} />

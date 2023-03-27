@@ -175,7 +175,7 @@ const BlogPage = () => {
 
                     
 
-                    </div>:PrevBlog.length ===0 ? " ":  <Skeleton count={10} />
+                    </div>:PrevBlog.length ===0 ? " ":  <Skeleton  />
                 }
 
                
@@ -249,7 +249,7 @@ const BlogPage = () => {
                             </Swiper>
                         </Row>
                     </Container>
-                </div>: asYouLikeBlog.length === 0 ? " ":  <Skeleton count={10} />
+                </div>: asYouLikeBlog.length === 0 ? " ":  <Skeleton />
                 }
             
         </div>

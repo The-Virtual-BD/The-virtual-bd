@@ -36,8 +36,9 @@ function Login() {
         .then(result => {
           if(result.error){
             console.log(result);
-            toast.error(result.error);
-            // toast.error("Login Failed");
+            // toast.error(result.error);
+            toast.error("Incorrect username or password");
+            
             setFailedMsg(result.error)
           }else{
             console.log(result);

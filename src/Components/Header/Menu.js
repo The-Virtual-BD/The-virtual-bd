@@ -107,12 +107,13 @@ function Menu() {
                 id="navbarScrollingDropdown"
               >
                   <NavDropdown.Item className="profile-dropdown">
-                  <Link to="/notices">Notices</Link>
-                     
+                      <Link to="/notices">Notices</Link>
                   </NavDropdown.Item>
-
                   <NavDropdown.Item className="profile-dropdown">
                       <Link to="/Word-Counter">Word Counter</Link>
+                  </NavDropdown.Item> 
+                  <NavDropdown.Item className="profile-dropdown">
+                      <Link to="/pdf-to-doc-converter">PDF to DOC</Link>
                   </NavDropdown.Item> 
               </NavDropdown>
 

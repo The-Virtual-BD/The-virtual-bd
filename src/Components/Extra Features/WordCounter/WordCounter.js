@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
-import Footer from '../Footer/Footer';
-import Menu from '../Header/Menu';
-import TopHeader from '../TopHeader/TopHeader';
+import Footer from '../../Footer/Footer';
+import Menu from '../../Header/Menu';
+import TopHeader from '../../TopHeader/TopHeader';
 import './WordCounter.css';
-import img1 from "../../Images/data_analysis.jpg";
+import img1 from "../../../Images/data_analysis.jpg";
 import { Link, useLocation } from 'react-router-dom';
 import {HiArrowNarrowRight} from 'react-icons/hi';
 import { GrammarlyEditorPlugin } from "@grammarly/editor-sdk-react";
@@ -37,7 +37,6 @@ const WordCounter = () => {
     //Get Count Number
     const countWords = (text) => {
         //Charectars Count
-        // const charectar = text.length;
         const charectar = text.replace(/[^\x20-\x7E]/g, "").length;
         setCharsCount(charectar);
 
@@ -70,8 +69,6 @@ const WordCounter = () => {
             const sentences = text.trim().split(/[.!?\n]+/);
             setSentenceCount(sentences.length-1);
           };
-       
-
     };
 
 
@@ -84,7 +81,7 @@ const WordCounter = () => {
         </Helmet>
         <TopHeader />
         <Menu />
-        <Container className='pt-3 pb-5'>
+        <Container className='pt-3 pb-5 converter-container'>
             <Row>
                 
                 <Col md={9} sm={12}>

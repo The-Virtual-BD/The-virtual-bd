@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.987f1115.css",
-    "main.js": "/static/js/main.47c69224.js",
+    "main.css": "/static/css/main.c88d741c.css",
+    "main.js": "/static/js/main.53dd0e29.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/BusinessService .mp4": "/static/media/BusinessService .1131f575ac3a6ff0f26e.mp4",
     "static/media/Shahajalal.png": "/static/media/Shahajalal.0da7f57fdbb43e2d642e.png",
@@ -21,6 +21,7 @@
     "static/media/google.png": "/static/media/google.eb4f576bd3f0f2c0c6f8.png",
     "static/media/pg5.jpg": "/static/media/pg5.3c63b10e589f9ac4ead9.jpg",
     "static/media/logo.jpg": "/static/media/logo.bc4ab47a38b27d8f5073.jpg",
+    "static/media/mehedi_hasan_CEO.jpg": "/static/media/mehedi_hasan_CEO.df0a063242c889b6bf34.jpg",
     "static/media/cardImg-1.png": "/static/media/cardImg-1.65dfcd3df5d488a0f278.png",
     "static/media/hedayet.png": "/static/media/hedayet.98fba0fe2ae019440310.png",
     "static/media/hamid.jpg": "/static/media/hamid.7d751f9ecfd49e6737ce.jpg",
@@ -53,12 +54,12 @@
     "static/media/bahamas.png": "/static/media/bahamas.81995b4b340cb24bc7b0.png",
     "static/media/Boibangla.png": "/static/media/Boibangla.0e6396a93f2da134f7b4.png",
     "index.html": "/index.html",
-    "main.987f1115.css.map": "/static/css/main.987f1115.css.map",
-    "main.47c69224.js.map": "/static/js/main.47c69224.js.map",
+    "main.c88d741c.css.map": "/static/css/main.c88d741c.css.map",
+    "main.53dd0e29.js.map": "/static/js/main.53dd0e29.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.987f1115.css",
-    "static/js/main.47c69224.js"
+    "static/css/main.c88d741c.css",
+    "static/js/main.53dd0e29.js"
   ]
 }
