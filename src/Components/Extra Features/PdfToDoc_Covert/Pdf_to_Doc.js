@@ -10,7 +10,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-const fileTypes = ["JPG", "PNG", "DOC"];
+const fileTypes = ["JPG", "PNG", "DOC","DOCX"];
 
 const PdftoDoc = () => {
     const [getPdf,setGetPdf]=useState(null);
