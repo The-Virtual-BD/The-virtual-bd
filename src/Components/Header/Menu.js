@@ -19,6 +19,9 @@ function Menu() {
 
   //HANDLE LOGOUT
   const handleLogout=()=>{
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('user');
+    navigate('/sign-in');
 
     const url = `${baseUrl}/api/logout`;
     fetch(url, {
@@ -113,7 +116,7 @@ function Menu() {
                       <Link to="/Word-Counter">Word Counter</Link>
                   </NavDropdown.Item> 
                   <NavDropdown.Item className="profile-dropdown">
-                      <Link to="/pdf-to-doc-converter">PDF to DOC</Link>
+                      <Link to="/pdf-to-doc-converter"> DOC to PDF</Link>
                   </NavDropdown.Item> 
               </NavDropdown>
 

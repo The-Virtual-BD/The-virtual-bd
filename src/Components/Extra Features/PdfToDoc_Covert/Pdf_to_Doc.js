@@ -33,11 +33,14 @@ const PdftoDoc = () => {
       getPdf.download();
     };
 
+
+    
+
     return (
         <>
         <Helmet>
                 <meta charSet="utf-8" />
-                <title>The Virtual BD || Pdf to Doc Converter</title>
+                <title>The Virtual BD || DOC to PDF Converter</title>
                 <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <TopHeader />
@@ -48,11 +51,12 @@ const PdftoDoc = () => {
 
           <div className='convert-input-container'>
              <FileUploader 
-             handleChange={handleConvert} 
-             name="file" 
-             types={fileTypes} 
-             hoverTitle={"Drop Here"}
-             required={true} />
+                handleChange={handleConvert} 
+                name="file" 
+                types={fileTypes} 
+                hoverTitle={"Drop Here"}
+                required={true} />
+
           </div>
 
           <div className='text-center mt-3'>

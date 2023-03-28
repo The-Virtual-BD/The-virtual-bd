@@ -23,7 +23,6 @@ function Login() {
     e.preventDefault();
     // console.log(data);
 
-
     const url = `${baseUrl}/api/login`;
     fetch(url, {
         method: 'POST',

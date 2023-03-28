@@ -57,9 +57,9 @@ const ProjectDetails = () => {
                         { project?.video && 
                             <p className=' my-3'>
                             <span className='fw-bold mb-4 me-2'>Video:</span>
-                            <iframe width="560" height="315" src={`${project?.video}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-                            {/* <a href={`${project?.video}`} target="_blank" rel="noopener noreferrer">Watch Video</a> */}
+                           <div>
+                                 <iframe width="560" height="315" src={`${project?.video}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                           </div>
                         </p>
                         }
                         <Row >
