@@ -37,6 +37,8 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
   const [category_id ,setCatagory_id] = useState("");
   const [charCount,setCharCount]=useState(0);
 
+  const [isSending,setIsSending]=useState(false);
+
 
 
       //Get Catagory
@@ -58,6 +60,7 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
       //Handle Blogger Form
       const handleBloggerForm = (e) => {
         e.preventDefault();
+        setIsSending(true);
         const BloggerReqSent = { name, subject, expertise, description };
 
         //Send To Backend
@@ -82,12 +85,15 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
               setBloggerReqPen(true);
             }
           });
+          setIsSending(false);
 
       };
 
       //Handle create blog Form
       const handleCreateBlogForm = async(e) => {
         e.preventDefault();
+        setIsSending(true);
+
         if(charCount <= 250){
           const newPostData = new FormData();
           newPostData.append('title', title);
@@ -126,6 +132,8 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
           toast.error("You Have Crossed Charecters Limits");
           return
         }
+
+        setIsSending(false);
 
       };
 
@@ -246,8 +254,6 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
                  Description
                </label>
 
-              
-
                <CKEditor
                  // data={descriptions}
                  onChange={(e) =>{
@@ -262,16 +268,16 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
 
           
 
-                       <div className="col-12 mb-3 ">
-                           <label for="doc" className="form-label fw-bold">Image</label>
-                           <input type="file" className="form-control " id="doc" onChange={(e) => setCover(e.target.files[0])} />
-                       </div>
+               <div className="col-12 mb-3 ">
+                  <label for="doc" className="form-label fw-bold">Image</label>
+                  <input type="file" className="form-control " id="doc" onChange={(e) => setCover(e.target.files[0])} required/>
+              </div>
 
 
 
 
              <div className="col-12 text-center ">
-               <button className="main-btn" type="submit">
+               <button className="main-btn" type="submit" disabled={isSending}>
                  Submit
                </button>
              </div>
@@ -340,7 +346,7 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
                 </div>
 
                 <div className="col-12 text-center ">
-                  <button className="main-btn" type="submit">
+                  <button className="main-btn" type="submit" disabled={isSending}>
                     Apply
                   </button>
                 </div>

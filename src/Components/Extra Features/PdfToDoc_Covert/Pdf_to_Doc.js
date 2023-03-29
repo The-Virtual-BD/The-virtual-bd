@@ -34,7 +34,11 @@ const PdftoDoc = () => {
     };
 
 
-    
+   
+    //www.abdulhamid3311@gmail.com_ecbc03deefb46ea3c89df6a3b6ad59f58edb5675457e98efab2d806609cf818d7634d3ac
+
+
+   
 
     return (
         <>
@@ -45,26 +49,29 @@ const PdftoDoc = () => {
         </Helmet>
         <TopHeader />
         <Menu />
+
         <Container className='converter-container mb-5'>
-           <h3 className='fw-bold word-Counter-result ps-2'>Convert Word To PDF</h3>
-           <p>This PDF converter is your go-to solution to convert Word to PDF online. Convert Microsoft Word documents to the popular and practical Adobe PDF format. Convert DOC to PDF or DOCX to PDF.</p>
+            <h3 className='fw-bold word-Counter-result ps-2'>Convert Word To PDF</h3>
+            <p>This PDF converter is your go-to solution to convert Word to PDF online. Convert Microsoft Word documents to the popular and practical Adobe PDF format. Convert DOC to PDF or DOCX to PDF.</p>
 
-          <div className='convert-input-container'>
-             <FileUploader 
-                handleChange={handleConvert} 
-                name="file" 
-                types={fileTypes} 
-                hoverTitle={"Drop Here"}
-                required={true} />
+            <div className='convert-input-container'>
+              <FileUploader 
+                  handleChange={handleConvert} 
+                  name="file" 
+                  types={fileTypes} 
+                  hoverTitle={"Drop Here"}
+                  required={true} />
 
-          </div>
+            </div>
 
-          <div className='text-center mt-3'>
-               <button className='blog-btn'  onClick={handleDownload} >Download</button>
-          </div>
+            <div className='text-center mt-3'>
+                <button className='blog-btn'  onClick={handleDownload} >Download</button>
+            </div>
 
-       
+
+          
         </Container>
+
         <Footer />
         </>
     );

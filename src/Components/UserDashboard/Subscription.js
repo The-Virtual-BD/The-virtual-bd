@@ -25,6 +25,8 @@ const Subscription = ({loading,setLoading,blog,isLoading}) => {
     const [description, setDescription] = useState('');
     const [attachment, setAttachment] = useState(null);
     const [ schedule, setSchedule] = useState('');
+
+    const [isSending,setIsSending]=useState(false);
    
    
    
@@ -56,6 +58,7 @@ const Subscription = ({loading,setLoading,blog,isLoading}) => {
     //Handle Subscription Form
     const handleSubscription = async (e) => {
         e.preventDefault();
+        setIsSending(true)
       
         const formData = new FormData();
         formData.append('service_id', service_id);
@@ -82,7 +85,8 @@ const Subscription = ({loading,setLoading,blog,isLoading}) => {
             console.log(result);
             e.target.reset();
             toast.success("Your application for subscription is under review. We will communicate with you soon.");
-        }
+        };
+        setIsSending(false);
     };
 
     
@@ -124,16 +128,16 @@ const Subscription = ({loading,setLoading,blog,isLoading}) => {
                                 selected={schedule}
                                 className="form-control"
                                 type={'datetime-local'}
-                                onChange={e=>setSchedule(e.target.value)}/>
+                                onChange={e=>setSchedule(e.target.value)} required/>
                         </div>
 
                         <div className="col-12 mb-3 ">
                             <label for="doc" className="form-label fw-bold">Documents</label>
-                            <input type="file" className="form-control " id="doc" onChange={(e) => setAttachment(e.target.files[0])} />
+                            <input type="file" className="form-control " id="doc" onChange={(e) => setAttachment(e.target.files[0])} required/>
                         </div>
 
                         <div className="col-12 text-center ">
-                            <button className='main-btn' type="submit">Submit</button>
+                            <button className='main-btn' type="submit" disabled={isSending}>Submit</button>
                         </div>
                     </form>
                 </div>
