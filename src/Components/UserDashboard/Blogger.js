@@ -78,14 +78,16 @@ const Blogger = ({ isBloggerRole,bloggerReqPen,setBloggerReqPen }) => {
             if (result.error) {
               console.log(result.error);
               toast.error("Blogger Req Failed");
+              setIsSending(false);
             } else {
               console.log(result);
               e.target.reset();
               toast.success("Your Applications has been Submitted");
               setBloggerReqPen(true);
+              setIsSending(false);
             }
           });
-          setIsSending(false);
+        
 
       };
 

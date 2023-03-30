@@ -56,6 +56,7 @@ function Login() {
             navigate('/user-dashboard');
           }else{
             console.log(result);
+            toast.error("Incorrect email or password")
           }
         })
   };

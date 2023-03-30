@@ -1,6 +1,6 @@
 import ceo from "../../../Images/mehedi_hasan_CEO.jpg";
 // import ceo from "./img/Mehedi.png";
-import cto from "./img/Jarif-Huda-Angon.png";
+import cto from "../../TeamMember/img/zarif.png";
 import cmo from "./img/asaf-kakon.jpg";
 
 const introduction = [

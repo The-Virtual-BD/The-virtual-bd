@@ -18,7 +18,7 @@ function RegisterComp() {
   const schema = yup.object().shape({
     first_name: yup.string().required("* First name is required"),
     last_name: yup.string().required("* Last name is required"),
-    profession: yup.string().required("* Professione is required"),
+    profession: yup.string().required("* Profession is required"),
     birth_date: yup.string().required("* Birth of Date is required"),
     email: yup
       .string()
@@ -85,7 +85,7 @@ function RegisterComp() {
         })
   };
 
-  console.log(errors)
+  // console.log(errors)
 
 
   return (

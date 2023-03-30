@@ -1,12 +1,9 @@
 import team1 from "../../Images/mehedi_hasan_CEO.jpg";
-import team2 from "./img/Jarif-Huda-Angon.png";
+import team2 from "./img/zarif.png";
 import team3 from "./img/asaf-kakon.jpg";
 import team4 from "./img/ishtiuq.png";
 import team5 from "./img/Sabbir.jpg";
 import team6 from "./img/Nasim.png";
-import team7 from "./img/Biswajit.png";
-import team10 from "./img/hedayet.png";
-import team11 from "./img/Shahajalal.png";
 import hamid from '../../Images/hamid.jpg';
 
 const TeamSlider = [
