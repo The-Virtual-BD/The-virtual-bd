@@ -58,13 +58,17 @@
   margin: 40px auto;
 }
 
+.input-container{
+  margin-bottom: 15px;
+}
+
 .user,
 .pass,
 .email {
   border: 1px solid #fff;
   border-radius: 10px;
   background: #fff;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 .user input,
@@ -133,6 +137,13 @@
 }
 #react-select-2-input:focus{
   outline: none !important;
+}
+
+
+.errorMassage{
+  font-size: 12px;
+  color: #E74C3C;
+  margin-left: 10px;
 }
 
 

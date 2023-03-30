@@ -8,17 +8,29 @@ import LoginSocial from "../../LoginSocial/LoginSocial";
 import { useForm } from "react-hook-form";
 import { baseUrl } from "../../../hooks/url";
 import { toast } from "react-toastify";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function Login() {
-  const { register, handleSubmit,reset, formState: { errors }} = useForm();
+   //confirm  validation
+   const schema = yup.object().shape({
+    email: yup
+      .string()
+      .email("* Invalid email address")
+      .required("* Email is required"),
+    password: yup.string().required("* Password is required"),
+  });
+
+  const { register, handleSubmit,reset, formState: { errors }} = useForm({ resolver: yupResolver(schema) });
   const navigate=useNavigate();
-  const [failedMsg,setFailedMsg]=useState('');
 
-  //Slide to Top
-  useEffect(() => {
-    window.scrollTo(0, 0)
-}, []);
+   //Slide to Top
+    useEffect(() => {
+      window.scrollTo(0, 0)
+  }, []); 
 
+
+  //Handle Login Form
   const onSubmit = (data ,e)=>{
     e.preventDefault();
     // console.log(data);
@@ -33,28 +45,19 @@ function Login() {
     })
         .then(res => res.json())
         .then(result => {
-          if(result.error){
-            console.log(result);
-            // toast.error(result.error);
-            toast.error("Incorrect username or password");
-            
-            setFailedMsg(result.error)
-          }else{
+          if(result.message){
             console.log(result);
             const token=result.token
             const user=JSON.stringify(result.user)
-
             // toast.success("login Successfully!");
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("user", user);
             reset();
-
             navigate('/user-dashboard');
+          }else{
+            console.log(result);
           }
-          
-           
         })
-  
   };
 
 
@@ -81,21 +84,24 @@ function Login() {
                   <div className="form_login">
                     <form onSubmit={handleSubmit(onSubmit)}>
 
+                    <div className="input-container">
                       <div className="user mb-0">
-                        <input type="email" placeholder="Email" {...register("email", { required: true })}/>
-                      </div>
-                      {errors.email && (
-                            <p className="text-danger mt-0 fs-6">*Email is required</p>
-                          )}
-
-                        <div className="mt-3 mb-3">
-                          <div className="pass mb-0 ">
-                              <input type="password" placeholder="Password" {...register("password", { required: true })}/>
-                          </div>
-                          {errors.password && (
-                                <p className="text-danger mt-0 fs-6">*Password is required</p>
-                              )}
+                          <input type="email" placeholder="Email" {...register("email", { required: true })}/>
                         </div>
+                        {errors.email && (
+                                  <p className="errorMassage">{errors.email.message}</p>
+                            )}
+                    </div>
+                     
+
+                    <div className="input-container">
+                            <div className="pass mb-0 ">
+                                <input type="password" placeholder="Password" {...register("password", { required: true })}/>
+                            </div>
+                            {errors.password && (
+                                  <p className="errorMassage">{errors.password.message}</p>
+                            )}
+                    </div>
 
                       <div className="control_area">
                         <div className="remember">
