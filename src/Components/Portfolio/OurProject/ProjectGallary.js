@@ -4,14 +4,14 @@ import { Col, Container, Row } from "react-bootstrap";
 import galaryImg from "./ProjectGallaryData";
 import { baseUrl } from "../../../hooks/url";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../../hooks/Loading";
 import Skeleton from "react-loading-skeleton";
 import { useQuery } from "react-query";
 
 function ProjectGallary() {
       const navigate = useNavigate();
       const [showProjects, setShowProjects] = useState(6);
-      const [items, setItems] = useState(galaryImg);
+       const [selectedTab, setSelectedTab] = useState('all');
+      const [filteredProjects, setFilteredProjects] = useState([]);
       
       //Slide to Top
       useEffect(() => {
@@ -20,26 +20,44 @@ function ProjectGallary() {
 
       //Get Jobs
       const { data:projects, isLoading, refetch } = useQuery('jobs', () => fetch(`${baseUrl}/api/projects/activeprojects`).then(res => res.json()));
-      const recentprojects = projects?.data ? [...(projects.data)].reverse() : [];
+
+     useEffect(() => {
+       if(projects){
+        setFilteredProjects([...projects?.data].reverse())
+       }
+     }, [projects  ])
+     
 
 
-      //Handle View job
-      const handleViewProject = id => {
-        navigate(`/portfolio/${id}`)
+      
+      //12-web, 13-Graphic, 14-Android, 15-Digital, 16-Cyber, 18-Data Analysis, 
+
+
+
+      const filterItem = (tab) => {
+        setSelectedTab(tab);
+    
+        if (tab === 'all') {
+          setFilteredProjects([...projects?.data].reverse());
+        } else {
+          const filtered = projects?.data?.filter((project) => project?.service?.id === tab);
+          setFilteredProjects([...filtered].reverse());
+        }
       };
 
-      if(isLoading){
-        return <Skeleton count={10} />
-      };
 
+        //Handle View job
+        const handleViewProject = id => {
+          navigate(`/portfolio/${id}`)
+        };
+  
+        if(isLoading){
+          return <Skeleton count={10} />
+        };
 
-      //Filter Category Projects
-      const filterItem = (catItem) => {
-        const updatedItem = galaryImg.filter((cureEle) => {
-          return cureEle.category === catItem;
-        });
-        setItems(updatedItem);
-      };
+        console.log(filteredProjects)
+      
+
 
 
 
@@ -57,38 +75,40 @@ function ProjectGallary() {
           </div>
 
           <div className="galary_btn">
-            <button className="btn_gap" onClick={() => filterItem("web")}>
+            <button className="btn_gap galary_btn_button" onClick={() => filterItem("all")}>
+              All
+            </button>
+
+            <button className="btn_gap galary_btn_button" onClick={() => filterItem(12)}>
               Web Design & Development
             </button>
 
-            <button className="btn_gap" onClick={() => filterItem("GraphicDesign")}>
+            <button className="btn_gap galary_btn_button" onClick={() => filterItem(14)}>
               Android App Development
             </button>
 
-            <button className="btn_gap" onClick={() => filterItem("UI/UXDesign")}>
+            <button className="btn_gap galary_btn_button" onClick={() => filterItem(13)}>
               Graphic & UI/UX Design
             </button>
 
 
-            <button className="btn_gap" onClick={() => filterItem("DigitalMarketing")}>
+            <button className="btn_gap galary_btn_button" onClick={() => filterItem(15)}>
               Digital Marketing
             </button>
 
-            <button className="btn_gap" onClick={() => filterItem("Partners")}>
+            <button className="btn_gap galary_btn_button" onClick={() => filterItem(18)}>
               Data Analysis
             </button>
 
-            <button className="btn_gap" onClick={() => filterItem("Partners")}>
+            <button className="btn_gap galary_btn_button" onClick={() => filterItem(16)}>
               Cyber Security
             </button>
 
-            <button className="btn_gap" onClick={() => setItems(galaryImg)}>
-              All
-            </button>
+            
           </div>
 
           <Row>
-            {recentprojects?.map((data) => {
+            {filteredProjects?.map((data) => {
               const { id, name, client_name, service, cover } = data;
 
               return (
@@ -113,7 +133,7 @@ function ProjectGallary() {
           </Row>
 
           {
-            recentprojects?.length >6 && <div className="loadMore">
+            filteredProjects?.length >6 && <div className="loadMore">
               <button className='blog-btn' onClick={()=>setShowProjects(showProjects+5)}>Load More</button></div>
           }
         </Container>

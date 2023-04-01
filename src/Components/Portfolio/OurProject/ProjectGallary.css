@@ -23,7 +23,7 @@
   margin-left: 40px;
 }
 
-.galary_btn button {
+.galary_btn_button {
   font-weight: 400;
   font-size: 16px;
   line-height: 40px;
@@ -37,7 +37,7 @@
   margin-bottom: 30px;
 }
 
-.galary_btn button:hover {
+.galary_btn_button:hover {
   border-top: 2px solid #3498db;
   transform: scale(1.02);
   -webkit-transform: scale(1.02);
@@ -45,6 +45,15 @@
   -ms-transform: scale(1.02);
   -o-transform: scale(1.02);
 }
+.galary_btn_Selected {
+  border-top: 2px solid #3498db;
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+}
+/* .galary_btn button */
 
 .overLine hr {
   position: relative;
