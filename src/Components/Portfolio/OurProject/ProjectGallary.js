@@ -63,7 +63,7 @@ function ProjectGallary() {
 
   return (
     <>
-      <section className="gallary">
+      <section className="gallary my-5">
         <div className="galarry_text">
           <p>our ALl Project</p>
           <h2>Have a look at our work!</h2>

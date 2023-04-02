@@ -23,7 +23,7 @@ function Portfolio() {
       <TopHeader />
       <Menu />
       <PortfolioHero />
-      <ProtfolioSlider />
+      {/* <ProtfolioSlider /> */}
       <ProjectGallary />
       <Footer />
     </>
