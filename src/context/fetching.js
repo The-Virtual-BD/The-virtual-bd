@@ -21,9 +21,9 @@ export const fetchProjects = async () => {
     return data?.data;
 };
 
-//Fetch News
-export const fetchNews = async () => {
-    const res = await fetch(`${baseUrl}/news/all`);
+//Fetch Notices
+export const fetchNotice = async () => {
+    const res = await fetch(`${baseUrl}/api/notices/allnotice`);
     const data = await res.json();
     return data?.data;
 };

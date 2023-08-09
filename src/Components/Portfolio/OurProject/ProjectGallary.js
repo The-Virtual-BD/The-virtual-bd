@@ -30,10 +30,10 @@ function ProjectGallary() {
   };
 
   if (!projectsLoading && projects.length === 0) {
-    return <p>No Carieer Avaiable</p>
+    return <p>No Project Avaiable</p>
   };
 
-  
+
   //Filter Item
   const filterItem = (tab) => {
     setSelectedTab(tab);

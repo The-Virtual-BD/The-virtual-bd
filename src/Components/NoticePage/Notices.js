@@ -12,11 +12,44 @@ import { useQuery } from "react-query";
 import Skeleton from 'react-loading-skeleton';
 import { Helmet } from 'react-helmet';
 import moment from 'moment';
+import { useCollection } from '../../context';
 
 const Notices = () => {
-  //Get Notices
-  const { data:notices, isLoading, refetch } = useQuery('notice', () => fetch(`${baseUrl}/api/notices/allnotice`).then(res => res.json()));
-  const recentNotices = notices?.data ? [...(notices.data)].reverse() : [];
+  return (
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>The Virtual BD || Notice</title>
+        {/* <link rel="canonical" href="http://mysite.com/example" /> */}
+      </Helmet>
+      <TopHeader />
+      <Menu />
+      <CareerHero>Notice</CareerHero>
+      <Container>
+        <NoticeData />
+      </Container>
+      <Footer />
+    </>
+  );
+};
+
+export default Notices;
+
+
+const NoticeData = () => {
+  const { notices, noticesLoading } = useCollection();
+
+
+  if (noticesLoading) {
+    return <p>Loading...</p>
+  };
+
+  if (!noticesLoading && notices.length === 0) {
+    return <p>No Notice Avaiable</p>
+  };
+
+
+  const recentData = [...notices].reverse();
 
 
   const NOTICE_COLUMNS = () => {
@@ -26,7 +59,7 @@ const Notices = () => {
         id: 'index',
         accessor: (_row, i) => i + 1
       },
-      
+
       {
         Header: "Name",
         accessor: "title",
@@ -39,11 +72,11 @@ const Notices = () => {
         Cell: ({ row }) => {
           const { created_at } = row.original;
           return (
-             <div>
-               { moment(created_at).format('DD MMMM, YYYY')}
-             </div>
+            <div>
+              {moment(created_at).format('DD MMMM, YYYY')}
+            </div>
           );
-      },
+        },
       },
       {
         Header: 'Download',
@@ -60,31 +93,8 @@ const Notices = () => {
   };
 
   return (
-    <>
-     <Helmet>
-                <meta charSet="utf-8" />
-                <title>The Virtual BD || Notice</title>
-                <link rel="canonical" href="http://mysite.com/example" />
-      </Helmet>
-      <TopHeader />
-      <Menu />
-      <CareerHero>Notice</CareerHero>
-      <div>
-          {
-            isLoading? <Skeleton count={10} />:
-                <Container>
-                  {
-                     recentNotices.length !==0 ?   <Table columns={NOTICE_COLUMNS()} data={recentNotices} headline={" "} />:<div className="d-flex align-items-center justify-content-center" style={{height:"200px"}}>
-                     <p className="text-center fw-bold" >No Notice available</p>
-                    </div>
-                  }
-                    
-                </Container>
-          }
-      </div>
-      <Footer />
-    </>
-  );
-};
-
-export default Notices;
+    <div>
+      {recentData.length !== 0 && <Table columns={NOTICE_COLUMNS()} data={recentData} headline={" "} />}
+    </div>
+  )
+}
