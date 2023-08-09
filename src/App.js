@@ -23,7 +23,7 @@ import UserProfile from "./Pages/UserProfile";
 import SingleBlogPage from "./Components/BlogPage/SingleBlogPage";
 import RequireAuth from "./Components/Auth/RequireAuth";
 import { createContext, useEffect } from "react";
-import { AppContext } from "./context";
+import DataCollection, { AppContext } from "./context";
 import { useState } from "react";
 import Notices from "./Components/NoticePage/Notices";
 import useToken from "./hooks/useToken";
@@ -37,69 +37,69 @@ import 'react-rater/lib/react-rater.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import PdftoDoc from "./Components/Extra Features/PdfToDoc_Covert/Pdf_to_Doc";
 import WordCounter from "./Components/Extra Features/WordCounter/WordCounter";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 
-
+const queryClient = new QueryClient();
 
 function App() {
-  // const[user,setUser]=useState([]);
   const [token] = useToken();
   const [user] = useUser();
 
-  const value={};
-  // console.log(value)
   return (
-    <AppContext.Provider value={value}>
-      
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/services" element={<Services />} />
+    <QueryClientProvider client={queryClient}>
+      <DataCollection>
 
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/portfolio/:id" element={<ProjectDetails />} />
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/services" element={<Services />} />
 
-              <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/:id" element={<ProjectDetails />} />
 
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<SingleBlogPage />} />
+            <Route path="/aboutus" element={<AboutUs />} />
 
-              <Route path="/career" element={<Career />} />
-              <Route path="/career/:id" element={<CarieerDetails />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<SingleBlogPage />} />
 
-              <Route path="/other" element={<Other />} />
-              <Route path="/contact" element={<ContuctUs />} />
-              <Route path="/notices" element={<Notices />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-conditions" element={<TermsCondition />} />
-              <Route path="/Word-Counter" element={<WordCounter />} />
-              <Route path="/pdf-to-doc-converter" element={<PdftoDoc />} />
-            
-              <Route path="/register" element={<Register />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/data-protection" element={<PrivacyPolicy />} />
-              <Route path="*" element={<NotFound />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/career/:id" element={<CarieerDetails />} />
 
-              <Route path="/user-dashboard" element={ < RequireAuth> <UserProfile /></RequireAuth>} />
-              
-              <Route path="/sign-in" element={<SingnIn />} />
-            
-            
+            <Route path="/other" element={<Other />} />
+            <Route path="/contact" element={<ContuctUs />} />
+            <Route path="/notices" element={<Notices />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsCondition />} />
+            <Route path="/Word-Counter" element={<WordCounter />} />
+            <Route path="/pdf-to-doc-converter" element={<PdftoDoc />} />
+
+            <Route path="/register" element={<Register />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/data-protection" element={<PrivacyPolicy />} />
+            <Route path="*" element={<NotFound />} />
+
+            <Route path="/user-dashboard" element={< RequireAuth> <UserProfile /></RequireAuth>} />
+
+            <Route path="/sign-in" element={<SingnIn />} />
 
 
-              <Route
-                path="/team/:slug"
-                exact={true}
-                element={<TeamInfo data={TeamCardData} />}
-              />
-            </Routes>
-            <ToastContainer />
-            <WhatsApp />
-            
-          </div>
-    </AppContext.Provider>
+
+
+            <Route
+              path="/team/:slug"
+              exact={true}
+              element={<TeamInfo data={TeamCardData} />}
+            />
+          </Routes>
+          <ToastContainer />
+          <WhatsApp />
+
+        </div>
+      </DataCollection>
+    </QueryClientProvider>
   );
 }
 

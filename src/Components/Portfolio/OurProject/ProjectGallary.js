@@ -1,64 +1,56 @@
 import React, { useEffect, useState } from "react";
 import "./ProjectGallary.css";
 import { Col, Container, Row } from "react-bootstrap";
-import galaryImg from "./ProjectGallaryData";
 import { baseUrl } from "../../../hooks/url";
 import { useNavigate } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
-import { useQuery } from "react-query";
+import { useCollection } from "../../../context";
 
 function ProjectGallary() {
-      const navigate = useNavigate();
-      const [showProjects, setShowProjects] = useState(6);
-       const [selectedTab, setSelectedTab] = useState('all');
-      const [filteredProjects, setFilteredProjects] = useState([]);
-      
-      //Slide to Top
-      useEffect(() => {
-        window.scrollTo(0, 0)
-      }, []);
+  const navigate = useNavigate();
+  const { projects, projectsLoading } = useCollection();
 
-      //Get Jobs
-      const { data:projects, isLoading, refetch } = useQuery('jobs', () => fetch(`${baseUrl}/api/projects/activeprojects`).then(res => res.json()));
+  const [showProjects, setShowProjects] = useState(6);
+  const [selectedTab, setSelectedTab] = useState('all');
 
-     useEffect(() => {
-       if(projects){
-        setFilteredProjects([...projects?.data].reverse())
-       }
-     }, [projects  ])
-     
+  const [filteredProjects, setFilteredProjects] = useState([]);
 
+  //Slide to Top
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
 
-      
-      //12-web, 13-Graphic, 14-Android, 15-Digital, 16-Cyber, 18-Data Analysis, 
+  useEffect(() => {
+    if (projects) {
+      setFilteredProjects([...projects].reverse())
+    }
+  }, [projects])
 
+  if (projectsLoading) {
+    return <p>Loading...</p>
+  };
 
+  if (!projectsLoading && projects.length === 0) {
+    return <p>No Carieer Avaiable</p>
+  };
 
-      const filterItem = (tab) => {
-        setSelectedTab(tab);
-    
-        if (tab === 'all') {
-          setFilteredProjects([...projects?.data].reverse());
-        } else {
-          const filtered = projects?.data?.filter((project) => project?.service?.id === tab);
-          setFilteredProjects([...filtered].reverse());
-        }
-      };
-
-
-        //Handle View job
-        const handleViewProject = id => {
-          navigate(`/portfolio/${id}`)
-        };
   
-        if(isLoading){
-          return <Skeleton count={10} />
-        };
+  //Filter Item
+  const filterItem = (tab) => {
+    setSelectedTab(tab);
 
-        console.log(filteredProjects)
-      
+    if (tab === 'all') {
+      setFilteredProjects([...projects?.data].reverse());
+    } else {
+      const filtered = projects?.data?.filter((project) => project?.service?.id === tab);
+      setFilteredProjects([...filtered].reverse());
+    }
+  };
 
 
+  //Handle View job
+  const handleViewProject = id => {
+    navigate(`/portfolio/${id}`)
+  };
 
 
   return (
@@ -104,7 +96,7 @@ function ProjectGallary() {
               Cyber Security
             </button>
 
-            
+
           </div>
 
           <Row>
@@ -133,8 +125,8 @@ function ProjectGallary() {
           </Row>
 
           {
-            filteredProjects?.length >6 && <div className="loadMore">
-              <button className='blog-btn' onClick={()=>setShowProjects(showProjects+5)}>Load More</button></div>
+            filteredProjects?.length > 6 && <div className="loadMore">
+              <button className='blog-btn' onClick={() => setShowProjects(showProjects + 5)}>Load More</button></div>
           }
         </Container>
       </section>

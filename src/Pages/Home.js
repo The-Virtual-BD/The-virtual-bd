@@ -27,7 +27,7 @@ function Home() {
       <Hero />
       <Provide />
       <Testimonial />
-      <TeamMember />
+      {/* <TeamMember /> */}
       <Counter />
       <BrandSlider />
       <GlobalBuisness />
