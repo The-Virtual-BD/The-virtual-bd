@@ -17,9 +17,7 @@ function Testimonial() {
     return <p>Loading...</p>
   };
 
-
   const recentReviews = reviews?.reverse();
-
 
   //Combined Both data Table with same key,value
   const testimonialWithNewKeys = recentReviews?.map((data) => ({
@@ -32,8 +30,6 @@ function Testimonial() {
   }));
 
   const reviewsData = [...testimonialWithNewKeys, ...TesimonialData];
-
- 
 
   if (!reviewsLoading && reviewsData.length === 0) {
     return <p>No Review Avaiable</p>
