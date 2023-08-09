@@ -27,3 +27,10 @@ export const fetchNotice = async () => {
     const data = await res.json();
     return data?.data;
 };
+
+//Fetch Services
+export const fetchServices = async () => {
+    const res = await fetch(`${baseUrl}/api/services/activeservices`);
+    const data = await res.json();
+    return data?.data;
+};

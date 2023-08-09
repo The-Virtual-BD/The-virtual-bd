@@ -8,10 +8,18 @@ import { baseUrl } from "../../hooks/url";
 import { useQuery } from "react-query";
 import Loading from "../../hooks/Loading";
 import Skeleton from "react-loading-skeleton";
+import { useCollection } from '../../context';
 
 function Provide() {
-   //Get services
-   const { data:services, isLoading, refetch } = useQuery('services', () => fetch(`${baseUrl}/api/services/activeservices`).then(res => res.json()));
+  const { services, servicesLoading } = useCollection();
+  if (servicesLoading) {
+    return <p>Loading...</p>
+  };
+
+  if (!servicesLoading && services.length === 0) {
+    return <p>No Service Avaiable</p>
+  };
+
 
   return (
     <>
@@ -21,38 +29,37 @@ function Provide() {
           <h2>Services We Provide</h2>
         </div>
 
-        {
-         isLoading? <Skeleton count={10} />:
-         <Container>
-            <Tabs>
-              <TabList>
-                 { services?.data?.map(servceTab=><Tab>{servceTab?.name}</Tab>)  }
-              </TabList>
-              
-              <div className="tabPanel_gap">
-                {
-                  services?.data?.map(servceContent=> <TabPanel>
-                    <Row>
-                      <Col md={7} sm={12}>
-                        <div className="service_poster">
-                          <img src={`${baseUrl}/${servceContent?.cover}`} alt={servceContent?.name} />
-                        </div>
-                      </Col>
 
-                      <Col md={5} sm={12}>
-                        <div className="service_content text-start">
-                          <div className='service-text' dangerouslySetInnerHTML={{ __html: servceContent?.description}} />
-                          
-                          <ServiceBtn />
-                        </div>
-                      </Col>
-                    </Row>
-                  </TabPanel>)
-                }
-              </div>
-            </Tabs>
+        <Container>
+          <Tabs>
+            <TabList>
+              {services?.data?.map(servceTab => <Tab>{servceTab?.name}</Tab>)}
+            </TabList>
+
+            <div className="tabPanel_gap">
+              {
+                services?.map(servceContent => <TabPanel>
+                  <Row>
+                    <Col md={7} sm={12}>
+                      <div className="service_poster">
+                        <img src={`${baseUrl}/${servceContent?.cover}`} alt={servceContent?.name} />
+                      </div>
+                    </Col>
+
+                    <Col md={5} sm={12}>
+                      <div className="service_content text-start">
+                        <div className='service-text' dangerouslySetInnerHTML={{ __html: servceContent?.description }} />
+
+                        <ServiceBtn />
+                      </div>
+                    </Col>
+                  </Row>
+                </TabPanel>)
+              }
+            </div>
+          </Tabs>
         </Container>
-        }
+
       </div>
     </>
   );

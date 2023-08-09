@@ -8,8 +8,6 @@ import Table from '../UserDashboard/Table';
 import { baseUrl } from '../../hooks/url';
 import './Notice.css';
 import Footer from '../Footer/Footer';
-import { useQuery } from "react-query";
-import Skeleton from 'react-loading-skeleton';
 import { Helmet } from 'react-helmet';
 import moment from 'moment';
 import { useCollection } from '../../context';
@@ -38,8 +36,6 @@ export default Notices;
 
 const NoticeData = () => {
   const { notices, noticesLoading } = useCollection();
-
-
   if (noticesLoading) {
     return <p>Loading...</p>
   };
@@ -97,4 +93,4 @@ const NoticeData = () => {
       {recentData.length !== 0 && <Table columns={NOTICE_COLUMNS()} data={recentData} headline={" "} />}
     </div>
   )
-}
+};
