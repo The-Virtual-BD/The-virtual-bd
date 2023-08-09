@@ -7,33 +7,37 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper";
-import { useQuery } from "react-query";
 import { baseUrl } from "../../hooks/url";
-import Skeleton from "react-loading-skeleton";
 import img1 from "./image/user.jpg";
+import { useCollection } from "../../context";
 
 function Testimonial() {
-    //Get Jobs
-    const { data:reviews, isLoading, refetch } = useQuery('review', () => fetch(`${baseUrl}/api/reviews/actreview`).then(res => res.json()));
-    const recentReviews = reviews?.data ? [...(reviews.data)].reverse() : [];
-    // console.log(recentReviews);
+  const { reviews, reviewsLoading } = useCollection();
+  if (reviewsLoading) {
+    return <p>Loading...</p>
+  };
+
+
+  const recentReviews = reviews?.reverse();
+
 
   //Combined Both data Table with same key,value
-    const testimonialWithNewKeys = recentReviews.map((data) => ({
-      id: data.id,
-      img: data?.author?.photo ? `${baseUrl}/${data?.author?.photo}` : img1,
-      rating: data.quantity,
-      name: `${data.author.first_name} ${data.author.last_name}`,
-      designation: data.author.profession,
-      reviewText: data.body,
-    }));
+  const testimonialWithNewKeys = recentReviews?.map((data) => ({
+    id: data.id,
+    img: data?.author?.photo ? `${baseUrl}/${data?.author?.photo}` : img1,
+    rating: data.quantity,
+    name: `${data.author.first_name} ${data.author.last_name}`,
+    designation: data.author.profession,
+    reviewText: data.body,
+  }));
 
-    const reviewsData = [...testimonialWithNewKeys, ...TesimonialData];
+  const reviewsData = [...testimonialWithNewKeys, ...TesimonialData];
 
+ 
 
-    if(isLoading){
-      return <Skeleton count={5.5} />   
-    };
+  if (!reviewsLoading && reviewsData.length === 0) {
+    return <p>No Review Avaiable</p>
+  };
 
   return (
     <>
@@ -78,7 +82,7 @@ function Testimonial() {
                   <div className="review_author">
 
                     <div className="review_img">
-                       { <img src={data?.img} alt={data?.name} /> }
+                      {<img src={data?.img} alt={data?.name} />}
                     </div>
 
                     <div className="review_info">

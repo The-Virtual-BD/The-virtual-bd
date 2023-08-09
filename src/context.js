@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { useQuery } from "react-query";
-import { fetchBlogs, fetchCarieer, fetchNotice, fetchProjects, fetchServices } from "./context/fetching";
+import { fetchBlogs, fetchCarieer, fetchNotice, fetchProjects, fetchReview, fetchServices } from "./context/fetching";
 import { useContext } from "react";
 
 export const AppContext = createContext();
@@ -11,9 +11,10 @@ const DataCollection = ({ children }) => {
     const { data: projects, isLoading: projectsLoading } = useQuery("projects", fetchProjects);
     const { data: notices, isLoading: noticesLoading } = useQuery("notices", fetchNotice);
     const { data: services, isLoading: servicesLoading } = useQuery("services", fetchServices);
+    const { data: reviews, isLoading: reviewsLoading } = useQuery("reviews", fetchReview);
 
 
-    const value = { blogs, blogsLoading, carieer, carieerLoading, projects, projectsLoading, notices, noticesLoading, services, servicesLoading };
+    const value = { blogs, blogsLoading, carieer, carieerLoading, projects, projectsLoading, notices, noticesLoading, services, servicesLoading, reviews, reviewsLoading };
     // console.log(value)
 
     return <AppContext.Provider value={value}>

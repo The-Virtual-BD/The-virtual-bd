@@ -34,3 +34,11 @@ export const fetchServices = async () => {
     const data = await res.json();
     return data?.data;
 };
+
+
+//Fetch Review
+export const fetchReview = async () => {
+    const res = await fetch(`${baseUrl}/api/reviews/actreview`);
+    const data = await res.json();
+    return data?.data;
+};
