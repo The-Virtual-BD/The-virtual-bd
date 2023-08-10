@@ -10,11 +10,16 @@ import { Pagination, Autoplay } from "swiper";
 import { baseUrl } from "../../hooks/url";
 import img1 from "./image/user.jpg";
 import { useCollection } from "../../context";
+import ServiceSkeleton from "../../utilities/Skeleton/ServiceSkeleton";
 
 function Testimonial() {
   const { reviews, reviewsLoading } = useCollection();
   if (reviewsLoading) {
-    return <p>Loading...</p>
+    return <div class="d-flex justify-content-center">
+      <div class="spinner-border text-info" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
   };
 
   const recentReviews = reviews?.reverse();

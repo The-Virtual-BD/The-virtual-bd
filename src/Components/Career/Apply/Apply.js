@@ -10,9 +10,13 @@ function Apply() {
 
 
   if (carieerLoading) {
-    return <p>Loading...</p>
+    return <div class="d-flex justify-content-center">
+      <div class="spinner-border text-info" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
   };
-  
+
   if (!carieerLoading && carieer.length === 0) {
     return <p>No Carieer Avaiable</p>
   };

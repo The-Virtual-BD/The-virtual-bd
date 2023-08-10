@@ -37,7 +37,11 @@ export default Notices;
 const NoticeData = () => {
   const { notices, noticesLoading } = useCollection();
   if (noticesLoading) {
-    return <p>Loading...</p>
+    return <div class="d-flex justify-content-center">
+      <div class="spinner-border text-info" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
   };
 
   if (!noticesLoading && notices.length === 0) {

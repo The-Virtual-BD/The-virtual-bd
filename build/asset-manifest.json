@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f184a62d.css",
-    "main.js": "/static/js/main.340a4a81.js",
+    "main.css": "/static/css/main.5d3d31c9.css",
+    "main.js": "/static/js/main.c5b576ad.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/BusinessService .mp4": "/static/media/BusinessService .1131f575ac3a6ff0f26e.mp4",
     "static/media/Shahajalal.png": "/static/media/Shahajalal.04c14435ba9f7f4015ac.png",
@@ -12,20 +12,15 @@
     "static/media/service_banner.jpg": "/static/media/service_banner.c3549c69dd322c6a5e3f.jpg",
     "static/media/searchHero.jpg": "/static/media/searchHero.6d81fbac003b05c4bd85.jpg",
     "static/media/sign-in-img.jpg": "/static/media/sign-in-img.d5e983f3c98a8992b822.jpg",
-    "static/media/pg2.jpg": "/static/media/pg2.158387c563c85855d300.jpg",
     "static/media/data_analysis.jpg": "/static/media/data_analysis.3e0604a34c12649d2276.jpg",
     "static/media/herobac.jpg": "/static/media/herobac.3399e87332ca7b013aa8.jpg",
-    "static/media/pg1.jpg": "/static/media/pg1.cf3d2d4321f9e3c83276.jpg",
-    "static/media/pg6.jpg": "/static/media/pg6.1850798bc4f34b479da9.jpg",
     "static/media/logo 2.png": "/static/media/logo 2.93d5cdba466fe318e6b4.png",
     "static/media/servise_content.jpg": "/static/media/servise_content.2f9104a41dc928f04f29.jpg",
     "static/media/google.png": "/static/media/google.eb4f576bd3f0f2c0c6f8.png",
-    "static/media/pg5.jpg": "/static/media/pg5.3c63b10e589f9ac4ead9.jpg",
     "static/media/logo.jpg": "/static/media/logo.bc4ab47a38b27d8f5073.jpg",
     "static/media/mehedi_hasan_CEO.jpg": "/static/media/mehedi_hasan_CEO.df0a063242c889b6bf34.jpg",
     "static/media/cardImg-1.png": "/static/media/cardImg-1.65dfcd3df5d488a0f278.png",
     "static/media/hamid.jpg": "/static/media/hamid.7d751f9ecfd49e6737ce.jpg",
-    "static/media/pg3.jpg": "/static/media/pg3.cdb7a87da0f0b60f9dac.jpg",
     "static/media/p4.jpg": "/static/media/p4.4e1a740bcca268d43d97.jpg",
     "static/media/ishtiuq.png": "/static/media/ishtiuq.22330dba68ec04315af7.png",
     "static/media/apple.png": "/static/media/apple.5273e19602d45371f3db.png",
@@ -54,12 +49,12 @@
     "static/media/bahamas.png": "/static/media/bahamas.81995b4b340cb24bc7b0.png",
     "static/media/Boibangla.png": "/static/media/Boibangla.0e6396a93f2da134f7b4.png",
     "index.html": "/index.html",
-    "main.f184a62d.css.map": "/static/css/main.f184a62d.css.map",
-    "main.340a4a81.js.map": "/static/js/main.340a4a81.js.map",
+    "main.5d3d31c9.css.map": "/static/css/main.5d3d31c9.css.map",
+    "main.c5b576ad.js.map": "/static/js/main.c5b576ad.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f184a62d.css",
-    "static/js/main.340a4a81.js"
+    "static/css/main.5d3d31c9.css",
+    "static/js/main.c5b576ad.js"
   ]
 }
