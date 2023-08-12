@@ -14,6 +14,8 @@ function ProjectGallary() {
 
   const [filteredProjects, setFilteredProjects] = useState([]);
 
+  // console.log(projects)
+
   //Slide to Top
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -43,9 +45,9 @@ function ProjectGallary() {
     setSelectedTab(tab);
 
     if (tab === 'all') {
-      setFilteredProjects([...projects?.data].reverse());
+      setFilteredProjects([...projects].reverse());
     } else {
-      const filtered = projects?.data?.filter((project) => project?.service?.id === tab);
+      const filtered = projects?.filter((project) => project?.service?.id === tab);
       setFilteredProjects([...filtered].reverse());
     }
   };
