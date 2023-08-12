@@ -37,7 +37,7 @@ function Provide() {
         <Container>
           <Tabs>
             <TabList>
-              {services?.data?.map(servceTab => <Tab>{servceTab?.name}</Tab>)}
+              {services?.map(servceTab => <Tab>{servceTab?.name}</Tab>)}
             </TabList>
 
             <div className="tabPanel_gap">
