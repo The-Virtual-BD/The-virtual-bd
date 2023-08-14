@@ -35,7 +35,7 @@ function ProjectGallary() {
     </div>
   };
 
-  if (!projectsLoading && projects.length === 0) {
+  if (!projectsLoading && projects?.length === 0) {
     return <p>No Project Avaiable</p>
   };
 

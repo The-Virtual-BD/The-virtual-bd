@@ -20,7 +20,7 @@ function Provide() {
     </div>
   };
 
-  if (!servicesLoading && services.length === 0) {
+  if (!servicesLoading && services?.length === 0) {
     return <p>No Service Avaiable</p>
   };
 

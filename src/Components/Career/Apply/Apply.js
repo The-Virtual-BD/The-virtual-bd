@@ -17,7 +17,7 @@ function Apply() {
     </div>
   };
 
-  if (!carieerLoading && carieer.length === 0) {
+  if (!carieerLoading && carieer?.length === 0) {
     return <p>No Carieer Avaiable</p>
   };
 

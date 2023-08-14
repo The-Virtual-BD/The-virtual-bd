@@ -44,7 +44,7 @@ const NoticeData = () => {
     </div>
   };
 
-  if (!noticesLoading && notices.length === 0) {
+  if (!noticesLoading && notices?.length === 0) {
     return <p>No Notice Avaiable</p>
   };
 

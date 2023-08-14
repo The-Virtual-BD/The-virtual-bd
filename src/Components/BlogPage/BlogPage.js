@@ -48,7 +48,7 @@ const BlogSection = () => {
         </div>
     };
 
-    if (!blogsLoading && blogs.length === 0) {
+    if (!blogsLoading && blogs?.length === 0) {
         return <p>No Blogs Avaiable</p>
     };
 
